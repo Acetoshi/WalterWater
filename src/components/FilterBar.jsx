@@ -1,6 +1,6 @@
 import "../styles/FilterBar.css";
 
-function FilterBar() {
+function FilterBar({filters}) {
   return (
     <div className="FilterBar">
       <button type="button" className="button-filter" id="displayDataButton">
@@ -9,7 +9,7 @@ function FilterBar() {
           aria-label="Affichage en mode liste des points"
         />
       </button>
-      <button type="button" className="button-filter">
+      <button type="button" className="button-filter" onClick={()=>filters.setUserWantsWater(!filters.userWantsWater)}>
         <span className="icon-faucet" aria-label="Affichage des Point d'eau" />
       </button>
 
