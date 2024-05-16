@@ -1,9 +1,8 @@
 
 import { MapContainer, TileLayer} from "react-leaflet";
-
-import "./assets/icomoon/style.css";
 import UserLocation from "./components/UserLocation";
 import FilterBar from "./components/FilterBar"
+import "./assets/icomoon/style.css";
 
 function App() {
 
