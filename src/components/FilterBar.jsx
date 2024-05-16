@@ -10,7 +10,7 @@ function FilterBar({filters}) {
         />
       </button>
       <button type="button" className="button-filter" onClick={()=>filters.setUserWantsWater(!filters.userWantsWater)}>
-        <span className="icon-faucet" aria-label="Affichage des Point d'eau" />
+        <span className={filters.userWantsWater?"icon-faucet":"icon-faucet deactivated"} aria-label="Affichage des Point d'eau" />
       </button>
 
       <button type="button" className="button-filter">
@@ -20,8 +20,8 @@ function FilterBar({filters}) {
         />
       </button>
 
-      <button type="button" className="button-filter">
-        <span className="icon-toilette" aria-label="Afficher des toilettes" />
+      <button type="button" className="button-filter" onClick={()=>filters.setUserWantsToilets(!filters.userWantsToilets)}>
+        <span className={filters.userWantsToilets?"icon-toilette":"icon-toilette deactivated"}  aria-label="Afficher des toilettes" />
       </button>
     </div>
   );

@@ -9,6 +9,7 @@ import PositionProvider from "./Contexts/PositionProvider";
 
 function App() {
   const [userWantsWater, setUserWantsWater] = useState(true);
+  const [userWantsToilets, setUserWantsToilets] = useState(true);
   return (
     <>
       <MapContainer center={[48.216671, -1.55]} zoom={14}>
@@ -19,10 +20,17 @@ function App() {
         <PositionProvider>
           <UserLocation />
           {userWantsWater && <Markers typeOfAmenity={"water"} radius={0.1} />}
-          <Markers typeOfAmenity={"toilets"} radius={0.1} />
+          {userWantsToilets && <Markers typeOfAmenity={"toilets"} radius={0.1} />}
         </PositionProvider>
       </MapContainer>
-      <FilterBar filters={{userWantsWater, setUserWantsWater}} />
+      <FilterBar
+        filters={{
+          userWantsWater,
+          setUserWantsWater,
+          userWantsToilets,
+          setUserWantsToilets,
+        }}
+      />
     </>
   );
 }

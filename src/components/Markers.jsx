@@ -10,6 +10,7 @@ export default function Markers({typeOfAmenity,radius}) {
 
   let queryDetails=''
   let icon={}
+  let popupcontent=''
 
 if (typeOfAmenity==="water"){
   queryDetails='["amenity"="drinking_water"]';
@@ -18,6 +19,7 @@ if (typeOfAmenity==="water"){
   console.log("toilet query")
   queryDetails='["amenity"="toilets"]';
   icon=toiletIcon;
+  popupcontent
 } 
 
   useEffect(() => { getPoints(userLocation,radius,setPoints,queryDetails)}, [userLocation]);

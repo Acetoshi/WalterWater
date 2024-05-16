@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Popup, Marker, useMap } from "react-leaflet";
 import { usePosition } from "../Contexts/PositionProvider";
+import { walterIcon } from "../scripts/icons";
 
 export default function UserLocation() {
 
@@ -30,8 +31,8 @@ export default function UserLocation() {
   }, [userLocation]);
 
   return (
-    <Marker position={userLocation}>
-      <Popup>You are here</Popup>
+    <Marker position={userLocation} icon={walterIcon}>
+      <Popup>Si tu veux voir en local les modifs qui sont dans Github, oui.</Popup>
     </Marker>
   );
 }
