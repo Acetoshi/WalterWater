@@ -1,6 +1,6 @@
 import "../styles/FilterBar.css";
 
-function FilterBar() {
+export default function FilterBar() {
   return (
     <>
       <div className="FilterBar"></div>
@@ -8,4 +8,3 @@ function FilterBar() {
     </>
   );
 }
-export default FilterBar;

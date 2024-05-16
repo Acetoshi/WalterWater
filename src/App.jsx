@@ -1,7 +1,7 @@
 
 import { MapContainer, TileLayer} from "react-leaflet";
 import UserLocation from "./components/UserLocation";
-import FilterBar from "./components/FilterBar"
+// import FilterBar from "./components/FilterBar"
 import "./assets/icomoon/style.css";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
         />
         <UserLocation />
       </MapContainer>
-      <FilterBar />
+      {/* <FilterBar /> */}
     </>
   );
 }
