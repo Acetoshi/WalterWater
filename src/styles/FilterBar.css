@@ -1,0 +1,9 @@
+.Footer {
+    display: flex;
+z-index: 2000;
+    position: absolute;
+margin-top: -30px;
+background-color: blue;
+width: 800px;
+height: 150px;
+}
