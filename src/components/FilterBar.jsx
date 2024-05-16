@@ -1,14 +1,14 @@
 import '../styles/FilterBar.css'
 
-function Footer () {
-return (
-<>
- <div className='Footer'> aaa </div>
+function FilterBar() {
+    return (
+        <>
+            <div className='FilterBar'></div>
+            <img className='Img1' src="/src/image/005-liste-a-puces.svg" alt="" />
 
+        </>
 
-</>
-
-)
+    )
 
 
 
@@ -17,4 +17,4 @@ return (
 
 
 }
-export default Footer;
+export default FilterBar;
