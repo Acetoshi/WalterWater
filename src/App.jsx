@@ -1,5 +1,4 @@
 import { MapContainer, TileLayer } from "react-leaflet";
-import "./components/FilterBar";
 import "./assets/icomoon/style.css";
 import "./styles/global.css";
 import FilterBar from "./components/FilterBar";
