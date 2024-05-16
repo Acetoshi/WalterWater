@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer } from "react-leaflet";
-
+import "./components/FilterBar"
+import Footer from "./components/FilterBar";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         />
 
       </MapContainer>
+      <Footer/>
     </>
   );
 }
