@@ -32,7 +32,7 @@ export default function UserLocation() {
 
   return (
     <Marker position={userLocation} icon={walterIcon}>
-      <Popup>Si tu veux voir en local les modifs qui sont dans Github, oui.</Popup>
+      <Popup>Voici ta postion, utilise les filtres pour trouver de l'eau, des restaurants ou des toilettes proches de toi!</Popup>
     </Marker>
   );
 }

@@ -13,9 +13,9 @@ function FilterBar({filters}) {
         <span className={filters.userWantsWater?"icon-faucet":"icon-faucet deactivated"} aria-label="Affichage des Point d'eau" />
       </button>
 
-      <button type="button" className="button-filter">
+      <button type="button" className="button-filter"onClick={()=>filters.setUserWantsFood(!filters.userWantsFood)}>
         <span
-          className="icon-restaurant"
+          className={filters.userWantsFood?"icon-restaurant":"icon-restaurant deactivated"}
           aria-label="Afficher des lieux pour se restaurer"
         />
       </button>
