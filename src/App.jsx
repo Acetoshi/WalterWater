@@ -1,14 +1,17 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import UserLocation from "./components/UserLocation";
+import FilterBar from "./components/FilterBar";
+import Walter from "./components/Walter";
 // import FilterBar from "./components/FilterBar"
 import "./assets/icomoon/style.css";
 import "./styles/global.css";
-import FilterBar from "./components/FilterBar";
+// import { useEffect } from "react";
 
 function App() {
-
+  // useEffect(()),([]);
   return (
     <>
+      <Walter />
       <MapContainer center={[48.216671, -1.55]} zoom={14}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

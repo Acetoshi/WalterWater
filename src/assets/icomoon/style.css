@@ -1,11 +1,11 @@
 @font-face {
   font-family: "icomoon";
-  src: url("fonts/icomoon.eot?hif5m0");
+  src: url("fonts/icomoon.eot?tmknph");
   src:
-    url("fonts/icomoon.eot?hif5m0#iefix") format("embedded-opentype"),
-    url("fonts/icomoon.ttf?hif5m0") format("truetype"),
-    url("fonts/icomoon.woff?hif5m0") format("woff"),
-    url("fonts/icomoon.svg?hif5m0#icomoon") format("svg");
+    url("fonts/icomoon.eot?tmknph#iefix") format("embedded-opentype"),
+    url("fonts/icomoon.ttf?tmknph") format("truetype"),
+    url("fonts/icomoon.woff?tmknph") format("woff"),
+    url("fonts/icomoon.svg?tmknph#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -27,6 +27,44 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-close:before {
+  content: "\e91c";
+}
+.icon-information:before {
+  content: "\e91b";
+}
+.icon-walter-color .path1:before {
+  content: "\e914";
+  color: rgb(22, 79, 145);
+}
+.icon-walter-color .path2:before {
+  content: "\e915";
+  margin-left: -0.7802734375em;
+  color: rgb(177, 123, 58);
+}
+.icon-walter-color .path3:before {
+  content: "\e916";
+  margin-left: -0.7802734375em;
+  color: rgb(67, 170, 139);
+}
+.icon-walter-color .path4:before {
+  content: "\e917";
+  margin-left: -0.7802734375em;
+  color: rgb(255, 232, 199);
+}
+.icon-walter-color .path5:before {
+  content: "\e918";
+  margin-left: -0.7802734375em;
+  color: rgb(182, 28, 28);
+}
+.icon-walter-color .path6:before {
+  content: "\e919";
+  margin-left: -0.7802734375em;
+  color: rgb(0, 0, 0);
+}
+.icon-walter-black:before {
+  content: "\e91a";
+}
 .icon-slope:before {
   content: "\e900";
 }
