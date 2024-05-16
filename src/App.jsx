@@ -8,9 +8,10 @@ import PositionProvider from "./Contexts/PositionProvider";
 import "./assets/icomoon/style.css";
 import "./styles/global.css";
 
-
 function App() {
   const [userWantsWater, setUserWantsWater] = useState(true);
+  const [userWantsToilets, setUserWantsToilets] = useState(true);
+  const [userWantsFood, setUserWantsFood] = useState(false);
   return (
     <>
       <Walter />
@@ -22,10 +23,22 @@ function App() {
         <PositionProvider>
           <UserLocation />
           {userWantsWater && <Markers typeOfAmenity={"water"} radius={0.1} />}
-          <Markers typeOfAmenity={"toilets"} radius={0.1} />
+          {userWantsToilets && (
+            <Markers typeOfAmenity={"toilets"} radius={0.1} />
+          )}
+          {userWantsFood && <Markers typeOfAmenity={"food"} radius={0.1} />}
         </PositionProvider>
       </MapContainer>
-      <FilterBar filters={{userWantsWater, setUserWantsWater}} />
+      <FilterBar
+        filters={{
+          userWantsWater,
+          setUserWantsWater,
+          userWantsToilets,
+          setUserWantsToilets,
+          userWantsFood,
+          setUserWantsFood,
+        }}
+      />
     </>
   );
 }
