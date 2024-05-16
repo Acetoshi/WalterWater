@@ -1,10 +1,9 @@
 
 import { MapContainer, TileLayer} from "react-leaflet";
-import UserLocation from "./components/UserLocation";
-import FilterBar from "./components/FilterBar";
-import "./assets/icomoon/style.css";
-import "./components/FilterBar.css";
 
+import "./assets/icomoon/style.css";
+import UserLocation from "./components/UserLocation";
+import FilterBar from "./components/FilterBar"
 
 function App() {
 
@@ -16,9 +15,8 @@ function App() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <UserLocation />
-
       </MapContainer>
-      <FilterBar/>
+      <FilterBar />
     </>
   );
 }
