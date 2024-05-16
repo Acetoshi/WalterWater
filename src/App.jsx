@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer } from "react-leaflet";
-import "./components/FilterBar"
+import "./components/FilterBar";
 import Footer from "./components/FilterBar";
+import "./assets/icomoon/style.css";
 
 function App() {
   return (
