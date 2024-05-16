@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
+
 import { MapContainer, TileLayer} from "react-leaflet";
 import UserLocation from "./components/UserLocation";
+import FilterBar from "./components/FilterBar";
+import "./assets/icomoon/style.css";
+import "./components/FilterBar.css";
+
 
 function App() {
 
@@ -14,6 +18,7 @@ function App() {
         <UserLocation />
 
       </MapContainer>
+      <FilterBar/>
     </>
   );
 }
