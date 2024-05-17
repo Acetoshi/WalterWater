@@ -36,6 +36,7 @@
 .info-item {
   display: flex;
   align-items: center;
+  padding-left: 1rem;
 }
 
 .info-logo {
@@ -55,4 +56,14 @@
 
 .list-view h3 {
   color: black;
+}
+.list-view h3 span {
+  color: var(--main-color);
+}
+
+.icon-emplacement {
+  color: var(--secondary-color);
+}
+.icon-time {
+  color: var(--secondary-color);
 }

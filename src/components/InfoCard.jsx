@@ -15,7 +15,8 @@ const InfoCard = ({ pointOfInterest }) => {
 
   return (
     <div className="info-card">
-      <h3>{pointOfInterest.tags.amenity}</h3>
+       
+      <h3><span className="icon-walter-black info-logo" aria-hidden="true" />{pointOfInterest.tags.amenity}</h3>
       {/* <div className="info-item">
         {pointOfInterest.tags.amenity === "toilets" && (
           <span
