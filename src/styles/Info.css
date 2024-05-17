@@ -1,0 +1,28 @@
+#InfoButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 3rem;
+  z-index: 2000;
+  left: 20rem;
+  margin-top: 16px;
+  border: none;
+  background-color: var(--secondary-color);
+  border-radius: 40px 40px 40px 40px;
+}
+.icon-etape-importante {
+  background-color: #43aa8b;
+  width: 3rem;
+  z-index: 2000;
+  border-radius: 40px 40px 40px 40px;
+  border: none;
+  font-size: 1.6rem;
+}
+
+.imagei {
+  display: flex;
+  z-index: 2000;
+  background-color: #43aa8b;
+  left: 1rem;
+}

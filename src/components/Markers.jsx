@@ -4,23 +4,25 @@ import { usePosition } from "../Contexts/PositionProvider";
 import { faucetIcon, toiletIcon } from "../scripts/icons";
 import { getPoints } from "../scripts/osmUtilities";
 
-export default function Markers({typeOfAmenity,radius}) {
+export default function Markers({ typeOfAmenity, radius }) {
   const { userLocation } = usePosition();
   const [points, setPoints] = useState([]);
 
-  let queryDetails=''
-  let icon={}
+  let queryDetails = "";
+  let icon = {};
 
-if (typeOfAmenity==="water"){
-  queryDetails='["amenity"="drinking_water"]';
-  icon=faucetIcon;
-} else if (typeOfAmenity==="toilets"){
-  console.log("toilet query")
-  queryDetails='["amenity"="toilets"]';
-  icon=toiletIcon;
-} 
+  if (typeOfAmenity === "water") {
+    queryDetails = '["amenity"="drinking_water"]';
+    icon = faucetIcon;
+  } else if (typeOfAmenity === "toilets") {
+    console.log("toilet query");
+    queryDetails = '["amenity"="toilets"]';
+    icon = toiletIcon;
+  }
 
-  useEffect(() => { getPoints(userLocation,radius,setPoints,queryDetails)}, [userLocation]);
+  useEffect(() => {
+    getPoints(userLocation, radius, setPoints, queryDetails);
+  }, [userLocation]);
 
   console.log(points);
 
