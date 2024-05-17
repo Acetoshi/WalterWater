@@ -2,7 +2,7 @@
   position: absolute;
   right: 0;
   bottom: 64px;
-  z-index: 2000;
+  z-index: 1998;
   /* width: 130px; */
   padding: 1rem;
   transition: all 0.2s ease-out;
