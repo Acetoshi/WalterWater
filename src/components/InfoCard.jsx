@@ -1,8 +1,14 @@
-const InfoCard = () => {
+const InfoCard = ({ pointOfInterest }) => {
   return (
     <div className="info-card">
+      <h3>{pointOfInterest.tags.amenity}</h3>
       <div className="info-item">
-        <img src="src/public/robinet.jpg" alt="Adresse" className="info-logo" />
+        {pointOfInterest.tags.amenity === "toilets" && (
+          <span
+            className="icon-restaurant"
+            aria-label="Afficher des lieux pour se restaurer"
+          />
+        )}
         <div className="info-text">
           <p>Adresse:</p>
           <p>7 rue Cappela - Nantes</p>
@@ -23,7 +29,11 @@ const InfoCard = () => {
         </div>
       </div>
       <div className="info-item">
-        <img src="src/public/horloge.jpg" alt="Temps estimé" className="info-logo" />
+        <img
+          src="src/public/horloge.jpg"
+          alt="Temps estimé"
+          className="info-logo"
+        />
         <div className="info-text">
           <p>Temps estimé:</p>
           <p>40 minutes</p>
@@ -31,6 +41,6 @@ const InfoCard = () => {
       </div>
     </div>
   );
-}
+};
 
 export default InfoCard;

@@ -27,7 +27,6 @@ export async function getPoints(location,radius,setterFunction,queryDetails) {
     })
       .then((data) => data.json())
       .then((result) => {
-        console.log(result);
         setterFunction(result.elements);
       });
   }
