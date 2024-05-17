@@ -3,10 +3,8 @@ import { Marker, Popup } from "react-leaflet";
 import { usePosition } from "../Contexts/PositionProvider";
 import { faucetIcon, toiletIcon, foodIcon } from "../scripts/icons";
 
-
-export default function Markers({ typeOfAmenity}) {
-  const { nearbyToilets, nearbyFood, nearbyWater } =
-    usePosition();
+export default function Markers({ typeOfAmenity }) {
+  const { nearbyToilets, nearbyFood, nearbyWater } = usePosition();
 
   let points = [];
   let icon = {};

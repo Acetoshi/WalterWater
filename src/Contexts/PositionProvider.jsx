@@ -15,7 +15,7 @@ export default function PositionProvider({ children }) {
       userLocation,
       0.1,
       setNearbyWater,
-      '["amenity"="drinking_water"]'
+      '["amenity"="drinking_water"]',
     );
     getPoints(userLocation, 0.1, setNearbyToilets, '["amenity"="toilets"]');
   }, [userLocation]);

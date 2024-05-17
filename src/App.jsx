@@ -5,6 +5,7 @@ import FilterBar from "./components/FilterBar";
 import Walter from "./components/Walter";
 import Markers from "./components/Markers";
 import PositionProvider from "./Contexts/PositionProvider";
+import Capybara from "./components/EasterEgg";
 import "./assets/icomoon/style.css";
 import "./styles/global.css";
 import "./styles/listview.css";
@@ -17,47 +18,11 @@ function App() {
   const [userWantsToilets, setUserWantsToilets] = useState(true);
   const [userWantsFood, setUserWantsFood] = useState(false);
 
-  const handleDisplayModeChange = (mode) => {
-    setListIsDisplayed(mode);
-  };
-  const initialData = [
-    {
-      adresse:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, repellendus!",
-      distance:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, repellendus!",
-      denivele:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, repellendus!",
-      temps_estime:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, repellendus!",
-    },
-    {
-      adresse:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, repellendus!",
-      distance:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, repellendus!",
-      denivele:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, repellendus!",
-      temps_estime:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, repellendus!",
-    },
-    {
-      adresse:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, repellendus!",
-      distance:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, repellendus!",
-      denivele:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, repellendus!",
-      temps_estime:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam, repellendus!",
-    },
-  ];
-
   return (
     <PositionProvider>
-      <Info/>
+      <Info />
       <Walter />
-      <ListView data={initialData} isDisplayed={listIsDisplayed} />
+      <ListView isDisplayed={listIsDisplayed} />
       <MapContainer center={[47.216671, -1.55]} zoom={14}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -69,8 +34,10 @@ function App() {
         {userWantsWater && <Markers typeOfAmenity={"water"} />}
         {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}
         {userWantsFood && <Markers typeOfAmenity={"food"} />}
+
+        <Capybara />
       </MapContainer>
-      
+
       <FilterBar
         filters={{
           userWantsWater,
@@ -82,7 +49,6 @@ function App() {
           listIsDisplayed,
           setListIsDisplayed,
         }}
-        onDisplayModeChange={handleDisplayModeChange}
       />
     </PositionProvider>
   );
