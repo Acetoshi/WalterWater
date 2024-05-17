@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { usePosition } from "../Contexts/PositionProvider";
-import { faucetIcon, toiletIcon } from "../scripts/icons";
+import { faucetIcon, toiletIcon,foodIcon } from "../scripts/icons";
 import { getPoints } from "../scripts/osmUtilities";
 
 export default function Markers({ typeOfAmenity, radius }) {
@@ -15,9 +15,13 @@ export default function Markers({ typeOfAmenity, radius }) {
     queryDetails = '["amenity"="drinking_water"]';
     icon = faucetIcon;
   } else if (typeOfAmenity === "toilets") {
-    console.log("toilet query");
     queryDetails = '["amenity"="toilets"]';
     icon = toiletIcon;
+  } else if (typeOfAmenity === "food") {
+    queryDetails = '["amenity"="restaurant"]';
+    icon = foodIcon;
+  } else {
+    queryDetails = '["amenity"="toilets"]';
   }
 
   useEffect(() => {
@@ -31,7 +35,12 @@ export default function Markers({ typeOfAmenity, radius }) {
       {points &&
         points.map((point) => (
           <Marker position={[point.lat, point.lon]} icon={icon}>
-            <Popup>Eau potable</Popup>
+            // TODO : faire un composant à partir du popup pour mettre les données des toilettes en forme.
+            <Popup>
+              {typeOfAmenity === "water"
+                ? "Eau potable"
+                : `${JSON.stringify(point.tags)}`}
+            </Popup>
           </Marker>
         ))}
     </ul>

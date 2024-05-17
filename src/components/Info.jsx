@@ -4,7 +4,7 @@ function Info() {
   return (
     <button type="button" className="imagei" id="InfoButton">
       <span
-        className="icon-etape-importante"
+        className="icon-information"
         aria-label="Affichage en mode liste des points"
       />
     </button>
