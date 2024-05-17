@@ -1,13 +1,36 @@
 .list-view {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: center;
   gap: 30px;
-  height: 80vh;
+  width: 100vw;
+  height: 100vh;
   overflow-y: auto;
+  list-style-type: none;
+  position: absolute;
+  z-index: 1999;
+  background-color: #00000099;
 }
 
 .list-view.hidden {
   display: none;
+}
+
+.list-view>li{
+  display: flex;
+  justify-content: center;
+}
+
+.info-card {
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 20px;
+  width: 80vw;
 }
 
 .info-item {
@@ -19,6 +42,7 @@
   max-width: 100%;
   max-height: 100%;
   margin: 20px;
+  color: black;
 }
 
 .info-text {
@@ -26,5 +50,9 @@
 }
 
 .list-view p {
+  color: black;
+}
+
+.list-view h3 {
   color: black;
 }

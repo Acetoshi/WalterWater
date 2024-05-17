@@ -1,4 +1,3 @@
-// import Logo from "./assets/demo-files/fonts/icomoon.svg";
 import { usePosition } from "../Contexts/PositionProvider";
 import InfoCard from "./InfoCard";
 
