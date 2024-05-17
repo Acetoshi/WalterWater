@@ -5,8 +5,8 @@ const InfoCard = ({ pointOfInterest }) => {
       <div className="info-item">
         {pointOfInterest.tags.amenity === "toilets" && (
           <span
-            className="icon-restaurant"
-            aria-label="Afficher des lieux pour se restaurer"
+            className="icon-etape-importante info-logo"
+            aria-hidden="true"
           />
         )}
         <div className="info-text">
@@ -15,25 +15,27 @@ const InfoCard = ({ pointOfInterest }) => {
         </div>
       </div>
       <div className="info-item">
-        <img src="src/public/loupe.jpg" alt="Distance" className="info-logo" />
+      <span
+            className="icon-emplacement info-logo"
+            aria-hidden="true"
+          />
         <div className="info-text">
           <p>Distance:</p>
           <p>3.5 km</p>
         </div>
       </div>
       <div className="info-item">
-        <img src="src/public/un-i.jpg" alt="Dénivelé" className="info-logo" />
+      <span className="icon-slope info-logo" aria-hidden="true"/>
         <div className="info-text">
           <p>Dénivelé:</p>
           <p>500 D+</p>
         </div>
       </div>
       <div className="info-item">
-        <img
-          src="src/public/horloge.jpg"
-          alt="Temps estimé"
-          className="info-logo"
-        />
+      <span
+            className="icon-time info-logo"
+            aria-hidden="true"
+          />
         <div className="info-text">
           <p>Temps estimé:</p>
           <p>40 minutes</p>

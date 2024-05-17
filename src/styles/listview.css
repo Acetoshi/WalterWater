@@ -1,9 +1,14 @@
+
 .list-view {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 30px;
   height: 80vh;
   overflow-y: auto;
+  list-style-type: none;
+  position: absolute;
+  z-index: 3000;
+  width: 100vw;
 }
 
 .list-view.hidden {
@@ -13,6 +18,17 @@
 .info-item {
   display: flex;
   align-items: center;
+}
+
+.info-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgb(107, 107, 107);
+  border-radius: 10px;
 }
 
 .info-logo {
