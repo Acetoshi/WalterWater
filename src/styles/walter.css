@@ -1,0 +1,30 @@
+.container-walter {
+  position: absolute;
+  right: 0;
+  bottom: 110px;
+  z-index: 20000;
+  width: 130px;
+  height: 160px;
+}
+.infos-walter {
+  position: absolute;
+  left: -229px;
+  bottom: 100px;
+  border-radius: 20px 20px 0 20px;
+  background-color: #fff;
+  padding: 1.2rem;
+  width: 230px;
+}
+.infos-walter p {
+  color: var(--grey-darker);
+}
+.container-walter .icon-walter-color {
+  font-size: 160px;
+}
+.container-walter .close-walter {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: var(--secondary-color);
+  font-size: 1.2rem;
+}

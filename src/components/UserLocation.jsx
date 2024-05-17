@@ -1,8 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Popup, Marker, useMap } from "react-leaflet";
+import { usePosition } from "../Contexts/PositionProvider";
+import { walterIcon } from "../scripts/icons";
 
 export default function UserLocation() {
-  const [userLocation, setUserLocation] = useState([48.866,2.33333]);
+
+  const { userLocation, setUserLocation } = usePosition();
 
   useEffect(getUserLocation, []);
 
@@ -24,12 +27,12 @@ export default function UserLocation() {
   const map = useMap();
 
   useEffect(() => {
-    map.setView(userLocation,16);
+    map.setView(userLocation,15);
   }, [userLocation]);
 
   return (
-    <Marker position={userLocation}>
-      <Popup>You are here</Popup>
+    <Marker position={userLocation} icon={walterIcon}>
+      <Popup>Voici ta postion, utilise les filtres pour trouver de l'eau, des restaurants ou des toilettes proches de toi!</Popup>
     </Marker>
   );
 }

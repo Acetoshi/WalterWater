@@ -22,10 +22,21 @@
   padding: 1rem 1rem;
 }
 
+.button-filter {
+  cursor:pointer;
+}
+
+
 .button-filter span {
   font-size: 3rem;
   color: var(--main-color);
 }
+
+.button-filter span.deactivated {
+  color: var( --grey-medium);
+}
+
+
 #displayDataButton {
   background-color: var(--secondary-color);
 }
