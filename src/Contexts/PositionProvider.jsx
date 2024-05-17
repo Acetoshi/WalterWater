@@ -20,8 +20,6 @@ export default function PositionProvider({ children }) {
     getPoints(userLocation, 0.1, setNearbyToilets, '["amenity"="toilets"]');
   }, [userLocation]);
 
-  console.log(nearbyWater);
-
   return (
     <PositionContext.Provider
       value={{
