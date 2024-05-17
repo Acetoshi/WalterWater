@@ -6,6 +6,10 @@
   overflow-y: auto;
 }
 
+.list-view.hidden {
+  display: none;
+}
+
 .info-item {
   display: flex;
   align-items: center;
@@ -21,6 +25,6 @@
   margin-left: 10px;
 }
 
-p {
+.list-view p {
   color: black;
 }

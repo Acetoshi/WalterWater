@@ -1,9 +1,9 @@
 // import Logo from "./assets/demo-files/fonts/icomoon.svg";
 
-const ListView = ({ data }) => {
+const ListView = ({ data, isDisplayed }) => {
   console.log(data);
   return (
-    <div className="list-view">
+    <div className={isDisplayed?"list-view":"list-view hidden"}>
       {data.map((item, index) => (
         <div key={index} className="info-card">
           <div className="info-item">

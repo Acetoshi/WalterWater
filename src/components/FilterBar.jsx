@@ -2,7 +2,7 @@ import "../styles/FilterBar.css";
 
 function FilterBar({filters, onDisplayModeChange }) {
   const handleDisplayModeChange = () => {
-    onDisplayModeChange("liste");
+    filters.setListIsDisplayed(()=>!filters.listIsDisplayed);
   };
 
   return (
