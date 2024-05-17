@@ -9,6 +9,7 @@ import "./assets/icomoon/style.css";
 import "./styles/global.css";
 import "./styles/listview.css";
 import ListView from "./components/ListView";
+import Info from "./components/Info";
 
 function App() {
   const [listIsDisplayed, setListIsDisplayed] = useState(false);
@@ -54,6 +55,7 @@ function App() {
 
   return (
     <PositionProvider>
+      <Info/>
       <Walter />
       <ListView data={initialData} isDisplayed={listIsDisplayed} />
       <MapContainer center={[47.216671, -1.55]} zoom={14}>
@@ -68,6 +70,7 @@ function App() {
         {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}
         {userWantsFood && <Markers typeOfAmenity={"food"} />}
       </MapContainer>
+      
       <FilterBar
         filters={{
           userWantsWater,
