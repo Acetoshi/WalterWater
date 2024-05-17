@@ -6,12 +6,12 @@ export default function PositionProvider({ children }) {
   const [userLocation, setUserLocation] = useState([48.866, 2.33333]);
 
   return (
-    <PositionContext.Provider value={{userLocation, setUserLocation}}>
+    <PositionContext.Provider value={{ userLocation, setUserLocation }}>
       {children}
     </PositionContext.Provider>
   );
 }
 
-export function usePosition(){
-   return useContext(PositionContext)
+export function usePosition() {
+  return useContext(PositionContext);
 }

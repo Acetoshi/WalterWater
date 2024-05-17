@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { usePosition } from "../Contexts/PositionProvider";
-import { faucetIcon, toiletIcon,foodIcon } from "../scripts/icons";
+import { faucetIcon, toiletIcon, foodIcon } from "../scripts/icons";
 import { getPoints } from "../scripts/osmUtilities";
 
 export default function Markers({ typeOfAmenity, radius }) {
