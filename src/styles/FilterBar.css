@@ -23,9 +23,8 @@
 }
 
 .button-filter {
-  cursor:pointer;
+  cursor: pointer;
 }
-
 
 .button-filter span {
   font-size: 3rem;
@@ -33,9 +32,8 @@
 }
 
 .button-filter span.deactivated {
-  color: var( --grey-medium);
+  color: var(--grey-medium);
 }
-
 
 #displayDataButton {
   background-color: var(--secondary-color);
