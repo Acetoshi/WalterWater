@@ -1,0 +1,30 @@
+.list-view {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 30px;
+  height: 80vh;
+  overflow-y: auto;
+}
+
+.list-view.hidden {
+  display: none;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+}
+
+.info-logo {
+  max-width: 100%;
+  max-height: 100%;
+  margin: 20px;
+}
+
+.info-text {
+  margin-left: 10px;
+}
+
+.list-view p {
+  color: black;
+}

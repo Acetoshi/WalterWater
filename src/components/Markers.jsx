@@ -34,9 +34,9 @@ export default function Markers({ typeOfAmenity, radius }) {
     <ul>
       {points &&
         points.map((point) => (
-          <Marker position={[point.lat, point.lon]} icon={icon}>
-            // TODO : faire un composant à partir du popup pour mettre les
-            données des toilettes en forme.
+          <Marker key={point.id} position={[point.lat, point.lon]} icon={icon}>
+            {/* // TODO : faire un composant à partir du popup pour mettre les
+            données des toilettes en forme. */}
             <Popup>
               {typeOfAmenity === "water"
                 ? "Eau potable"

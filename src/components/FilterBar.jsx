@@ -1,9 +1,18 @@
 import "../styles/FilterBar.css";
 
-function FilterBar({filters}) {
+function FilterBar({filters, onDisplayModeChange }) {
+  const handleDisplayModeChange = () => {
+    filters.setListIsDisplayed(()=>!filters.listIsDisplayed);
+  };
+
   return (
     <div className="FilterBar">
-      <button type="button" className="button-filter" id="displayDataButton">
+      <button
+        type="button"
+        className="button-filter"
+        id="displayDataButton"
+        onClick={handleDisplayModeChange}
+      >
         <span
           className="icon-liste-a-puces"
           aria-label="Affichage en mode liste des points"
