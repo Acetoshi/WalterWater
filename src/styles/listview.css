@@ -1,25 +1,33 @@
 .list-view {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: center;
   gap: 30px;
   width: 100vw;
   height: 100vh;
   overflow-y: auto;
   list-style-type: none;
   position: absolute;
-  z-index: 3000;
+  z-index: 1999;
+  background-color: #00000099;
 }
 
 .list-view.hidden {
   display: none;
 }
 
+.list-view>li{
+  display: flex;
+  justify-content: center;
+}
+
 .info-card {
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: beige;
+  transform: translate(-50%, -50%); */
+  background-color: var(--white);
   border-radius: 10px;
   padding: 20px;
   width: 80vw;
