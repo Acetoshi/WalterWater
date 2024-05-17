@@ -29,10 +29,9 @@ export async function getPoints(
         );
         out geom;
     `),
-  })
-    .then((data) => data.json())
-    .then((result) => {
-      console.log(result);
-      setterFunction(result.elements);
-    });
-}
+    })
+      .then((data) => data.json())
+      .then((result) => {
+        setterFunction(result.elements);
+      });
+  }

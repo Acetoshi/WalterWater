@@ -5,29 +5,35 @@ import FilterBar from "./components/FilterBar";
 import Walter from "./components/Walter";
 import Markers from "./components/Markers";
 import PositionProvider from "./Contexts/PositionProvider";
+import Capybara from "./components/EasterEgg";
 import "./assets/icomoon/style.css";
 import "./styles/global.css";
+import "./styles/listview.css";
+import ListView from "./components/ListView";
 
 function App() {
+  const [listIsDisplayed, setListIsDisplayed] = useState(false);
   const [userWantsWater, setUserWantsWater] = useState(true);
   const [userWantsToilets, setUserWantsToilets] = useState(true);
   const [userWantsFood, setUserWantsFood] = useState(false);
+
   return (
-    <>
+    <PositionProvider>
       <Walter />
-      <MapContainer center={[48.216671, -1.55]} zoom={14}>
+      <ListView isDisplayed={listIsDisplayed} />
+      <MapContainer center={[47.216671, -1.55]} zoom={14}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <PositionProvider>
-          <UserLocation />
-          {userWantsWater && <Markers typeOfAmenity={"water"} radius={0.1} />}
-          {userWantsToilets && (
-            <Markers typeOfAmenity={"toilets"} radius={0.1} />
-          )}
-          {userWantsFood && <Markers typeOfAmenity={"food"} radius={0.1} />}
-        </PositionProvider>
+
+        <UserLocation />
+
+        {userWantsWater && <Markers typeOfAmenity={"water"} />}
+        {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}
+        {userWantsFood && <Markers typeOfAmenity={"food"} />}
+
+        <Capybara />
       </MapContainer>
       <FilterBar
         filters={{
@@ -37,9 +43,11 @@ function App() {
           setUserWantsToilets,
           userWantsFood,
           setUserWantsFood,
+          listIsDisplayed,
+          setListIsDisplayed,
         }}
       />
-    </>
+    </PositionProvider>
   );
 }
 

@@ -2,6 +2,7 @@ import faucet from "../assets/markerIcons/faucet_icon.svg";
 import toilet from "../assets/markerIcons/toilet_icon.svg";
 import food from "../assets/markerIcons/food_icon.svg";
 import walter from "../assets/markerIcons/walter_icon_color.svg";
+import capybara from "../assets/markerIcons/capybara_icon.svg"
 import L from "leaflet";
 
 // give the source to your icon
@@ -37,3 +38,12 @@ export let walterIcon = new L.icon({
   popupAnchor: [0, -72],
   iconSize: [56, 72],
 });
+
+export let capybaraIcon = new L.icon({
+  iconUrl: capybara,
+  iconRetinaUrl: capybara,
+  iconAnchor: [28, 72],
+  popupAnchor: [0, -72],
+  iconSize: [56, 72],
+});
+

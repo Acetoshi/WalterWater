@@ -1,13 +1,26 @@
 import "../styles/FilterBar.css";
 
 function FilterBar({ filters }) {
+  const handleDisplayModeChange = () => {
+    filters.setListIsDisplayed(() => !filters.listIsDisplayed);
+  };
+
   return (
     <div className="FilterBar">
-      <button type="button" className="button-filter" id="displayDataButton">
-        <span
+      <button
+        type="button"
+        className="button-filter"
+        id="displayDataButton"
+        onClick={handleDisplayModeChange}
+      >
+        {filters.listIsDisplayed?(        <span
+          className="icon-search-location-1"
+          aria-label="Affichage de la carte"
+        />):(        <span
           className="icon-liste-a-puces"
           aria-label="Affichage en mode liste des points"
-        />
+        />)}
+
       </button>
       <button
         type="button"
