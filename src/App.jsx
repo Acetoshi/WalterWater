@@ -64,9 +64,9 @@ function App() {
 
         <UserLocation />
 
-        {userWantsWater && <Markers typeOfAmenity={"water"} radius={0.1} />}
-        {userWantsToilets && <Markers typeOfAmenity={"toilets"} radius={0.1} />}
-        {userWantsFood && <Markers typeOfAmenity={"food"} radius={0.1} />}
+        {userWantsWater && <Markers typeOfAmenity={"water"} />}
+        {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}
+        {userWantsFood && <Markers typeOfAmenity={"food"} />}
       </MapContainer>
       <FilterBar
         filters={{

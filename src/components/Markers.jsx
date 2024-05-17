@@ -1,34 +1,26 @@
 import { useState, useEffect } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { usePosition } from "../Contexts/PositionProvider";
-import { faucetIcon, toiletIcon,foodIcon } from "../scripts/icons";
-import { getPoints } from "../scripts/osmUtilities";
+import { faucetIcon, toiletIcon, foodIcon } from "../scripts/icons";
 
-export default function Markers({ typeOfAmenity, radius }) {
-  const { userLocation } = usePosition();
-  const [points, setPoints] = useState([]);
 
-  let queryDetails = "";
+export default function Markers({ typeOfAmenity}) {
+  const { nearbyToilets, nearbyFood, nearbyWater } =
+    usePosition();
+
+  let points = [];
   let icon = {};
 
   if (typeOfAmenity === "water") {
-    queryDetails = '["amenity"="drinking_water"]';
+    points = nearbyWater;
     icon = faucetIcon;
   } else if (typeOfAmenity === "toilets") {
-    queryDetails = '["amenity"="toilets"]';
+    points = nearbyToilets;
     icon = toiletIcon;
   } else if (typeOfAmenity === "food") {
-    queryDetails = '["amenity"="restaurant"]';
+    points = nearbyFood;
     icon = foodIcon;
-  } else {
-    queryDetails = '["amenity"="toilets"]';
   }
-
-  useEffect(() => {
-    getPoints(userLocation, radius, setPoints, queryDetails);
-  }, [userLocation]);
-
-  console.log(points);
 
   return (
     <ul>
