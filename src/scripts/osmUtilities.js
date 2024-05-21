@@ -10,7 +10,7 @@ export function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
       Math.sin(dLon / 2);
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   var d = R * c; // Distance in km
-  return d;
+  return d.toFixed(2); //to fixed returns only 2 decimal places.
 }
 
 function deg2rad(deg) {
@@ -27,6 +27,7 @@ function boundingBox(location, radius) {
 
 export async function getAllPoints(location, radius, setterFunction) {
   const bBox = boundingBox(location, radius);
+  const maxObjects = 1000;
   fetch("https://overpass-api.de/api/interpreter", {
     method: "POST",
     // The body contains the query
@@ -44,11 +45,25 @@ export async function getAllPoints(location, radius, setterFunction) {
             node["amenity"="toilets"](${bBox});
             node["amenity"="restaurant"](${bBox});
           );
-          out geom;
+          out geom ${maxObjects};
       `),
   })
     .then((data) => data.json())
     .then((result) => {
-      setterFunction(result.elements.slice(0, 500));
+      setterFunction(
+        result.elements
+          .map((point) => ({
+            ...point,
+            distanceKm: getDistanceFromLatLonInKm(
+              location[0],
+              location[1],
+              point.lat,
+              point.lon
+            ),
+          }))
+          .sort((pointA, pointB) =>
+            pointA.distanceKm - pointB.distanceKm > 0 ? true : false
+          )
+      );
     });
 }

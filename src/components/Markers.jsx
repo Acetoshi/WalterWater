@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { usePosition } from "../Contexts/PositionProvider";
 import { faucetIcon, toiletIcon, foodIcon } from "../scripts/icons";
@@ -22,8 +21,6 @@ export default function Markers({ typeOfAmenity}) {
     icon = foodIcon;
   }
 
-  console.log(points);
-
   return (
     <ul>
       {points &&
@@ -35,6 +32,7 @@ export default function Markers({ typeOfAmenity}) {
               {typeOfAmenity === "water"
                 ? "Eau potable"
                 : `${JSON.stringify(point.tags)}`}
+                
             </Popup>
           </Marker>
         ))}

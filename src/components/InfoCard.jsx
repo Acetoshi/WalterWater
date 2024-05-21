@@ -1,17 +1,17 @@
-import { getDistanceFromLatLonInKm } from "../scripts/osmUtilities.js";
+// import { getDistanceFromLatLonInKm } from "../scripts/osmUtilities.js";
 import { usePosition } from "../Contexts/PositionProvider.jsx";
 
 const InfoCard = ({ pointOfInterest }) => {
   const { userLocation } = usePosition();
 
-  let distance = getDistanceFromLatLonInKm(
-    userLocation[0],
-    userLocation[1],
-    pointOfInterest.lat,
-    pointOfInterest.lon
-  )
+  // let distance = getDistanceFromLatLonInKm(
+  //   userLocation[0],
+  //   userLocation[1],
+  //   pointOfInterest.lat,
+  //   pointOfInterest.lon
+  // )
 
-  let temps=Math.round(distance * 60 /4);
+  let temps=Math.round(pointOfInterest.distanceKm * 60 /4);
 
   return (
     <div className="info-card">
@@ -32,9 +32,8 @@ const InfoCard = ({ pointOfInterest }) => {
       <div className="info-item">
         <span className="icon-emplacement info-logo" aria-hidden="true" />
         <div className="info-text">
-          <p>Distance :</p>
           <p>
-            {distance.toString().slice(0, 4)+" km"}
+            {`Distance : ${pointOfInterest.distanceKm} km`}
           </p>
         </div>
       </div>
@@ -48,8 +47,7 @@ const InfoCard = ({ pointOfInterest }) => {
       <div className="info-item">
         <span className="icon-time info-logo" aria-hidden="true" />
         <div className="info-text">
-          <p>Temps estimé:</p>
-          <p>{`${temps} mn`}</p>
+          <p>{`Temps estimé : ${temps} mn à pied`}</p>
         </div>
       </div>
     </div>
