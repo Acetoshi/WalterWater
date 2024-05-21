@@ -13,9 +13,7 @@ export default function PositionProvider({ children }) {
 
   useEffect(() => {
     getAllPoints(userLocation, 0.1, setNearbyPOIs);
-    console.log("setting item", userLocation.toString());
     localStorage.setItem("userLocation", userLocation.toString());
-    console.log(localStorage.getItem("userLocation").split(','));
   }, [userLocation]);
 
   return (
