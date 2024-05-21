@@ -1,26 +1,24 @@
 import { usePosition } from "../Contexts/PositionProvider";
 import InfoCard from "./InfoCard";
 
-const ListView = ({ isDisplayed ,filters}) => {
-  const { nearbyToilets, nearbyFood, nearbyWater } = usePosition();
+const ListView = ({ isDisplayed, filters }) => {
+  const { nearbyPOIs } = usePosition();
 
   return (
     <ul className={isDisplayed ? "list-view" : "list-view hidden"}>
-      {filters.userWantsToilets && nearbyToilets.map((item, index) => (
-        <li key={item.id}>
-          <InfoCard pointOfInterest={item} />
-        </li>
-      ))}
-      {filters.userWantsWater && nearbyWater.map((item, index) => (
-        <li key={item.id}>
-          <InfoCard pointOfInterest={item} />
-        </li>
-      ))}
-      {filters.userWantsFood && nearbyFood.map((item, index) => (
-        <li key={item.id}>
-          <InfoCard pointOfInterest={item} />
-        </li>
-      ))}
+      {nearbyPOIs
+        .filter(
+          (point) =>
+            (filters.userWantsToilets && point.tags.amenity === "toilets") ||
+            (filters.userWantsWater &&
+              point.tags.amenity === "drinking_water") ||
+            (filters.userWantsFood && point.tags.amenity === "restaurant")
+        )
+        .map((point) => (
+          <li key={point.id}>
+            <InfoCard pointOfInterest={point} />
+          </li>
+        ))}
     </ul>
   );
 };

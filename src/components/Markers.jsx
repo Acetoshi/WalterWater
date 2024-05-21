@@ -1,24 +1,23 @@
-import { useState, useEffect } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { usePosition } from "../Contexts/PositionProvider";
 import { faucetIcon, toiletIcon, foodIcon } from "../scripts/icons";
 
 
 export default function Markers({ typeOfAmenity}) {
-  const { nearbyToilets, nearbyFood, nearbyWater } =
+  const { nearbyPOIs } =
     usePosition();
 
   let points = [];
   let icon = {};
 
   if (typeOfAmenity === "water") {
-    points = nearbyWater;
+    points = nearbyPOIs.filter(point=>point.tags.amenity==="drinking_water");
     icon = faucetIcon;
   } else if (typeOfAmenity === "toilets") {
-    points = nearbyToilets;
+    points = nearbyPOIs.filter(point=>point.tags.amenity==="toilets");
     icon = toiletIcon;
   } else if (typeOfAmenity === "food") {
-    points = nearbyFood;
+    points = nearbyPOIs.filter(point=>point.tags.amenity==="restaurant");
     icon = foodIcon;
   }
 
@@ -33,6 +32,7 @@ export default function Markers({ typeOfAmenity}) {
               {typeOfAmenity === "water"
                 ? "Eau potable"
                 : `${JSON.stringify(point.tags)}`}
+                
             </Popup>
           </Marker>
         ))}
