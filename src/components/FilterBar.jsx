@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "../styles/FilterBar.css";
 
 function FilterBar({ filters }) {
@@ -13,14 +14,17 @@ function FilterBar({ filters }) {
         id="displayDataButton"
         onClick={handleDisplayModeChange}
       >
-        {filters.listIsDisplayed?(        <span
-          className="icon-search-location-1"
-          aria-label="Affichage de la carte"
-        />):(        <span
-          className="icon-liste-a-puces"
-          aria-label="Affichage en mode liste des points"
-        />)}
-
+        {filters.listIsDisplayed ? (
+          <span
+            className="icon-search-location-1"
+            aria-label="Affichage de la carte"
+          />
+        ) : (
+          <span
+            className="icon-liste-a-puces"
+            aria-label="Affichage en mode liste des points"
+          />
+        )}
       </button>
       <button
         type="button"
@@ -67,4 +71,9 @@ function FilterBar({ filters }) {
     </div>
   );
 }
+
 export default FilterBar;
+
+FilterBar.proptypes = {
+  filters: PropTypes.object.isRequired,
+};

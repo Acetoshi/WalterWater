@@ -16,7 +16,7 @@ export default function UserLocation() {
             position.coords.latitude,
             position.coords.longitude,
           ]),
-        () => console.log("Unable to retrieve your location"),
+        () => console.log("Unable to retrieve your location")
       );
     } else {
       console.log("Geolocation not supported");
@@ -32,8 +32,10 @@ export default function UserLocation() {
   return (
     <Marker position={userLocation} icon={walterIcon}>
       <Popup>
-        Voici ta postion, utilise les filtres pour trouver de l'eau, des
-        restaurants ou des toilettes proches de toi!
+        <p>
+          Voici ta postion, utilise les filtres pour trouver de l'eau, des
+          restaurants ou des toilettes proches de toi!
+        </p>
       </Popup>
     </Marker>
   );
