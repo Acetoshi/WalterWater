@@ -1,18 +1,21 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import {
-  getAllPoints,
-  getDistanceFromLatLonInKm,
-} from "../scripts/osmUtilities";
+import { getAllPoints } from "../scripts/osmUtilities";
 
 const PositionContext = createContext();
 
 export default function PositionProvider({ children }) {
-  const [userLocation, setUserLocation] = useState([48.866, 2.33333]);
+  const [userLocation, setUserLocation] = useState(
+    localStorage.getItem("userLocation") === null
+      ? [48.866, 2.33333]
+      : localStorage.getItem("userLocation").split(',')
+  );
   const [nearbyPOIs, setNearbyPOIs] = useState([]); // POIs stands for Points of Interest
 
   useEffect(() => {
     getAllPoints(userLocation, 0.1, setNearbyPOIs);
-    console.log(nearbyPOIs)
+    console.log("setting item", userLocation.toString());
+    localStorage.setItem("userLocation", userLocation.toString());
+    console.log(localStorage.getItem("userLocation").split(','));
   }, [userLocation]);
 
   return (
