@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { getPoints } from "../scripts/osmUtilities";
+import { getAllPoints } from "../scripts/osmUtilities";
 
 const PositionContext = createContext();
 
@@ -8,16 +8,10 @@ export default function PositionProvider({ children }) {
   const [nearbyFood, setNearbyFood] = useState([]);
   const [nearbyWater, setNearbyWater] = useState([]);
   const [nearbyToilets, setNearbyToilets] = useState([]);
+  const [nearbyPOIs, setNearbyPOIs] = useState([]);
 
   useEffect(() => {
-    getPoints(userLocation, 0.1, setNearbyFood, '["amenity"="restaurant"]');
-    getPoints(
-      userLocation,
-      0.1,
-      setNearbyWater,
-      '["amenity"="drinking_water"]'
-    );
-    getPoints(userLocation, 0.1, setNearbyToilets, '["amenity"="toilets"]');
+    getAllPoints(userLocation, 0.1, setNearbyPOIs);
   }, [userLocation]);
 
   return (
@@ -25,9 +19,7 @@ export default function PositionProvider({ children }) {
       value={{
         userLocation,
         setUserLocation,
-        nearbyToilets,
-        nearbyFood,
-        nearbyWater,
+        nearbyPOIs,
       }}
     >
       {children}
