@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
+import InfoPage from "../pages/InfoPage";
 
 const router = createBrowserRouter([
   {
@@ -9,8 +10,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/info",
-    element: <h1>Lucas, fous ton composant ici</h1>,
+    element: <InfoPage/>,
   },
+
+
 ]);
 
 export default router;
