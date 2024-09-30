@@ -10,6 +10,7 @@ import "./assets/icomoon/style.css";
 import "./styles/global.css";
 import "./styles/listview.css";
 import ListView from "./components/ListView";
+import SearchThisArea from "./components/SearchThisArea";
 
 function App() {
   const [listIsDisplayed, setListIsDisplayed] = useState(false);
@@ -35,6 +36,7 @@ function App() {
         />
 
         <UserLocation />
+        <SearchThisArea />
 
         {userWantsWater && <Markers typeOfAmenity={"water"} />}
         {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}
