@@ -1,13 +1,14 @@
-export function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+//TODO : this functions can be accessed via map.distance from leaflet.
+export function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2 - lat1); // deg2rad below
-  var dLon = deg2rad(lon2 - lon1);
+  var dLng = deg2rad(lng2 - lng1);
   var a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos(deg2rad(lat1)) *
       Math.cos(deg2rad(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
+      Math.sin(dLng / 2) *
+      Math.sin(dLng / 2);
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   var d = R * c; // Distance in km
   return d.toFixed(2); //to fixed returns only 2 decimal places.
@@ -18,11 +19,11 @@ function deg2rad(deg) {
 }
 
 function boundingBox(location, radius) {
-  const minLat = location[0] - radius / 2;
-  const maxLat = location[0] + radius / 2;
-  const minLon = location[1] - radius / 2;
-  const maxLon = location[1] + radius / 2;
-  return `${minLat},${minLon},${maxLat},${maxLon}`;
+  const minLat = location.lat - radius / 2;
+  const maxLat = location.lat + radius / 2;
+  const minLng = location.lng - radius / 2;
+  const maxLng = location.lng + radius / 2;
+  return `${minLat},${minLng},${maxLat},${maxLng}`;
 }
 
 export async function getAllPoints(location, radius, setterFunction) {
@@ -55,8 +56,8 @@ export async function getAllPoints(location, radius, setterFunction) {
           .map((point) => ({
             ...point,
             distanceKm: getDistanceFromLatLonInKm(
-              location[0],
-              location[1],
+              location.lat,
+              location.lng,
               point.lat,
               point.lon
             ),
