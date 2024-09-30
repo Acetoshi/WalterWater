@@ -1,7 +1,7 @@
 import { useMap } from "react-leaflet";
 import { usePosition } from "../Contexts/PositionProvider";
 
-export default function SearchThisArea() {
+export default function MapTracker() {
   const map = useMap();
   const { userLocation } = usePosition();
 

@@ -6,11 +6,12 @@ import Walter from "./components/Walter";
 import Markers from "./components/Markers";
 import PositionProvider from "./Contexts/PositionProvider";
 import Capybara from "./components/EasterEgg";
+import ListView from "./components/ListView";
+import SearchThisArea from "./components/SearchThisArea";
 import "./assets/icomoon/style.css";
 import "./styles/global.css";
 import "./styles/listview.css";
-import ListView from "./components/ListView";
-import SearchThisArea from "./components/SearchThisArea";
+import "./styles/searchThisAreaButton.css";
 
 function App() {
   const [listIsDisplayed, setListIsDisplayed] = useState(false);
@@ -44,6 +45,7 @@ function App() {
 
         <Capybara />
       </MapContainer>
+      <button id="search-this-area-button"> search this area </button>
       <FilterBar
         filters={{
           userWantsWater,
