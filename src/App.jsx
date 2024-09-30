@@ -10,8 +10,9 @@ import ListView from "./components/ListView";
 import SearchThisArea from "./components/SearchThisArea";
 import "./assets/icomoon/style.css";
 import "./styles/global.css";
-import "./styles/listview.css";
-import "./styles/searchThisAreaButton.css";
+import MapTracker from "./components/MapTracker";
+
+
 
 function App() {
   const [listIsDisplayed, setListIsDisplayed] = useState(false);
@@ -30,6 +31,7 @@ function App() {
           userWantsFood,
         }}
       />
+      
       <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -37,7 +39,7 @@ function App() {
         />
 
         <UserLocation />
-        <SearchThisArea />
+        <MapTracker/>
 
         {userWantsWater && <Markers typeOfAmenity={"water"} />}
         {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}
@@ -45,7 +47,8 @@ function App() {
 
         <Capybara />
       </MapContainer>
-      <button id="search-this-area-button"> search this area </button>
+
+      <SearchThisArea />
       <FilterBar
         filters={{
           userWantsWater,

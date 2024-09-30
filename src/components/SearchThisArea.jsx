@@ -1,21 +1,35 @@
-import { useMap } from "react-leaflet";
+import { useEffect, useState } from "react";
 import { usePosition } from "../Contexts/PositionProvider";
+import "../styles/searchThisAreaButton.css";
+import { getDistanceFromLatLonInKm } from "../scripts/osmUtilities";
 
 export default function SearchThisArea() {
-  const map = useMap();
-  const { userLocation } = usePosition();
+  const { userLocation, mapCenter } = usePosition();
+  const [buttonIsDisplayed, setButtonIsDisplayed] = useState(false);
 
-  map.on("moveend", () => {
-    console.log(map.getCenter());
-    console.log(userLocation)
-    console.log(map.getBounds())
-    if (userLocation){
-        const distance = map.distance(map.getCenter(), userLocation);
-        console.log(distance)
+  
+
+  const distance = getDistanceFromLatLonInKm(
+    userLocation.lat,
+    userLocation.lng,
+    mapCenter.lat,
+    mapCenter.lng
+  );
+
+  console.log(distance);
+
+  useEffect(() => {
+    if (Number(distance) >= 5) {
+      setButtonIsDisplayed(true);
+      console.log("button is visible");
+    } else {
+      setButtonIsDisplayed(false);
     }
+  }, [userLocation, mapCenter]);
 
-  });
+  //TODO : get the info : are we far enough form the user's position to display the button ?
 
-
-  return <button id="search-this-area-button"> search this area </button>;
+  return buttonIsDisplayed ? (
+    <button id="search-this-area-button"> search this area </button>
+  ) : null;
 }
