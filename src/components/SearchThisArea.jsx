@@ -14,18 +14,13 @@ export default function SearchThisArea() {
     mapCenter.lng
   );
 
-  console.log(distance);
-
   useEffect(() => {
     if (Number(distance) >= 5) {
       setButtonIsDisplayed(true);
-      console.log("button is visible");
     } else {
       setButtonIsDisplayed(false);
     }
   }, [userLocation, mapCenter]);
-
-  //TODO : get the info : are we far enough form the user's position to display the button ?
 
   return (
     <button
