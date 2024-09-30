@@ -11,6 +11,7 @@ export default function PositionProvider({ children }) {
   );
   const [nearbyPOIs, setNearbyPOIs] = useState([]); // POIs stands for Points of Interest
 
+  // this useEffect fetches POIs data on OSM server
   useEffect(() => {
     getAllPoints(userLocation, 0.1, setNearbyPOIs);
     localStorage.setItem("userLocation", userLocation.toString());
