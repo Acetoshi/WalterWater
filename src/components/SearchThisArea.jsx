@@ -7,8 +7,6 @@ export default function SearchThisArea() {
   const { userLocation, mapCenter } = usePosition();
   const [buttonIsDisplayed, setButtonIsDisplayed] = useState(false);
 
-  
-
   const distance = getDistanceFromLatLonInKm(
     userLocation.lat,
     userLocation.lng,
@@ -29,7 +27,12 @@ export default function SearchThisArea() {
 
   //TODO : get the info : are we far enough form the user's position to display the button ?
 
-  return buttonIsDisplayed ? (
-    <button id="search-this-area-button"> search this area </button>
-  ) : null;
+  return (
+    <button
+      id="search-this-area-button"
+      className={buttonIsDisplayed ? "" : "hidden"}
+    >
+      search this area
+    </button>
+  );
 }
