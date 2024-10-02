@@ -26,7 +26,7 @@ function boundingBox(location, radius) {
   return `${minLat},${minLng},${maxLat},${maxLng}`;
 }
 
-export async function getAllPoints(location, radius, setterFunction) {
+export async function getAllPoints(location, radius, POIsetterFunction) {
   const bBox = boundingBox(location, radius);
   const maxObjects = 1000;
   fetch("https://overpass-api.de/api/interpreter", {
@@ -51,7 +51,7 @@ export async function getAllPoints(location, radius, setterFunction) {
   })
     .then((data) => data.json())
     .then((result) => {
-      setterFunction(
+      POIsetterFunction(
         result.elements
           .map((point) => ({
             ...point,
@@ -62,17 +62,20 @@ export async function getAllPoints(location, radius, setterFunction) {
               point.lon
             ),
           }))
-          .sort((pointA, pointB) =>
-            pointA.distanceKm - pointB.distanceKm
-          )
+          .sort((pointA, pointB) => pointA.distanceKm - pointB.distanceKm)
       );
     });
 }
 
-
-export async function getNewPoints(userLocation, mapBounds, setterFunction) {
-  const boundingBox = `${mapBounds.minLat},${mapBounds.minLng},${mapBounds.maxLat},${mapBounds.maxLng}`
+export async function getNewPoints(
+  userLocation,
+  mapBounds,
+  POIsetterFunction,
+  statusSetterFunction
+) {
+  const boundingBox = `${mapBounds.minLat},${mapBounds.minLng},${mapBounds.maxLat},${mapBounds.maxLng}`;
   const maxObjects = 1000;
+  statusSetterFunction("fetching data");
   fetch("https://overpass-api.de/api/interpreter", {
     method: "POST",
     // The body contains the query
@@ -95,7 +98,7 @@ export async function getNewPoints(userLocation, mapBounds, setterFunction) {
   })
     .then((data) => data.json())
     .then((result) => {
-      setterFunction(
+      POIsetterFunction(
         result.elements
           .map((point) => ({
             ...point,
@@ -110,5 +113,6 @@ export async function getNewPoints(userLocation, mapBounds, setterFunction) {
             pointA.distanceKm - pointB.distanceKm > 0 ? true : false
           )
       );
+      statusSetterFunction("data received");
     });
 }

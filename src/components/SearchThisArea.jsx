@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { usePosition } from "../Contexts/PositionProvider";
-import { getDistanceFromLatLonInKm, getNewPoints } from "../scripts/osmUtilities";
+import {
+  getDistanceFromLatLonInKm,
+  getNewPoints,
+} from "../scripts/osmUtilities";
 import "../styles/searchThisAreaButton.css";
 
 export default function SearchThisArea() {
   const { userLocation, mapPosition, setAreaPOIs, areaPOIs } = usePosition();
   const [buttonIsDisplayed, setButtonIsDisplayed] = useState(false);
+  const [requestStatus, setRequestStatus] = useState("ready to fetch");
 
   const distance = getDistanceFromLatLonInKm(
     userLocation.lat,
@@ -22,21 +26,33 @@ export default function SearchThisArea() {
     }
   }, [userLocation, mapPosition]);
 
+  useEffect(() => {
+    if (requestStatus == "data received") {
+      setTimeout(() => setRequestStatus("ready to fetch"), 1000);
+    }
+  }, [requestStatus]);
 
-//TODO : get bounds and launch a search. 
-
-  const handleSearch = ()=>{
-    getNewPoints(userLocation,mapPosition.bounds,setAreaPOIs)
-    console.log(areaPOIs)
-  }
+  const handleSearch = () => {
+    getNewPoints(
+      userLocation,
+      mapPosition.bounds,
+      setAreaPOIs,
+      setRequestStatus
+    );
+  };
 
   return (
     <button
       id="search-this-area-button"
-      className={buttonIsDisplayed ? "" : "hidden"}
+      className={`${buttonIsDisplayed ? "" : "hidden"} 
+      ${requestStatus !== "ready to fetch" ? "disabled" : ""
+      }`}
       onClick={handleSearch}
+      disabled={requestStatus !== "ready to fetch"}
     >
-      search this area
+       {(requestStatus==="ready to fetch")&&"search this area"}
+       {(requestStatus==="fetching data")&&"fetching data"}
+       {(requestStatus==="data received")&&" data received"}
     </button>
   );
 }
