@@ -71,7 +71,7 @@ export async function getAllPoints(location, radius, setterFunction) {
             ),
           }))
           .sort((pointA, pointB) =>
-            pointA.distanceKm - pointB.distanceKm > 0 ? true : false
+            pointA.distanceKm - pointB.distanceKm
           )
       );
     });
