@@ -4,10 +4,11 @@ import { usePosition } from "../Contexts/PositionProvider";
 // This component enables the app to track the center of the map, ie to know where the user is looking.
 export default function MapTracker() {
   const map = useMap();
-  const { setMapCenter } = usePosition();
+  const { setMapCenter, setMapBounds } = usePosition();
 
   map.on("moveend", () => {
     setMapCenter(map.getCenter());
+    setMapBounds(map.getBounds());
   });
 
   return null;

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { usePosition } from "../Contexts/PositionProvider";
 import "../styles/searchThisAreaButton.css";
-import { getDistanceFromLatLonInKm } from "../scripts/osmUtilities";
+import { getDistanceFromLatLonInKm, getNewPoints } from "../scripts/osmUtilities";
 
 export default function SearchThisArea() {
-  const { userLocation, mapCenter } = usePosition();
+  const { userLocation, mapCenter, mapBounds,setAreaPOIs, areaPOIs } = usePosition();
   const [buttonIsDisplayed, setButtonIsDisplayed] = useState(false);
 
   const distance = getDistanceFromLatLonInKm(
@@ -22,10 +22,19 @@ export default function SearchThisArea() {
     }
   }, [userLocation, mapCenter]);
 
+
+//TODO : get bounds and launch a search. 
+
+  const handleSearch = ()=>{
+    getNewPoints(mapCenter,mapBounds,setAreaPOIs)
+    console.log(areaPOIs)
+  }
+
   return (
     <button
       id="search-this-area-button"
       className={buttonIsDisplayed ? "" : "hidden"}
+      onClick={handleSearch}
     >
       search this area
     </button>

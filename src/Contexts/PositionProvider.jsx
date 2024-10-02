@@ -21,8 +21,13 @@ export default function PositionProvider({ children }) {
         }
   );
 
+  const [mapBounds, setMapBounds] = useState(null);
+
   const [nearbyPOIs, setNearbyPOIs] = useState([]); // POIs stands for Points of Interest
-  const [areaPOIs, setAreaPOIs] = useState([])
+  const [areaPOIs, setAreaPOIs] = useState([]);
+
+
+  console.log(mapBounds)
 
   useEffect(() => {
     getAllPoints(userLocation, 0.1, setNearbyPOIs);
@@ -38,6 +43,10 @@ export default function PositionProvider({ children }) {
         nearbyPOIs,
         mapCenter,
         setMapCenter,
+        mapBounds,
+        setMapBounds,
+        areaPOIs,
+        setAreaPOIs
       }}
     >
       {children}

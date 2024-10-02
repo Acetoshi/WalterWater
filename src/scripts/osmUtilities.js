@@ -26,8 +26,60 @@ function boundingBox(location, radius) {
   return `${minLat},${minLng},${maxLat},${maxLng}`;
 }
 
+function prepareBoundingBox(mapBounds){
+  const minLat = mapBounds._southWest.lat
+  const maxLat = mapBounds._northEast.lat
+  const minLng = mapBounds._southWest.lng
+  const maxLng = mapBounds._northEast.lng
+  return `${minLat},${minLng},${maxLat},${maxLng}`;
+}
+
 export async function getAllPoints(location, radius, setterFunction) {
   const bBox = boundingBox(location, radius);
+  const maxObjects = 1000;
+  fetch("https://overpass-api.de/api/interpreter", {
+    method: "POST",
+    // The body contains the query
+    // to understand the query language see "The Programmatic Query Language" on
+    // https://wiki.openstreetmap.org/wiki/Overpass_API#The_Programmatic_Query_Language_(OverpassQL)
+    body:
+      "data=" +
+      encodeURIComponent(`
+          [bbox:${bBox}]
+          [out:json]
+          [timeout:25]
+          ;
+          (
+            node["amenity"="drinking_water"](${bBox});
+            node["amenity"="toilets"](${bBox});
+            node["amenity"="restaurant"](${bBox});
+          );
+          out geom ${maxObjects};
+      `),
+  })
+    .then((data) => data.json())
+    .then((result) => {
+      setterFunction(
+        result.elements
+          .map((point) => ({
+            ...point,
+            distanceKm: getDistanceFromLatLonInKm(
+              location.lat,
+              location.lng,
+              point.lat,
+              point.lon
+            ),
+          }))
+          .sort((pointA, pointB) =>
+            pointA.distanceKm - pointB.distanceKm > 0 ? true : false
+          )
+      );
+    });
+}
+
+
+export async function getNewPoints(location, mapBounds, setterFunction) {
+  const bBox = prepareBoundingBox(mapBounds)
   const maxObjects = 1000;
   fetch("https://overpass-api.de/api/interpreter", {
     method: "POST",
