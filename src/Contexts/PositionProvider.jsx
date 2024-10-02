@@ -29,6 +29,7 @@ export default function PositionProvider({ children }) {
 
   console.log(mapPosition);
 
+  // this useEffect fetches POIs data on OSM server
   useEffect(() => {
     getAllPoints(userLocation, 0.1, setNearbyPOIs);
     localStorage.setItem("userLat", userLocation.lat.toString());
