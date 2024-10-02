@@ -3,21 +3,23 @@ import { usePosition } from "../Contexts/PositionProvider";
 import { faucetIcon, toiletIcon, foodIcon } from "../scripts/icons";
 
 export default function Markers({ typeOfAmenity }) {
-  const { nearbyPOIs } = usePosition();
+  const { nearbyPOIs, areaPOIs } = usePosition();
 
   let points = [];
   let icon = {};
 
+  const POIs=nearbyPOIs.concat(areaPOIs)
+
   if (typeOfAmenity === "water") {
-    points = nearbyPOIs.filter(
+    points = POIs.filter(
       (point) => point.tags.amenity === "drinking_water"
     );
     icon = faucetIcon;
   } else if (typeOfAmenity === "toilets") {
-    points = nearbyPOIs.filter((point) => point.tags.amenity === "toilets");
+    points = POIs.filter((point) => point.tags.amenity === "toilets");
     icon = toiletIcon;
   } else if (typeOfAmenity === "food") {
-    points = nearbyPOIs.filter((point) => point.tags.amenity === "restaurant");
+    points = POIs.filter((point) => point.tags.amenity === "restaurant");
     icon = foodIcon;
   }
 

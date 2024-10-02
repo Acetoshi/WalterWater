@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import UserLocation from "./components/UserLocation";
-import FilterBar from "./components/FilterBar";
-import Walter from "./components/Walter";
-import Markers from "./components/Markers";
 import PositionProvider from "./Contexts/PositionProvider";
+import UserLocation from "./components/UserLocation";
+import Markers from "./components/Markers";
+import MapTracker from "./components/MapTracker";
+import FilterBar from "./components/FilterBar";
+import SearchThisArea from "./components/SearchThisArea";
+import Walter from "./components/Walter";
 import Capybara from "./components/EasterEgg";
+import ListView from "./components/ListView";
 import "./assets/icomoon/style.css";
 import "./styles/global.css";
-import "./styles/listview.css";
-import ListView from "./components/ListView";
 
 function App() {
   const [listIsDisplayed, setListIsDisplayed] = useState(false);
@@ -28,6 +29,7 @@ function App() {
           userWantsFood,
         }}
       />
+
       <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -35,6 +37,7 @@ function App() {
         />
 
         <UserLocation />
+        <MapTracker />
 
         {userWantsWater && <Markers typeOfAmenity={"water"} />}
         {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}
@@ -42,6 +45,8 @@ function App() {
 
         <Capybara />
       </MapContainer>
+
+      <SearchThisArea />
       <FilterBar
         filters={{
           userWantsWater,

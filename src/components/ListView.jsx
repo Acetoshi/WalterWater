@@ -1,5 +1,6 @@
 import { usePosition } from "../Contexts/PositionProvider";
 import InfoCard from "./InfoCard";
+import "../styles/listview.css";
 
 const ListView = ({ isDisplayed, filters }) => {
   const { nearbyPOIs } = usePosition();

@@ -13,10 +13,10 @@ export default function UserLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) =>
-          setUserLocation([
-            position.coords.latitude,
-            position.coords.longitude,
-          ]),
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          }),
         () => console.log("Unable to retrieve your location")
       );
     } else {
@@ -45,7 +45,7 @@ export default function UserLocation() {
       };
 
       // Manually set the user location using the received coordinates
-      setUserLocation([latitude, longitude]);
+      setUserLocation({lat: latitude, lng: longitude});
     };
 
     // Add event listener for the 'locationReceived' event
