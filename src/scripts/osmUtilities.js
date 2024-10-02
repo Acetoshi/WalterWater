@@ -26,14 +26,6 @@ function boundingBox(location, radius) {
   return `${minLat},${minLng},${maxLat},${maxLng}`;
 }
 
-function prepareBoundingBox(mapBounds){
-  const minLat = mapBounds._southWest.lat
-  const maxLat = mapBounds._northEast.lat
-  const minLng = mapBounds._southWest.lng
-  const maxLng = mapBounds._northEast.lng
-  return `${minLat},${minLng},${maxLat},${maxLng}`;
-}
-
 export async function getAllPoints(location, radius, setterFunction) {
   const bBox = boundingBox(location, radius);
   const maxObjects = 1000;
@@ -78,7 +70,7 @@ export async function getAllPoints(location, radius, setterFunction) {
 }
 
 
-export async function getNewPoints(location, mapBounds, setterFunction) {
+export async function getNewPoints(userLocation, mapBounds, setterFunction) {
   const boundingBox = `${mapBounds.minLat},${mapBounds.minLng},${mapBounds.maxLat},${mapBounds.maxLng}`
   const maxObjects = 1000;
   fetch("https://overpass-api.de/api/interpreter", {
@@ -108,8 +100,8 @@ export async function getNewPoints(location, mapBounds, setterFunction) {
           .map((point) => ({
             ...point,
             distanceKm: getDistanceFromLatLonInKm(
-              location.lat,
-              location.lng,
+              userLocation.lat,
+              userLocation.lng,
               point.lat,
               point.lon
             ),

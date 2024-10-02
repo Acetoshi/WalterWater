@@ -26,7 +26,7 @@ export default function SearchThisArea() {
 //TODO : get bounds and launch a search. 
 
   const handleSearch = ()=>{
-    getNewPoints(mapPosition.center,mapPosition.bounds,setAreaPOIs)
+    getNewPoints(userLocation,mapPosition.bounds,setAreaPOIs)
     console.log(areaPOIs)
   }
 
