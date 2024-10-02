@@ -14,3 +14,8 @@
 #search-this-area-button.hidden {
   transform: translate(-50%,-100px);
 }
+
+#search-this-area-button.disabled {
+  background-color: grey !important;
+  height: 200;
+}

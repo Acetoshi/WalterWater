@@ -26,15 +26,7 @@ function boundingBox(location, radius) {
   return `${minLat},${minLng},${maxLat},${maxLng}`;
 }
 
-function prepareBoundingBox(mapBounds){
-  const minLat = mapBounds._southWest.lat
-  const maxLat = mapBounds._northEast.lat
-  const minLng = mapBounds._southWest.lng
-  const maxLng = mapBounds._northEast.lng
-  return `${minLat},${minLng},${maxLat},${maxLng}`;
-}
-
-export async function getAllPoints(location, radius, setterFunction) {
+export async function getAllPoints(location, radius, POIsetterFunction) {
   const bBox = boundingBox(location, radius);
   const maxObjects = 1000;
   fetch("https://overpass-api.de/api/interpreter", {
@@ -59,7 +51,7 @@ export async function getAllPoints(location, radius, setterFunction) {
   })
     .then((data) => data.json())
     .then((result) => {
-      setterFunction(
+      POIsetterFunction(
         result.elements
           .map((point) => ({
             ...point,
@@ -70,17 +62,20 @@ export async function getAllPoints(location, radius, setterFunction) {
               point.lon
             ),
           }))
-          .sort((pointA, pointB) =>
-            pointA.distanceKm - pointB.distanceKm
-          )
+          .sort((pointA, pointB) => pointA.distanceKm - pointB.distanceKm)
       );
     });
 }
 
-
-export async function getNewPoints(location, mapBounds, setterFunction) {
-  const bBox = prepareBoundingBox(mapBounds)
+export async function getNewPoints(
+  userLocation,
+  mapBounds,
+  POIsetterFunction,
+  statusSetterFunction
+) {
+  const boundingBox = `${mapBounds.minLat},${mapBounds.minLng},${mapBounds.maxLat},${mapBounds.maxLng}`;
   const maxObjects = 1000;
+  statusSetterFunction("fetching data");
   fetch("https://overpass-api.de/api/interpreter", {
     method: "POST",
     // The body contains the query
@@ -89,27 +84,27 @@ export async function getNewPoints(location, mapBounds, setterFunction) {
     body:
       "data=" +
       encodeURIComponent(`
-          [bbox:${bBox}]
+          [bbox:${boundingBox}]
           [out:json]
           [timeout:25]
           ;
           (
-            node["amenity"="drinking_water"](${bBox});
-            node["amenity"="toilets"](${bBox});
-            node["amenity"="restaurant"](${bBox});
+            node["amenity"="drinking_water"](${boundingBox});
+            node["amenity"="toilets"](${boundingBox});
+            node["amenity"="restaurant"](${boundingBox});
           );
           out geom ${maxObjects};
       `),
   })
     .then((data) => data.json())
     .then((result) => {
-      setterFunction(
+      POIsetterFunction(
         result.elements
           .map((point) => ({
             ...point,
             distanceKm: getDistanceFromLatLonInKm(
-              location.lat,
-              location.lng,
+              userLocation.lat,
+              userLocation.lng,
               point.lat,
               point.lon
             ),
@@ -118,5 +113,6 @@ export async function getNewPoints(location, mapBounds, setterFunction) {
             pointA.distanceKm - pointB.distanceKm > 0 ? true : false
           )
       );
+      statusSetterFunction("data received");
     });
 }
