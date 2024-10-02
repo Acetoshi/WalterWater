@@ -79,7 +79,7 @@ export async function getAllPoints(location, radius, setterFunction) {
 
 
 export async function getNewPoints(location, mapBounds, setterFunction) {
-  const bBox = prepareBoundingBox(mapBounds)
+  const boundingBox = `${mapBounds.minLat},${mapBounds.minLng},${mapBounds.maxLat},${mapBounds.maxLng}`
   const maxObjects = 1000;
   fetch("https://overpass-api.de/api/interpreter", {
     method: "POST",
@@ -89,14 +89,14 @@ export async function getNewPoints(location, mapBounds, setterFunction) {
     body:
       "data=" +
       encodeURIComponent(`
-          [bbox:${bBox}]
+          [bbox:${boundingBox}]
           [out:json]
           [timeout:25]
           ;
           (
-            node["amenity"="drinking_water"](${bBox});
-            node["amenity"="toilets"](${bBox});
-            node["amenity"="restaurant"](${bBox});
+            node["amenity"="drinking_water"](${boundingBox});
+            node["amenity"="toilets"](${boundingBox});
+            node["amenity"="restaurant"](${boundingBox});
           );
           out geom ${maxObjects};
       `),

@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { usePosition } from "../Contexts/PositionProvider";
-import "../styles/searchThisAreaButton.css";
 import { getDistanceFromLatLonInKm, getNewPoints } from "../scripts/osmUtilities";
+import "../styles/searchThisAreaButton.css";
 
 export default function SearchThisArea() {
-  const { userLocation, mapCenter, mapBounds,setAreaPOIs, areaPOIs } = usePosition();
+  const { userLocation, mapPosition, setAreaPOIs, areaPOIs } = usePosition();
   const [buttonIsDisplayed, setButtonIsDisplayed] = useState(false);
 
   const distance = getDistanceFromLatLonInKm(
     userLocation.lat,
     userLocation.lng,
-    mapCenter.lat,
-    mapCenter.lng
+    mapPosition.center.lat,
+    mapPosition.center.lng
   );
 
   useEffect(() => {
@@ -20,13 +20,13 @@ export default function SearchThisArea() {
     } else {
       setButtonIsDisplayed(false);
     }
-  }, [userLocation, mapCenter]);
+  }, [userLocation, mapPosition]);
 
 
 //TODO : get bounds and launch a search. 
 
   const handleSearch = ()=>{
-    getNewPoints(mapCenter,mapBounds,setAreaPOIs)
+    getNewPoints(mapPosition.center,mapPosition.bounds,setAreaPOIs)
     console.log(areaPOIs)
   }
 

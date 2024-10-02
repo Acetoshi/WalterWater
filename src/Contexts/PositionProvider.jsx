@@ -12,22 +12,22 @@ export default function PositionProvider({ children }) {
           lng: Number(localStorage.getItem("userLon")),
         }
   );
-  const [mapCenter, setMapCenter] = useState(
+
+  const [mapPosition, setMapPosition] = useState(
     localStorage.getItem("userLat") === null
-      ? { lat: 48.866, lng: 2.33333 }
+      ? { bounds: null, center: { lat: 48.866, lng: 2.33333 } }
       : {
-          lat: Number(localStorage.getItem("userLat")),
-          lng: Number(localStorage.getItem("userLon")),
+          bounds: null,
+          center: {
+            lat: Number(localStorage.getItem("userLat")),
+            lng: Number(localStorage.getItem("userLon")),
+          },
         }
   );
-
-  const [mapBounds, setMapBounds] = useState(null);
-
   const [nearbyPOIs, setNearbyPOIs] = useState([]); // POIs stands for Points of Interest
   const [areaPOIs, setAreaPOIs] = useState([]);
 
-
-  console.log(mapBounds)
+  console.log(mapPosition);
 
   useEffect(() => {
     getAllPoints(userLocation, 0.1, setNearbyPOIs);
@@ -41,12 +41,10 @@ export default function PositionProvider({ children }) {
         userLocation,
         setUserLocation,
         nearbyPOIs,
-        mapCenter,
-        setMapCenter,
-        mapBounds,
-        setMapBounds,
+        mapPosition,
+        setMapPosition,
         areaPOIs,
-        setAreaPOIs
+        setAreaPOIs,
       }}
     >
       {children}
