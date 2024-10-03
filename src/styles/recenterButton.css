@@ -1,15 +1,16 @@
-#recenter-button{
-    position: absolute;
-    bottom: 25vh;
-    transform: translateY(-50%);
-    right: 5%;
-    aspect-ratio: 1;
-    padding:8px;
-    border-radius: 48px;
-    background-color: var(--secondary-color);
-    z-index:1000;
+#recenter-button {
+  position: absolute;
+  bottom: 25vh;
+  transform: translateY(-50%);
+  right: 5%;
+  width: 48px;
+  height: 48px;
+  padding: 8px;
+  border-radius: 48px;
+  background-color: var(--secondary-color);
+  z-index: 1000;
 
-    & img{
-        width:32px;
-    }
+  & img {
+    width: 32px;
+  }
 }
