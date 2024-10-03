@@ -8,12 +8,10 @@ export default function Markers({ typeOfAmenity }) {
   let points = [];
   let icon = {};
 
-  const POIs=nearbyPOIs.concat(areaPOIs)
+  const POIs = nearbyPOIs.concat(areaPOIs);
 
   if (typeOfAmenity === "water") {
-    points = POIs.filter(
-      (point) => point.tags.amenity === "drinking_water"
-    );
+    points = POIs.filter((point) => point.tags.amenity === "drinking_water");
     icon = faucetIcon;
   } else if (typeOfAmenity === "toilets") {
     points = POIs.filter((point) => point.tags.amenity === "toilets");
@@ -31,21 +29,44 @@ export default function Markers({ typeOfAmenity }) {
             {/* // TODO : faire un composant à partir du popup pour mettre les
             données des toilettes en forme. */}
             <Popup>
-            <h3><span className="icon-walter-black info-logo" aria-hidden="true" />{point.tags.amenity.replace('_',' ')}</h3>
+              <h3>
+                <span
+                  className="icon-walter-black info-logo"
+                  aria-hidden="true"
+                />
+                {point.tags.amenity.replace("_", " ")}
+              </h3>
 
-              
               {/* {`${JSON.stringify(point.tags)}`} */}
 
-              {point.tags.wikimedia_commons&& (<img src={point.tags.wikimedia_commons} alt="wikimediacommons"></img>)}
-              {point.tags.wheelchair && (<p>wheelchair access : {point.tags.wheelchair}</p>)}
-              {point.tags.fee && (<p>{point.tags.fee==='no'?'free of charge':'access requires a fee'}</p>)}
-
+              {point.tags.wikimedia_commons && (
+                <img
+                  src={point.tags.wikimedia_commons}
+                  alt="wikimediacommons"
+                ></img>
+              )}
+              {point.tags.wheelchair && (
+                <p>wheelchair access : {point.tags.wheelchair}</p>
+              )}
+              {point.tags.fee && (
+                <p>
+                  {point.tags.fee === "no"
+                    ? "free of charge"
+                    : "access requires a fee"}
+                </p>
+              )}
               <p>
                 <span
                   className="icon-emplacement info-logo"
                   aria-hidden="true"
                 />
                 {`Distance : ${point.distanceKm} km`}
+              </p>
+              <p>
+                <span className="icon-time info-logo" aria-hidden="true" />
+                {`walk time : ${Math.round(
+                  (point.distanceKm * 60) / 4
+                )} mn`}
               </p>
             </Popup>
           </Marker>
