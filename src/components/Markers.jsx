@@ -32,9 +32,13 @@ export default function Markers({ typeOfAmenity }) {
             données des toilettes en forme. */}
             <Popup>
             <h3><span className="icon-walter-black info-logo" aria-hidden="true" />{point.tags.amenity.replace('_',' ')}</h3>
-              {`${JSON.stringify(point.tags)}`}
+
+              
+              {/* {`${JSON.stringify(point.tags)}`} */}
 
               {point.tags.wikimedia_commons&& (<img src={point.tags.wikimedia_commons} alt="wikimediacommons"></img>)}
+              {point.tags.wheelchair && (<p>wheelchair access : {point.tags.wheelchair}</p>)}
+              {point.tags.fee && (<p>{point.tags.fee==='no'?'free of charge':'access requires a fee'}</p>)}
 
               <p>
                 <span
