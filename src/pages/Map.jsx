@@ -4,6 +4,7 @@ import PositionProvider from "../Contexts/PositionProvider";
 import UserLocation from "../components/UserLocation";
 import Markers from "../components/Markers";
 import MapTracker from "../components/MapTracker";
+import MapRecenterer from "../components/MapRecenterer";
 import FilterBar from "../components/FilterBar";
 import SearchThisArea from "../components/SearchThisArea";
 import Walter from "../components/Walter";
@@ -37,6 +38,7 @@ export default function Map() {
 
         <UserLocation />
         <MapTracker />
+        <MapRecenterer/>
 
         {userWantsWater && <Markers typeOfAmenity={"water"} />}
         {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}

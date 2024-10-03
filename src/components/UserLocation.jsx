@@ -4,7 +4,7 @@ import { usePosition } from "../Contexts/PositionProvider";
 import { walterIcon } from "../scripts/icons";
 
 export default function UserLocation() {
-  const { userLocation, setUserLocation } = usePosition();
+  const { userLocation, setUserLocation, recenterIsNeeded } = usePosition();
 
   useEffect(getUserLocation, []);
 
@@ -45,7 +45,7 @@ export default function UserLocation() {
       };
 
       // Manually set the user location using the received coordinates
-      setUserLocation({lat: latitude, lng: longitude});
+      setUserLocation({ lat: latitude, lng: longitude });
     };
 
     // Add event listener for the 'locationReceived' event
@@ -62,6 +62,8 @@ export default function UserLocation() {
   useEffect(() => {
     map.setView(userLocation, 15);
   }, [userLocation]);
+
+
 
   return (
     <Marker position={userLocation} icon={walterIcon}>

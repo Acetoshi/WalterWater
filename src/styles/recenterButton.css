@@ -1,6 +1,7 @@
 #recenter-button{
     position: absolute;
-    bottom: 190px;
+    bottom: 25vh;
+    transform: translateY(-50%);
     right: 5%;
     aspect-ratio: 1;
     padding:8px;
