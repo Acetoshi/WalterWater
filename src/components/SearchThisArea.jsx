@@ -45,14 +45,18 @@ export default function SearchThisArea() {
     <button
       id="search-this-area-button"
       className={`${buttonIsDisplayed ? "" : "hidden"} 
-      ${requestStatus !== "ready to fetch" ? "disabled" : ""
-      }`}
+      ${requestStatus !== "ready to fetch" ? "disabled" : ""}`}
       onClick={handleSearch}
       disabled={requestStatus !== "ready to fetch"}
     >
-       {(requestStatus==="ready to fetch")&&"search this area"}
-       {(requestStatus==="fetching data")&&"fetching data"}
-       {(requestStatus==="data received")&&" data received"}
+      {requestStatus === "ready to fetch" && <p>search this area</p>}
+      {requestStatus === "fetching data" && (
+        <p>
+          <span class="loader"></span> fetching data
+        </p>
+      )}
+      {requestStatus === "data received" && <p>data received</p>}
+      {requestStatus === "server error" && <p>server error, try again later</p>}
     </button>
   );
 }

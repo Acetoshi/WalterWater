@@ -96,7 +96,14 @@ export async function getNewPoints(
           out geom ${maxObjects};
       `),
   })
-    .then((data) => data.json())
+    .then((response) => {
+      if (!response.ok) {
+        statusSetterFunction("server error");
+      } else {
+        statusSetterFunction("data received");
+      }
+      return response.json();
+    })
     .then((result) => {
       POIsetterFunction(
         result.elements
@@ -113,6 +120,6 @@ export async function getNewPoints(
             pointA.distanceKm - pointB.distanceKm > 0 ? true : false
           )
       );
-      statusSetterFunction("data received");
+      
     });
 }

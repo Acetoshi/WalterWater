@@ -9,13 +9,41 @@
   background-color: var(--secondary-color);
   transform: translate(-50%, 0%);
   transition: transform 0.6s ease-in-out;
+  font-size: var(--font-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #search-this-area-button.hidden {
-  transform: translate(-50%,-100px);
+  transform: translate(-50%, -100px);
 }
 
 #search-this-area-button.disabled {
   background-color: grey !important;
+  opacity: 80%;
   height: 200;
+  cursor: not-allowed;
+}
+
+/* copied from https://cssloaders.github.io/ */
+
+.loader {
+  width: var(--font-size);
+  height: var(--font-size);
+  border: 3px solid #fff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
