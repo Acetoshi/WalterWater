@@ -9,8 +9,7 @@ import SearchThisArea from "../components/SearchThisArea";
 import Walter from "../components/Walter";
 import Capybara from "../components/EasterEgg";
 import ListView from "../components/ListView";
-import "../assets/icomoon/style.css";
-import "../styles/global.css";
+import RecenterButton from "../components/RecenterButton";
 
 export default function Map() {
   const [listIsDisplayed, setListIsDisplayed] = useState(false);
@@ -45,7 +44,7 @@ export default function Map() {
 
         <Capybara />
       </MapContainer>
-
+      <RecenterButton />
       <SearchThisArea />
       <FilterBar
         filters={{

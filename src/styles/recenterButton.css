@@ -1,0 +1,14 @@
+#recenter-button{
+    position: absolute;
+    bottom: 190px;
+    right: 5%;
+    aspect-ratio: 1;
+    padding:8px;
+    border-radius: 48px;
+    background-color: var(--secondary-color);
+    z-index:1000;
+
+    & img{
+        width:32px;
+    }
+}

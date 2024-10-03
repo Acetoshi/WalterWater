@@ -22,8 +22,10 @@ export default function PositionProvider({ children }) {
             lat: Number(localStorage.getItem("userLat")),
             lng: Number(localStorage.getItem("userLon")),
           },
+          distanceFromUser: 0
         }
   );
+  
   const [nearbyPOIs, setNearbyPOIs] = useState([]); // POIs stands for Points of Interest
   const [areaPOIs, setAreaPOIs] = useState([]);
 

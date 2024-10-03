@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "../styles/FilterBar.css";
+import "../styles/filterBar.css";
 
 function FilterBar({ filters }) {
   const handleDisplayModeChange = () => {
@@ -7,7 +7,7 @@ function FilterBar({ filters }) {
   };
 
   return (
-    <div className="FilterBar">
+    <div className="filterbar">
       <button
         type="button"
         className="button-filter"
