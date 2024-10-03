@@ -7,6 +7,12 @@ export default function MapTracker() {
   const map = useMap();
   const { userLocation, setMapPosition } = usePosition();
 
+
+  // This is needed to let the user move the map as he/she wishes wthout the open pop-ups anchoring the view
+  map.on("dragstart", () => {
+    map.closePopup();
+  });
+
   map.on("moveend", () => {
     // Track the current map bounds in order to use them as a bounding box for POI search later on
     const bounds = map.getBounds();

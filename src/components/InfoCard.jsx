@@ -18,7 +18,7 @@ const InfoCard = ({ pointOfInterest }) => {
       <div className="info-item">
         <span className="icon-time info-logo" aria-hidden="true" />
         <div className="info-text">
-          <p>{`Temps estimé : ${temps} mn à pied`}</p>
+          <p>{`Estimanted Walk time : ${temps} mn`}</p>
         </div>
       </div>
     </div>
@@ -26,3 +26,4 @@ const InfoCard = ({ pointOfInterest }) => {
 };
 
 export default InfoCard;
+

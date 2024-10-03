@@ -67,6 +67,8 @@ export async function getAllPoints(location, radius, POIsetterFunction) {
     });
 }
 
+// TODO : refator the previous function so that this one can be kept. 
+// maybe by passing the map
 export async function getNewPoints(
   userLocation,
   mapBounds,
