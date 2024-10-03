@@ -9,6 +9,8 @@ export default function MapRecenterer() {
   //This enables us to re-center the map on the user when the Recenter Button is clicked
   //See component RecenterButton
   useEffect(() => {
+    // needed otherwise the open popups would 'refocus" the map  
+    map.closePopup();
     map.flyTo(userLocation, 15, {duration:1});
   }, [recenterIsNeeded]);
 
