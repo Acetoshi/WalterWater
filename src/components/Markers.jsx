@@ -70,7 +70,7 @@ export default function Markers({ typeOfAmenity }) {
 
                 <li className="popup-info-row">
                   <img className="popup-icon" src={footstepsIcon} alt="" />
-                  <p>{`Distance : ${point.distanceKm} km`}</p>
+                  <p>{`distance : ${point.distanceKm} km`}</p>
                 </li>
 
                 <li className="popup-info-row">
