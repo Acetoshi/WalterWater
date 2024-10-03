@@ -6,6 +6,9 @@ import { getDistanceFromLatLonInKm } from "../scripts/osmUtilities";
 export default function MapTracker() {
   const map = useMap();
   const { userLocation, setMapPosition } = usePosition();
+  map.on("dragstart", () => {
+    map.closePopup();
+  });
 
   map.on("moveend", () => {
     // Track the current map bounds in order to use them as a bounding box for POI search later on

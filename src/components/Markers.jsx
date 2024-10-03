@@ -34,6 +34,8 @@ export default function Markers({ typeOfAmenity }) {
             <h3><span className="icon-walter-black info-logo" aria-hidden="true" />{point.tags.amenity.replace('_',' ')}</h3>
               {`${JSON.stringify(point.tags)}`}
 
+              {point.tags.wikimedia_commons&& (<img src={point.tags.wikimedia_commons} alt="wikimediacommons"></img>)}
+
               <p>
                 <span
                   className="icon-emplacement info-logo"
