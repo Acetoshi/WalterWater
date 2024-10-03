@@ -22,10 +22,14 @@ export default function PositionProvider({ children }) {
             lat: Number(localStorage.getItem("userLat")),
             lng: Number(localStorage.getItem("userLon")),
           },
+          distanceFromUser: 0,
         }
   );
+
   const [nearbyPOIs, setNearbyPOIs] = useState([]); // POIs stands for Points of Interest
   const [areaPOIs, setAreaPOIs] = useState([]);
+
+  const [recenterIsNeeded, setrecenterIsNeeded] = useState("true");
 
   // this useEffect fetches POIs data on OSM server
   useEffect(() => {
@@ -44,6 +48,8 @@ export default function PositionProvider({ children }) {
         setMapPosition,
         areaPOIs,
         setAreaPOIs,
+        recenterIsNeeded,
+        setrecenterIsNeeded,
       }}
     >
       {children}

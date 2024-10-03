@@ -4,13 +4,13 @@ import PositionProvider from "../Contexts/PositionProvider";
 import UserLocation from "../components/UserLocation";
 import Markers from "../components/Markers";
 import MapTracker from "../components/MapTracker";
+import MapRecenterer from "../components/MapRecenterer";
 import FilterBar from "../components/FilterBar";
 import SearchThisArea from "../components/SearchThisArea";
 import Walter from "../components/Walter";
 import Capybara from "../components/EasterEgg";
 import ListView from "../components/ListView";
-import "../assets/icomoon/style.css";
-import "../styles/global.css";
+import RecenterButton from "../components/RecenterButton";
 
 export default function Map() {
   const [listIsDisplayed, setListIsDisplayed] = useState(false);
@@ -38,6 +38,7 @@ export default function Map() {
 
         <UserLocation />
         <MapTracker />
+        <MapRecenterer/>
 
         {userWantsWater && <Markers typeOfAmenity={"water"} />}
         {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}
@@ -45,7 +46,7 @@ export default function Map() {
 
         <Capybara />
       </MapContainer>
-
+      <RecenterButton />
       <SearchThisArea />
       <FilterBar
         filters={{
