@@ -2,7 +2,6 @@
   position: absolute;
   --position: calc(25vh + 88px);
   bottom: var(--position);
-  /* transform: translateY(-50%); */
   right: 5%;
   width: 48px;
   z-index: 1000;
@@ -27,12 +26,15 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        & img {
-          width: 32px;
-        }
-        & p {
-          color:black;
-          font-size: 0.6rem;
+        & button {
+          width: 100%;
+          & img {
+            width: 32px;
+          }
+          & p {
+            color: black;
+            font-size: 0.6rem;
+          }
         }
       }
     }

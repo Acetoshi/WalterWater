@@ -4,7 +4,9 @@ import mapProviders from "../scripts/mapProviders.json";
 import icon from "../assets/icons/time.svg";
 
 export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
-  console.log(mapSelecter);
+  
+  //see how the menu gets auto-closed when the map moves in MapTracker Component
+  
 
   return (
     <div id="map-provider-selector-container">

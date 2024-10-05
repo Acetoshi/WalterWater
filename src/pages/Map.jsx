@@ -33,7 +33,7 @@ export default function Map() {
         />
 
         <UserLocation />
-        <MapTracker />
+        <MapTracker setMapSelecter={setMapSelecter}/>
         <MapRecenterer />
 
         {userWantsWater && <Markers typeOfAmenity={"water"} />}

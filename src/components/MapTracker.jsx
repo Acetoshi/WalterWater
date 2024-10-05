@@ -3,14 +3,18 @@ import { usePosition } from "../Contexts/PositionProvider";
 import { getDistanceFromLatLonInKm } from "../scripts/osmUtilities";
 
 // This component enables the app to track the center of the map, ie to know where the user is looking.
-export default function MapTracker() {
+export default function MapTracker({setMapSelecter}) {
   const map = useMap();
   const { userLocation, setMapPosition } = usePosition();
-
 
   // This is needed to let the user move the map as he/she wishes wthout the open pop-ups anchoring the view
   map.on("dragstart", () => {
     map.closePopup();
+  });
+
+  // This is needed to close the MapProviderSelecter menu when the map moves
+  map.on("movestart", () => {
+    setMapSelecter((mapSelecter)=>{return{...mapSelecter,isOpen:false}})
   });
 
   map.on("moveend", () => {
