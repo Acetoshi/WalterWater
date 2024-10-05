@@ -26,23 +26,14 @@ export default function Map() {
 
   return (
     <PositionProvider>
-      <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>
-        <TileLayer
-          attribution={mapProviders[mapSelecter.providerId].attribution}
-          url={mapProviders[mapSelecter.providerId].tilesUrl}
-        />
-
-        <UserLocation />
-        <MapTracker setMapSelecter={setMapSelecter}/>
-        <MapRecenterer />
-
-        {userWantsWater && <Markers typeOfAmenity={"water"} />}
-        {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}
-        {userWantsFood && <Markers typeOfAmenity={"food"} />}
-
-        <Capybara />
-      </MapContainer>
-
+      <ListView
+        isDisplayed={listIsDisplayed}
+        filters={{
+          userWantsWater,
+          userWantsToilets,
+          userWantsFood,
+        }}
+      />
       <MapProviderSelector
         mapSelecter={mapSelecter}
         setMapSelecter={setMapSelecter}
@@ -61,15 +52,24 @@ export default function Map() {
           setListIsDisplayed,
         }}
       />
-      <ListView
-        isDisplayed={listIsDisplayed}
-        filters={{
-          userWantsWater,
-          userWantsToilets,
-          userWantsFood,
-        }}
-      />
+
       <Walter />
+      <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>
+        <TileLayer
+          attribution={mapProviders[mapSelecter.providerId].attribution}
+          url={mapProviders[mapSelecter.providerId].tilesUrl}
+        />
+
+        <UserLocation />
+        <MapTracker setMapSelecter={setMapSelecter} />
+        <MapRecenterer />
+
+        {userWantsWater && <Markers typeOfAmenity={"water"} />}
+        {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}
+        {userWantsFood && <Markers typeOfAmenity={"food"} />}
+
+        <Capybara />
+      </MapContainer>
     </PositionProvider>
   );
 }

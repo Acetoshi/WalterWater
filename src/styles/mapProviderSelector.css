@@ -4,11 +4,16 @@
   bottom: var(--position);
   right: 5%;
   width: 48px;
+  height:48px;
   z-index: 1000;
+
+  & .map-provider-menu-mask.closed{
+    height: 1px;
+  }
 
   & .map-provider-menu-mask {
     overflow: hidden;
-    transform: translateY(-24px);
+    transform: translateY(-254px);
 
     & .map-provider-menu {
       background-color: var(--white);
@@ -29,7 +34,7 @@
         & button {
           width: 100%;
           & img {
-            width: 32px;
+            width: 36px;
             border-radius: 8px;
           }
           & p {
@@ -45,6 +50,12 @@
     transform: translateY(100%);
   }
 }
+
+/* #map-provider-selector-container.closed {
+  transition: 0.6s;
+  -moz-transition: max-height 0.3s; 
+  max-height: 48px;
+} */
 
 #map-provider-selector-menu-button {
   position: absolute;
