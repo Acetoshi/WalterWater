@@ -1,7 +1,10 @@
 import "../styles/mapProviderSelector.css";
 import layerIcon from "../assets/icons/layers.svg";
 import mapProviders from "../scripts/mapProviders.json";
-import icon from "../assets/icons/time.svg";
+import mapPreviewSimple from "../assets/mapPreviews/simple.png"
+import mapPreviewDetailed from "../assets/mapPreviews/detailed.jpg"
+import mapPreviewCycle from "../assets/mapPreviews/cycle.jpg"
+import mapPreviewSatellite from "../assets/mapPreviews/satellite.jpg"
 
 export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
   
@@ -12,6 +15,7 @@ export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
     <div id="map-provider-selector-container">
       <button
         id="map-provider-selector-menu-button"
+        aria-label="open or close map providers menu"
         type="button"
         onClick={() =>
           setMapSelecter((mapSelecter) => {
@@ -30,6 +34,7 @@ export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
           {mapProviders.map((provider, index) => (
             <li key={provider.name}>
               <button
+              aria-label={provider.alias}
                 onClick={() =>
                   setMapSelecter((mapSelecter) => {
                     return {
@@ -39,7 +44,10 @@ export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
                   })
                 }
               >
-                <img src={icon} />
+                {provider.alias==="simple"&&<img src={mapPreviewSimple} />}
+                {provider.alias==="detailed"&&<img src={mapPreviewDetailed} />}
+                {provider.alias==="cycling"&&<img src={mapPreviewCycle} />}
+                {provider.alias==="satellite"&&<img src={mapPreviewSatellite} />}
                 <p>{provider.alias}</p>
               </button>
             </li>
