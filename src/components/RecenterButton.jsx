@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { usePosition } from "../Contexts/PositionProvider";
 import recenterIconFull from "../assets/icons/recenterWhite.png";
 import recenterIconEmpty from "../assets/icons/recenterWhiteEmpty.png";

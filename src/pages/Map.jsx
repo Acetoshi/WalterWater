@@ -11,16 +11,21 @@ import Walter from "../components/Walter";
 import Capybara from "../components/EasterEgg";
 import ListView from "../components/ListView";
 import RecenterButton from "../components/RecenterButton";
+import mapProviders from "../scripts/mapProviders.json";
+import MapProviderSelector from "../components/MapProviderSelector";
 
 export default function Map() {
   const [listIsDisplayed, setListIsDisplayed] = useState(false);
   const [userWantsWater, setUserWantsWater] = useState(true);
   const [userWantsToilets, setUserWantsToilets] = useState(true);
   const [userWantsFood, setUserWantsFood] = useState(false);
+  const [mapSelecter, setMapSelecter] = useState({
+    isOpen: false,
+    providerId: Number(localStorage.getItem("mapProviderId")),
+  });
 
   return (
     <PositionProvider>
-      <Walter />
       <ListView
         isDisplayed={listIsDisplayed}
         filters={{
@@ -29,23 +34,10 @@ export default function Map() {
           userWantsFood,
         }}
       />
-
-      <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-
-        <UserLocation />
-        <MapTracker />
-        <MapRecenterer/>
-
-        {userWantsWater && <Markers typeOfAmenity={"water"} />}
-        {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}
-        {userWantsFood && <Markers typeOfAmenity={"food"} />}
-
-        <Capybara />
-      </MapContainer>
+      <MapProviderSelector
+        mapSelecter={mapSelecter}
+        setMapSelecter={setMapSelecter}
+      />
       <RecenterButton />
       <SearchThisArea />
       <FilterBar
@@ -60,6 +52,24 @@ export default function Map() {
           setListIsDisplayed,
         }}
       />
+
+      <Walter />
+      <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>
+        <TileLayer
+          attribution={mapProviders[mapSelecter.providerId].attribution}
+          url={mapProviders[mapSelecter.providerId].tilesUrl}
+        />
+
+        <UserLocation />
+        <MapTracker setMapSelecter={setMapSelecter} />
+        <MapRecenterer />
+
+        {userWantsWater && <Markers typeOfAmenity={"water"} />}
+        {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}
+        {userWantsFood && <Markers typeOfAmenity={"food"} />}
+
+        <Capybara />
+      </MapContainer>
     </PositionProvider>
   );
 }
