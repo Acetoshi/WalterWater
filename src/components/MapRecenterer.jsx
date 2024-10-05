@@ -9,16 +9,17 @@ export default function MapRecenterer() {
   //This enables us to re-center the map on the user when the Recenter Button is clicked
   //See component RecenterButton
   useEffect(() => {
-    // needed otherwise the open popups would 'refocus" the map  
+    // needed otherwise the open popups would 'refocus" the map
     map.closePopup();
-    map.flyTo(userLocation, 15, {duration:1});
+    map.flyTo(userLocation, 15, { duration: 1 });
   }, [recenterIsNeeded]);
 
   // this enables the list view to move the map to a target POI
   useEffect(() => {
-    // needed otherwise the open popups would 'refocus" the map  
-    map.closePopup();
-    map.flyTo(targetPOIPosition, 18, {duration:1});
+    if (targetPOIPosition.lat !== 0) { // this prevents a teleport to NULL island
+      map.closePopup();
+      map.flyTo(targetPOIPosition, 18, { duration: 1 });
+    }
   }, [targetPOIPosition]);
 
   return null;
