@@ -1,8 +1,6 @@
 .list-view {
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-content: center;
-  align-items: center;
+  display:flex;
+  flex-direction: column;
   gap: 30px;
   padding-top: 30px;
   padding-bottom: 100px;
@@ -22,6 +20,13 @@
 .list-view>li{
   display: flex;
   justify-content: center;
+  & article{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    max-width: 400px;
+  }
 }
 
 .info-card {
@@ -59,9 +64,9 @@
   color: var(--main-color);
 }
 
-.icon-emplacement {
-  color: var(--secondary-color);
-}
-.icon-time {
-  color: var(--secondary-color);
+.list-view button{
+  background-color: var(--secondary-color);
+  padding:8px 16px;
+  border-radius: 8px;
+  margin: 16px auto 0;
 }
