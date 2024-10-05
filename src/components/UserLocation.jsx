@@ -4,7 +4,7 @@ import { usePosition } from "../Contexts/PositionProvider";
 import { walterIcon } from "../scripts/icons";
 
 export default function UserLocation() {
-  const { userLocation, setUserLocation, recenterIsNeeded } = usePosition();
+  const { userLocation, setUserLocation } = usePosition();
 
   useEffect(getUserLocation, []);
 
@@ -69,8 +69,8 @@ export default function UserLocation() {
     <Marker position={userLocation} icon={walterIcon}>
       <Popup>
         <p>
-          Voici ta postion, utilise les filtres pour trouver de l'eau, des
-          restaurants ou des toilettes proches de toi!
+          This is your position, explorer, use filters to find water or toilets around you.
+          Have a great time.
         </p>
       </Popup>
     </Marker>

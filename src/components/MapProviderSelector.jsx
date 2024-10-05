@@ -1,13 +1,19 @@
-import "../styles/mapProviderSelector.css";
-import layerIcon from "../assets/icons/layers.svg";
+import { useEffect } from "react";
 import mapProviders from "../scripts/mapProviders.json";
+import layerIcon from "../assets/icons/layers.svg";
 import mapPreviewSimple from "../assets/mapPreviews/simple.jpg";
 import mapPreviewDetailed from "../assets/mapPreviews/detailed.jpg";
 import mapPreviewCycle from "../assets/mapPreviews/cycle.jpg";
 import mapPreviewSatellite from "../assets/mapPreviews/satellite.jpg";
+import "../styles/mapProviderSelector.css";
 
 export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
   //see how the menu gets auto-closed when the map moves in MapTracker Component
+
+  // this is needed to useLocalStorage to remember the user's last map provider
+  useEffect(() => {
+    localStorage.setItem("mapProviderId", mapSelecter.providerId.toString());
+  }, [mapSelecter]);
 
   return (
     <div id="map-provider-selector-container">

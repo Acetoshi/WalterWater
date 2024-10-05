@@ -21,7 +21,7 @@ export default function Map() {
   const [userWantsFood, setUserWantsFood] = useState(false);
   const [mapSelecter, setMapSelecter] = useState({
     isOpen: false,
-    providerId: 0,
+    providerId: Number(localStorage.getItem("mapProviderId")),
   });
 
   return (
