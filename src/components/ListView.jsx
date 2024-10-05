@@ -1,8 +1,9 @@
 import { usePosition } from "../Contexts/PositionProvider";
 import InfoCard from "./InfoCard";
+
 import "../styles/listview.css";
 
-const ListView = ({ isDisplayed, filters }) => {
+const ListView = ({ isDisplayed, setIsDisplayed, filters }) => {
   const { nearbyPOIs } = usePosition();
 
   return (
@@ -17,7 +18,7 @@ const ListView = ({ isDisplayed, filters }) => {
         )
         .map((point) => (
           <li key={point.id}>
-            <InfoCard pointOfInterest={point} />
+            <InfoCard point={point} setIsDisplayed={setIsDisplayed} />
           </li>
         ))}
     </ul>

@@ -28,6 +28,7 @@ export default function Map() {
     <PositionProvider>
       <ListView
         isDisplayed={listIsDisplayed}
+        setIsDisplayed={setListIsDisplayed}
         filters={{
           userWantsWater,
           userWantsToilets,

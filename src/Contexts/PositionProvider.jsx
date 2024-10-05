@@ -29,6 +29,13 @@ export default function PositionProvider({ children }) {
   const [nearbyPOIs, setNearbyPOIs] = useState([]); // POIs stands for Points of Interest
   const [areaPOIs, setAreaPOIs] = useState([]);
 
+  // used for the listview to pass the target POI position
+  const [targetPOIPosition, setTargetPOIPosition] = useState({
+    lat: 0,
+    lng: 0,
+  });
+
+  // used for the recenter feature
   const [recenterIsNeeded, setrecenterIsNeeded] = useState("true");
 
   // this useEffect fetches POIs data on OSM server
@@ -50,6 +57,8 @@ export default function PositionProvider({ children }) {
         setAreaPOIs,
         recenterIsNeeded,
         setrecenterIsNeeded,
+        targetPOIPosition,
+        setTargetPOIPosition,
       }}
     >
       {children}

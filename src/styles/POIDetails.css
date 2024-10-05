@@ -1,0 +1,23 @@
+
+ul.poi-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+
+    & .poi-info-row {
+      display: grid;
+      grid-template: 1fr /1fr 6fr;
+      align-items: center;
+      justify-items: center;
+      gap:16px;
+      & p {
+        margin: 0;
+        justify-self: left;
+      }
+    }
+  }
+
+  & .poi-icon {
+    height: 20px;
+  }
