@@ -13,6 +13,11 @@ button {
   background: none;
   cursor: pointer;
 }
+
+li{
+  list-style: none;
+}
+
 /*----icon-walter-----*/
 /*-------------------*/
 .icon-walter-color .path1:before {
