@@ -53,6 +53,18 @@ export default function POIDetails({ point }) {
           </li>
         )}
 
+        {point.tags.changing_table && (
+          <li className="poi-info-row">
+            <img
+              className="poi-icon"
+              loading="lazy"
+              src={toiletPositionIcon}
+              alt=""
+            />
+            <p>changing table : {point.tags.changing_table}</p>
+          </li>
+        )}
+
         <li className="poi-info-row">
           <img className="poi-icon" loading="lazy" src={footstepsIcon} alt="" />
           <p>{`distance : ${point.distanceKm} km`}</p>
