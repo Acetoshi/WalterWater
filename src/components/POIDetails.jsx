@@ -3,6 +3,7 @@ import moneyIcon from "../assets/icons/money.svg";
 import footstepsIcon from "../assets/icons/footsteps.svg";
 import timeIcon from "../assets/icons/time.svg";
 import toiletPositionIcon from "../assets/icons/toilet.svg";
+import changingTableIcon from "../assets/icons/baby-carriage.svg"
 import "../styles/POIDetails.css";
 
 export default function POIDetails({ point }) {
@@ -58,7 +59,7 @@ export default function POIDetails({ point }) {
             <img
               className="poi-icon"
               loading="lazy"
-              src={toiletPositionIcon}
+              src={changingTableIcon}
               alt=""
             />
             <p>changing table : {point.tags.changing_table}</p>
