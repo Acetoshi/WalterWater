@@ -15,14 +15,14 @@ export default function POIDetails({ point }) {
       <ul className="poi-details">
         {point.tags.wheelchair && (
           <li className="poi-info-row">
-            <img className="poi-icon" src={wheechairIcon} alt="" />
+            <img className="poi-icon" loading="lazy" src={wheechairIcon} alt="" />
             <p>wheelchair access : {point.tags.wheelchair}</p>
           </li>
         )}
 
         {point.tags.fee && (
           <li className="poi-info-row">
-            <img className="poi-icon" src={moneyIcon} alt="" />
+            <img className="poi-icon" loading="lazy" src={moneyIcon} alt="" />
             <p>
               {point.tags.fee === "no"
                 ? "free of charge"
@@ -32,12 +32,12 @@ export default function POIDetails({ point }) {
         )}
 
         <li className="poi-info-row">
-          <img className="poi-icon" src={footstepsIcon} alt="" />
+          <img className="poi-icon" loading="lazy" src={footstepsIcon} alt="" />
           <p>{`distance : ${point.distanceKm} km`}</p>
         </li>
 
         <li className="poi-info-row">
-          <img className="poi-icon" src={timeIcon} alt="" />
+          <img className="poi-icon" loading="lazy" src={timeIcon} alt="" />
           <p>{`walk time : ${Math.round((point.distanceKm * 60) / 4)} mn`}</p>
         </li>
       </ul>

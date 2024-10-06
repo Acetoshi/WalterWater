@@ -1,26 +1,34 @@
+.list-view-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 1999;
+  background-color: #00000099;
+  overflow-y: scroll;
+  cursor: default;
+}
+
+.list-view-container.hidden {
+  display: none;
+}
+
 .list-view {
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: 30px;
   padding-top: 30px;
   padding-bottom: 100px;
-  width: 100vw;
-  height: 100vh;
-  overflow-y: auto;
-  list-style-type: none;
-  position: absolute;
-  z-index: 1999;
-  background-color: #00000099;
+  padding: 30px 0px 100px 0px;
+  max-width: 400px;
 }
 
-.list-view.hidden {
-  display: none;
-}
-
-.list-view>li{
+.list-view > li {
   display: flex;
   justify-content: center;
-  & article{
+
+  & article {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,11 +72,11 @@
   color: var(--main-color);
 }
 
-.list-view button{
+.list-view button {
   background-color: var(--secondary-color);
-  color:white;
+  color: white;
   font-size: 16px;
-  padding:8px 16px;
+  padding: 8px 16px;
   border-radius: 8px;
   margin: 16px auto 0;
 }
