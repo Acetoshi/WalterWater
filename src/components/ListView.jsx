@@ -11,8 +11,10 @@ const ListView = ({ isDisplayed, setIsDisplayed, filters }) => {
       role="button"
       aria-label="close list view"
       onClick={(event) => {
-        console.log(event.target);
-        setIsDisplayed(false);
+        // this button is needed to close the list view only if the user clicks on the side of the list-view to close it 
+        if (event.target.className==="list-view-container"){
+          setIsDisplayed(false);
+        }
       }}
       className={
         isDisplayed ? "list-view-container" : "list-view-container hidden"
