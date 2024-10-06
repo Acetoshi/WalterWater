@@ -28,7 +28,7 @@ function boundingBox(location, radius) {
 
 export async function getAllPoints(location, radius, POIsetterFunction) {
   const bBox = boundingBox(location, radius);
-  const maxObjects = 1000;
+  const maxObjects = 500;
   fetch("https://overpass-api.de/api/interpreter", {
     method: "POST",
     // The body contains the query
@@ -76,7 +76,7 @@ export async function getNewPoints(
   statusSetterFunction
 ) {
   const boundingBox = `${mapBounds.minLat},${mapBounds.minLng},${mapBounds.maxLat},${mapBounds.maxLng}`;
-  const maxObjects = 1000;
+  const maxObjects = 250;
   statusSetterFunction("fetching data");
   fetch("https://overpass-api.de/api/interpreter", {
     method: "POST",
