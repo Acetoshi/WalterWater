@@ -3,6 +3,7 @@ import { usePosition } from "../Contexts/PositionProvider";
 import { faucetIcon, toiletIcon, foodIcon } from "../scripts/icons";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import "../styles/leafletPopup.css";
+import "../styles/leafletMarkerGroup.css";
 import POIDetails from "./POIDetails";
 
 export default function Markers({ typeOfAmenity }) {
@@ -26,7 +27,12 @@ export default function Markers({ typeOfAmenity }) {
   }
   //TODO : use this reference : https://wiki.openstreetmap.org/wiki/Key:wikimedia_commons to find a way to obtain images from wikimedia.
   return (
-    <MarkerClusterGroup disableClusteringAtZoom={18} spiderfyOnMaxZoom={false}>
+    <MarkerClusterGroup
+      disableClusteringAtZoom={18}
+      spiderfyOnMaxZoom={false}
+      polygonOptions={{ stroke: false }}
+      maxClusterRadius={110}
+    >
       {points &&
         points.map((point) => (
           <Marker
