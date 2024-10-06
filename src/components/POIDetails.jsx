@@ -6,6 +6,8 @@ import toiletPositionIcon from "../assets/icons/toilet.svg";
 import changingTableIcon from "../assets/icons/baby-carriage.svg"
 import "../styles/POIDetails.css";
 
+// Official doc for POI tags : https://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtoilets
+
 export default function POIDetails({ point }) {
   return (
     <>
