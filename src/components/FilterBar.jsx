@@ -1,9 +1,13 @@
 import PropTypes from "prop-types";
 import "../styles/filterBar.css";
+import { usePOIs } from "../Contexts/PointsOfInterestProvider";
 
-function FilterBar({ filters }) {
+function FilterBar({ listState }) {
+  const { listIsDisplayed, setListIsDisplayed } = listState;
+  const { userFilters, setUserFilters } = usePOIs();
+
   const handleDisplayModeChange = () => {
-    filters.setListIsDisplayed(() => !filters.listIsDisplayed);
+    setListIsDisplayed(() => !listIsDisplayed);
   };
 
   return (
@@ -14,7 +18,7 @@ function FilterBar({ filters }) {
         id="displayDataButton"
         onClick={handleDisplayModeChange}
       >
-        {filters.listIsDisplayed ? (
+        {listIsDisplayed ? (
           <span
             className="icon-search-location-1"
             aria-label="Affichage de la carte"
@@ -29,11 +33,15 @@ function FilterBar({ filters }) {
       <button
         type="button"
         className="button-filter"
-        onClick={() => filters.setUserWantsWater(!filters.userWantsWater)}
+        onClick={() =>
+          setUserFilters(() => {
+            return { ...userFilters, water: !userFilters.water };
+          })
+        }
       >
         <span
           className={
-            filters.userWantsWater ? "icon-faucet" : "icon-faucet deactivated"
+            userFilters.water ? "icon-faucet" : "icon-faucet deactivated"
           }
           aria-label="Affichage des Point d'eau"
         />
@@ -42,13 +50,15 @@ function FilterBar({ filters }) {
       <button
         type="button"
         className="button-filter"
-        onClick={() => filters.setUserWantsFood(!filters.userWantsFood)}
+        onClick={() =>
+          setUserFilters(() => {
+            return { ...userFilters, food: !userFilters.food };
+          })
+        }
       >
         <span
           className={
-            filters.userWantsFood
-              ? "icon-restaurant"
-              : "icon-restaurant deactivated"
+            userFilters.food ? "icon-restaurant" : "icon-restaurant deactivated"
           }
           aria-label="Afficher des lieux pour se restaurer"
         />
@@ -57,13 +67,15 @@ function FilterBar({ filters }) {
       <button
         type="button"
         className="button-filter"
-        onClick={() => filters.setUserWantsToilets(!filters.userWantsToilets)}
+        onClick={() =>
+          setUserFilters(() => {
+            return { ...userFilters, toilets: !userFilters.toilets };
+          })
+        }
       >
         <span
           className={
-            filters.userWantsToilets
-              ? "icon-toilette"
-              : "icon-toilette deactivated"
+            userFilters.toilets ? "icon-toilette" : "icon-toilette deactivated"
           }
           aria-label="Afficher des toilettes"
         />

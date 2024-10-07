@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import PositionProvider from "../Contexts/PositionProvider";
+import PointsOfInterestProvider from "../Contexts/PointsOfInterestProvider";
 import UserLocation from "../components/UserLocation";
 import Markers from "../components/Markers";
 import MapTracker from "../components/MapTracker";
@@ -16,9 +17,6 @@ import MapProviderSelector from "../components/MapProviderSelector";
 
 export default function Map() {
   const [listIsDisplayed, setListIsDisplayed] = useState(false);
-  const [userWantsWater, setUserWantsWater] = useState(true);
-  const [userWantsToilets, setUserWantsToilets] = useState(true);
-  const [userWantsFood, setUserWantsFood] = useState(false);
   const [mapSelecter, setMapSelecter] = useState({
     isOpen: false,
     providerId: Number(localStorage.getItem("mapProviderId")),
@@ -26,51 +24,35 @@ export default function Map() {
 
   return (
     <PositionProvider>
-      <ListView
-        isDisplayed={listIsDisplayed}
-        setIsDisplayed={setListIsDisplayed}
-        filters={{
-          userWantsWater,
-          userWantsToilets,
-          userWantsFood,
-        }}
-      />
-      <MapProviderSelector
-        mapSelecter={mapSelecter}
-        setMapSelecter={setMapSelecter}
-      />
-      <RecenterButton />
-      <SearchThisArea />
-      <FilterBar
-        filters={{
-          userWantsWater,
-          setUserWantsWater,
-          userWantsToilets,
-          setUserWantsToilets,
-          userWantsFood,
-          setUserWantsFood,
-          listIsDisplayed,
-          setListIsDisplayed,
-        }}
-      />
-
-      <Walter />
-      <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>
-        <TileLayer
-          attribution={mapProviders[mapSelecter.providerId].attribution}
-          url={mapProviders[mapSelecter.providerId].tilesUrl}
+      <PointsOfInterestProvider>
+        <ListView
+          isDisplayed={listIsDisplayed}
+          setIsDisplayed={setListIsDisplayed}
         />
+        <MapProviderSelector
+          mapSelecter={mapSelecter}
+          setMapSelecter={setMapSelecter}
+        />
+        <RecenterButton />
+        <SearchThisArea />
+        <FilterBar listState={{ listIsDisplayed, setListIsDisplayed }} />
 
-        <UserLocation />
-        <MapTracker setMapSelecter={setMapSelecter} />
-        <MapRecenterer />
+        <Walter />
+        <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>
+          <TileLayer
+            attribution={mapProviders[mapSelecter.providerId].attribution}
+            url={mapProviders[mapSelecter.providerId].tilesUrl}
+          />
 
-        {userWantsWater && <Markers typeOfAmenity={"water"} />}
-        {userWantsToilets && <Markers typeOfAmenity={"toilets"} />}
-        {userWantsFood && <Markers typeOfAmenity={"food"} />}
+          <UserLocation />
+          <MapTracker setMapSelecter={setMapSelecter} />
+          <MapRecenterer />
 
-        <Capybara />
-      </MapContainer>
+          <Markers />
+
+          <Capybara />
+        </MapContainer>
+      </PointsOfInterestProvider>
     </PositionProvider>
   );
 }
