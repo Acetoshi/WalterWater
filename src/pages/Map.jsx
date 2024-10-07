@@ -43,12 +43,11 @@ export default function Map() {
             attribution={mapProviders[mapSelecter.providerId].attribution}
             url={mapProviders[mapSelecter.providerId].tilesUrl}
           />
+          <Markers />
 
           <UserLocation />
           <MapTracker setMapSelecter={setMapSelecter} />
           <MapRecenterer />
-
-          <Markers />
 
           <Capybara />
         </MapContainer>

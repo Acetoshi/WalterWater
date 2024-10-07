@@ -21,8 +21,8 @@ const ListView = ({ isDisplayed, setIsDisplayed }) => {
       }
     >
       <ul className={isDisplayed ? "list-view" : "list-view hidden"}>
-        {POIs.map((point) => (
-          <li key={point.id}>
+        {POIs.map((point, index) => (
+          <li key={`${point.id}+${index}`}>
             <InfoCard point={point} setIsDisplayed={setIsDisplayed} />
           </li>
         ))}

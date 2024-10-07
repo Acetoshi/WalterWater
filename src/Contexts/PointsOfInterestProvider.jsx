@@ -39,8 +39,6 @@ export default function PointsOfInterestProvider({ children }) {
     setPOIs(() => newPOIs);
   }, [nearbyPOIs, areaPOIs, userFilters]);
 
-  console.log(areaPOIs);
-
   return (
     <PointsOfInterest.Provider
       value={{

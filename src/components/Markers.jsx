@@ -8,7 +8,7 @@ import "../styles/leafletPopup.css";
 import "../styles/leafletMarkerGroup.css";
 
 export default function Markers() {
-  const { POIs, } = usePOIs();
+  const { POIs, setTargetPOIPosition } = usePOIs();
   const map = useMap();
 
   const iconMap = {
@@ -21,12 +21,12 @@ export default function Markers() {
   const handleMarkerClick = useCallback(
     (point) => {
       const zoom = map.getZoom();
-      // map.flyTo([point.lat, point.lon], zoom, {
-      //   easeLinearity: 0.1,
-      //   duration: 0.6,
-      // });
-      setTargetPOIPosition({ lat: point.lat, lng: point.lon });
-      console.log("cuplrit triggered");
+      map.flyTo([point.lat, point.lon], zoom, {
+        easeLinearity: 1,
+        duration: 0.6,
+      });
+      //setTargetPOIPosition({ lat: point.lat, lng: point.lon });
+      console.log(point.id);
     },
     [POIs]
   );
@@ -42,9 +42,9 @@ export default function Markers() {
       maxClusterRadius={110}
     >
       {POIs &&
-        POIs.map((point) => (
+        POIs.map((point,index) => (
           <Marker
-            key={point.id}
+            key={`${point.id}+${index}`}
             position={[point.lat, point.lon]}
             icon={iconMap[point.tags.amenity]}
             autoPanOnFocus={false}
@@ -52,7 +52,7 @@ export default function Markers() {
               click: (e) => handleMarkerClick(point),
             }}
           >
-            <Popup keepInView={false}>
+            <Popup keepInView={false} autoPan={false} className={`${point.id}`}>
               <POIDetails point={point} />
             </Popup>
           </Marker>

@@ -20,7 +20,7 @@ export default function MapRecenterer() {
   useEffect(() => {
     if (targetPOIPosition.lat !== 0) {
       // this prevents a teleport to NULL island
-      //map.closePopup();
+      map.closePopup();
       map.flyTo(targetPOIPosition, 18, { duration: 1 });
     }
   }, [targetPOIPosition]);
