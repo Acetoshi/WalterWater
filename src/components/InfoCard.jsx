@@ -1,9 +1,9 @@
-import { usePosition } from "../Contexts/PositionProvider";
+import { usePOIs } from "../Contexts/PointsOfInterestProvider";
 import POIDetails from "./POIDetails";
 
 
 export default function InfoCard({ point, setIsDisplayed }) {
-  const { setTargetPOIPosition } = usePosition();
+  const { setTargetPOIPosition } = usePOIs();
   let temps = Math.round((point.distanceKm * 60) / 4);
 
   const handleClick=()=>{

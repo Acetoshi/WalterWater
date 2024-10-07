@@ -1,14 +1,15 @@
+import { memo } from "react";
 import wheechairIcon from "../assets/icons/wheelchair.svg";
 import moneyIcon from "../assets/icons/money.svg";
 import footstepsIcon from "../assets/icons/footsteps.svg";
 import timeIcon from "../assets/icons/time.svg";
 import toiletPositionIcon from "../assets/icons/toilet.svg";
-import changingTableIcon from "../assets/icons/baby-carriage.svg"
+import changingTableIcon from "../assets/icons/baby-carriage.svg";
 import "../styles/POIDetails.css";
 
 // Official doc for POI tags : https://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtoilets
 
-export default function POIDetails({ point }) {
+const POIDetails = memo(({ point }) => {
   return (
     <>
       <h3>
@@ -80,4 +81,5 @@ export default function POIDetails({ point }) {
       </ul>
     </>
   );
-}
+});
+export default POIDetails;

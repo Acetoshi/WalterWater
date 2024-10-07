@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { usePosition } from "../Contexts/PositionProvider";
+import { usePOIs } from "../Contexts/PointsOfInterestProvider";
 import { getNewPoints } from "../scripts/osmUtilities";
 import "../styles/searchThisAreaButton.css";
 
 
 // Needed for the user to be able to research POIs somewhere else without loading all the world's POIs in memory 
 export default function SearchThisArea() {
-  const { userLocation, mapPosition, setAreaPOIs } = usePosition();
+  const { userLocation, mapPosition} = usePosition();
+  const { setAreaPOIs}= usePOIs()
   const [requestStatus, setRequestStatus] = useState("ready to fetch");
 
   useEffect(() => {
