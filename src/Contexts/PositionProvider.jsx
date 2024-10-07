@@ -26,8 +26,6 @@ export default function PositionProvider({ children }) {
   // used for the recenter feature
   const [recenterIsNeeded, setrecenterIsNeeded] = useState("true");
 
-  console.log(mapPosition.center)
-
   return (
     <PositionContext.Provider
       value={{

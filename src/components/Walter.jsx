@@ -1,37 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "../styles/walter.css";
-import tips from "../scripts/walterTips.json"
+import tips from "../scripts/walterTips.json";
+import { usePOIs } from "../Contexts/PointsOfInterestProvider";
 
 function Walter() {
+  const checkFirstRender = useRef(true);
+  const checkSecondRender = useRef(true);
 
-  // console.log('%c⧭', 'color: #ff0000', adviseHiking[0]);
+  const { areaPOIs } = usePOIs();
+  console.log(areaPOIs);
 
-  const [isVisible, setIsVisible] = useState(false);
-  const [displayWalterInfos, setDisplayWalterInfos] = useState(false);
-
+  const [walterIsVisible, setWalterIsVisible] = useState(false);
   const [tip, setTip] = useState("");
-  // const [randomAdvise, setRandomAdvise] = useState(adviseHiking[0]);
+  const [message, setMessage] = useState("");
 
-  // toggle bulle Walter
-  const handleWalterInfos = () => {
-    setDisplayWalterInfos(true);
-  };
+  //warn the user when his search didn't find anything
+  useEffect(() => {
 
-  // toggle bulle Wal
-  const handleWalter = () => {
-    setDisplayWalterInfos(false);
-  };
+    if (checkFirstRender.current) {
+      checkFirstRender.current = false;
+      return;
+    } else if (checkSecondRender.current) {
+      checkFirstRender.current = false;
+      return;
+    }
 
-  // random number
-  function getNumberRandom(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-  }
-  // console.log('%c⧭ getNumberRandom', 'color: #00e600', getNumberRandom(0, adviseHiking.length));
+    if (areaPOIs.length === 0) {
+      console.log("ouvre-la water");
+      setMessage("Nothing here but crickets ! Maybe try another place ?");
+      setWalterIsVisible(true);
+      setTimeout(() => setWalterIsVisible(false), 3000);
+      setTimeout(() => setMessage(""), 4000);
+    }
+  }, [areaPOIs]);
 
   // au chargement
   useEffect(() => {
     //affichage bulle infos
-    setIsVisible(true);
 
     // Déclencher l'animation après le montage du composant
     const firstLoad = localStorage.getItem("firstLoad");
@@ -47,22 +52,22 @@ function Walter() {
   }, []);
 
   return (
-    <div
-      className={`container-walter ${displayWalterInfos ? "hide-walter" : ""}`}
+    <button
+      className={`container-walter ${walterIsVisible ? "" : "hidden"}`}
+      onClick={() => setWalterIsVisible(!walterIsVisible)}
     >
-      <div className={`infos-walter ${displayWalterInfos ? "fade-in" : ""}`}>
-        <button className="close-walter" onClick={handleWalterInfos}>
+      <div className={`infos-walter ${walterIsVisible ? "" : "fade-in"}`}>
+        <button
+          className="close-walter"
+          onClick={() => setWalterIsVisible(false)}
+        >
           <span className="icon-close" aria-label="Fermer modal"></span>
         </button>
         <div className="container-infos">
-          <p>{tip}</p>
+          <p>{message || tip}</p>
         </div>
       </div>
-      <span
-        className="icon-walter-color"
-        aria-label="Walter la mascotte"
-        onClick={handleWalter}
-      >
+      <span className="icon-walter-color" aria-label="Walter la mascotte">
         <span className="path1"></span>
         <span className="path2"></span>
         <span className="path3"></span>
@@ -70,7 +75,7 @@ function Walter() {
         <span className="path5"></span>
         <span className="path6"></span>
       </span>
-    </div>
+    </button>
   );
 }
 
