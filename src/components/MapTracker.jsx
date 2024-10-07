@@ -8,8 +8,6 @@ export default function MapTracker({ setMapSelecter }) {
   const map = useMap();
   const { userLocation, setMapPosition } = usePosition();
 
-  console.log("maptracker is re-rendered");
-
   useEffect(() => {
     // This is needed to let the user move the map as he/she wishes wthout the open pop-ups anchoring the view
     const handleDragStart = () => {
@@ -28,6 +26,7 @@ export default function MapTracker({ setMapSelecter }) {
 
     const handleMoveEnd = () => {
       // Track the current map bounds in order to use them as a bounding box for POI search later on
+      console.log('moveend')
       const bounds = map.getBounds();
       const center = map.getCenter();
       const distance = getDistanceFromLatLonInKm(
@@ -36,7 +35,7 @@ export default function MapTracker({ setMapSelecter }) {
         center.lat,
         center.lng
       );
-      setMapPosition({
+      setMapPosition(()=>{return{
         bounds: {
           minLat: bounds._southWest.lat,
           maxLat: bounds._northEast.lat,
@@ -48,7 +47,8 @@ export default function MapTracker({ setMapSelecter }) {
           lng: center.lng,
         },
         distanceFromUser: distance,
-      });
+      }});
+    }
 
       map.on("moveend", handleMoveEnd);
 
@@ -57,7 +57,6 @@ export default function MapTracker({ setMapSelecter }) {
         map.off("moveend", handleMoveEnd);
         map.off("movestart", handleMoveStart);
       };
-    };
   }, []);
 
   return null;

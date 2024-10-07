@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, memo } from "react";
 import { Marker, Popup, useMap } from "react-leaflet";
 import { usePOIs } from "../Contexts/PointsOfInterestProvider";
 import { faucetIcon, toiletIcon, foodIcon } from "../scripts/icons";
@@ -7,15 +7,33 @@ import POIDetails from "./POIDetails";
 import "../styles/leafletPopup.css";
 import "../styles/leafletMarkerGroup.css";
 
-export default function Markers() {
-  const { POIs, setTargetPOIPosition } = usePOIs();
-  const map = useMap();
-
+const MarkerComponent = memo(({ point, onMarkerClick }) => {
   const iconMap = {
     drinking_water: faucetIcon,
     toilets: toiletIcon,
     restaurant: foodIcon,
   };
+
+  return (
+    <Marker
+      key={point.id}
+      position={[point.lat, point.lon]}
+      icon={iconMap[point.tags.amenity]}
+      autoPanOnFocus={false}
+      eventHandlers={{
+        click: () => onMarkerClick(point),
+      }}
+    >
+      <Popup keepInView={false} autoPan={false} className={`${point.id}`}>
+        <POIDetails point={point} />
+      </Popup>
+    </Marker>
+  );
+});
+
+export default function Markers() {
+  const { POIs } = usePOIs();
+  const map = useMap();
 
   // useCallBack needed because of marker clusters
   const handleMarkerClick = useCallback(
@@ -42,20 +60,12 @@ export default function Markers() {
       maxClusterRadius={110}
     >
       {POIs &&
-        POIs.map((point,index) => (
-          <Marker
+        POIs.map((point, index) => (
+          <MarkerComponent
             key={`${point.id}+${index}`}
-            position={[point.lat, point.lon]}
-            icon={iconMap[point.tags.amenity]}
-            autoPanOnFocus={false}
-            eventHandlers={{
-              click: (e) => handleMarkerClick(point),
-            }}
-          >
-            <Popup keepInView={false} autoPan={false} className={`${point.id}`}>
-              <POIDetails point={point} />
-            </Popup>
-          </Marker>
+            point={point}
+            onMarkerClick={handleMarkerClick}
+          />
         ))}
     </MarkerClusterGroup>
   );
