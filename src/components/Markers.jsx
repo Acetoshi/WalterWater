@@ -8,35 +8,28 @@ import "../styles/leafletPopup.css";
 import "../styles/leafletMarkerGroup.css";
 
 export default function Markers() {
-  const { POIs } = usePOIs();
+  const { POIs, } = usePOIs();
   const map = useMap();
 
-  let icon = {};
-
- 
-
-  // if (typeOfAmenity === "water") {
-  //   points = POIs.filter((point) => point.tags.amenity === "drinking_water");
-  //   icon = faucetIcon;
-  // } else if (typeOfAmenity === "toilets") {
-  //   points = POIs.filter((point) => point.tags.amenity === "toilets");
-  //   icon = toiletIcon;
-  // } else if (typeOfAmenity === "food") {
-  //   points = POIs.filter((point) => point.tags.amenity === "restaurant");
-  //   icon = foodIcon;
-  // }
-
-
-
-  icon = toiletIcon;
+  const iconMap = {
+    drinking_water: faucetIcon,
+    toilets: toiletIcon,
+    restaurant: foodIcon,
+  };
 
   // useCallBack needed because of marker clusters
-  const handleMarkerClick = useCallback((point) => {
-    map.flyTo([point.lat, point.lon], map.getZoom(), {
-      easeLinearity: 0.001,
-      duration: 0.8,
-    });
-  }, []);
+  const handleMarkerClick = useCallback(
+    (point) => {
+      const zoom = map.getZoom();
+      // map.flyTo([point.lat, point.lon], zoom, {
+      //   easeLinearity: 0.1,
+      //   duration: 0.6,
+      // });
+      setTargetPOIPosition({ lat: point.lat, lng: point.lon });
+      console.log("cuplrit triggered");
+    },
+    [POIs]
+  );
 
   //TODO : use this reference : https://wiki.openstreetmap.org/wiki/Key:wikimedia_commons to find a way to obtain images from wikimedia.
   return (
@@ -48,18 +41,18 @@ export default function Markers() {
       polygonOptions={{ stroke: false }}
       maxClusterRadius={110}
     >
-      {POIs  &&
+      {POIs &&
         POIs.map((point) => (
           <Marker
             key={point.id}
             position={[point.lat, point.lon]}
-            icon={icon}
+            icon={iconMap[point.tags.amenity]}
             autoPanOnFocus={false}
             eventHandlers={{
               click: (e) => handleMarkerClick(point),
             }}
           >
-            <Popup>
+            <Popup keepInView={false}>
               <POIDetails point={point} />
             </Popup>
           </Marker>

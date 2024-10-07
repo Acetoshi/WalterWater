@@ -30,7 +30,7 @@ export default function PointsOfInterestProvider({ children }) {
   }, [userLocation]);
 
   useEffect(() => {
-    const newPOIs = nearbyPOIs.concat(areaPOIs).filter(
+    const newPOIs = [...nearbyPOIs, ...areaPOIs].filter(
       (point) =>
         (point.tags.amenity === "drinking_water" && userFilters.water) ||
         (point.tags.amenity === "toilets" && userFilters.toilets) ||

@@ -9,7 +9,8 @@ export default function MapTracker({setMapSelecter}) {
 
   // This is needed to let the user move the map as he/she wishes wthout the open pop-ups anchoring the view
   map.on("dragstart", () => {
-    map.closePopup();
+    //map.closePopup();
+    console.log('order to close all pop-ups')
   });
 
   // This is needed to close the MapProviderSelecter menu when the map moves
