@@ -7,14 +7,14 @@ const PointsOfInterest = createContext();
 export default function PointsOfInterestProvider({ children }) {
   const { userLocation } = usePosition();
 
-  console.log("inital log ",localStorage.getItem("userFilters"))
+  const storedFilters = localStorage.getItem("userFilters");
 
   const [userFilters, setUserFilters] = useState(
-    localStorage.getItem("userFilters")
+    storedFilters
       ? {
-          water: localStorage.getItem("userFilters")[0] === "1",
-          food: localStorage.getItem("userFilters")[1] === "1",
-          toilets: localStorage.getItem("userFilters")[2] === "1",
+          water: storedFilters[0] === "1",
+          food: storedFilters[1] === "1",
+          toilets: storedFilters[2] === "1",
         }
       : {
           water: true,
@@ -60,8 +60,6 @@ export default function PointsOfInterestProvider({ children }) {
     );
     setPOIs(() => newPOIs);
   }, [nearbyPOIs, areaPOIs, userFilters]);
-
-  
 
   return (
     <PointsOfInterest.Provider
