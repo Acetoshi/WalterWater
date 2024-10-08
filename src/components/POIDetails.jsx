@@ -1,10 +1,4 @@
 import { memo } from "react";
-import wheechairIcon from "../assets/icons/wheelchair.svg";
-import moneyIcon from "../assets/icons/money.svg";
-import footstepsIcon from "../assets/icons/footsteps.svg";
-import timeIcon from "../assets/icons/time.svg";
-import toiletPositionIcon from "../assets/icons/toilet.svg";
-import changingTableIcon from "../assets/icons/baby-carriage.svg";
 import "../styles/POIDetails.css";
 
 // Official doc for POI tags : https://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtoilets
@@ -25,7 +19,7 @@ const POIDetails = memo(({ point }) => {
             <img
               className="poi-icon"
               loading="lazy"
-              src={wheechairIcon}
+              src="/icons/wheelchair.svg"
               alt=""
             />
             <p>wheelchair access : {point.tags.wheelchair}</p>
@@ -34,7 +28,12 @@ const POIDetails = memo(({ point }) => {
 
         {point.tags.fee && (
           <li className="poi-info-row">
-            <img className="poi-icon" loading="lazy" src={moneyIcon} alt="" />
+            <img
+              className="poi-icon"
+              loading="lazy"
+              src="/icons/money.svg"
+              alt=""
+            />
             <p>
               {point.tags.fee === "no"
                 ? "free of charge"
@@ -48,7 +47,7 @@ const POIDetails = memo(({ point }) => {
             <img
               className="poi-icon"
               loading="lazy"
-              src={toiletPositionIcon}
+              src="/icons/toilet.svg"
               alt=""
             />
             <p>
@@ -62,7 +61,7 @@ const POIDetails = memo(({ point }) => {
             <img
               className="poi-icon"
               loading="lazy"
-              src={changingTableIcon}
+              src="icons/baby-carriage.svg"
               alt=""
             />
             <p>changing table : {point.tags.changing_table}</p>
@@ -70,12 +69,22 @@ const POIDetails = memo(({ point }) => {
         )}
 
         <li className="poi-info-row">
-          <img className="poi-icon" loading="lazy" src={footstepsIcon} alt="" />
+          <img
+            className="poi-icon"
+            loading="lazy"
+            src="icons/footsteps.svg"
+            alt=""
+          />
           <p>{`distance : ${point.distanceKm} km`}</p>
         </li>
 
         <li className="poi-info-row">
-          <img className="poi-icon" loading="lazy" src={timeIcon} alt="" />
+          <img
+            className="poi-icon"
+            loading="lazy"
+            src="/icons/time.svg"
+            alt=""
+          />
           <p>{`walk time : ${point.walkTime}`}</p>
         </li>
       </ul>
