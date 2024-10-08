@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import "../styles/walter.css";
-import tips from "../scripts/walterTips.json";
 import { usePOIs } from "../Contexts/PointsOfInterestProvider";
 
 function Walter() {
