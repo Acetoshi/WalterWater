@@ -8,31 +8,43 @@ function Walter() {
   const checkSecondRender = useRef(true);
 
   const { areaPOIs } = usePOIs();
-  console.log(areaPOIs);
 
   const [walterIsVisible, setWalterIsVisible] = useState(false);
   const [tip, setTip] = useState("");
   const [message, setMessage] = useState("");
 
+  const failMessages = [
+    "Well, that was a lovely little treasure hunt… for absolutely nothing!",
+    "Nothing here but crickets ! Maybe try another place ?",
+    "Searching for results? You might as well look for a needle in a haystack… blindfolded!",
+    "Nothing here yet, but remember, even the best explorers faced a few empty maps before striking gold!",
+  ];
+
+  const walterSays = (something) => {
+    setWalterIsVisible(true);
+    setMessage(something);
+    setTimeout(() => setWalterIsVisible(false), 3000);
+  };
+
   //warn the user when his search didn't find anything
   useEffect(() => {
-
+    // this is here to skip the first two renders
     if (checkFirstRender.current) {
       checkFirstRender.current = false;
       return;
     } else if (checkSecondRender.current) {
-      checkFirstRender.current = false;
+      checkSecondRender.current = false;
       return;
     }
-
+    console.log("areaPOIs");
     if (areaPOIs.length === 0) {
-      console.log("ouvre-la water");
-      setMessage("Nothing here but crickets ! Maybe try another place ?");
-      setWalterIsVisible(true);
-      setTimeout(() => setWalterIsVisible(false), 3000);
-      setTimeout(() => setMessage(""), 4000);
+      walterSays(
+        failMessages[Math.floor(Math.random() * 0.99 * failMessages.length)]
+      );
     }
   }, [areaPOIs]);
+
+  console.log(areaPOIs);
 
   // au chargement
   useEffect(() => {
@@ -64,7 +76,7 @@ function Walter() {
           <span className="icon-close" aria-label="Fermer modal"></span>
         </button>
         <div className="container-infos">
-          <p>{message || tip}</p>
+          <p>{message}</p>
         </div>
       </div>
       <span className="icon-walter-color" aria-label="Walter la mascotte">

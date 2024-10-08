@@ -43,8 +43,6 @@ export default function Markers() {
         easeLinearity: 1,
         duration: 0.6,
       });
-      //setTargetPOIPosition({ lat: point.lat, lng: point.lon });
-      console.log(point.id);
     },
     [POIs]
   );
