@@ -79,16 +79,17 @@ function Walter() {
     >
       <div className={`infos-walter ${walterIsVisible ? "" : "fade-in"}`}>
         <button
+          role="button"
           className="close-walter"
           onClick={() => setWalterIsVisible(false)}
         >
-          <span className="icon-close" aria-label="Fermer modal"></span>
+          ignore <span className="icon-close" ></span>
         </button>
         <div className="container-infos">
           <p>{message}</p>
         </div>
       </div>
-      <span className="icon-walter-color" aria-label="Walter la mascotte">
+      <span className="icon-walter-color" >
         <span className="path1"></span>
         <span className="path2"></span>
         <span className="path3"></span>

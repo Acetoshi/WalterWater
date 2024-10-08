@@ -20,24 +20,19 @@ function FilterBar({ listState }) {
       >
         {listIsDisplayed ? (
           <>
-            <span
-              className="icon-search-location-1"
-              aria-label="Affichage de la carte"
-            />
+            <span className="icon-search-location-1" />
             show map
           </>
         ) : (
           <>
-            <span
-              className="icon-liste-a-puces"
-              aria-label="Affichage en mode liste des points"
-            />
+            <span className="icon-liste-a-puces" />
             show list
           </>
         )}
       </button>
       <button
-        type="button"
+        role="button"
+        aria-pressed={userFilters.water}
         className="filter-button"
         onClick={() =>
           setUserFilters(() => {
@@ -49,13 +44,13 @@ function FilterBar({ listState }) {
           className={
             userFilters.water ? "icon-faucet" : "icon-faucet deactivated"
           }
-          aria-label="Affichage des Point d'eau"
         />
         water
       </button>
 
       <button
-        type="button"
+        role="button"
+        aria-pressed={userFilters.food}
         className="filter-button"
         onClick={() =>
           setUserFilters(() => {
@@ -67,13 +62,13 @@ function FilterBar({ listState }) {
           className={
             userFilters.food ? "icon-restaurant" : "icon-restaurant deactivated"
           }
-          aria-label="Afficher des lieux pour se restaurer"
         />
         restaurants
       </button>
 
       <button
-        type="button"
+        role="button"
+        aria-pressed={userFilters.toilets}
         className="filter-button"
         onClick={() =>
           setUserFilters(() => {
@@ -85,7 +80,6 @@ function FilterBar({ listState }) {
           className={
             userFilters.toilets ? "icon-toilette" : "icon-toilette deactivated"
           }
-          aria-label="Afficher des toilettes"
         />
         toilets
       </button>

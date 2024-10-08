@@ -20,6 +20,7 @@
 
 .infos-walter p {
   color: var(--grey-darker);
+  margin-top: 16px;
 }
 
 .container-walter .icon-walter-color {
@@ -36,7 +37,11 @@
   top: 10px;
   color: var(--secondary-color);
   font-size: 1.2rem;
+  display: flex;
+  gap:8px;
+  align-items: center;
 }
+
 
 .show-walter {
   /*  duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
