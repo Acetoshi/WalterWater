@@ -42,14 +42,14 @@
   /*  duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
   animation: 0.5s ease-in 0s 1 normal forwards slidein;
 }
-.hide-walter {
+.container-walter.hidden {
   /*  duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
   animation: 0.5s ease-in 0s 1 normal forwards slideout;
 }
-.hide-walter .icon-walter-color {
-  /*  duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
-  animation: 2s ease-in 1s infinite normal both bounce;
-}
+
+/* .hide-walter .icon-walter-color { 
+ animation: 2s ease-in 1s infinite normal both bounce; 
+ } */
 
 @keyframes slidein {
   from {
