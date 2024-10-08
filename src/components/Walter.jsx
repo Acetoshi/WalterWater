@@ -36,15 +36,12 @@ function Walter() {
       checkSecondRender.current = false;
       return;
     }
-    console.log("areaPOIs");
     if (areaPOIs.length === 0) {
       walterSays(
         failMessages[Math.floor(Math.random() * 0.99 * failMessages.length)]
       );
     }
   }, [areaPOIs]);
-
-  console.log(areaPOIs);
 
   // au chargement
   useEffect(() => {
