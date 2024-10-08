@@ -24,7 +24,7 @@ function FilterBar({ listState }) {
               className="icon-search-location-1"
               aria-label="Affichage de la carte"
             />
-            <p>show map</p>
+            show map
           </>
         ) : (
           <>
@@ -32,7 +32,7 @@ function FilterBar({ listState }) {
               className="icon-liste-a-puces"
               aria-label="Affichage en mode liste des points"
             />
-            <p>show list</p>
+            show list
           </>
         )}
       </button>
