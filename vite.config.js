@@ -12,8 +12,8 @@ export default defineConfig({
         description: "Find water and toilets near you !",
         start_url: "/",
         display: "standalone",
-        background_color: "#ffffff",
-        theme_color: "#00bfff",
+        background_color: "#164f91",
+        theme_color: "#43aa8b",
         icons: [
           {
             src: "/pwa/walter-icon-small.png",
