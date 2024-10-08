@@ -31,7 +31,6 @@ export default function PointsOfInterestProvider({ children }) {
         userFilters.toilets ? 1 : 0
       }`.toString()
     );
-    console.log(localStorage.getItem("userFilters"));
   }, [userFilters]);
 
   const [nearbyPOIs, setNearbyPOIs] = useState([]);
