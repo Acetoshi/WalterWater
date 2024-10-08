@@ -52,13 +52,13 @@ export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
                   })
                 }
               >
-                {provider.alias === "simple" && <img src={mapPreviewSimple} />}
+                {provider.alias === "simple" && <img src={mapPreviewSimple} alt=""/>}
                 {provider.alias === "detailed" && (
-                  <img src={mapPreviewDetailed} />
+                  <img src={mapPreviewDetailed} alt=""/>
                 )}
-                {provider.alias === "cycling" && <img src={mapPreviewCycle} />}
+                {provider.alias === "cycling" && <img src={mapPreviewCycle} alt=""/>}
                 {provider.alias === "satellite" && (
-                  <img src={mapPreviewSatellite} />
+                  <img src={mapPreviewSatellite} alt=""/>
                 )}
                 <p>{provider.alias}</p>
               </button>
