@@ -16,12 +16,12 @@ export default defineConfig({
         theme_color: "#00bfff",
         icons: [
           {
-            src: "PWA_icons/icon-192x192.png",
+            src: "/walter-icon-small.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "PWA_icons/icon-512x512.png",
+            src: "/walter-icon-large.png",
             sizes: "512x512",
             type: "image/png",
           },
