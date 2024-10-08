@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: 3s linear fadeout;
+  animation: 2.5s linear fadeout;
   opacity: 0;
   z-index: 0;
 }
@@ -37,9 +37,9 @@
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
   border-radius: 20px;
-  animation: drip 1s cubic-bezier(1, 0, 0.71, 0.19);
-  -webkit-animation: drip 1s cubic-bezier(1, 0, 0.71, 0.19);
-  -moz-animation: drip 1s cubic-bezier(1, 0, 0.71, 0.19);
+  animation: drip 1s cubic-bezier(1, 0, 0.99, 0.19);
+  -webkit-animation: drip 1s cubic-bezier(1, 0, 0.99, 0.19);
+  -moz-animation: drip 1s cubic-bezier(1, 0, 0.99, 0.19);
 }
 
 .drop:before {
