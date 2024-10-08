@@ -1,15 +1,29 @@
 .droplet-container {
   position: fixed;
-  top:0px;
-  bottom:0px;
-  height: 100 lvh;
-  width: 100wv;
+  top: 20vh;
   z-index: 50000;
   background-color: var(--main-color);
-  overflow: hidden;
 }
 
-div {
+/* copied from https://codepen.io/abehjat/pen/oXMENv */
+
+.droplet-background {
+  overflow: hidden;
+  padding-top: 25vh;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--main-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: 3s linear fadeout;
+  opacity: 0;
+  z-index: 0;
+}
+
+.drop,
+.wave {
   margin: 175px auto;
 }
 
@@ -17,24 +31,15 @@ div {
   position: relative;
   width: 20px;
   height: 20px;
-  top: -30px;
+  top: -200px;
   margin: 0 auto;
   background: #fff;
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
   border-radius: 20px;
-  -moz-animation-name: drip;
-  -webkit-animation-name: drip;
-  animation-name: drip;
-  -moz-animation-timing-function: cubic-bezier(1, 0, 0.91, 0.19);
-  -webkit-animation-timing-function: cubic-bezier(1, 0, 0.91, 0.19);
-  animation-timing-function: cubic-bezier(1, 0, 0.91, 0.19);
-  -moz-animation-duration: 2s;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -moz-animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
+  animation: drip 1s cubic-bezier(1, 0, 0.71, 0.19);
+  -webkit-animation: drip 1s cubic-bezier(1, 0, 0.71, 0.19);
+  -moz-animation: drip 1s cubic-bezier(1, 0, 0.71, 0.19);
 }
 
 .drop:before {
@@ -58,18 +63,9 @@ div {
   -moz-border-radius: 300px / 150px;
   -webkit-border-radius: 300px / 150px;
   border-radius: 300px / 150px;
-  -moz-animation-name: ripple;
-  -webkit-animation-name: ripple;
-  animation-name: ripple;
-  -moz-animation-delay: 2s;
-  -webkit-animation-delay: 2s;
-  animation-delay: 2s;
-  -moz-animation-duration: 2s;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -moz-animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
+  animation: ripple 1s 1s;
+  -webkit-animation: ripple 1s 1s;
+  -moz-animation: ripple 1s 1s;
 }
 
 .wave:after {
@@ -84,15 +80,9 @@ div {
   -moz-border-radius: 300px / 150px;
   -webkit-border-radius: 300px / 150px;
   border-radius: 300px / 150px;
-  -moz-animation-name: ripple-2;
-  -webkit-animation-name: ripple-2;
-  animation-name: ripple-2;
-  -moz-animation-duration: 2s;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -moz-animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
+  animation: ripple-2 1s;
+  -webkit-animation: ripple-2 1s;
+  -moz-animation: ripple-2 1s;
 }
 
 @keyframes ripple {
@@ -126,6 +116,21 @@ div {
 
 @keyframes drip {
   to {
-    top: 190px;
+    top: 200px;
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+    z-index: 3000;
+  }
+  50% {
+    opacity: 1;
+    z-index: 3000;
+  }
+  100% {
+    opacity: 0;
+    z-index: 3000;
   }
 }
