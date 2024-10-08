@@ -1,7 +1,11 @@
 import { Outlet } from "react-router-dom";
+import Droplet from "./components/Droplet";
 
-function App() {
-  return <Outlet />;
+export default function App() {
+  return (
+    <>
+      <Droplet />
+      <Outlet />
+    </>
+  );
 }
-
-export default App;
