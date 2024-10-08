@@ -76,7 +76,7 @@ const POIDetails = memo(({ point }) => {
 
         <li className="poi-info-row">
           <img className="poi-icon" loading="lazy" src={timeIcon} alt="" />
-          <p>{`walk time : ${Math.round((point.distanceKm * 60) / 4)} mn`}</p>
+          <p>{`walk time : ${point.walkTime}`}</p>
         </li>
       </ul>
     </>

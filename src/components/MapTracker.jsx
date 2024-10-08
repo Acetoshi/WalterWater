@@ -12,7 +12,6 @@ export default function MapTracker({ setMapSelecter }) {
     // This is needed to let the user move the map as he/she wishes wthout the open pop-ups anchoring the view
     const handleDragStart = () => {
       map.closePopup();
-      console.log("order to close all pop-ups");
     };
     map.on("dragstart", handleDragStart);
 
@@ -26,7 +25,6 @@ export default function MapTracker({ setMapSelecter }) {
 
     const handleMoveEnd = () => {
       // Track the current map bounds in order to use them as a bounding box for POI search later on
-      console.log('moveend')
       const bounds = map.getBounds();
       const center = map.getCenter();
       const distance = getDistanceFromLatLonInKm(

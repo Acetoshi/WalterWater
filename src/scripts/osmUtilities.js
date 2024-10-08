@@ -18,6 +18,23 @@ function deg2rad(deg) {
   return deg * (Math.PI / 180);
 }
 
+function getWalkingTime(distanceKm, speedKmh = 4) {
+  const totalTimeInHours = distanceKm / speedKmh;
+
+  const days = Math.floor(totalTimeInHours / 24);
+  const hours = Math.floor(totalTimeInHours % 24);
+  const minutes = Math.round(
+    (totalTimeInHours - Math.floor(totalTimeInHours)) * 60
+  );
+
+  let timeString = "";
+  if (days > 0) timeString += `${days}d `;
+  if (hours > 0) timeString += `${hours}h `;
+  if (minutes > 0) timeString += `${minutes}min`;
+
+  return timeString.trim() || "0min"; // Return '0min' if no time is calculated
+}
+
 function boundingBox(location, radius) {
   const minLat = location.lat - radius / 2;
   const maxLat = location.lat + radius / 2;
@@ -53,21 +70,25 @@ export async function getAllPoints(location, radius, POIsetterFunction) {
     .then((result) => {
       POIsetterFunction(
         result.elements
-          .map((point) => ({
-            ...point,
-            distanceKm: getDistanceFromLatLonInKm(
+          .map((point) => {
+            const distance = getDistanceFromLatLonInKm(
               location.lat,
               location.lng,
               point.lat,
               point.lon
-            ),
-          }))
+            );
+            return {
+              ...point,
+              distanceKm: distance,
+              walkTime: getWalkingTime(distance), // Pass userSpeed if needed
+            };
+          })
           .sort((pointA, pointB) => pointA.distanceKm - pointB.distanceKm)
       );
     });
 }
 
-// TODO : refator the previous function so that this one can be kept. 
+// TODO : refator the previous function so that this one can be kept.
 // maybe by passing the map
 export async function getNewPoints(
   userLocation,
@@ -109,19 +130,20 @@ export async function getNewPoints(
     .then((result) => {
       POIsetterFunction(
         result.elements
-          .map((point) => ({
-            ...point,
-            distanceKm: getDistanceFromLatLonInKm(
+          .map((point) => {
+            const distance = getDistanceFromLatLonInKm(
               userLocation.lat,
               userLocation.lng,
               point.lat,
               point.lon
-            ),
-          }))
-          .sort((pointA, pointB) =>
-            pointA.distanceKm - pointB.distanceKm > 0 ? true : false
-          )
+            );
+            return {
+              ...point,
+              distanceKm: distance,
+              walkTime: getWalkingTime(distance), // Pass userSpeed if needed
+            };
+          })
+          .sort((pointA, pointB) => pointA.distanceKm - pointB.distanceKm)
       );
-      
     });
 }
