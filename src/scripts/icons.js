@@ -1,8 +1,8 @@
-import faucet from "../assets/markerIcons/faucet_icon.svg";
-import toilet from "../assets/markerIcons/toilet_icon.svg";
-import food from "../assets/markerIcons/food_icon.svg";
-import walter from "../assets/markerIcons/walter_icon_color.svg";
-import capybara from "../assets/markerIcons/capybara_icon.svg"
+import faucet from "/markerIcons/faucet_icon.svg";
+import toilet from "/markerIcons/toilet_icon.svg";
+import food from "/markerIcons/food_icon.svg";
+import walter from "/markerIcons/walter_icon_color.svg";
+import capybara from "/markerIcons/capybara_icon.svg"
 import L from "leaflet";
 
 // give the source to your icon
