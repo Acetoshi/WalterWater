@@ -14,25 +14,31 @@ function FilterBar({ listState }) {
     <div className="filterbar">
       <button
         type="button"
-        className="button-filter"
+        className="filter-button"
         id="displayDataButton"
         onClick={handleDisplayModeChange}
       >
         {listIsDisplayed ? (
-          <span
-            className="icon-search-location-1"
-            aria-label="Affichage de la carte"
-          />
+          <>
+            <span
+              className="icon-search-location-1"
+              aria-label="Affichage de la carte"
+            />
+            show map
+          </>
         ) : (
-          <span
-            className="icon-liste-a-puces"
-            aria-label="Affichage en mode liste des points"
-          />
+          <>
+            <span
+              className="icon-liste-a-puces"
+              aria-label="Affichage en mode liste des points"
+            />
+            show list
+          </>
         )}
       </button>
       <button
         type="button"
-        className="button-filter"
+        className="filter-button"
         onClick={() =>
           setUserFilters(() => {
             return { ...userFilters, water: !userFilters.water };
@@ -45,11 +51,12 @@ function FilterBar({ listState }) {
           }
           aria-label="Affichage des Point d'eau"
         />
+        water
       </button>
 
       <button
         type="button"
-        className="button-filter"
+        className="filter-button"
         onClick={() =>
           setUserFilters(() => {
             return { ...userFilters, food: !userFilters.food };
@@ -62,11 +69,12 @@ function FilterBar({ listState }) {
           }
           aria-label="Afficher des lieux pour se restaurer"
         />
+        restaurants
       </button>
 
       <button
         type="button"
-        className="button-filter"
+        className="filter-button"
         onClick={() =>
           setUserFilters(() => {
             return { ...userFilters, toilets: !userFilters.toilets };
@@ -79,6 +87,7 @@ function FilterBar({ listState }) {
           }
           aria-label="Afficher des toilettes"
         />
+        toilets
       </button>
     </div>
   );

@@ -1,7 +1,4 @@
 import { usePosition } from "../Contexts/PositionProvider";
-import recenterIconFull from "../assets/icons/recenterWhite.png";
-import recenterIconEmpty from "../assets/icons/recenterWhiteEmpty.png";
-
 import "../styles/recenterButton.css";
 
 export default function RecenterButton() {
@@ -16,8 +13,8 @@ export default function RecenterButton() {
       <img
         src={
           mapPosition.distanceFromUser >= 0.2
-            ? recenterIconEmpty
-            : recenterIconFull
+            ? "/icons/recenterWhiteEmpty.png"
+            : "/icons/recenterWhiteFull.png"
         }
         alt="recenter the map on your position"
       ></img>

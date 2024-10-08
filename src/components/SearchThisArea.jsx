@@ -7,7 +7,7 @@ import "../styles/searchThisAreaButton.css";
 // Needed for the user to be able to research POIs somewhere else without loading all the world's POIs in memory
 export default function SearchThisArea() {
   const { userLocation, mapPosition } = usePosition();
-  const { setAreaPOIs } = usePOIs();
+  const { setAreaPOIs, userFilters } = usePOIs();
   const [requestStatus, setRequestStatus] = useState("ready to fetch");
 
   useEffect(() => {
@@ -19,6 +19,7 @@ export default function SearchThisArea() {
   const handleSearch = () => {
     getNewPoints(
       userLocation,
+      userFilters,
       mapPosition.bounds,
       setAreaPOIs,
       setRequestStatus

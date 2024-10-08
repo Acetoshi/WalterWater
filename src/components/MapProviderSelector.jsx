@@ -1,10 +1,5 @@
 import { useEffect } from "react";
 import mapProviders from "../scripts/mapProviders.json";
-import layerIcon from "../assets/icons/layers.svg";
-import mapPreviewSimple from "../assets/mapPreviews/simple.jpg";
-import mapPreviewDetailed from "../assets/mapPreviews/detailed.jpg";
-import mapPreviewCycle from "../assets/mapPreviews/cycle.jpg";
-import mapPreviewSatellite from "../assets/mapPreviews/satellite.jpg";
 import "../styles/mapProviderSelector.css";
 
 export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
@@ -27,7 +22,7 @@ export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
           })
         }
       >
-        <img src={layerIcon} alt="recenter the map on your position"></img>
+        <img src="/icons/layers.svg" alt="recenter the map on your position"></img>
       </button>
       <div
         className={`map-provider-menu-mask ${
@@ -52,13 +47,13 @@ export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
                   })
                 }
               >
-                {provider.alias === "simple" && <img src={mapPreviewSimple} alt=""/>}
+                {provider.alias === "simple" && <img src="/mapPreviews/simple.jpg" alt=""/>}
                 {provider.alias === "detailed" && (
-                  <img src={mapPreviewDetailed} alt=""/>
+                  <img src="/mapPreviews/detailed.jpg" alt=""/>
                 )}
-                {provider.alias === "cycling" && <img src={mapPreviewCycle} alt=""/>}
+                {provider.alias === "cycling" && <img src="/mapPreviews/cycle.jpg" alt=""/>}
                 {provider.alias === "satellite" && (
-                  <img src={mapPreviewSatellite} alt=""/>
+                  <img src="/mapPreviews/satellite.jpg" alt=""/>
                 )}
                 <p>{provider.alias}</p>
               </button>
