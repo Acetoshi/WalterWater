@@ -19,11 +19,13 @@ export default defineConfig({
             src: "/pwa/walter-icon-small.png",
             sizes: "192x192",
             type: "image/png",
+            purpose: "maskable",
           },
           {
             src: "/pwa/walter-icon-large.png",
             sizes: "512x512",
             type: "image/png",
+            purpose: "maskable",
           },
         ],
       },
