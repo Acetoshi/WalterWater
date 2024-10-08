@@ -92,10 +92,12 @@ export async function getAllPoints(location, radius, POIsetterFunction) {
 // maybe by passing the map
 export async function getNewPoints(
   userLocation,
+  userFilters,
   mapBounds,
   POIsetterFunction,
   statusSetterFunction
 ) {
+  const { water, food, toilets } = userFilters;
   const boundingBox = `${mapBounds.minLat},${mapBounds.minLng},${mapBounds.maxLat},${mapBounds.maxLng}`;
   const maxObjects = 250;
   statusSetterFunction("fetching data");
@@ -112,9 +114,9 @@ export async function getNewPoints(
           [timeout:25]
           ;
           (
-            node["amenity"="drinking_water"](${boundingBox});
-            node["amenity"="toilets"](${boundingBox});
-            node["amenity"="restaurant"](${boundingBox});
+            ${water?`node["amenity"="drinking_water"](${boundingBox});`:''}
+            ${toilets?`node["amenity"="toilets"](${boundingBox});`:''}
+            ${food?`node["amenity"="restaurant"](${boundingBox});`:''}
           );
           out geom ${maxObjects};
       `),
