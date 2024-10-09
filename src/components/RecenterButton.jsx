@@ -9,6 +9,7 @@ export default function RecenterButton() {
       id="recenter-button"
       type="button"
       onClick={() => setrecenterIsNeeded(!recenterIsNeeded)}
+      disabled={(mapPosition.distanceFromUser<=0.05)}
     >
       <img
         src={

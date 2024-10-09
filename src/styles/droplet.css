@@ -1,12 +1,3 @@
-.droplet-container {
-  position: fixed;
-  top: 20vh;
-  z-index: 50000;
-  background-color: var(--main-color);
-}
-
-/* copied from https://codepen.io/abehjat/pen/oXMENv */
-
 .droplet-background {
   overflow: hidden;
   padding-top: 25vh;
@@ -17,34 +8,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: 2.5s linear fadeout;
+  animation: 2s linear fadeout;
   opacity: 0;
   z-index: 0;
 }
 
-.drop,
-.wave {
-  margin: 175px auto;
+.ripple-container {
+  position: absolute;
+  z-index: 0;
+  top: 50vh;
+  background-color: var(--main-color);
 }
 
+/* copied from https://codepen.io/abehjat/pen/oXMENv */
+
+
 .drop {
-  position: relative;
+  position: absolute;
+  z-index: 2;
   width: 20px;
   height: 20px;
-  top: -200px;
+  top: -20px;
   margin: 0 auto;
   background: #fff;
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
   border-radius: 20px;
-  animation: drip 1s cubic-bezier(1, 0, 0.99, 0.19);
-  -webkit-animation: drip 1s cubic-bezier(1, 0, 0.99, 0.19);
-  -moz-animation: drip 1s cubic-bezier(1, 0, 0.99, 0.19);
+  animation: drip 0.8s cubic-bezier(1, 0, 0.69, 0.19);
 }
 
 .drop:before {
   content: "";
   position: absolute;
+  z-index: 2;
   width: 0;
   height: 0;
   border-left: 10px solid transparent;
@@ -60,12 +54,8 @@
   width: 2px;
   height: 1px;
   border: #fff 7px solid;
-  -moz-border-radius: 300px / 150px;
-  -webkit-border-radius: 300px / 150px;
   border-radius: 300px / 150px;
-  animation: ripple 1s 1s;
-  -webkit-animation: ripple 1s 1s;
-  -moz-animation: ripple 1s 1s;
+  animation: ripple 1.2s 0.8s;
 }
 
 .wave:after {
@@ -77,12 +67,8 @@
   width: 2px;
   height: 1px;
   border: #fff 5px solid;
-  -moz-border-radius: 300px / 150px;
-  -webkit-border-radius: 300px / 150px;
   border-radius: 300px / 150px;
   animation: ripple-2 1s;
-  -webkit-animation: ripple-2 1s;
-  -moz-animation: ripple-2 1s;
 }
 
 @keyframes ripple {
@@ -115,8 +101,11 @@
 }
 
 @keyframes drip {
-  to {
-    top: 200px;
+  0% {
+    top: -10px;
+  }
+  100% {
+    top: 50vh;
   }
 }
 
@@ -132,5 +121,14 @@
   100% {
     opacity: 0;
     z-index: 3000;
+  }
+}
+
+@media screen and (min-width: 786px) {
+  .wave{
+    transform: scale(2.5);
+  }
+  .drop{
+    transform: scale(2) translateY(-5px);
   }
 }

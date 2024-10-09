@@ -68,7 +68,7 @@ function Walter() {
       localStorage.setItem("firstLoad", "true");
     } else {
       // Subsequent loads, show a random element
-      walterSays(tips[randomInt(tips.length-1)]);
+      if(randomInt(5)===1) walterSays(tips[randomInt(tips.length-1)]);
     }
   }, []);
 

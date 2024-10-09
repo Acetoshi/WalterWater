@@ -1,11 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
 :root {
   --main-color: #164f91;
   --secondary-color: #43aa8b;
   --white: #ffffff;
+  --black: #111111;
   --grey-light: #ededed;
   --grey-medium: #bdbdbd;
   --grey-darker: #5a5a5a;
-  --font-size:16px;
+  --font-size: 16px;
+
+  --font-heading: "Outfit", sans-serif;
+  --font-body: "Outfit", sans-serif;
+
+  --font-weight-heading: 800;
+  --font-weight-body: 350;
+
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-body);
+  line-height: 1.5;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--white);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.leaflet-container {
+  height: 100svh;
+  width: 100vw;
 }
 
 button {
@@ -14,67 +48,92 @@ button {
   cursor: pointer;
 }
 
-li{
+li {
   list-style: none;
 }
 
-/*----icon-walter-----*/
-/*-------------------*/
-.icon-walter-color .path1:before {
-  content: "\e914";
-  color: #164f91;
-}
-.icon-walter-color .path2:before {
-  content: "\e915";
-  color: #b17b3a;
-  margin-left: -0.7802734375em;
-}
-.icon-walter-color .path3:before {
-  content: "\e916";
-  color: #43aa8b;
-  margin-left: -0.7802734375em;
-}
-.icon-walter-color .path4:before {
-  content: "\e917";
-  color: #ffe8c7;
-  margin-left: -0.7802734375em;
-}
-.icon-walter-color .path5:before {
-  content: "\e918";
-  color: #b61c1c;
-  margin-left: -0.7802734375em;
-}
-.icon-walter-color .path6:before {
-  content: "\e919";
-  color: #000;
-  margin-left: -0.7802734375em;
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-heading);
 }
 
-.fade-in {
-  transition: all 1s ease-in;
-  z-index: 0;
-  width: 230px;
-  /*  duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
-  animation: 0.5s ease-in 0s 1 normal both fade-in;
-}
+/* general style for all the text pages */
+.info-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--white);
 
-.fade-in.visible {
-  opacity: 1;
-  z-index: 20000;
-  width: 230px;
-}
-@keyframes fade-in {
-  0% {
-    opacity: 1;
-    width: 230px;
+  & h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--main-color);
   }
 
-  90% {
-    width: 230px;
+  & h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
   }
-  100% {
-    opacity: 0;
-    width: 0px;
-    padding: 0;
+
+  & p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--black);
+  }
+
+  & ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  & li {
+    list-style: circle;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--black);
+  }
+
+  & a.redirect-button {
+    color: white;
+    margin:0 auto;
+    padding: 8px 16px;
+    border-radius: 16px;
+    background-color: var(--main-color);
+    font-size: var(--font-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    margin-top: 3rem;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .info-page {
+    & h1 {
+      font-size: 2rem;
+      max-width: 250px;
+      text-align: left;
+    }
+
+    & h2 {
+      font-size: 1.5rem;
+    }
+
+    & p {
+      font-size: 0.9rem;
+    }
+
+    & li {
+      font-size: 0.9rem;
+    }
   }
 }

@@ -1,5 +1,6 @@
 import {useState,useEffect} from "react"
 import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Droplet from "./components/Droplet";
 
 export default function App() {
@@ -9,7 +10,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -17,6 +18,7 @@ export default function App() {
   return (
     <>
       {isVisible && <Droplet />}
+      <Navbar />
       <Outlet />
     </>
   );
