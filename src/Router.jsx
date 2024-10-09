@@ -1,7 +1,8 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
-import Map from '../pages/Map'
-import App from "../App";
-import PrivacyPolicy from "../pages/PrivacyPolicy";
+import Map from "./pages/Map";
+import App from "./App";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import GetTheApp from "./pages/getTheApp";
 
 const router = createBrowserRouter([
   {
@@ -14,11 +15,15 @@ const router = createBrowserRouter([
         element: <Map />,
       },
       {
+        path: "get-the-app",
+        element: <GetTheApp />,
+      },
+      {
         path: "/about",
         element: <Outlet />, // Use <Outlet /> as a component
         children: [
           {
-            path: "support", 
+            path: "support",
             element: <h1>this is the about page</h1>,
           },
           {
@@ -30,6 +35,5 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
 
 export default router;

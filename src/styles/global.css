@@ -1,19 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
 :root {
   --main-color: #164f91;
   --secondary-color: #43aa8b;
   --white: #ffffff;
+  --black: #111111;
   --grey-light: #ededed;
   --grey-medium: #bdbdbd;
   --grey-darker: #5a5a5a;
   --font-size: 16px;
 
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-heading: "Outfit", sans-serif;
+  --font-body: "Outfit", sans-serif;
+
+  --font-weight-heading: 800;
+  --font-weight-body: 350;
+
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-body);
   line-height: 1.5;
-  font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--white);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -43,37 +52,65 @@ li {
   list-style: none;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-heading);
+}
+
 /* general style for all the text pages */
 .info-page {
-  max-width: 800px; /* Limits the width of the content */
-  margin: 0 auto; /* Centers the main element */
-  padding: 2rem; /* Adds space inside the main element */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--white);
 
   & h1 {
     text-align: center;
-    font-size: 2.5rem; /* Main title size */
-    margin-bottom: 1.5rem; /* Space below the title */
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--main-color);
   }
 
   & h2 {
     text-align: center;
-    font-size: 2rem; /* Section title size */
-    margin-top: 2rem; /* Space above section titles */
-    margin-bottom: 1rem; /* Space below section titles */
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
   }
 
   & p {
-    font-size: 1rem; /* Paragraph size */
-    margin-bottom: 1.5rem; /* Space below paragraphs */
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--black);
   }
 
   & ul {
-    padding-left: 1.5rem; /* Indent for lists */
-    margin-bottom: 1.5rem; /* Space below lists */
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 
   & li {
-    margin-bottom: 0.5rem; /* Space between list items */
+    list-style: circle;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--black);
+  }
+
+  & a.redirect-button {
+    color: white;
+    margin:0 auto;
+    padding: 8px 16px;
+    border-radius: 16px;
+    background-color: var(--main-color);
+    font-size: var(--font-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
   }
 }
 
@@ -81,15 +118,19 @@ li {
 @media (max-width: 600px) {
   .info-page {
     & h1 {
-      font-size: 2rem; /* Adjust title size for smaller screens */
+      font-size: 2rem;
     }
 
     & h2 {
-      font-size: 1.5rem; /* Adjust section title size */
+      font-size: 1.5rem;
     }
 
     & p {
-      font-size: 0.9rem; /* Adjust paragraph size */
+      font-size: 0.9rem;
+    }
+
+    & li {
+      font-size: 0.9rem;
     }
   }
 }

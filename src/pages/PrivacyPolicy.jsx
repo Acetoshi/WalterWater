@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 export default function PrivacyPolicy() {
   return (
     <main className="confidentiality-rules info-page">
-      <h1>Walter Water - Privacy Policy</h1>
+      <h1>PRIVACY POLICY</h1>
 
       <section>
         <h2>Introduction</h2>
@@ -34,7 +36,9 @@ export default function PrivacyPolicy() {
           The Walter Water app interacts directly with OpenStreetMap (OSM) as a
           backend service to provide you with real-time data. When you use the
           app, requests are sent directly to OSM without any intermediate data
-          storage or processing on our part.
+          storage or processing on our part. Your last known position is stored
+          only on your device, not on our servers. Walter Water uses the
+          overpass API to communicate with OSM.
         </p>
       </section>
 
@@ -51,10 +55,11 @@ export default function PrivacyPolicy() {
       <section>
         <h2>Confidentiality of Your Information</h2>
         <p>
-          Since Walter Water does not collect or store any personal information,
-          there is no user data to share with third parties. We do not sell,
-          trade, or otherwise transfer any information, ensuring your privacy
-          remains intact.
+          Since Walter Water does not collect any personal information, there is
+          no user data to share with third parties. We do not sell, trade, or
+          otherwise transfer any information, ensuring your privacy remains
+          intact. The only data storage is local, on your device and enables the
+          app to remember your filters and last location.
         </p>
       </section>
 
@@ -75,6 +80,8 @@ export default function PrivacyPolicy() {
           informed about our practices.
         </p>
       </section>
+
+      <Link to="/" className="redirect-button" >back to the map</Link>
     </main>
   );
 }
