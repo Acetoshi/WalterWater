@@ -11,7 +11,6 @@ export default function Navbar() {
 
   const links = [
     { to: "/", label: "map", icon: "user" },
-    { to: "/about", label: "about", icon: "user" },
     { to: "/about/privacy", label: "privacy policy", icon: "user" },
     { to: "/get-the-app", label: "get the app", icon: "user" },
   ];

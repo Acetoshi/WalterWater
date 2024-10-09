@@ -1,7 +1,8 @@
 #root {
-  --nav-button-size: 32px;
-  --burger-menu-padding-right: 32px;
-  --burger-menu-padding-top: 32px;
+  --nav-burger-width: 32px;
+  --nav-button-padding: 8px;
+  --burger-menu-padding-right: 16px;
+  --burger-menu-padding-top: 16px;
   --burger-menu-line-thickness: 5px;
 }
 
@@ -58,19 +59,21 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: transparent;
+  background-color: var(--main-color);
   border: 0px;
-  height: var(--nav-button-size);
-  width: var(--nav-button-size);
+  padding:8px;
+  height: 48px;
+  width: 48px;
   position: relative;
   z-index: 10;
+  border-radius: 8px;
 
   & div {
     transition-duration: 0.4s;
-    width: var(--nav-button-size);
+    width: var(--nav-burger-width);
     height: var(--burger-menu-line-thickness);
     border-radius: 4px;
-    background-color: white;
+    background-color: var(--white);
     transition-timing-function: ease-out;
   }
 
@@ -101,7 +104,7 @@
     }
 
     & div.nav-menu-button-middle-bar {
-      width: var(--nav-button-size);
+      width: var(--nav-burger-width);
       transition-delay: 200ms;
     }
   }
@@ -110,6 +113,7 @@
     transform: translateX(100%);
   }
 }
+
 
 /*************************/
 /*********RESPONSIVE******/

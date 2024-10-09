@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function GetTheApp() {
   return (
     <main className="confidentiality-rules info-page">
@@ -7,9 +9,9 @@ export default function GetTheApp() {
         <h2>What is a PWA?</h2>
         <p>
           A Progressive Web App (PWA) is a type of application that combines the
-          best of websites and mobile apps. It’s fast, and you
-          can easily add it to your home screen. With a PWA, you get a smooth
-          experience without the need to download anything from an app store.
+          best of websites and mobile apps. It’s fast, and you can easily add it
+          to your home screen. With a PWA, you get a smooth experience without
+          the need to download anything from an app store.
         </p>
       </section>
 
@@ -59,6 +61,10 @@ export default function GetTheApp() {
           using the app!
         </p>
       </section>
+
+      <Link to="/" className="redirect-button">
+        back to the map
+      </Link>
     </main>
   );
 }

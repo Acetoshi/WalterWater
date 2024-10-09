@@ -2,7 +2,7 @@
   position: absolute;
   --position: calc(25vh + 88px);
   bottom: var(--position);
-  right: 5%;
+  right: 16px;
   width: 48px;
   height: 48px;
   z-index: 1000;
