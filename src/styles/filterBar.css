@@ -22,7 +22,7 @@
   border: none;
   outline: none;
   background: none;
-  padding: 1rem 0 1rem;
+  padding: 0.5rem 0 0.5rem;
   cursor: pointer;
   color: var(--main-color);
   display: flex;
@@ -32,7 +32,7 @@
 }
 
 .filter-button span {
-  font-size: 3rem;
+  font-size: 2rem;
   color: var(--main-color);
 }
 
