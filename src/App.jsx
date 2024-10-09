@@ -10,7 +10,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -18,7 +18,7 @@ export default function App() {
   return (
     <>
       {isVisible && <Droplet />}
-      <NavBar />
+      <Navbar />
       <Outlet />
     </>
   );
