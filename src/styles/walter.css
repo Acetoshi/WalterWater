@@ -38,10 +38,9 @@
   color: var(--secondary-color);
   font-size: 0.8rem;
   display: flex;
-  gap:8px;
+  gap: 8px;
   align-items: center;
 }
-
 
 .show-walter {
   /*  duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
@@ -102,5 +101,66 @@
 
   100% {
     transform: translateY(0);
+  }
+}
+
+/*----icon-walter-----*/
+/*-------------------*/
+.icon-walter-color .path1:before {
+  content: "\e914";
+  color: #164f91;
+}
+.icon-walter-color .path2:before {
+  content: "\e915";
+  color: #b17b3a;
+  margin-left: -0.7802734375em;
+}
+.icon-walter-color .path3:before {
+  content: "\e916";
+  color: #43aa8b;
+  margin-left: -0.7802734375em;
+}
+.icon-walter-color .path4:before {
+  content: "\e917";
+  color: #ffe8c7;
+  margin-left: -0.7802734375em;
+}
+.icon-walter-color .path5:before {
+  content: "\e918";
+  color: #b61c1c;
+  margin-left: -0.7802734375em;
+}
+.icon-walter-color .path6:before {
+  content: "\e919";
+  color: #000;
+  margin-left: -0.7802734375em;
+}
+
+.fade-in {
+  transition: all 1s ease-in;
+  z-index: 0;
+  width: 230px;
+  /*  duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
+  animation: 0.5s ease-in 0s 1 normal both fade-in;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  z-index: 20000;
+  width: 230px;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 1;
+    width: 230px;
+  }
+
+  90% {
+    width: 230px;
+  }
+  100% {
+    opacity: 0;
+    width: 0px;
+    padding: 0;
   }
 }
