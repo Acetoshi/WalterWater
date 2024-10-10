@@ -1,5 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { getAllPoints } from "../scripts/osmUtilities";
+import { createContext, useContext, useState } from "react";
 
 const PositionContext = createContext();
 
