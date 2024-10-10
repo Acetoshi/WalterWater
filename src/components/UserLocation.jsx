@@ -33,9 +33,7 @@ export default function UserLocation() {
 
       // Override navigator.geolocation.getCurrentPosition with the received location
       navigator.geolocation.getCurrentPosition = (
-        successCallback,
-        errorCallback
-      ) => {
+        successCallback) => {
         successCallback({
           coords: {
             latitude,
