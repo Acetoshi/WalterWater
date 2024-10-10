@@ -77,7 +77,7 @@ function Walter() {
       className={`container-walter ${walterIsVisible ? "" : "hidden"}`}
       onClick={() => setWalterIsVisible(!walterIsVisible)}
     >
-      <div className={`infos-walter ${walterIsVisible ? "" : "fade-in"}`}>
+      <div className={`infos-walter ${walterIsVisible ? "" : "fade-out"}`}>
         <button
           role="button"
           className="close-walter"
