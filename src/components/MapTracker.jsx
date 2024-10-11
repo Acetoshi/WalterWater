@@ -55,7 +55,7 @@ export default function MapTracker({ setMapSelecter }) {
         map.off("moveend", handleMoveEnd);
         map.off("movestart", handleMoveStart);
       };
-  }, []);
+  }, [userLocation]);
 
   return null;
 }

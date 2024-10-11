@@ -1,10 +1,8 @@
 .walter-container {
   position: absolute;
-  right: 0;
-  bottom: 2.4rem;
+  right: 2.4rem;
+  bottom: 3.4rem;
   z-index: 1998;
-  /* width: 130px; */
-  padding: 1rem;
   transition: all 0.2s ease-out;
 }
 
@@ -32,6 +30,25 @@
   & p {
     color: var(--grey-darker);
     margin-top: 16px;
+  }
+
+  & .enable-location-button {
+    color: white;
+    margin:0 auto;
+    padding: 8px 16px;
+    border-radius: 16px;
+    background-color: var(--main-color);
+    font-size: var(--font-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    margin-top: 8px;
+  }
+  & .enable-location-button.disabled{
+    background-color: grey !important;
+    opacity: 80%;
+    cursor: not-allowed;
   }
 }
 
