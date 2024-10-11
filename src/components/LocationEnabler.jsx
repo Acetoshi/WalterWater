@@ -1,19 +1,30 @@
+import { useState, useEffect } from "react";
 import { usePosition } from "../Contexts/PositionProvider";
 
-export default function LocationEnabler() {
-  const { setUserLocation } = usePosition();
+// the point of this component is to avoid being too pushy with the user by requesting his location stairght up
 
-  useEffect(getUserLocation, []);
+export default function LocationEnabler({
+  setWalterIsVisible,
+  setImportantMessage,
+}) {
+  const { setUserLocation } = usePosition();
+  const [locationStatus, setLocationStatus] = useState("unknown");
 
   // this function is used to get the user's location when using a web browser
   function getUserLocation() {
+    setLocationStatus("fetching");
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) =>
+        (position) => {
           setUserLocation({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
-          }),
+          });
+          setImportantMessage("Geolocation successfull !");
+          setTimeout(() => setWalterIsVisible(false), 2000);
+          setTimeout(() => setImportantMessage(""), 2500);
+          setLocationStatus("located");
+        },
         () => console.log("Unable to retrieve your location")
       );
     } else {
@@ -49,12 +60,31 @@ export default function LocationEnabler() {
     return () => {
       window.removeEventListener("locationReceived", handleLocationReceived);
     };
-  }, [setUserLocation]);
+  }, []);
 
-  return (
-    <>
-      <button>enable location</button>
-      <button>remind me later</button>
-    </>
-  );
+  // only ask for permission if user never allowed location before
+  useEffect(() => {
+    console.log(localStorage.getItem("userLat"));
+    if (!localStorage.getItem("userLat")) {
+      console.log(localStorage.getItem("userLat"));
+      console.log("nothin in local storage");
+      setImportantMessage("Enable location to get nearby points of interest !");
+      setWalterIsVisible(true);
+    } else {
+      //getUserLocation();
+      console.log(localStorage.getItem("userLat"));
+    }
+  }, []);
+
+  return locationStatus !== "located" ? (
+    <button className="enable-location-button" onClick={getUserLocation}>
+      {locationStatus === "unknown" && <span>enable location</span>}
+      {locationStatus === "fetching" && (
+        <span>
+          <span className="loader"></span>
+          working
+        </span>
+      )}
+    </button>
+  ) : null;
 }

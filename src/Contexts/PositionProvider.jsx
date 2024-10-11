@@ -1,10 +1,9 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const PositionContext = createContext();
 
 export default function PositionProvider({ children }) {
-  
-  const defaultUserPosition = { lat: 48.866, lng: 2.33333 };
+  const defaultUserPosition = { lat: 48.86, lng: 2.33 };
   const storedUserPosition = {
     lat: Number(localStorage.getItem("userLat")),
     lng: Number(localStorage.getItem("userLon")),
@@ -15,6 +14,17 @@ export default function PositionProvider({ children }) {
       ? defaultUserPosition
       : storedUserPosition
   );
+
+  // memorize last user location if different from the default one
+  useEffect(() => {
+    if (
+      userLocation.lat !== defaultUserPosition.lat &&
+      userLocation.lng !== defaultUserPosition.lng
+    ) {
+      localStorage.setItem("userLat", userLocation.lat.toString());
+      localStorage.setItem("userLon", userLocation.lng.toString());
+    }
+  }, [userLocation]);
 
   const [mapPosition, setMapPosition] = useState(
     localStorage.getItem("userLat") === null

@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import "../styles/walter.css";
 import { usePOIs } from "../Contexts/PointsOfInterestProvider";
+import LocationEnabler from "./LocationEnabler";
 
 function Walter() {
   const checkFirstRender = useRef(true);
@@ -10,6 +11,7 @@ function Walter() {
 
   const [walterIsVisible, setWalterIsVisible] = useState(false);
   const [message, setMessage] = useState("");
+  const [importantMessage, setImportantMessage] = useState("");
 
   const failMessages = [
     "Well, that was a lovely little treasure hunt… for absolutely nothing!",
@@ -32,10 +34,10 @@ function Walter() {
     "Improvised loo? Dig a hole and cover it up afterwards. Bears appreciate a tidy environment, thank you very much!",
   ];
 
-  const walterSays = (something) => {
+  const walterSays = (something, delay) => {
     setWalterIsVisible(true);
     setMessage(something);
-    setTimeout(() => setWalterIsVisible(false), 3500);
+    if (delay) setTimeout(() => setWalterIsVisible(false), delay);
   };
 
   const randomInt = (max) => {
@@ -50,13 +52,15 @@ function Walter() {
   // needed to make walter say stuff from time to time
   useEffect(() => {
     // when the component mounts
-    if (!checkFirstRender.current) {
-      if (randomInt(5) === 1) {
-        walterSays(randomEntry(tips));
-      } else {
-        setMessage(randomEntry(tips));
-      }
-    }
+    // if (!checkFirstRender.current && !importantMessage) {
+    //   if (true||randomInt(5) === 1) {
+    //     walterSays(randomEntry(tips), 3500);
+    //   } else {
+    //     setMessage(randomEntry(tips));
+    //   }
+    // }
+
+    setMessage(randomEntry(tips));
 
     // change message every 30 segonds
     const intervalId = setInterval(() => setMessage(randomEntry(tips)), 30000);
@@ -75,7 +79,7 @@ function Walter() {
       return;
     }
     if (areaPOIs.length === 0) {
-      walterSays(randomEntry(failMessages));
+      walterSays(randomEntry(failMessages), 3500);
     }
   }, [areaPOIs]);
 
@@ -91,6 +95,7 @@ function Walter() {
           alt="adventurous walter with a big mustache, a walking stick and a hat"
         />
       </button>
+
       <div className={`walter-infotip ${walterIsVisible ? "" : "fade-out"}`}>
         <button
           role="button"
@@ -100,8 +105,11 @@ function Walter() {
           ignore <span className="icon-close"></span>
         </button>
         <div className="container-infos">
-          <p>{message}</p>
-          {/* TODO put a if here, wether user has enabled location or not */}
+          <p>{importantMessage || message}</p>
+          <LocationEnabler
+            setWalterIsVisible={setWalterIsVisible}
+            setImportantMessage={setImportantMessage}
+          />
         </div>
       </div>
     </div>
