@@ -1,14 +1,26 @@
-.container-walter {
+.walter-container {
   position: absolute;
   right: 0;
-  bottom: 64px;
+  bottom: 2.4rem;
   z-index: 1998;
   /* width: 130px; */
   padding: 1rem;
   transition: all 0.2s ease-out;
 }
 
-.infos-walter {
+#walter {
+  height: 7rem;
+}
+
+.show-walter {
+  animation: 0.5s ease-in 0s 1 normal forwards slidein;
+}
+.walter-container.hidden {
+  animation: 0.5s ease-in 0s 1 normal forwards slideout;
+}
+
+
+.walter-infotip {
   position: absolute;
   left: -229px;
   bottom: 100px;
@@ -16,22 +28,14 @@
   background-color: #fff;
   padding: 1.2rem;
   width: 230px;
+
+  & p {
+    color: var(--grey-darker);
+    margin-top: 16px;
+  }
 }
 
-.infos-walter p {
-  color: var(--grey-darker);
-  margin-top: 16px;
-}
-
-.container-walter .icon-walter-color {
-  position: relative;
-  top: 0;
-  display: block;
-  font-size: 120px;
-  transition: all 0.3s ease-out;
-}
-
-.container-walter .close-walter {
+.walter-container .button-close-infotip {
   position: absolute;
   right: 10px;
   top: 10px;
@@ -42,18 +46,11 @@
   align-items: center;
 }
 
-.show-walter {
-  /*  duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
-  animation: 0.5s ease-in 0s 1 normal forwards slidein;
+.walter-infotip.fade-out {
+  transition: all 1s ease-in;
+  z-index: 0;
+  animation: 0.3s ease-in 0s 1 normal both fade-out;
 }
-.container-walter.hidden {
-  /*  duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
-  animation: 0.5s ease-in 0s 1 normal forwards slideout;
-}
-
-/* .hide-walter .icon-walter-color { 
- animation: 2s ease-in 1s infinite normal both bounce; 
- } */
 
 @keyframes slidein {
   from {
@@ -74,7 +71,30 @@
   }
 }
 
-@keyframes bounce {
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    width: 230px;
+  }
+
+  95% {
+    opacity: 0;
+    width: 230px;
+  }
+
+  100% {
+    opacity: 0;
+    width: 0px;
+  }
+}
+
+
+/* .hide-walter .icon-walter-color { 
+ animation: 2s ease-in 1s infinite normal both bounce; 
+ } */
+
+ /* @keyframes bounce {
   70% {
     transform: translateY(0%);
   }
@@ -102,65 +122,4 @@
   100% {
     transform: translateY(0);
   }
-}
-
-/*----icon-walter-----*/
-/*-------------------*/
-.icon-walter-color .path1:before {
-  content: "\e914";
-  color: #164f91;
-}
-.icon-walter-color .path2:before {
-  content: "\e915";
-  color: #b17b3a;
-  margin-left: -0.7802734375em;
-}
-.icon-walter-color .path3:before {
-  content: "\e916";
-  color: #43aa8b;
-  margin-left: -0.7802734375em;
-}
-.icon-walter-color .path4:before {
-  content: "\e917";
-  color: #ffe8c7;
-  margin-left: -0.7802734375em;
-}
-.icon-walter-color .path5:before {
-  content: "\e918";
-  color: #b61c1c;
-  margin-left: -0.7802734375em;
-}
-.icon-walter-color .path6:before {
-  content: "\e919";
-  color: #000;
-  margin-left: -0.7802734375em;
-}
-
-.fade-in {
-  transition: all 1s ease-in;
-  z-index: 0;
-  width: 230px;
-  /*  duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
-  animation: 0.5s ease-in 0s 1 normal both fade-in;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  z-index: 20000;
-  width: 230px;
-}
-@keyframes fade-in {
-  0% {
-    opacity: 1;
-    width: 230px;
-  }
-
-  90% {
-    width: 230px;
-  }
-  100% {
-    opacity: 0;
-    width: 0px;
-    padding: 0;
-  }
-}
+} */

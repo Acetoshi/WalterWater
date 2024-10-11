@@ -38,9 +38,31 @@ function Walter() {
     setTimeout(() => setWalterIsVisible(false), 3500);
   };
 
-  const randomInt = (max)=>{
-    return Math.floor(Math.random() * max)
-  }
+  const randomInt = (max) => {
+    return Math.floor(Math.random() * max);
+  };
+
+  const randomEntry = (arr) => {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+  };
+
+  // needed to make walter say stuff from time to time
+  useEffect(() => {
+    // when the component mounts
+    if (!checkFirstRender.current) {
+      if (randomInt(5) === 1) {
+        walterSays(randomEntry(tips));
+      } else {
+        setMessage(randomEntry(tips));
+      }
+    }
+
+    // change message every 30 segonds
+    const intervalId = setInterval(() => setMessage(randomEntry(tips)), 30000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   //warn the user when his search didn't find anything
   useEffect(() => {
@@ -53,51 +75,36 @@ function Walter() {
       return;
     }
     if (areaPOIs.length === 0) {
-      walterSays(
-        failMessages[randomInt(failMessages.length-1)]
-      );
+      walterSays(randomEntry(failMessages));
     }
   }, [areaPOIs]);
 
-  // au chargement
-  useEffect(() => {
-    // Déclencher l'animation après le montage du composant
-    const firstLoad = localStorage.getItem("firstLoad");
-    if (!firstLoad) {
-      // First load, show the first element and set the flag in localStorage
-      localStorage.setItem("firstLoad", "true");
-    } else {
-      // Subsequent loads, show a random element
-      if(randomInt(5)===1) walterSays(tips[randomInt(tips.length-1)]);
-    }
-  }, []);
-
   return (
-    <button
-      className={`container-walter ${walterIsVisible ? "" : "hidden"}`}
-      onClick={() => setWalterIsVisible(!walterIsVisible)}
-    >
-      <div className={`infos-walter ${walterIsVisible ? "" : "fade-in"}`}>
+    <div className={`walter-container ${walterIsVisible ? "" : "hidden"}`}>
+      <button
+        role="button"
+        onClick={() => setWalterIsVisible(!walterIsVisible)}
+      >
+        <img
+          id="walter"
+          src="/icons/walter-color.svg"
+          alt="adventurous walter with a big mustache, a walking stick and a hat"
+        />
+      </button>
+      <div className={`walter-infotip ${walterIsVisible ? "" : "fade-out"}`}>
         <button
           role="button"
-          className="close-walter"
+          className="button-close-infotip"
           onClick={() => setWalterIsVisible(false)}
         >
-          ignore <span className="icon-close" ></span>
+          ignore <span className="icon-close"></span>
         </button>
         <div className="container-infos">
           <p>{message}</p>
+          {/* TODO put a if here, wether user has enabled location or not */}
         </div>
       </div>
-      <span className="icon-walter-color" >
-        <span className="path1"></span>
-        <span className="path2"></span>
-        <span className="path3"></span>
-        <span className="path4"></span>
-        <span className="path5"></span>
-        <span className="path6"></span>
-      </span>
-    </button>
+    </div>
   );
 }
 
