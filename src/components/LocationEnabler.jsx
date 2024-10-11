@@ -20,12 +20,17 @@ export default function LocationEnabler({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           });
+          setLocationStatus("located");
           setImportantMessage("Geolocation successfull !");
           setTimeout(() => setWalterIsVisible(false), 2000);
           setTimeout(() => setImportantMessage(""), 2500);
-          setLocationStatus("located");
         },
-        () => console.log("Unable to retrieve your location")
+        () => {
+          setImportantMessage(
+            "I couldn't locate you, refresh the page and try again."
+          );
+          setLocationStatus("failed");
+        }
       );
     } else {
       console.log("Geolocation not supported");
@@ -76,13 +81,18 @@ export default function LocationEnabler({
     }
   }, []);
 
-  return locationStatus !== "located" ? (
-    <button className="enable-location-button" onClick={getUserLocation}>
+  return locationStatus !== "located" && locationStatus !== "failed" ? (
+    <button
+      className={`enable-location-button ${
+        locationStatus === "fetching" ? "disabled" : ""
+      }`}
+      onClick={getUserLocation}
+    >
       {locationStatus === "unknown" && <span>enable location</span>}
       {locationStatus === "fetching" && (
         <span>
           <span className="loader"></span>
-          working
+          {" "}working
         </span>
       )}
     </button>

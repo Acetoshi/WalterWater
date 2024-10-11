@@ -22,7 +22,6 @@
 #search-this-area-button.disabled {
   background-color: grey !important;
   opacity: 80%;
-  height: 200;
   cursor: not-allowed;
 }
 

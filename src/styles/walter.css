@@ -45,6 +45,11 @@
     text-decoration: none;
     margin-top: 8px;
   }
+  & .enable-location-button.disabled{
+    background-color: grey !important;
+    opacity: 80%;
+    cursor: not-allowed;
+  }
 }
 
 .walter-container .button-close-infotip {

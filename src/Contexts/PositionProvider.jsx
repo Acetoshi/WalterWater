@@ -16,6 +16,7 @@ export default function PositionProvider({ children }) {
   );
 
   // memorize last user location if different from the default one
+  // needed to always show the user his/her last location on next visit
   useEffect(() => {
     if (
       userLocation.lat !== defaultUserPosition.lat &&
