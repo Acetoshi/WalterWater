@@ -3,7 +3,7 @@ import "../styles/recenterButton.css";
 
 export default function RecenterButton() {
   const { mapPosition, recenterIsNeeded, setrecenterIsNeeded } = usePosition();
-
+  
   return (
     <button
       id="recenter-button"

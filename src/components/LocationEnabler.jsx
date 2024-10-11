@@ -33,7 +33,10 @@ export default function LocationEnabler({
         }
       );
     } else {
-      console.log("Geolocation not supported");
+        setImportantMessage(
+            "Geolocation isn't supported by your browser"
+          );
+          setLocationStatus("failed");
     }
   }
 
@@ -42,7 +45,6 @@ export default function LocationEnabler({
     // Listen for the custom 'locationReceived' event when the component mounts
     const handleLocationReceived = (event) => {
       const { latitude, longitude } = event.detail;
-      console.log("Received location from native app:", latitude, longitude);
 
       // Override navigator.geolocation.getCurrentPosition with the received location
       navigator.geolocation.getCurrentPosition = (successCallback) => {
@@ -69,15 +71,11 @@ export default function LocationEnabler({
 
   // only ask for permission if user never allowed location before
   useEffect(() => {
-    console.log(localStorage.getItem("userLat"));
     if (!localStorage.getItem("userLat")) {
-      console.log(localStorage.getItem("userLat"));
-      console.log("nothin in local storage");
       setImportantMessage("Enable location to get nearby points of interest !");
       setWalterIsVisible(true);
     } else {
-      //getUserLocation();
-      console.log(localStorage.getItem("userLat"));
+      getUserLocation();
     }
   }, []);
 

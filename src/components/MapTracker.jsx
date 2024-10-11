@@ -33,6 +33,7 @@ export default function MapTracker({ setMapSelecter }) {
         center.lat,
         center.lng
       );
+      console.log(distance)
       setMapPosition(()=>{return{
         bounds: {
           minLat: bounds._southWest.lat,
@@ -55,7 +56,7 @@ export default function MapTracker({ setMapSelecter }) {
         map.off("moveend", handleMoveEnd);
         map.off("movestart", handleMoveStart);
       };
-  }, []);
+  }, [userLocation]);
 
   return null;
 }
