@@ -2,7 +2,7 @@ import { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import PositionProvider from "../Contexts/PositionProvider";
 import PointsOfInterestProvider from "../Contexts/PointsOfInterestProvider";
-import UserLocation from "../components/UserLocation";
+import UserMarker from "../components/UserMarker";
 import Markers from "../components/Markers";
 import MapTracker from "../components/MapTracker";
 import MapRecenterer from "../components/MapRecenterer";
@@ -45,7 +45,7 @@ export default function Map() {
           />
           <Markers />
 
-          <UserLocation />
+          <UserMarker />
           <MapTracker setMapSelecter={setMapSelecter} />
           <MapRecenterer />
 
