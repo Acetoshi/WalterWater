@@ -33,7 +33,6 @@ export default function MapTracker({ setMapSelecter }) {
         center.lat,
         center.lng
       );
-      console.log(distance)
       setMapPosition(()=>{return{
         bounds: {
           minLat: bounds._southWest.lat,

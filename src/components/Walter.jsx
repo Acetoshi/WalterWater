@@ -40,10 +40,6 @@ function Walter() {
     if (delay) setTimeout(() => setWalterIsVisible(false), delay);
   };
 
-  const randomInt = (max) => {
-    return Math.floor(Math.random() * max);
-  };
-
   const randomEntry = (arr) => {
     const randomIndex = Math.floor(Math.random() * arr.length);
     return arr[randomIndex];
@@ -51,14 +47,6 @@ function Walter() {
 
   // needed to make walter say stuff from time to time
   useEffect(() => {
-    // when the component mounts
-    // if (!checkFirstRender.current && !importantMessage) {
-    //   if (true||randomInt(5) === 1) {
-    //     walterSays(randomEntry(tips), 3500);
-    //   } else {
-    //     setMessage(randomEntry(tips));
-    //   }
-    // }
 
     setMessage(randomEntry(tips));
 
