@@ -42,6 +42,10 @@
   align-items: center;
 }
 
+#walter {
+  width:255px;
+}
+
 .show-walter {
   /*  duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
   animation: 0.5s ease-in 0s 1 normal forwards slidein;
@@ -104,38 +108,6 @@
   }
 }
 
-/*----icon-walter-----*/
-/*-------------------*/
-.icon-walter-color .path1:before {
-  content: "\e914";
-  color: #164f91;
-}
-.icon-walter-color .path2:before {
-  content: "\e915";
-  color: #b17b3a;
-  margin-left: -0.7802734375em;
-}
-.icon-walter-color .path3:before {
-  content: "\e916";
-  color: #43aa8b;
-  margin-left: -0.7802734375em;
-}
-.icon-walter-color .path4:before {
-  content: "\e917";
-  color: #ffe8c7;
-  margin-left: -0.7802734375em;
-}
-.icon-walter-color .path5:before {
-  content: "\e918";
-  color: #b61c1c;
-  margin-left: -0.7802734375em;
-}
-.icon-walter-color .path6:before {
-  content: "\e919";
-  color: #000;
-  margin-left: -0.7802734375em;
-}
-
 .fade-out {
   transition: all 1s ease-in;
   z-index: 0;
@@ -158,3 +130,5 @@
     width:0px;
   }
 }
+
+

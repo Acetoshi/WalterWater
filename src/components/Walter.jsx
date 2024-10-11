@@ -38,9 +38,14 @@ function Walter() {
     setTimeout(() => setWalterIsVisible(false), 3500);
   };
 
-  const randomInt = (max)=>{
-    return Math.floor(Math.random() * max)
-  }
+  const randomInt = (max) => {
+    return Math.floor(Math.random() * max);
+  };
+
+  const randomEntry = (arr) => {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+  };
 
   //warn the user when his search didn't find anything
   useEffect(() => {
@@ -53,9 +58,7 @@ function Walter() {
       return;
     }
     if (areaPOIs.length === 0) {
-      walterSays(
-        failMessages[randomInt(failMessages.length-1)]
-      );
+      walterSays(failMessages[randomInt(failMessages.length - 1)]);
     }
   }, [areaPOIs]);
 
@@ -68,7 +71,12 @@ function Walter() {
       localStorage.setItem("firstLoad", "true");
     } else {
       // Subsequent loads, show a random element
-      if(randomInt(5)===1) walterSays(tips[randomInt(tips.length-1)]);
+      if (randomInt(5) === 1) {
+        walterSays(randomEntry(tips));
+      } else {
+        setMessage(randomEntry(tips));
+      }
+      /// TODO : mettre quand meme un message la dedans ! ou bien changer random le message qund j'appuie sur walter
     }
   }, []);
 
@@ -83,20 +91,17 @@ function Walter() {
           className="close-walter"
           onClick={() => setWalterIsVisible(false)}
         >
-          ignore <span className="icon-close" ></span>
+          ignore <span className="icon-close"></span>
         </button>
         <div className="container-infos">
           <p>{message}</p>
         </div>
       </div>
-      <span className="icon-walter-color" >
-        <span className="path1"></span>
-        <span className="path2"></span>
-        <span className="path3"></span>
-        <span className="path4"></span>
-        <span className="path5"></span>
-        <span className="path6"></span>
-      </span>
+      <img
+        id="walter"
+        src="/icons/walter-color.svg"
+        alt="adventurous walter with a big mustache, a walking stick and a hat"
+      />
     </button>
   );
 }
