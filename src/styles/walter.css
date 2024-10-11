@@ -1,14 +1,14 @@
-.container-walter {
+.walter-container {
   position: absolute;
   right: 0;
-  bottom: 64px;
+  bottom: 2.5rem;
   z-index: 1998;
   /* width: 130px; */
   padding: 1rem;
   transition: all 0.2s ease-out;
 }
 
-.infos-walter {
+.walter-infotip {
   position: absolute;
   left: -229px;
   bottom: 100px;
@@ -16,22 +16,14 @@
   background-color: #fff;
   padding: 1.2rem;
   width: 230px;
+
+  & p {
+    color: var(--grey-darker);
+    margin-top: 16px;
+  }
 }
 
-.infos-walter p {
-  color: var(--grey-darker);
-  margin-top: 16px;
-}
-
-.container-walter .icon-walter-color {
-  position: relative;
-  top: 0;
-  display: block;
-  font-size: 120px;
-  transition: all 0.3s ease-out;
-}
-
-.container-walter .close-walter {
+.walter-container .button-close-infotip {
   position: absolute;
   right: 10px;
   top: 10px;
@@ -43,14 +35,14 @@
 }
 
 #walter {
-  width:255px;
+  height: 7rem;
 }
 
 .show-walter {
   /*  duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
   animation: 0.5s ease-in 0s 1 normal forwards slidein;
 }
-.container-walter.hidden {
+.walter-container.hidden {
   /*  duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name */
   animation: 0.5s ease-in 0s 1 normal forwards slideout;
 }
@@ -117,18 +109,16 @@
 @keyframes fade-out {
   0% {
     opacity: 1;
-    width:230px;
+    width: 230px;
   }
 
   95% {
     opacity: 0;
-    width:230px;
+    width: 230px;
   }
 
   100% {
     opacity: 0;
-    width:0px;
+    width: 0px;
   }
 }
-
-

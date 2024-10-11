@@ -82,13 +82,13 @@ function Walter() {
 
   return (
     <button
-      className={`container-walter ${walterIsVisible ? "" : "hidden"}`}
+      className={`walter-container ${walterIsVisible ? "" : "hidden"}`}
       onClick={() => setWalterIsVisible(!walterIsVisible)}
     >
-      <div className={`infos-walter ${walterIsVisible ? "" : "fade-out"}`}>
+      <div className={`walter-infotip ${walterIsVisible ? "" : "fade-out"}`}>
         <button
           role="button"
-          className="close-walter"
+          className="button-close-infotip"
           onClick={() => setWalterIsVisible(false)}
         >
           ignore <span className="icon-close"></span>
