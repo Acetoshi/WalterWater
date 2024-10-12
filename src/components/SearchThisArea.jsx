@@ -29,7 +29,7 @@ export default function SearchThisArea() {
   return (
     <button
       id="search-this-area-button"
-      className={`${mapPosition.distanceFromUser >= 3 ? "" : "hidden"} 
+      className={`button-feedback ${mapPosition.distanceFromUser >= 3 ? "" : "hidden"} 
       ${requestStatus !== "ready to fetch" ? "disabled" : ""}`}
       onClick={handleSearch}
       disabled={requestStatus !== "ready to fetch"}
