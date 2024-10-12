@@ -46,6 +46,17 @@ button {
   border: none;
   background: none;
   cursor: pointer;
+  outline: none;
+}
+
+
+/* This class is used to make button that have visual feedback */
+.button-feedback {
+  transition: transform 0.3s;
+}
+
+.button-feedback:active {
+  transform: scale(1.1);
 }
 
 li {
@@ -102,7 +113,7 @@ h4 {
 
   & a.redirect-button {
     color: white;
-    margin:0 auto;
+    margin: 0 auto;
     padding: 8px 16px;
     border-radius: 16px;
     background-color: var(--main-color);

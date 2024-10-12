@@ -18,6 +18,7 @@ export default function InfoCard({ point, setIsDisplayed }) {
         onClick={handleClick}
         aria-label="view on map"
         role="button"
+        className="button-feedback"
       >
         view on map
       </button>

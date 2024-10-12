@@ -16,6 +16,7 @@ export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
         id="map-provider-selector-menu-button"
         aria-label="open or close map providers menu"
         type="button"
+        className="button-feedback"
         onClick={() =>
           setMapSelecter((mapSelecter) => {
             return { ...mapSelecter, isOpen: !mapSelecter.isOpen };
