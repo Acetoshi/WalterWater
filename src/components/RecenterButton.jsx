@@ -9,7 +9,7 @@ export default function RecenterButton() {
       <button
         id="recenter-button"
         type="button"
-        className={mapPosition.distanceFromUser >= 0.05 && "button-feedback"}
+        className={mapPosition.distanceFromUser >= 0.05?"button-feedback":""}
         onClick={() => setrecenterIsNeeded(!recenterIsNeeded)}
         disabled={mapPosition.distanceFromUser <= 0.05}
       >
