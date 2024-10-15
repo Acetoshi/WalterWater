@@ -14,7 +14,7 @@
   display: none;
 }
 
-.list-view {
+.list-view-container > div {
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -22,25 +22,12 @@
   padding-bottom: 100px;
   padding: 30px 0px 100px 0px;
   max-width: 400px;
-  overflow-y: scroll;
 }
 
 /* needed because having two different scrolls creates all kind of troubles between chrome and firefox */
-.list-view::-webkit-scrollbar, .list-view-container::-webkit-scrollbar {
+.list-view::-webkit-scrollbar,
+.list-view-container::-webkit-scrollbar {
   display: none;
-}
-
-.list-view > li {
-  display: flex;
-  justify-content: center;
-
-  & article {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    max-width: 400px;
-  }
 }
 
 .info-card {
@@ -48,6 +35,11 @@
   border-radius: 10px;
   padding: 20px;
   width: 80vw;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 400px;
 }
 
 .info-item {
