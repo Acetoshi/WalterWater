@@ -1,14 +1,17 @@
-#search-this-area-button {
-  color: white;
+#search-this-area-button-container {
   z-index: 1000;
   position: absolute;
   top: 60px;
   left: 50%;
+  transform: translate(-50%, 0%);
+  border-radius: 16px;
+}
+
+#search-this-area-button {
+  color: white;
   padding: 8px 16px;
   border-radius: 16px;
   background-color: var(--main-color);
-  transform: translate(-50%, 0%);
-  transition: transform 0.6s ease-in-out;
   font-size: var(--font-size);
   display: flex;
   justify-content: center;

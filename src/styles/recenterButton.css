@@ -1,14 +1,17 @@
-#recenter-button {
+#recenter-button-container {
   position: absolute;
+  z-index: 1000;
   bottom: 25vh;
   transform: translateY(-50%);
   right: 16px;
+}
+
+#recenter-button {
   width: 48px;
   height: 48px;
   padding: 8px;
   border-radius: 48px;
   background-color: var(--secondary-color);
-  z-index: 1000;
 
   & img {
     width: 32px;

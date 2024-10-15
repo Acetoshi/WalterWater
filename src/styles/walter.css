@@ -4,6 +4,10 @@
   bottom: 3.4rem;
   z-index: 1998;
   transition: all 0.2s ease-out;
+
+  &button:active {
+    transform: none;
+  }
 }
 
 #walter {
@@ -16,7 +20,6 @@
 .walter-container.hidden {
   animation: 0.5s ease-in 0s 1 normal forwards slideout;
 }
-
 
 .walter-infotip {
   position: absolute;
@@ -34,7 +37,7 @@
 
   & .enable-location-button {
     color: white;
-    margin:0 auto;
+    margin: 0 auto;
     padding: 8px 16px;
     border-radius: 16px;
     background-color: var(--main-color);
@@ -45,7 +48,7 @@
     text-decoration: none;
     margin-top: 8px;
   }
-  & .enable-location-button.disabled{
+  & .enable-location-button.disabled {
     background-color: grey !important;
     opacity: 80%;
     cursor: not-allowed;
@@ -88,7 +91,6 @@
   }
 }
 
-
 @keyframes fade-out {
   0% {
     opacity: 1;
@@ -106,12 +108,11 @@
   }
 }
 
-
 /* .hide-walter .icon-walter-color { 
  animation: 2s ease-in 1s infinite normal both bounce; 
  } */
 
- /* @keyframes bounce {
+/* @keyframes bounce {
   70% {
     transform: translateY(0%);
   }

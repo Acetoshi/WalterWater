@@ -14,7 +14,7 @@ function FilterBar({ listState }) {
     <div className="filterbar">
       <button
         type="button"
-        className="filter-button"
+        className="filter-button button-feedback"
         id="displayDataButton"
         onClick={handleDisplayModeChange}
       >
@@ -33,7 +33,7 @@ function FilterBar({ listState }) {
       <button
         role="button"
         aria-pressed={userFilters.water}
-        className="filter-button"
+        className="filter-button button-feedback"
         onClick={() =>
           setUserFilters(() => {
             return { ...userFilters, water: !userFilters.water };
@@ -51,7 +51,7 @@ function FilterBar({ listState }) {
       <button
         role="button"
         aria-pressed={userFilters.food}
-        className="filter-button"
+        className="filter-button button-feedback"
         onClick={() =>
           setUserFilters(() => {
             return { ...userFilters, food: !userFilters.food };
@@ -69,7 +69,7 @@ function FilterBar({ listState }) {
       <button
         role="button"
         aria-pressed={userFilters.toilets}
-        className="filter-button"
+        className="filter-button button-feedback"
         onClick={() =>
           setUserFilters(() => {
             return { ...userFilters, toilets: !userFilters.toilets };

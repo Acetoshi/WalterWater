@@ -62,7 +62,7 @@ export default function GetTheApp() {
         </p>
       </section>
 
-      <Link to="/" className="redirect-button">
+      <Link to="/" className="redirect-button button-feedback">
         back to the map
       </Link>
     </main>

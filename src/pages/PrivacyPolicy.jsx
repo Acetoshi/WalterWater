@@ -81,7 +81,7 @@ export default function PrivacyPolicy() {
         </p>
       </section>
 
-      <Link to="/" className="redirect-button">
+      <Link to="/" className="redirect-button button-feedback">
         back to the map
       </Link>
     </main>

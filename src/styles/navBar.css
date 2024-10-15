@@ -1,12 +1,10 @@
-#root {
+.navbar {
   --nav-burger-width: 32px;
   --nav-button-padding: 8px;
   --burger-menu-padding-right: 16px;
   --burger-menu-padding-top: 16px;
   --burger-menu-line-thickness: 5px;
-}
 
-.navbar {
   position: fixed;
   top: 0;
   right: 0;
@@ -61,7 +59,7 @@
   align-items: center;
   background-color: var(--main-color);
   border: 0px;
-  padding:8px;
+  padding: 8px;
   height: 48px;
   width: 48px;
   position: relative;
@@ -113,7 +111,6 @@
     transform: translateX(100%);
   }
 }
-
 
 /*************************/
 /*********RESPONSIVE******/
