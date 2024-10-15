@@ -81,7 +81,7 @@ export default function LocationEnabler({
 
   return locationStatus !== "located" && locationStatus !== "failed" ? (
     <button
-      className={`enable-location-button ${
+      className={`enable-location-button button-feedback ${
         locationStatus === "fetching" ? "disabled" : ""
       }`}
       onClick={getUserLocation}
