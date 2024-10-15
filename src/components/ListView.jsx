@@ -1,7 +1,8 @@
+import { VariableSizeList } from "react-window";
 import { usePOIs } from "../Contexts/PointsOfInterestProvider";
 import InfoCard from "./InfoCard";
-
 import "../styles/listview.css";
+
 
 const ListView = ({ isDisplayed, setIsDisplayed }) => {
   const { POIs } = usePOIs();
@@ -21,11 +22,14 @@ const ListView = ({ isDisplayed, setIsDisplayed }) => {
       }
     >
       <ul className={isDisplayed ? "list-view" : "list-view hidden"}>
-        {POIs.map((point, index) => (
-          <li key={`${point.id}+${index}`}>
-            <InfoCard point={point} setIsDisplayed={setIsDisplayed} />
-          </li>
-        ))}
+        <VariableSizeList
+          height={1000}
+          width={400}
+          itemCount={POIs.length}
+          itemSize={()=>200}
+        >
+            {({index})=><InfoCard point={POIs[index]} setIsDisplayed={setIsDisplayed} />}
+        </VariableSizeList>
       </ul>
     </button>
   );
