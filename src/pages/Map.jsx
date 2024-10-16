@@ -43,9 +43,8 @@ export default function Map() {
             attribution={mapProviders[mapSelecter.providerId].attribution}
             url={mapProviders[mapSelecter.providerId].tilesUrl}
           />
-          <Pane name="customPane" style={{ zIndex: 200 }}>
-          <SearchThisArea />
-          </Pane>
+
+            <SearchThisArea />
 
           <Markers />
 
