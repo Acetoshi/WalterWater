@@ -19,7 +19,7 @@
 }
 
 #search-this-area-button.hidden {
-  transform: translate(-50%, -100px);
+  transform: translateY(-100px);
 }
 
 #search-this-area-button.disabled {

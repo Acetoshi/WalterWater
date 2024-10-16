@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { usePosition } from "../Contexts/PositionProvider";
 import { usePOIs } from "../Contexts/PointsOfInterestProvider";
 import { getNewPoints } from "../scripts/osmUtilities";
@@ -11,10 +11,27 @@ export default function SearchThisArea() {
   const { userLocation, mapPosition } = usePosition();
   const { setAreaPOIs, userFilters } = usePOIs();
   const [requestStatus, setRequestStatus] = useState("ready to fetch");
-  const [isHidden, setIsHidden]=useState(false);
+  const buttonRef = useRef(null);
 
-  map.on("popupopen",()=>setIsHidden(true))
-  map.on("popupclose",()=>setIsHidden(false))
+  useEffect(() => {
+    const button = buttonRef.current;
+
+    const handlePopupOpen = () => {
+      button.classList.add("hidden");
+    };
+
+    const handlePopupClose = () => {
+      button.classList.remove("hidden");
+    };
+
+    map.on("popupopen", handlePopupOpen);
+    map.on("popupclose", handlePopupClose);
+
+    return () => {
+      map.off("popupopen", handlePopupOpen);
+      map.off("popupclose", handlePopupClose);
+    };
+  }, [map]);
 
   useEffect(() => {
     if (requestStatus === "data received") {
@@ -36,7 +53,8 @@ export default function SearchThisArea() {
     <div id="search-this-area-button-container">
       <button
         id="search-this-area-button"
-        className={`button-feedback ${requestStatus !== "ready to fetch" ? "disabled" : ""} ${isHidden?"hidden":""}`}
+        ref={buttonRef}
+        className={`button-feedback ${requestStatus !== "ready to fetch" ? "disabled" : ""}`}
         onClick={handleSearch}
         disabled={requestStatus !== "ready to fetch"}
       >
