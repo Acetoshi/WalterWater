@@ -34,7 +34,7 @@ export default function Map() {
           setMapSelecter={setMapSelecter}
         />
         <RecenterButton />
-        <SearchThisArea />
+
         <FilterBar listState={{ listIsDisplayed, setListIsDisplayed }} />
 
         <Walter />
@@ -43,6 +43,9 @@ export default function Map() {
             attribution={mapProviders[mapSelecter.providerId].attribution}
             url={mapProviders[mapSelecter.providerId].tilesUrl}
           />
+
+            <SearchThisArea />
+
           <Markers />
 
           <UserMarker />
