@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pane, MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 import PositionProvider from "../Contexts/PositionProvider";
 import PointsOfInterestProvider from "../Contexts/PointsOfInterestProvider";
 import UserMarker from "../components/UserMarker";

@@ -1,5 +1,5 @@
 #search-this-area-button-container {
-  z-index: 400;
+  z-index: 1000;
   position: absolute;
   top: 60px;
   left: 50%;
