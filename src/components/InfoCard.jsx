@@ -11,7 +11,7 @@ export default function InfoCard({ point, setIsDisplayed }) {
   }
 
   return (
-    <article className="info-card">
+    <li className="info-card" key={point.id}>
       <POIDetails point={point}/>
       
       <button
@@ -22,6 +22,6 @@ export default function InfoCard({ point, setIsDisplayed }) {
       >
         view on map
       </button>
-    </article>
+    </li>
   );
 }

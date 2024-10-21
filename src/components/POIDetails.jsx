@@ -1,9 +1,8 @@
-import { memo } from "react";
 import "../styles/POIDetails.css";
 
 // Official doc for POI tags : https://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtoilets
 
-const POIDetails = memo(({ point }) => {
+export default function POIDetails({ point }) {
   return (
     <>
       <h3>
@@ -90,5 +89,4 @@ const POIDetails = memo(({ point }) => {
       </ul>
     </>
   );
-});
-export default POIDetails;
+}
