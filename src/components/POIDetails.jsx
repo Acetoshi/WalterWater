@@ -13,14 +13,12 @@ export default function POIDetails({ point }) {
             point.tags.amenity === "drinking_water" ? "faucet" : ""
           }${point.tags.amenity === "toilets" ? "toilets" : ""}${
             point.tags.amenity === "restaurant" ? "food" : ""
-          }_icon.svg`}
+          }-icon.svg`}
           alt=""
         />
         <h3>{point.tags.amenity.replace("_", " ")}</h3>
       </hgroup>
-      {/* (point.tags.amenity === "drinking_water" && userFilters.water) ||
-        (point.tags.amenity === "toilets" && userFilters.toilets) ||
-        (point.tags.amenity === "restaurant" && userFilters.food) */}
+
       {/* <p>{JSON.stringify(point.tags)}</p> */}
 
       <ul className="poi-details">
