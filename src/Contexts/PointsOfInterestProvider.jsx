@@ -1,11 +1,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { getAllPoints } from "../scripts/osmUtilities";
-import { usePosition } from "./PositionProvider";
 
 const PointsOfInterest = createContext();
 
 export default function PointsOfInterestProvider({ children }) {
-  const { userLocation } = usePosition();
 
   const storedFilters = localStorage.getItem("userFilters");
 
@@ -33,7 +30,6 @@ export default function PointsOfInterestProvider({ children }) {
     );
   }, [userFilters]);
 
-  const [nearbyPOIs, setNearbyPOIs] = useState([]);
   const [areaPOIs, setAreaPOIs] = useState([]);
   const [POIs, setPOIs] = useState([]);
 
@@ -43,27 +39,21 @@ export default function PointsOfInterestProvider({ children }) {
     lng: 0,
   });
 
-  // this useEffect fetches POIs data on OSM server
   useEffect(() => {
-    getAllPoints(userLocation, 0.1, setNearbyPOIs);
-  }, [userLocation]);
-
-  useEffect(() => {
-    const newPOIs = [...nearbyPOIs, ...areaPOIs].filter(
+    const newPOIs = areaPOIs.filter(
       (point) =>
         (point.tags.amenity === "drinking_water" && userFilters.water) ||
         (point.tags.amenity === "toilets" && userFilters.toilets) ||
         (point.tags.amenity === "restaurant" && userFilters.food)
     );
     setPOIs(() => newPOIs);
-  }, [nearbyPOIs, areaPOIs, userFilters]);
+  }, [areaPOIs, userFilters]);
 
   return (
     <PointsOfInterest.Provider
       value={{
         userFilters,
         setUserFilters,
-        nearbyPOIs,
         areaPOIs,
         POIs,
         setAreaPOIs,

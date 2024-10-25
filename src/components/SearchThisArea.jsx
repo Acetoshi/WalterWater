@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { usePosition } from "../Contexts/PositionProvider";
 import { usePOIs } from "../Contexts/PointsOfInterestProvider";
-import { getNewPoints } from "../scripts/osmUtilities";
+import { getPoints } from "../scripts/osmUtilities";
 import "../styles/searchThisAreaButton.css";
 import { useMap } from "react-leaflet";
 
 // Needed for the user to be able to research POIs somewhere else without loading all the world's POIs in memory
 export default function SearchThisArea() {
   const map = useMap();
-  const { userLocation, mapPosition } = usePosition();
+  const { userLocation, mapPosition, recenterIsNeeded } = usePosition();
   const { setAreaPOIs, userFilters } = usePOIs();
   const [requestStatus, setRequestStatus] = useState("ready to fetch");
   const buttonRef = useRef(null);
@@ -40,7 +40,7 @@ export default function SearchThisArea() {
   }, [requestStatus]);
 
   const handleSearch = () => {
-    getNewPoints(
+    getPoints(
       userLocation,
       userFilters,
       mapPosition.bounds,
@@ -49,12 +49,23 @@ export default function SearchThisArea() {
     );
   };
 
+  useEffect(() => {
+    console.log('searching')
+    setTimeout(()=>handleSearch(),2000);
+  }, [userLocation]);
+
+  useEffect(() => {
+    setTimeout(handleSearch,1000);
+  }, [recenterIsNeeded]);
+
   return (
     <div id="search-this-area-button-container">
       <button
         id="search-this-area-button"
         ref={buttonRef}
-        className={`button-feedback ${requestStatus !== "ready to fetch" ? "disabled" : ""}`}
+        className={`button-feedback ${
+          requestStatus !== "ready to fetch" ? "disabled" : ""
+        }`}
         onClick={handleSearch}
         disabled={requestStatus !== "ready to fetch"}
       >

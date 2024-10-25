@@ -13,7 +13,7 @@ export default function MapRecenterer() {
   useEffect(() => {
     // needed otherwise the open popups would 'refocus" the map
     map.closePopup();
-    map.flyTo(userLocation, 15, { duration: 1 });
+    map.flyTo(userLocation, 14, { duration: 1 });
   }, [recenterIsNeeded]);
 
   // this enables the list view to move the map to a target POI

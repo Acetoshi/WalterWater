@@ -1,4 +1,3 @@
-//TODO : this functions can be accessed via map.distance from leaflet.
 export function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2 - lat1); // deg2rad below
@@ -35,62 +34,8 @@ function getWalkingTime(distanceKm, speedKmh = 4) {
   return timeString.trim() || "0min"; // Return '0min' if no time is calculated
 }
 
-function boundingBox(location, radius) {
-  const minLat = location.lat - radius / 2;
-  const maxLat = location.lat + radius / 2;
-  const minLng = location.lng - radius / 2;
-  const maxLng = location.lng + radius / 2;
-  return `${minLat},${minLng},${maxLat},${maxLng}`;
-}
-
-export async function getAllPoints(location, radius, POIsetterFunction) {
-  const bBox = boundingBox(location, radius);
-  const maxObjects = 500;
-  fetch("https://overpass-api.de/api/interpreter", {
-    method: "POST",
-    // The body contains the query
-    // to understand the query language see "The Programmatic Query Language" on
-    // https://wiki.openstreetmap.org/wiki/Overpass_API#The_Programmatic_Query_Language_(OverpassQL)
-    body:
-      "data=" +
-      encodeURIComponent(`
-          [bbox:${bBox}]
-          [out:json]
-          [timeout:25]
-          ;
-          (
-            node["amenity"="drinking_water"](${bBox});
-            node["amenity"="toilets"](${bBox});
-            node["amenity"="restaurant"](${bBox});
-          );
-          out geom ${maxObjects};
-      `),
-  })
-    .then((data) => data.json())
-    .then((result) => {
-      POIsetterFunction(
-        result.elements
-          .map((point) => {
-            const distance = getDistanceFromLatLonInKm(
-              location.lat,
-              location.lng,
-              point.lat,
-              point.lon
-            );
-            return {
-              ...point,
-              distanceKm: distance,
-              walkTime: getWalkingTime(distance), // Pass userSpeed if needed
-            };
-          })
-          .sort((pointA, pointB) => pointA.distanceKm - pointB.distanceKm)
-      );
-    });
-}
-
-// TODO : refator the previous function so that this one can be kept.
 // maybe by passing the map
-export async function getNewPoints(
+export async function getPoints(
   userLocation,
   userFilters,
   mapBounds,
@@ -99,7 +44,7 @@ export async function getNewPoints(
 ) {
   const { water, food, toilets } = userFilters;
   const boundingBox = `${mapBounds.minLat},${mapBounds.minLng},${mapBounds.maxLat},${mapBounds.maxLng}`;
-  const maxObjects = 250;
+  const maxObjects = 3000;
   statusSetterFunction("fetching data");
   fetch("https://overpass-api.de/api/interpreter", {
     method: "POST",
