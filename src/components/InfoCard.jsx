@@ -1,27 +1,28 @@
 import { usePOIs } from "../Contexts/PointsOfInterestProvider";
 import POIDetails from "./POIDetails";
 
-
-export default function InfoCard({ point, setIsDisplayed }) {
+export default function InfoCard({ point, setIsDisplayed, style }) {
   const { setTargetPOIPosition } = usePOIs();
 
-  const handleClick=()=>{
-    setIsDisplayed(false)
-    setTargetPOIPosition({ lat: point.lat, lng: point.lon })
-  }
+  const handleClick = () => {
+    setIsDisplayed(false);
+    setTargetPOIPosition({ lat: point.lat, lng: point.lon });
+  };
 
   return (
-    <article className="info-card">
-      <POIDetails point={point}/>
-      
-      <button
-        onClick={handleClick}
-        aria-label="view on map"
-        role="button"
-        className="button-feedback"
-      >
-        view on map
-      </button>
-    </article>
+    <li className="info-card-container" key={point.id} style={style}>
+      <article className="info-card">
+        <POIDetails point={point} />
+
+        <button
+          onClick={handleClick}
+          aria-label="view on map"
+          role="button"
+          className="button-feedback"
+        >
+          view on map
+        </button>
+      </article>
+    </li>
   );
 }

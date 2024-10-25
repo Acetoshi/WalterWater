@@ -1,34 +1,49 @@
+import React, { useRef, useCallback } from "react";
+import { VariableSizeList as List } from "react-window";
 import { usePOIs } from "../Contexts/PointsOfInterestProvider";
 import InfoCard from "./InfoCard";
-
 import "../styles/listview.css";
 
-const ListView = ({ isDisplayed, setIsDisplayed }) => {
+export default function ListView({ isDisplayed, setIsDisplayed }) {
   const { POIs } = usePOIs();
 
   return (
-    <button
-      role="button"
-      aria-label="close list view"
-      onClick={(event) => {
-        // this button is needed to close the list view only if the user clicks on the side of the list-view to close it
-        if (event.target.className === "list-view-container") {
-          setIsDisplayed(false);
-        }
-      }}
+    <List
       className={
         isDisplayed ? "list-view-container" : "list-view-container hidden"
       }
+      innerElementType={"ul"}
+      height={1024}
+      width={"unset"}
+      itemCount={POIs.length}
+      itemSize={() => 360}
+      overscanCount={4}
     >
-      <ul className={isDisplayed ? "list-view" : "list-view hidden"}>
-        {POIs.map((point, index) => (
-          <li key={`${point.id}+${index}`}>
-            <InfoCard point={point} setIsDisplayed={setIsDisplayed} />
-          </li>
-        ))}
-      </ul>
-    </button>
+      {({ index, style }) => (
+          <InfoCard
+            point={POIs[index]}
+            setIsDisplayed={setIsDisplayed}
+            style={{
+              ...style, left:"unset"
+            }}
+          />
+      )}
+    </List>
   );
-};
+}
 
-export default ListView;
+// Close button functionality (if needed)
+{
+  /* <button
+  role="button"
+  aria-label="close list view"
+  onClick={(event) => {
+    // Close the list view if clicking outside
+    if (event.target.className === "list-view-container") {
+      setIsDisplayed(false);
+    }
+  }}
+  className={isDisplayed ? "list-view-container" : "list-view-container hidden"}
+>
+</button> */
+}

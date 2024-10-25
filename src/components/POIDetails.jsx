@@ -1,15 +1,23 @@
-import { memo } from "react";
 import "../styles/POIDetails.css";
 
 // Official doc for POI tags : https://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtoilets
 
-const POIDetails = memo(({ point }) => {
+export default function POIDetails({ point }) {
   return (
     <>
-      <h3>
-        <span className="icon-walter-black info-logo" aria-hidden="true" />
-        {point.tags.amenity.replace("_", " ")}
-      </h3>
+      <hgroup className="poi-details-heading">
+        <img
+          className="poi-icon"
+          loading="lazy"
+          src={`/icons/${
+            point.tags.amenity === "drinking_water" ? "faucet" : ""
+          }${point.tags.amenity === "toilets" ? "toilets" : ""}${
+            point.tags.amenity === "restaurant" ? "food" : ""
+          }-icon.svg`}
+          alt=""
+        />
+        <h3>{point.tags.amenity.replace("_", " ")}</h3>
+      </hgroup>
 
       {/* <p>{JSON.stringify(point.tags)}</p> */}
 
@@ -90,5 +98,4 @@ const POIDetails = memo(({ point }) => {
       </ul>
     </>
   );
-});
-export default POIDetails;
+}

@@ -1,53 +1,46 @@
 .list-view-container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  position: absolute;
+  --list-width: min(calc(100vw - 2rem), 400px);
+  position: absolute !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  overflow-x: hidden !important;
   z-index: 1999;
   background-color: #00000099;
   overflow-y: scroll;
   cursor: default;
+  display: flex;
+  justify-content: center;
 }
 
 .list-view-container.hidden {
   display: none;
 }
 
-.list-view {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  padding-top: 30px;
-  padding-bottom: 100px;
-  padding: 30px 0px 100px 0px;
-  max-width: 400px;
-  overflow-y: scroll;
-}
+.list-view-container > ul {
+  height: 100vh;
+  width: var(--list-width) !important;
 
-/* needed because having two different scrolls creates all kind of troubles between chrome and firefox */
-.list-view::-webkit-scrollbar, .list-view-container::-webkit-scrollbar {
-  display: none;
-}
+  & .info-card-container {
+    padding: 1rem 0 1rem 0;
 
-.list-view > li {
-  display: flex;
-  justify-content: center;
-
-  & article {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    max-width: 400px;
+    & article.info-card {
+      background-color: var(--white);
+      height: 100%;
+      border-radius: 10px;
+      padding: 2rem 3rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: var(--list-width);
+    }
   }
 }
 
-.info-card {
-  background-color: var(--white);
-  border-radius: 10px;
-  padding: 20px;
-  width: 80vw;
+/* needed because having two different scrolls creates all kind of troubles between chrome and firefox */
+.list-view::-webkit-scrollbar,
+.list-view-container::-webkit-scrollbar {
+  display: none;
 }
 
 .info-item {
@@ -63,26 +56,11 @@
   color: black;
 }
 
-.info-text {
-  margin-left: 10px;
-}
-
-.list-view p {
-  color: black;
-}
-
-.list-view h3 {
-  color: black;
-}
-.list-view h3 span {
-  color: var(--main-color);
-}
-
-.list-view button {
+.list-view-container button {
   background-color: var(--secondary-color);
   color: white;
   font-size: 16px;
   padding: 8px 16px;
   border-radius: 8px;
-  margin: 16px auto 0;
+  margin: 0 auto;
 }

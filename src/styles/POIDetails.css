@@ -1,23 +1,32 @@
-
 ul.poi-details {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 
-    & .poi-info-row {
-      display: grid;
-      grid-template: 1fr /1fr 6fr;
-      align-items: center;
-      justify-items: center;
-      gap:16px;
-      & p {
-        margin: 0;
-        justify-self: left;
-      }
+  & .poi-info-row {
+    display: grid;
+    grid-template: 1fr /1fr 6fr;
+    align-items: center;
+    justify-items: center;
+    gap: 16px;
+
+    & p {
+      margin: 0;
+      justify-self: left;
+      color: black;
     }
   }
+}
 
-  & .poi-icon {
-    height: 20px;
-  }
+.poi-details-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: black;
+}
+
+.poi-icon {
+  height: 1.5rem;
+}
