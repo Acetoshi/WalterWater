@@ -13,8 +13,8 @@ export default function ListView({ isDisplayed, setIsDisplayed }) {
         isDisplayed ? "list-view-container" : "list-view-container hidden"
       }
       innerElementType={"ul"}
-      height={600}
-      width={500}
+      height={1024}
+      width={"unset"}
       itemCount={POIs.length}
       itemSize={() => 360}
       overscanCount={4}

@@ -3,7 +3,6 @@ ul.poi-details {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin-top: 16px;
 
     & .poi-info-row {
       display: grid;
