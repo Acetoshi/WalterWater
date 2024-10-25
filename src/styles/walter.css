@@ -55,6 +55,15 @@
   }
 }
 
+.walter-infotip.fade-out {
+  transition: all 0.3s ease-in;
+  z-index: 0;
+  animation: 0.3s ease-in 0s 1 normal both fade-out;
+  & p {
+    visibility: hidden;
+  }
+}
+
 .walter-container .button-close-infotip {
   position: absolute;
   right: 10px;
@@ -64,12 +73,6 @@
   display: flex;
   gap: 8px;
   align-items: center;
-}
-
-.walter-infotip.fade-out {
-  transition: all 1s ease-in;
-  z-index: 0;
-  animation: 0.3s ease-in 0s 1 normal both fade-out;
 }
 
 @keyframes slidein {
@@ -95,16 +98,22 @@
   0% {
     opacity: 1;
     width: 230px;
+    padding: 1.2rem;
+    visibility: visible;
   }
 
-  95% {
+  99% {
     opacity: 0;
     width: 230px;
+    padding: 1.2rem;
+    visibility: visible;
   }
 
   100% {
     opacity: 0;
     width: 0px;
+    padding: 0;
+    visibility: hidden;
   }
 }
 
