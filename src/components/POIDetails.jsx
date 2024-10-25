@@ -5,10 +5,17 @@ import "../styles/POIDetails.css";
 export default function POIDetails({ point }) {
   return (
     <>
-      <h3>
-        <span className="icon-walter-black info-logo" aria-hidden="true" />
-        {point.tags.amenity.replace("_", " ")}
-      </h3>
+      <hgroup className="poi-details-heading">
+        <img
+          className="poi-icon"
+          loading="lazy"
+          src="/icons/wheelchair.svg"
+          alt=""
+        />
+        <h3 >
+          {point.tags.amenity.replace("_", " ")}
+        </h3>
+      </hgroup>
 
       {/* <p>{JSON.stringify(point.tags)}</p> */}
 

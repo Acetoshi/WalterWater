@@ -16,13 +16,17 @@ export default function ListView({ isDisplayed, setIsDisplayed }) {
       height={600}
       width={500}
       itemCount={POIs.length}
-      itemSize={()=>360} // Use the getItemSize function for dynamic sizes
-      overscanCount={3}
+      itemSize={() => 360}
+      overscanCount={4}
     >
       {({ index, style }) => (
-          <InfoCard point={POIs[index]} setIsDisplayed={setIsDisplayed} style={{
-            ...style, marginBottom:30
-          }} />
+          <InfoCard
+            point={POIs[index]}
+            setIsDisplayed={setIsDisplayed}
+            style={{
+              ...style, left:"unset"
+            }}
+          />
       )}
     </List>
   );

@@ -10,17 +10,19 @@ export default function InfoCard({ point, setIsDisplayed, style }) {
   };
 
   return (
-    <li className="info-card" key={point.id} style={style}>
-      <POIDetails point={point} />
+    <li className="info-card-container" key={point.id} style={style}>
+      <article className="info-card">
+        <POIDetails point={point} />
 
-      <button
-        onClick={handleClick}
-        aria-label="view on map"
-        role="button"
-        className="button-feedback"
-      >
-        view on map
-      </button>
+        <button
+          onClick={handleClick}
+          aria-label="view on map"
+          role="button"
+          className="button-feedback"
+        >
+          view on map
+        </button>
+      </article>
     </li>
   );
 }
