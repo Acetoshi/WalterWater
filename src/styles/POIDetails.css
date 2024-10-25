@@ -24,7 +24,7 @@ ul.poi-details {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap:0.3rem;
+    gap:0.5rem;
     color: black;
   }
 
