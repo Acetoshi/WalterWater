@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
-import { usePosition } from "../Contexts/PositionProvider";
+import { usePosition } from "../hooks/usePosition";
 import { usePOIs } from "../Contexts/PointsOfInterestProvider";
 
 export default function MapRecenterer() {

@@ -1,4 +1,4 @@
-import { usePosition } from "../Contexts/PositionProvider";
+import { usePosition } from "../hooks/usePosition";
 import "../styles/recenterButton.css";
 
 export default function RecenterButton() {

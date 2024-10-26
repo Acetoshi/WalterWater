@@ -44,7 +44,7 @@ export async function getPoints(
 ) {
   const { water, food, toilets } = userFilters;
   const boundingBox = `${mapBounds.minLat},${mapBounds.minLng},${mapBounds.maxLat},${mapBounds.maxLng}`;
-  const maxObjects = 3000;
+  const maxObjects = 2000;
   statusSetterFunction("fetching data");
   fetch("https://overpass-api.de/api/interpreter", {
     method: "POST",

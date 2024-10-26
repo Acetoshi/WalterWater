@@ -1,18 +1,15 @@
-import { useEffect, useState, useRef } from "react";
-import { usePosition } from "../Contexts/PositionProvider";
+import { useEffect, useRef } from "react";
 import { usePOIs } from "../Contexts/PointsOfInterestProvider";
-import { getPoints } from "../scripts/osmUtilities";
 import "../styles/searchThisAreaButton.css";
 import { useMap } from "react-leaflet";
 
 // Needed for the user to be able to research POIs somewhere else without loading all the world's POIs in memory
 export default function SearchThisArea() {
+  const {fetchPOIs, requestStatus} = usePOIs();
   const map = useMap();
-  const { userLocation, mapPosition, recenterIsNeeded } = usePosition();
-  const { setAreaPOIs, userFilters } = usePOIs();
-  const [requestStatus, setRequestStatus] = useState("ready to fetch");
   const buttonRef = useRef(null);
 
+  //this is needed to keep the button away from the UI when a popup is opened
   useEffect(() => {
     const button = buttonRef.current;
 
@@ -33,30 +30,6 @@ export default function SearchThisArea() {
     };
   }, [map]);
 
-  useEffect(() => {
-    if (requestStatus === "data received") {
-      setTimeout(() => setRequestStatus("ready to fetch"), 1000);
-    }
-  }, [requestStatus]);
-
-  const handleSearch = () => {
-    getPoints(
-      userLocation,
-      userFilters,
-      mapPosition.bounds,
-      setAreaPOIs,
-      setRequestStatus
-    );
-  };
-
-  useEffect(() => {
-    console.log('searching')
-    setTimeout(()=>handleSearch(),2000);
-  }, [userLocation]);
-
-  useEffect(() => {
-    setTimeout(handleSearch,1000);
-  }, [recenterIsNeeded]);
 
   return (
     <div id="search-this-area-button-container">
@@ -66,7 +39,7 @@ export default function SearchThisArea() {
         className={`button-feedback ${
           requestStatus !== "ready to fetch" ? "disabled" : ""
         }`}
-        onClick={handleSearch}
+        onClick={fetchPOIs}
         disabled={requestStatus !== "ready to fetch"}
       >
         {requestStatus === "ready to fetch" && <p>search this area</p>}

@@ -1,4 +1,3 @@
-import React, { useRef, useCallback } from "react";
 import { VariableSizeList as List } from "react-window";
 import { usePOIs } from "../Contexts/PointsOfInterestProvider";
 import InfoCard from "./InfoCard";

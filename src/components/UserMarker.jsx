@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Popup, Marker, useMap } from "react-leaflet";
-import { usePosition } from "../Contexts/PositionProvider";
+import { usePosition } from "../hooks/usePosition";
 import { walterIcon } from "../scripts/icons";
 
 export default function UserMarker() {

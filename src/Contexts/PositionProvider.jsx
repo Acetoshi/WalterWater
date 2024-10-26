@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const PositionContext = createContext();
 
@@ -52,6 +52,4 @@ export default function PositionProvider({ children }) {
   );
 }
 
-export function usePosition() {
-  return useContext(PositionContext);
-}
+export {PositionContext}

@@ -1,8 +1,11 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { usePosition } from "../hooks/usePosition";
+import { getPoints } from "../scripts/osmUtilities";
 
 const PointsOfInterest = createContext();
 
 export default function PointsOfInterestProvider({ children }) {
+  const { userLocation, mapPosition, recenterIsNeeded } = usePosition();
 
   const storedFilters = localStorage.getItem("userFilters");
 
@@ -20,15 +23,7 @@ export default function PointsOfInterestProvider({ children }) {
         }
   );
 
-  // store userFilters in localStorage
-  useEffect(() => {
-    localStorage.setItem(
-      "userFilters",
-      `${userFilters.water ? 1 : 0}${userFilters.food ? 1 : 0}${
-        userFilters.toilets ? 1 : 0
-      }`.toString()
-    );
-  }, [userFilters]);
+  const [requestStatus, setRequestStatus] = useState("ready to fetch");
 
   const [areaPOIs, setAreaPOIs] = useState([]);
   const [POIs, setPOIs] = useState([]);
@@ -38,6 +33,16 @@ export default function PointsOfInterestProvider({ children }) {
     lat: 0,
     lng: 0,
   });
+
+  // store userFilters in localStorage
+  useEffect(() => {
+    localStorage.setItem(
+      "userFilters",
+      `${userFilters.water ? 1 : 0}${userFilters.food ? 1 : 0}${
+        userFilters.toilets ? 1 : 0
+      }`.toString()
+    );
+  }, [userFilters]);
 
   useEffect(() => {
     const newPOIs = areaPOIs.filter(
@@ -49,6 +54,33 @@ export default function PointsOfInterestProvider({ children }) {
     setPOIs(() => newPOIs);
   }, [areaPOIs, userFilters]);
 
+  const fetchPOIs = () => {
+    getPoints(
+      userLocation,
+      userFilters,
+      mapPosition.bounds,
+      setAreaPOIs,
+      setRequestStatus
+    );
+  };
+
+  useEffect(() => {
+    // TODO : handle the case where map Position.bounds isn't defined
+    const bounds = {
+      minLat: userLocation.lat - 0.25,
+      maxLat: userLocation.lat + 0.25,
+      minLng: userLocation.lng - 0.25,
+      maxLng: userLocation.lng + 0.25,
+    };
+    getPoints(userLocation, userFilters, bounds, setAreaPOIs, setRequestStatus);
+  }, [userLocation, recenterIsNeeded]);
+
+  useEffect(() => {
+    if (requestStatus === "data received") {
+      setTimeout(() => setRequestStatus("ready to fetch"), 1000);
+    }
+  }, [requestStatus]);
+
   return (
     <PointsOfInterest.Provider
       value={{
@@ -56,9 +88,10 @@ export default function PointsOfInterestProvider({ children }) {
         setUserFilters,
         areaPOIs,
         POIs,
-        setAreaPOIs,
+        fetchPOIs,
         targetPOIPosition,
         setTargetPOIPosition,
+        requestStatus,
       }}
     >
       {children}
