@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { usePosition } from "../Contexts/PositionProvider";
+import { usePosition } from "../hooks/usePosition";
 
 // the point of this component is to avoid being too pushy with the user by requesting his location stairght up
 

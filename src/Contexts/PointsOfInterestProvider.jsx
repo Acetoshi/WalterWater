@@ -1,11 +1,11 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { getAllPoints } from "../scripts/osmUtilities";
-import { usePosition } from "./PositionProvider";
+import { createContext, useState, useEffect } from "react";
+import { usePosition } from "../hooks/usePosition";
+import { getPoints } from "../scripts/osmUtilities";
 
-const PointsOfInterest = createContext();
+const PointsOfInterestContext = createContext();
 
 export default function PointsOfInterestProvider({ children }) {
-  const { userLocation } = usePosition();
+  const { userLocation, mapPosition, recenterIsNeeded } = usePosition();
 
   const storedFilters = localStorage.getItem("userFilters");
 
@@ -23,6 +23,17 @@ export default function PointsOfInterestProvider({ children }) {
         }
   );
 
+  const [requestStatus, setRequestStatus] = useState("ready to fetch");
+
+  const [areaPOIs, setAreaPOIs] = useState([]);
+  const [POIs, setPOIs] = useState([]);
+
+  // used for the listview to pass the target POI position
+  const [targetPOIPosition, setTargetPOIPosition] = useState({
+    lat: 0,
+    lng: 0,
+  });
+
   // store userFilters in localStorage
   useEffect(() => {
     localStorage.setItem(
@@ -33,49 +44,61 @@ export default function PointsOfInterestProvider({ children }) {
     );
   }, [userFilters]);
 
-  const [nearbyPOIs, setNearbyPOIs] = useState([]);
-  const [areaPOIs, setAreaPOIs] = useState([]);
-  const [POIs, setPOIs] = useState([]);
-
-  // used for the listview to pass the target POI position
-  const [targetPOIPosition, setTargetPOIPosition] = useState({
-    lat: 0,
-    lng: 0,
-  });
-
-  // this useEffect fetches POIs data on OSM server
   useEffect(() => {
-    getAllPoints(userLocation, 0.1, setNearbyPOIs);
-  }, [userLocation]);
-
-  useEffect(() => {
-    const newPOIs = [...nearbyPOIs, ...areaPOIs].filter(
+    const newPOIs = areaPOIs.filter(
       (point) =>
         (point.tags.amenity === "drinking_water" && userFilters.water) ||
         (point.tags.amenity === "toilets" && userFilters.toilets) ||
         (point.tags.amenity === "restaurant" && userFilters.food)
     );
     setPOIs(() => newPOIs);
-  }, [nearbyPOIs, areaPOIs, userFilters]);
+  }, [areaPOIs, userFilters]);
+
+  const fetchPOIs = () => {
+    getPoints(
+      userLocation,
+      userFilters,
+      mapPosition.bounds,
+      setAreaPOIs,
+      setRequestStatus
+    );
+  };
+
+  useEffect(() => {
+    // TODO : handle the case where map Position.bounds isn't defined
+    const bounds = {
+      minLat: userLocation.lat - 0.25,
+      maxLat: userLocation.lat + 0.25,
+      minLng: userLocation.lng - 0.25,
+      maxLng: userLocation.lng + 0.25,
+    };
+    getPoints(userLocation, userFilters, bounds, setAreaPOIs, setRequestStatus);
+  }, [userLocation, recenterIsNeeded]);
+
+  useEffect(() => {
+    if (requestStatus === "data received") {
+      setTimeout(() => setRequestStatus("ready to fetch"), 1000);
+    }
+  }, [requestStatus]);
 
   return (
-    <PointsOfInterest.Provider
+    <PointsOfInterestContext.Provider
       value={{
         userFilters,
         setUserFilters,
-        nearbyPOIs,
         areaPOIs,
         POIs,
-        setAreaPOIs,
+        fetchPOIs,
         targetPOIPosition,
         setTargetPOIPosition,
+        requestStatus,
       }}
     >
       {children}
-    </PointsOfInterest.Provider>
+    </PointsOfInterestContext.Provider>
   );
 }
 
-export function usePOIs() {
-  return useContext(PointsOfInterest);
-}
+export {PointsOfInterestContext}
+
+
