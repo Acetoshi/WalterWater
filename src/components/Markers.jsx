@@ -1,35 +1,9 @@
-import { useCallback, memo } from "react";
-import { Marker, Popup, useMap } from "react-leaflet";
-import { usePOIs } from "../Contexts/PointsOfInterestProvider";
-import { faucetIcon, toiletIcon, foodIcon } from "../scripts/icons";
+import { useCallback } from "react";
+import CustomMarker from "./CustomMarker";
+import { useMap } from "react-leaflet";
+import { usePOIs } from "../hooks/usePOIs";
 import MarkerClusterGroup from "react-leaflet-cluster";
-import POIDetails from "./POIDetails";
-import "../styles/leafletPopup.css";
 import "../styles/leafletMarkerGroup.css";
-
-const MarkerComponent = memo(({ point, onMarkerClick }) => {
-  const iconMap = {
-    drinking_water: faucetIcon,
-    toilets: toiletIcon,
-    restaurant: foodIcon,
-  };
-
-  return (
-    <Marker
-      key={point.id}
-      position={[point.lat, point.lon]}
-      icon={iconMap[point.tags.amenity]}
-      autoPanOnFocus={false}
-      eventHandlers={{
-        click: () => onMarkerClick(point),
-      }}
-    >
-      <Popup keepInView={false} autoPan={false} className={`${point.id}`}>
-        <POIDetails point={point} />
-      </Popup>
-    </Marker>
-  );
-});
 
 export default function Markers() {
   const { POIs } = usePOIs();
@@ -59,7 +33,7 @@ export default function Markers() {
     >
       {POIs &&
         POIs.map((point, index) => (
-          <MarkerComponent
+          <CustomMarker
             key={`${point.id}+${index}`}
             point={point}
             onMarkerClick={handleMarkerClick}

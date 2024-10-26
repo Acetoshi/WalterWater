@@ -1,8 +1,8 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { usePosition } from "../hooks/usePosition";
 import { getPoints } from "../scripts/osmUtilities";
 
-const PointsOfInterest = createContext();
+const PointsOfInterestContext = createContext();
 
 export default function PointsOfInterestProvider({ children }) {
   const { userLocation, mapPosition, recenterIsNeeded } = usePosition();
@@ -82,7 +82,7 @@ export default function PointsOfInterestProvider({ children }) {
   }, [requestStatus]);
 
   return (
-    <PointsOfInterest.Provider
+    <PointsOfInterestContext.Provider
       value={{
         userFilters,
         setUserFilters,
@@ -95,10 +95,10 @@ export default function PointsOfInterestProvider({ children }) {
       }}
     >
       {children}
-    </PointsOfInterest.Provider>
+    </PointsOfInterestContext.Provider>
   );
 }
 
-export function usePOIs() {
-  return useContext(PointsOfInterest);
-}
+export {PointsOfInterestContext}
+
+

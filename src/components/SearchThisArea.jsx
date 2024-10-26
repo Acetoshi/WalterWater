@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { usePOIs } from "../Contexts/PointsOfInterestProvider";
+import { usePOIs } from "../hooks/usePOIs";
 import "../styles/searchThisAreaButton.css";
 import { useMap } from "react-leaflet";
 

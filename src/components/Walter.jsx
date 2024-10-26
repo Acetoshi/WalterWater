@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import "../styles/walter.css";
-import { usePOIs } from "../Contexts/PointsOfInterestProvider";
+import { usePOIs } from "../hooks/usePOIs";
 import LocationEnabler from "./LocationEnabler";
 
 function Walter() {

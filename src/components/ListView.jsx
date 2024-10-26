@@ -1,5 +1,5 @@
 import { VariableSizeList as List } from "react-window";
-import { usePOIs } from "../Contexts/PointsOfInterestProvider";
+import { usePOIs } from "../hooks/usePOIs"
 import InfoCard from "./InfoCard";
 import "../styles/listview.css";
 

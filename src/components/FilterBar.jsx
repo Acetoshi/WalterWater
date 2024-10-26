@@ -1,6 +1,5 @@
-import PropTypes from "prop-types";
+import { usePOIs } from "../hooks/usePOIs";
 import "../styles/filterBar.css";
-import { usePOIs } from "../Contexts/PointsOfInterestProvider";
 
 function FilterBar({ listState }) {
   const { listIsDisplayed, setListIsDisplayed } = listState;
@@ -88,7 +87,3 @@ function FilterBar({ listState }) {
 }
 
 export default FilterBar;
-
-FilterBar.proptypes = {
-  filters: PropTypes.object.isRequired,
-};

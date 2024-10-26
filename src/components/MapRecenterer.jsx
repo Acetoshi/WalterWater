@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
 import { usePosition } from "../hooks/usePosition";
-import { usePOIs } from "../Contexts/PointsOfInterestProvider";
+import { usePOIs } from "../hooks/usePOIs";
 
 export default function MapRecenterer() {
   const { userLocation, recenterIsNeeded } = usePosition();
