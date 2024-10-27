@@ -49,7 +49,6 @@ button {
   outline: none;
 }
 
-
 /* This class is used to make button that have visual feedback */
 .button-feedback {
   transition: transform 0.3s;
@@ -109,20 +108,6 @@ h4 {
     margin-left: 1rem;
     margin-bottom: 0.5rem;
     color: var(--black);
-  }
-
-  & a.redirect-button {
-    color: white;
-    margin: 0 auto;
-    padding: 8px 16px;
-    border-radius: 16px;
-    background-color: var(--main-color);
-    font-size: var(--font-size);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    margin-top: 3rem;
   }
 }
 

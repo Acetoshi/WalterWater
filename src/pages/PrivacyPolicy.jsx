@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import BackToMapButton from "../components/BackToMapButton";
 
 export default function PrivacyPolicy() {
   return (
@@ -80,10 +80,8 @@ export default function PrivacyPolicy() {
           informed about our practices.
         </p>
       </section>
+      <BackToMapButton />
 
-      <Link to="/" className="redirect-button button-feedback">
-        back to the map
-      </Link>
     </main>
   );
 }

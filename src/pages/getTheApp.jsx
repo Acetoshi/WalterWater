@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import BackToMapButton from "../components/BackToMapButton";
 
 export default function GetTheApp() {
   return (
@@ -62,9 +63,7 @@ export default function GetTheApp() {
         </p>
       </section>
 
-      <Link to="/" className="redirect-button button-feedback">
-        back to the map
-      </Link>
+      <BackToMapButton />
     </main>
   );
 }
