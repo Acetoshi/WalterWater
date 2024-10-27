@@ -1,31 +1,42 @@
-import "../styles/listToggle.css"
+import "../styles/listToggle.css";
 
 export default function ListToggle({ listState }) {
   const { listIsDisplayed, setListIsDisplayed } = listState;
 
-  return (
-    <div id="list-toggle-container">
+  const handleToggle = () => setListIsDisplayed(!listIsDisplayed);
 
-    
-    <button
-      type="button"
-      className="button-feedback"
-      id="list-toggle"
-      onClick={() => setListIsDisplayed(!listIsDisplayed)}
-    >
-      {listIsDisplayed ? (
-        <>
-          <img src="/icons/map.svg" alt="show map" />
-          show map
-        </>
-      ) : (
-        <>
-          <img src="/icons/list.svg" alt="show list" />
-          show list
-        </>
-      )}
-    </button>
-  </div>
-  )
- 
+  return (
+    <fieldset id="list-toggle-container">
+      <legend>{`select map view or list view`}</legend>
+
+      <input
+        type="radio"
+        id="toggle-input-map"
+        name="button-reservation"
+        className="toggle-input"
+        checked={!listIsDisplayed}
+        onChange={handleToggle}
+      />
+
+      <input
+        type="radio"
+        id="toggle-input-list"
+        name="button-reservation"
+        className="toggle-input"
+        checked={listIsDisplayed}
+        onChange={handleToggle}
+      />
+
+      <label htmlFor="toggle-input-map" className="map-label">
+        <img src="/icons/map.svg" alt="show map" />
+      </label>
+
+      <label htmlFor="toggle-input-list" className="list-label">
+        <img src="/icons/list.svg" alt="show map" />
+      </label>
+
+      <span className="toggle-slider" />
+
+    </fieldset>
+  );
 }

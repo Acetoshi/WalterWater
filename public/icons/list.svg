@@ -45,40 +45,40 @@
      x2="19"
      y2="1"
      id="line1"
-     style="stroke:#ffffff;stroke-opacity:1" />
+     style="stroke:#164f91;stroke-opacity:1" />
   <line
      x1="6"
      y1="7"
      x2="19"
      y2="7"
      id="line2"
-     style="stroke:#ffffff;stroke-opacity:1" />
+     style="stroke:#164f91;stroke-opacity:1" />
   <line
      x1="6"
      y1="13"
      x2="19"
      y2="13"
      id="line3"
-     style="stroke:#ffffff;stroke-opacity:1" />
+     style="stroke:#164f91;stroke-opacity:1" />
   <line
      x1="1"
      y1="1"
      x2="1.01"
      y2="1"
      id="line4"
-     style="stroke:#ffffff;stroke-opacity:1" />
+     style="stroke:#164f91;stroke-opacity:1" />
   <line
      x1="1"
      y1="7"
      x2="1.01"
      y2="7"
      id="line5"
-     style="stroke:#ffffff;stroke-opacity:1" />
+     style="stroke:#164f91;stroke-opacity:1" />
   <line
      x1="1"
      y1="13"
      x2="1.01"
      y2="13"
      id="line6"
-     style="stroke:#ffffff;stroke-opacity:1" />
+     style="stroke:#164f91;stroke-opacity:1" />
 </svg>

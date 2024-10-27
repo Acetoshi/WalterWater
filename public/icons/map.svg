@@ -42,7 +42,7 @@
   <polygon
      points="8,18 16,22 23,18 23,2 16,6 8,2 1,6 1,22 "
      id="polygon1"
-     style="stroke:#ffffff;stroke-opacity:1"
+     style="stroke:#164f91;stroke-opacity:1"
      transform="translate(0,-1)" />
   <line
      x1="8"
@@ -50,12 +50,12 @@
      x2="8"
      y2="17"
      id="line1"
-     style="stroke:#ffffff;stroke-opacity:1" />
+     style="stroke:#164f91;stroke-opacity:1" />
   <line
      x1="16"
      y1="5"
      x2="16"
      y2="21"
      id="line2"
-     style="stroke:#ffffff;stroke-opacity:1" />
+     style="stroke:#164f91;stroke-opacity:1" />
 </svg>
