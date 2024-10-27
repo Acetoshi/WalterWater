@@ -29,7 +29,7 @@
       list-style: none;
 
       & a {
-        font-size: 2.7rem;
+        font-size: 2rem;
         text-align: right;
         text-decoration: none;
         color: var(--white);

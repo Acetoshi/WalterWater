@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import BackToMapButton from "../components/BackToMapButton";
 
 export default function GetTheApp() {
