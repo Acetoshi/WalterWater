@@ -1,7 +1,7 @@
 #list-toggle-container {
   position: absolute;
   z-index: 2000;
-  left: 16px;
+  left: calc(50vw - 48px);
   bottom: 16px;
   background-color: var(--main-color);
   border: 0px;
@@ -60,12 +60,9 @@
   }
 }
 
+/* This is required to move the slider left and right */
 #toggle-input-map:checked ~ .toggle-slider {
   transform: translateX(0);
-}
-
-#toggle-input-map:checked ~ .list-label>img {
-    filter: brightness(0) saturate(0) invert(1);
 }
 
 #toggle-input-list:checked ~ .toggle-slider {
@@ -73,6 +70,10 @@
 
 }
 
+/* This is required to change the images colour to white */
+#toggle-input-map:checked ~ .list-label>img {
+    filter: brightness(0) saturate(0) invert(1);
+}
 #toggle-input-list:checked ~ .map-label>img {
     filter: brightness(0) saturate(0) invert(1);
 }
