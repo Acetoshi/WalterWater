@@ -18,12 +18,14 @@
 
   & img {
     width: 28px;
+    transition: transform 0.3s ease-in-out;
   }
 }
 
 #filters-drawer {
     background-color: white;
-    padding : 16px 64px 16px 16px;
+    padding : 16px;
+    margin-right: 64px;
     border-radius: 24px;
     display: flex;
 }
@@ -34,6 +36,7 @@
     max-width: 48px;
     max-height: 48px;
     padding:0;
+    margin-right: 0;
 }
 
 .filter-button {
@@ -58,3 +61,10 @@
     filter: grayscale(100%) brightness(0.8) opacity(0.4);
   }
 }
+
+
+#filters-drawer-container.open>#filters-drawer-button>img{
+  transform: rotate(-90deg);
+
+}
+
