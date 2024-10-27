@@ -6,12 +6,13 @@ import UserMarker from "../components/UserMarker";
 import Markers from "../components/Markers";
 import MapTracker from "../components/MapTracker";
 import MapRecenterer from "../components/MapRecenterer";
-import FilterBar from "../components/FilterBar";
-import SearchThisArea from "../components/SearchThisArea";
 import Walter from "../components/Walter";
 import Capybara from "../components/EasterEgg";
+import ListToggle from "../components/ListToggle";
 import ListView from "../components/ListView";
 import RecenterButton from "../components/RecenterButton";
+import FiltersDrawer from "../components/FiltersDrawer";
+import SearchThisArea from "../components/SearchThisArea";
 import mapProviders from "../scripts/mapProviders.json";
 import MapProviderSelector from "../components/MapProviderSelector";
 
@@ -25,17 +26,15 @@ export default function Map() {
   return (
     <PositionProvider>
       <PointsOfInterestProvider>
-        <ListView
-          isDisplayed={listIsDisplayed}
-          setIsDisplayed={setListIsDisplayed}
-        />
+        <ListToggle listState={{ listIsDisplayed, setListIsDisplayed }} />
+        <ListView listState={{ listIsDisplayed, setListIsDisplayed }} />
         <MapProviderSelector
           mapSelecter={mapSelecter}
           setMapSelecter={setMapSelecter}
         />
         <RecenterButton />
 
-        <FilterBar listState={{ listIsDisplayed, setListIsDisplayed }} />
+        <FiltersDrawer listState={{ listIsDisplayed, setListIsDisplayed }} />
 
         <Walter />
         <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>
@@ -44,7 +43,7 @@ export default function Map() {
             url={mapProviders[mapSelecter.providerId].tilesUrl}
           />
 
-            <SearchThisArea />
+          <SearchThisArea />
 
           <Markers />
 

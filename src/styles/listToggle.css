@@ -1,0 +1,19 @@
+#list-toggle-container {
+  position: absolute;
+  z-index: 2000;
+  left: 16px;
+  bottom: 16px;
+}
+
+#list-toggle {
+  background-color: var(--main-color);
+  border: 0px;
+  padding: 8px;
+  height: 48px;
+  width: 48px;
+  border-radius: 8px;
+
+  & img {
+    height: 1rem;
+  }
+}
