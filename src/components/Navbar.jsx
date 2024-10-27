@@ -10,9 +10,10 @@ export default function Navbar() {
   }
 
   const links = [
-    { to: "/", label: "map", icon: "user" },
-    { to: "/about/privacy", label: "privacy policy", icon: "user" },
-    { to: "/get-the-app", label: "get the app", icon: "user" },
+    { to: "/", label: "Map", icon: "" },
+    { to: "/get-the-app", label: "Dowload the App", icon: "" },
+    { to: "/frequently-asked-questions", label: "FAQs & Support", icon: "" },
+    { to: "/about/privacy", label: "Privacy Policy", icon: "" },
   ];
 
   return (
