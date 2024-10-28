@@ -1,8 +1,15 @@
 #filters-drawer-container {
   position: absolute;
-  z-index: 1000;
-  bottom: calc(25vh - 16px - 24px );
+  bottom: calc(25vh - 16px - 24px);
   right: 16px;
+}
+
+#filters-drawer-container.open {
+  z-index: 5000;
+}
+
+#filters-drawer-container.closed {
+  z-index: 2000;
 }
 
 #filters-drawer-button {
@@ -11,10 +18,10 @@
   padding: 10px;
   border-radius: 48px;
   background-color: var(--secondary-color);
-  position:absolute;
+  position: absolute;
   z-index: 1;
   bottom: 0;
-  right:0;
+  right: 0;
 
   & img {
     width: 28px;
@@ -23,20 +30,19 @@
 }
 
 #filters-drawer {
-    background-color: white;
-    padding : 16px;
-    margin-right: 64px;
-    border-radius: 24px;
-    display: flex;
+  background-color: white;
+  padding: 16px;
+  margin-right: 64px;
+  border-radius: 24px;
+  display: flex;
 }
 
-
 #filters-drawer.closed {
-    overflow: hidden;
-    max-width: 48px;
-    max-height: 48px;
-    padding:0;
-    margin-right: 0;
+  overflow: hidden;
+  max-width: 48px;
+  max-height: 48px;
+  padding: 0;
+  margin-right: 0;
 }
 
 .filter-button {
@@ -62,9 +68,24 @@
   }
 }
 
-
-#filters-drawer-container.open>#filters-drawer-button>img{
+#filters-drawer-container.open > #filters-drawer-button > img {
   transform: rotate(-90deg);
-
 }
 
+#drawer-background.visible {
+  position: absolute;
+  z-index: 4999;
+  height: 100vh;
+  width: 100vw;
+  background-color: #00000099;
+  transition: 0.6s;
+  transition-property: background-color;
+}
+
+#drawer-background.hidden {
+  position: absolute;
+  z-index: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #FFFFFF00;
+}

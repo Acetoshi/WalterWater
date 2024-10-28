@@ -11,7 +11,7 @@ export default function FrequentlyAskedQuestions() {
         <h2>What is this app about?</h2>
         <p>
           This app helps users locate water amenities, toilets, and other
-          essential points of interest (POIs) in outdoor areas. Whether you're
+          essential points of interest (POIs) in outdoor areas. Whether you are
           hiking, camping, or enjoying a day at the park, this app provides
           information on nearby facilities to enhance your experience.
         </p>
