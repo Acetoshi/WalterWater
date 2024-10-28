@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import PositionProvider from "../Contexts/PositionProvider";
-import PointsOfInterestProvider from "../Contexts/PointsOfInterestProvider";
 import UserMarker from "../components/UserMarker";
 import Markers from "../components/Markers";
 import MapTracker from "../components/MapTracker";
@@ -24,36 +22,34 @@ export default function Map() {
   });
 
   return (
-    <PositionProvider>
-      <PointsOfInterestProvider>
-        <ListToggle listState={{ listIsDisplayed, setListIsDisplayed }} />
-        <ListView listState={{ listIsDisplayed, setListIsDisplayed }} />
-        <MapProviderSelector
-          mapSelecter={mapSelecter}
-          setMapSelecter={setMapSelecter}
+    <>
+      <ListToggle listState={{ listIsDisplayed, setListIsDisplayed }} />
+      <ListView listState={{ listIsDisplayed, setListIsDisplayed }} />
+      <MapProviderSelector
+        mapSelecter={mapSelecter}
+        setMapSelecter={setMapSelecter}
+      />
+      <RecenterButton />
+
+      <FiltersDrawer listState={{ listIsDisplayed, setListIsDisplayed }} />
+
+      <Walter />
+      <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>
+        <TileLayer
+          attribution={mapProviders[mapSelecter.providerId].attribution}
+          url={mapProviders[mapSelecter.providerId].tilesUrl}
         />
-        <RecenterButton />
 
-        <FiltersDrawer listState={{ listIsDisplayed, setListIsDisplayed }} />
+        <SearchThisArea />
 
-        <Walter />
-        <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>
-          <TileLayer
-            attribution={mapProviders[mapSelecter.providerId].attribution}
-            url={mapProviders[mapSelecter.providerId].tilesUrl}
-          />
+        <Markers />
 
-          <SearchThisArea />
+        <UserMarker />
+        <MapTracker setMapSelecter={setMapSelecter} />
+        <MapRecenterer />
 
-          <Markers />
-
-          <UserMarker />
-          <MapTracker setMapSelecter={setMapSelecter} />
-          <MapRecenterer />
-
-          <Capybara />
-        </MapContainer>
-      </PointsOfInterestProvider>
-    </PositionProvider>
+        <Capybara />
+      </MapContainer>
+    </>
   );
 }
