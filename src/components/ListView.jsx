@@ -1,15 +1,16 @@
 import { VariableSizeList as List } from "react-window";
-import { usePOIs } from "../hooks/usePOIs"
+import { usePOIs } from "../hooks/usePOIs";
 import InfoCard from "./InfoCard";
 import "../styles/listview.css";
 
-export default function ListView({ isDisplayed, setIsDisplayed }) {
+export default function ListView({ listState }) {
   const { POIs } = usePOIs();
+  const { listIsDisplayed, setListIsDisplayed } = listState;
 
   return (
     <List
       className={
-        isDisplayed ? "list-view-container" : "list-view-container hidden"
+        listIsDisplayed ? "list-view-container" : "list-view-container hidden"
       }
       innerElementType={"ul"}
       height={1024}
@@ -19,13 +20,14 @@ export default function ListView({ isDisplayed, setIsDisplayed }) {
       overscanCount={4}
     >
       {({ index, style }) => (
-          <InfoCard
-            point={POIs[index]}
-            setIsDisplayed={setIsDisplayed}
-            style={{
-              ...style, left:"unset"
-            }}
-          />
+        <InfoCard
+          point={POIs[index]}
+          setIsDisplayed={setListIsDisplayed}
+          style={{
+            ...style,
+            left: "unset",
+          }}
+        />
       )}
     </List>
   );
@@ -42,7 +44,7 @@ export default function ListView({ isDisplayed, setIsDisplayed }) {
       setIsDisplayed(false);
     }
   }}
-  className={isDisplayed ? "list-view-container" : "list-view-container hidden"}
+  className={listIsDisplayed ? "list-view-container" : "list-view-container hidden"}
 >
 </button> */
 }
