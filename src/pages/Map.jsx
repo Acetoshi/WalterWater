@@ -3,7 +3,7 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import UserMarker from "../components/UserMarker";
 import Markers from "../components/Markers";
 import MapTracker from "../components/MapTracker";
-import MapRecenterer from "../components/MapRecenterer";
+import POIsFocuser from "../components/POIsFocuser";
 import Walter from "../components/Walter";
 import Capybara from "../components/EasterEgg";
 import ListToggle from "../components/ListToggle";
@@ -28,27 +28,24 @@ export default function Map() {
         mapSelecter={mapSelecter}
         setMapSelecter={setMapSelecter}
       />
-      <RecenterButton />
-
-      <FiltersDrawer listState={{ listIsDisplayed, setListIsDisplayed }} />
 
       <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>
         <TileLayer
           attribution={mapProviders[mapSelecter.providerId].attribution}
           url={mapProviders[mapSelecter.providerId].tilesUrl}
         />
-
-        <SearchThisArea />
-
         <Markers />
-
         <UserMarker />
         <MapTracker setMapSelecter={setMapSelecter} />
-        <MapRecenterer />
+
+        <SearchThisArea />
+        <RecenterButton />
+        <POIsFocuser />
+        <FiltersDrawer listState={{ listIsDisplayed, setListIsDisplayed }} />
+        <ListToggle listState={{ listIsDisplayed, setListIsDisplayed }} />
 
         <Capybara />
         <Walter />
-        <ListToggle listState={{ listIsDisplayed, setListIsDisplayed }} />
       </MapContainer>
     </>
   );

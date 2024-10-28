@@ -39,7 +39,7 @@ export default function SearchThisArea() {
         className={`button-feedback ${
           requestStatus !== "ready to fetch" ? "disabled" : ""
         }`}
-        onClick={fetchPOIs}
+        onClick={()=>fetchPOIs("view")}
         disabled={requestStatus !== "ready to fetch"}
       >
         {requestStatus === "ready to fetch" && <p>search this area</p>}

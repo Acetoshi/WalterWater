@@ -5,7 +5,7 @@ import { getPoints } from "../scripts/osmUtilities";
 const PointsOfInterestContext = createContext();
 
 export default function PointsOfInterestProvider({ children }) {
-  const { userLocation, mapPosition, recenterIsNeeded } = usePosition();
+  const { userLocation, mapPosition } = usePosition();
 
   const storedFilters = localStorage.getItem("userFilters");
 
@@ -54,26 +54,35 @@ export default function PointsOfInterestProvider({ children }) {
     setPOIs(() => newPOIs);
   }, [areaPOIs, userFilters]);
 
-  const fetchPOIs = () => {
-    getPoints(
-      userLocation,
-      userFilters,
-      mapPosition.bounds,
-      setAreaPOIs,
-      setRequestStatus
-    );
+  const fetchPOIs = (center = "view") => {
+    if (center === "view") {
+      getPoints(
+        userLocation,
+        userFilters,
+        mapPosition.bounds,
+        setAreaPOIs,
+        setRequestStatus
+      );
+    } else if (center === "user") {
+      const bounds = {
+        minLat: userLocation.lat - 0.25,
+        maxLat: userLocation.lat + 0.25,
+        minLng: userLocation.lng - 0.25,
+        maxLng: userLocation.lng + 0.25,
+      };
+      getPoints(
+        userLocation,
+        userFilters,
+        bounds,
+        setAreaPOIs,
+        setRequestStatus
+      );
+    }
   };
 
   useEffect(() => {
-    // TODO : handle the case where map Position.bounds isn't defined
-    const bounds = {
-      minLat: userLocation.lat - 0.25,
-      maxLat: userLocation.lat + 0.25,
-      minLng: userLocation.lng - 0.25,
-      maxLng: userLocation.lng + 0.25,
-    };
-    getPoints(userLocation, userFilters, bounds, setAreaPOIs, setRequestStatus);
-  }, [userLocation, recenterIsNeeded]);
+    fetchPOIs("user");
+  }, [userLocation]);
 
   useEffect(() => {
     if (requestStatus === "data received") {
@@ -99,6 +108,4 @@ export default function PointsOfInterestProvider({ children }) {
   );
 }
 
-export {PointsOfInterestContext}
-
-
+export { PointsOfInterestContext };
