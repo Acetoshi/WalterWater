@@ -25,7 +25,7 @@
 
   & img {
     width: 28px;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-out;
   }
 }
 

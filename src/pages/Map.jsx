@@ -23,7 +23,6 @@ export default function Map() {
 
   return (
     <>
-      <ListToggle listState={{ listIsDisplayed, setListIsDisplayed }} />
       <ListView listState={{ listIsDisplayed, setListIsDisplayed }} />
       <MapProviderSelector
         mapSelecter={mapSelecter}
@@ -33,7 +32,6 @@ export default function Map() {
 
       <FiltersDrawer listState={{ listIsDisplayed, setListIsDisplayed }} />
 
-      <Walter />
       <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>
         <TileLayer
           attribution={mapProviders[mapSelecter.providerId].attribution}
@@ -49,6 +47,8 @@ export default function Map() {
         <MapRecenterer />
 
         <Capybara />
+        <Walter />
+        <ListToggle listState={{ listIsDisplayed, setListIsDisplayed }} />
       </MapContainer>
     </>
   );

@@ -12,19 +12,19 @@ export default function ListToggle({ listState }) {
       <input
         type="radio"
         id="toggle-input-map"
-        name="button-reservation"
+        name="show map"
         className="toggle-input"
         checked={!listIsDisplayed}
-        onChange={handleToggle}
+        onClick={handleToggle}
       />
 
       <input
         type="radio"
         id="toggle-input-list"
-        name="button-reservation"
+        name="show list"
         className="toggle-input"
         checked={listIsDisplayed}
-        onChange={handleToggle}
+        onClick={handleToggle}
       />
 
       <label htmlFor="toggle-input-map" className="map-label">
@@ -32,7 +32,7 @@ export default function ListToggle({ listState }) {
       </label>
 
       <label htmlFor="toggle-input-list" className="list-label">
-        <img src="/icons/list.svg" alt="show map" />
+        <img src="/icons/list.svg" alt="show list" />
       </label>
 
       <span className="toggle-slider" />
