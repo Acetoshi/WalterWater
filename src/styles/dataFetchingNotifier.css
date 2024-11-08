@@ -1,4 +1,4 @@
-#search-this-area-button-container {
+#data-fetching-notifier-container {
   z-index: 1000;
   position: absolute;
   top: 60px;
@@ -7,7 +7,7 @@
   border-radius: 16px;
 }
 
-#search-this-area-button {
+#data-fetching-notifier {
   color: white;
   padding: 8px 16px;
   border-radius: 16px;
@@ -18,11 +18,11 @@
   align-items: center;
 }
 
-#search-this-area-button.hidden {
+#data-fetching-notifier.hidden {
   transform: translateY(-100px);
 }
 
-#search-this-area-button.disabled {
+#data-fetching-notifier.disabled {
   background-color: grey !important;
   opacity: 80%;
   cursor: not-allowed;

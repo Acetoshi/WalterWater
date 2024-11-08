@@ -10,9 +10,9 @@ import ListToggle from "../components/ListToggle";
 import ListView from "../components/ListView";
 import RecenterButton from "../components/RecenterButton";
 import FiltersDrawer from "../components/FiltersDrawer";
-import SearchThisArea from "../components/SearchThisArea";
 import mapProviders from "../scripts/mapProviders.json";
 import MapProviderSelector from "../components/MapProviderSelector";
+import DataFetchingNotifier from "../components/DataFetchingNotifier";
 
 export default function Map() {
   const [listIsDisplayed, setListIsDisplayed] = useState(false);
@@ -38,7 +38,7 @@ export default function Map() {
         <UserMarker />
         <MapTracker setMapSelecter={setMapSelecter} />
 
-        <SearchThisArea />
+        <DataFetchingNotifier />
         <RecenterButton />
         <POIsFocuser />
         <FiltersDrawer listState={{ listIsDisplayed, setListIsDisplayed }} />
