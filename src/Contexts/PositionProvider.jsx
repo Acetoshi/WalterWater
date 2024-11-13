@@ -33,8 +33,6 @@ export default function PositionProvider({ children }) {
       : { bounds: null, center: storedUserPosition, distanceFromUser: 0 }
   );
 
-  // used for the recenter feature
-  const [recenterIsNeeded, setrecenterIsNeeded] = useState("true");
 
   return (
     <PositionContext.Provider
@@ -42,9 +40,7 @@ export default function PositionProvider({ children }) {
         userLocation,
         setUserLocation,
         mapPosition,
-        setMapPosition,
-        recenterIsNeeded,
-        setrecenterIsNeeded,
+        setMapPosition
       }}
     >
       {children}

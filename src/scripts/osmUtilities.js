@@ -34,63 +34,64 @@ function getWalkingTime(distanceKm, speedKmh = 4) {
   return timeString.trim() || "0min"; // Return '0min' if no time is calculated
 }
 
-// maybe by passing the map
-export async function getPoints(
-  userLocation,
-  userFilters,
-  mapBounds,
-  POIsetterFunction,
-  statusSetterFunction
-) {
+export async function getPoints(userLocation, userFilters, mapBounds) {
+  if (!mapBounds) return { success: false, POIs: [] };
+
   const { water, food, toilets } = userFilters;
   const boundingBox = `${mapBounds.minLat},${mapBounds.minLng},${mapBounds.maxLat},${mapBounds.maxLng}`;
   const maxObjects = 2000;
-  statusSetterFunction("fetching data");
-  fetch("https://overpass-api.de/api/interpreter", {
-    method: "POST",
-    // The body contains the query
-    // to understand the query language see "The Programmatic Query Language" on
-    // https://wiki.openstreetmap.org/wiki/Overpass_API#The_Programmatic_Query_Language_(OverpassQL)
-    body:
-      "data=" +
-      encodeURIComponent(`
-          [bbox:${boundingBox}]
-          [out:json]
-          [timeout:25]
-          ;
-          (
-            ${water?`node["amenity"="drinking_water"](${boundingBox});`:''}
-            ${toilets?`node["amenity"="toilets"](${boundingBox});`:''}
-            ${food?`node["amenity"="restaurant"](${boundingBox});`:''}
-          );
-          out geom ${maxObjects};
+
+  try {
+    // Fetch data from Overpass API
+    const response = await fetch("https://overpass-api.de/api/interpreter", {
+      method: "POST",
+      body:
+        "data=" +
+        encodeURIComponent(`
+        [bbox:${boundingBox}]
+        [out:json]
+        [timeout:25];
+        (
+          ${water ? `node["amenity"="drinking_water"](${boundingBox});` : ""}
+          ${toilets ? `node["amenity"="toilets"](${boundingBox});` : ""}
+          ${food ? `node["amenity"="restaurant"](${boundingBox});` : ""}
+        );
+        out geom ${maxObjects};
       `),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        statusSetterFunction("server error");
-      } else {
-        statusSetterFunction("data received");
-      }
-      return response.json();
-    })
-    .then((result) => {
-      POIsetterFunction(
-        result.elements
-          .map((point) => {
-            const distance = getDistanceFromLatLonInKm(
-              userLocation.lat,
-              userLocation.lng,
-              point.lat,
-              point.lon
-            );
-            return {
-              ...point,
-              distanceKm: distance,
-              walkTime: getWalkingTime(distance), // Pass userSpeed if needed
-            };
-          })
-          .sort((pointA, pointB) => pointA.distanceKm - pointB.distanceKm)
-      );
     });
+
+    if (!response.ok) return { success: false, POIs: [] };
+
+    // Parse the response as JSON
+    const result = await response.json();
+
+    const points = result.elements.sort((pointA, pointB) => {
+      const distanceA = getDistanceFromLatLonInKm(
+        userLocation.lat,
+        userLocation.lng,
+        pointA.lat,
+        pointA.lon
+      );
+      const distanceB = getDistanceFromLatLonInKm(
+        userLocation.lat,
+        userLocation.lng,
+        pointB.lat,
+        pointB.lon
+      );
+
+      // Directly mutating the point objects to include distance and walkTime
+      pointA.distanceKm = distanceA;
+      pointA.walkTime = getWalkingTime(distanceA);
+
+      pointB.distanceKm = distanceB;
+      pointB.walkTime = getWalkingTime(distanceB);
+
+      // Sorting based on distance
+      return distanceA - distanceB;
+    });
+
+    return { success: true, POIs: points };
+  } catch {
+    return { success: false, POIs: [] };
+  }
 }

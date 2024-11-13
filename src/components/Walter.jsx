@@ -7,7 +7,7 @@ function Walter() {
   const checkFirstRender = useRef(true);
   const checkSecondRender = useRef(true);
 
-  const { areaPOIs } = usePOIs();
+  const { POIs } = usePOIs();
 
   const [walterIsVisible, setWalterIsVisible] = useState(false);
   const [message, setMessage] = useState("");
@@ -66,10 +66,10 @@ function Walter() {
       checkSecondRender.current = false;
       return;
     }
-    if (areaPOIs.length === 0) {
+    if (POIs.length === 0) {
       walterSays(randomEntry(failMessages), 3500);
     }
-  }, [areaPOIs]);
+  }, [POIs]);
 
   return (
     <div className={`walter-container ${walterIsVisible ? "" : "hidden"}`}>

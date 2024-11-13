@@ -5,7 +5,7 @@ import { getPoints } from "../scripts/osmUtilities";
 const PointsOfInterestContext = createContext();
 
 export default function PointsOfInterestProvider({ children }) {
-  const { userLocation, mapPosition, recenterIsNeeded } = usePosition();
+  const { userLocation, mapPosition } = usePosition();
 
   const storedFilters = localStorage.getItem("userFilters");
 
@@ -54,39 +54,50 @@ export default function PointsOfInterestProvider({ children }) {
     setPOIs(() => newPOIs);
   }, [areaPOIs, userFilters]);
 
-  const fetchPOIs = () => {
-    getPoints(
+  const fetchPOIs = async (center) => {
+    setRequestStatus("fetching data");
+    let bounds = {};
+    if (center === "user") {
+      bounds = {
+        minLat: userLocation.lat - 0.25,
+        maxLat: userLocation.lat + 0.25,
+        minLng: userLocation.lng - 0.25,
+        maxLng: userLocation.lng + 0.25,
+      };
+    } else {
+      bounds = mapPosition.bounds;
+    }
+
+    const { success, POIs } = await getPoints(
       userLocation,
       userFilters,
-      mapPosition.bounds,
-      setAreaPOIs,
-      setRequestStatus
+      bounds
     );
+
+    if (success) {
+      setAreaPOIs(POIs);
+      setRequestStatus("data received");
+      //TODO : kill this timeout in the useEffect
+      setTimeout(() => setRequestStatus("ready to fetch"), 1000);
+    } else {
+      setRequestStatus("server error");
+    }
   };
 
   useEffect(() => {
-    // TODO : handle the case where map Position.bounds isn't defined
-    const bounds = {
-      minLat: userLocation.lat - 0.25,
-      maxLat: userLocation.lat + 0.25,
-      minLng: userLocation.lng - 0.25,
-      maxLng: userLocation.lng + 0.25,
-    };
-    getPoints(userLocation, userFilters, bounds, setAreaPOIs, setRequestStatus);
-  }, [userLocation, recenterIsNeeded]);
+    fetchPOIs("user");
+  }, [userLocation]);
 
+  // Used to fetch new data everytime the map is moved
   useEffect(() => {
-    if (requestStatus === "data received") {
-      setTimeout(() => setRequestStatus("ready to fetch"), 1000);
-    }
-  }, [requestStatus]);
+    fetchPOIs();
+  }, [mapPosition, userFilters]);
 
   return (
     <PointsOfInterestContext.Provider
       value={{
         userFilters,
         setUserFilters,
-        areaPOIs,
         POIs,
         fetchPOIs,
         targetPOIPosition,
@@ -99,6 +110,4 @@ export default function PointsOfInterestProvider({ children }) {
   );
 }
 
-export {PointsOfInterestContext}
-
-
+export { PointsOfInterestContext };
