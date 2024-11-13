@@ -16,6 +16,7 @@ export default function ListToggle({ listState }) {
         className="toggle-input"
         checked={!listIsDisplayed}
         onClick={handleToggle}
+        onChange={handleToggle}
       />
 
       <input
@@ -25,6 +26,7 @@ export default function ListToggle({ listState }) {
         className="toggle-input"
         checked={listIsDisplayed}
         onClick={handleToggle}
+        onChange={handleToggle}
       />
 
       <label htmlFor="toggle-input-map" className="map-label">
