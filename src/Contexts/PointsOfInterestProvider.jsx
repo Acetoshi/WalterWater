@@ -54,7 +54,7 @@ export default function PointsOfInterestProvider({ children }) {
     setPOIs(() => newPOIs);
   }, [areaPOIs, userFilters]);
 
-  const fetchPOIs =  async (center) => {
+  const fetchPOIs = async (center) => {
     setRequestStatus("fetching data");
     let bounds = {};
     if (center === "user") {
@@ -65,19 +65,14 @@ export default function PointsOfInterestProvider({ children }) {
         maxLng: userLocation.lng + 0.25,
       };
     } else {
-      if (mapPosition && mapPosition.bounds) {
-        bounds = mapPosition.bounds;
-      } else {
-        bounds = {
-          minLat: 0,
-          maxLat: 0,
-          minLng: 0,
-          maxLng: 0,
-        };
-      }
+      bounds = mapPosition.bounds;
     }
 
-    const { success, POIs } = await getPoints(userLocation, userFilters, bounds);
+    const { success, POIs } = await getPoints(
+      userLocation,
+      userFilters,
+      bounds
+    );
 
     if (success) {
       setAreaPOIs(POIs);

@@ -34,15 +34,8 @@ function getWalkingTime(distanceKm, speedKmh = 4) {
   return timeString.trim() || "0min"; // Return '0min' if no time is calculated
 }
 
-
-//TODO : await the result properly in the context
-export async function getPoints(
-  userLocation,
-  userFilters,
-  mapBounds
-) {
-
-  if(!mapBounds) return {success:false,POIs:[]}
+export async function getPoints(userLocation, userFilters, mapBounds) {
+  if (!mapBounds) return { success: false, POIs: [] };
 
   const { water, food, toilets } = userFilters;
   const boundingBox = `${mapBounds.minLat},${mapBounds.minLng},${mapBounds.maxLat},${mapBounds.maxLng}`;
@@ -72,25 +65,33 @@ export async function getPoints(
     // Parse the response as JSON
     const result = await response.json();
 
-    console.log(result)
-
     const points = result.elements.sort((pointA, pointB) => {
-      const distanceA = getDistanceFromLatLonInKm(userLocation.lat, userLocation.lng, pointA.lat, pointA.lon);
-      const distanceB = getDistanceFromLatLonInKm(userLocation.lat, userLocation.lng, pointB.lat, pointB.lon);
-    
+      const distanceA = getDistanceFromLatLonInKm(
+        userLocation.lat,
+        userLocation.lng,
+        pointA.lat,
+        pointA.lon
+      );
+      const distanceB = getDistanceFromLatLonInKm(
+        userLocation.lat,
+        userLocation.lng,
+        pointB.lat,
+        pointB.lon
+      );
+
       // Directly mutating the point objects to include distance and walkTime
       pointA.distanceKm = distanceA;
       pointA.walkTime = getWalkingTime(distanceA);
-    
+
       pointB.distanceKm = distanceB;
       pointB.walkTime = getWalkingTime(distanceB);
-    
+
       // Sorting based on distance
       return distanceA - distanceB;
     });
 
     return { success: true, POIs: points };
   } catch {
-    return { success: false, POIs: [] }
+    return { success: false, POIs: [] };
   }
 }
