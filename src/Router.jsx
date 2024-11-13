@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <Outlet />, // Use <Outlet /> as a component
+        element: <Outlet />,
         children: [
           {
             path: "support",
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/frequently-asked-questions",
-        element: <FrequentlyAskedQuestions />, // Use <Outlet /> as a component
+        element: <FrequentlyAskedQuestions />,
       },
     ],
   },

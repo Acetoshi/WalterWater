@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import router from "./Router.jsx";
 import { RouterProvider } from "react-router-dom";
-import "./styles/global.css";
+import router from "./Router.jsx";
 import PositionProvider from "./Contexts/PositionProvider";
 import PointsOfInterestProvider from "./Contexts/PointsOfInterestProvider";
+import "./styles/global.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
