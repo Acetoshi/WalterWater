@@ -54,29 +54,38 @@ export default function PointsOfInterestProvider({ children }) {
     setPOIs(() => newPOIs);
   }, [areaPOIs, userFilters]);
 
-  const fetchPOIs = (center = "view") => {
-    if (center === "view") {
-      getPoints(
-        userLocation,
-        userFilters,
-        mapPosition.bounds,
-        setAreaPOIs,
-        setRequestStatus
-      );
-    } else if (center === "user") {
-      const bounds = {
+  const fetchPOIs =  async (center) => {
+    setRequestStatus("fetching data");
+    let bounds = {};
+    if (center === "user") {
+      bounds = {
         minLat: userLocation.lat - 0.25,
         maxLat: userLocation.lat + 0.25,
         minLng: userLocation.lng - 0.25,
         maxLng: userLocation.lng + 0.25,
       };
-      getPoints(
-        userLocation,
-        userFilters,
-        bounds,
-        setAreaPOIs,
-        setRequestStatus
-      );
+    } else {
+      if (mapPosition && mapPosition.bounds) {
+        bounds = mapPosition.bounds;
+      } else {
+        bounds = {
+          minLat: 0,
+          maxLat: 0,
+          minLng: 0,
+          maxLng: 0,
+        };
+      }
+    }
+
+    const { success, POIs } = await getPoints(userLocation, userFilters, bounds);
+
+    if (success) {
+      setAreaPOIs(POIs);
+      setRequestStatus("data received");
+      //TODO : kill this timeout in the useEffect
+      setTimeout(() => setRequestStatus("ready to fetch"), 1000);
+    } else {
+      setRequestStatus("server error");
     }
   };
 
@@ -84,11 +93,10 @@ export default function PointsOfInterestProvider({ children }) {
     fetchPOIs("user");
   }, [userLocation]);
 
+  // Used to fetch new data everytime the map is moved
   useEffect(() => {
-    if (requestStatus === "data received") {
-      setTimeout(() => setRequestStatus("ready to fetch"), 1000);
-    }
-  }, [requestStatus]);
+    fetchPOIs();
+  }, [mapPosition, userFilters]);
 
   return (
     <PointsOfInterestContext.Provider
