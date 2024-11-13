@@ -103,7 +103,6 @@ export default function PointsOfInterestProvider({ children }) {
       value={{
         userFilters,
         setUserFilters,
-        areaPOIs,
         POIs,
         fetchPOIs,
         targetPOIPosition,
