@@ -74,41 +74,23 @@ export async function getPoints(
 
     console.log(result)
 
-    const points = result.elements
-      .map((point) => {
-        const distance = getDistanceFromLatLonInKm(
-          userLocation.lat,
-          userLocation.lng,
-          point.lat,
-          point.lon
-        );
-        return {
-          ...point,
-          distanceKm: distance,
-          walkTime: getWalkingTime(distance), // Pass userSpeed if needed
-        };
-      })
-      .sort((pointA, pointB) => pointA.distanceKm - pointB.distanceKm);
+    const points = result.elements.sort((pointA, pointB) => {
+      const distanceA = getDistanceFromLatLonInKm(userLocation.lat, userLocation.lng, pointA.lat, pointA.lon);
+      const distanceB = getDistanceFromLatLonInKm(userLocation.lat, userLocation.lng, pointB.lat, pointB.lon);
+    
+      // Directly mutating the point objects to include distance and walkTime
+      pointA.distanceKm = distanceA;
+      pointA.walkTime = getWalkingTime(distanceA);
+    
+      pointB.distanceKm = distanceB;
+      pointB.walkTime = getWalkingTime(distanceB);
+    
+      // Sorting based on distance
+      return distanceA - distanceB;
+    });
 
     return { success: true, POIs: points };
   } catch {
     return { success: false, POIs: [] }
   }
 }
-
-//TODO : improve with : 
-// Sort and compute distance and walkTime in one loop
-// points.sort((pointA, pointB) => {
-//   const distanceA = getDistanceFromLatLonInKm(userLocation.lat, userLocation.lng, pointA.lat, pointA.lon);
-//   const distanceB = getDistanceFromLatLonInKm(userLocation.lat, userLocation.lng, pointB.lat, pointB.lon);
-
-//   // Directly mutating the point objects to include distance and walkTime
-//   pointA.distanceKm = distanceA;
-//   pointA.walkTime = getWalkingTime(distanceA);
-
-//   pointB.distanceKm = distanceB;
-//   pointB.walkTime = getWalkingTime(distanceB);
-
-//   // Sorting based on distance
-//   return distanceA - distanceB;
-// });
