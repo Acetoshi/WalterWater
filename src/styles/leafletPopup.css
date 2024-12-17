@@ -1,7 +1,0 @@
-.leaflet-popup-content {
-  padding: 0.75rem 0;
-  min-width: 200px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
