@@ -26,47 +26,16 @@ const PositionContext =
   createContext<PositionContextValue>(defaultContextValue);
 
 export default function PositionProvider({ children }: ContextProps) {
-  // const storedUserPosition = {
-  //   lat: Number(localStorage.getItem("userLat")),
-  //   lng: Number(localStorage.getItem("userLon")),
-  // };
-
-  // const [userLocation, setUserLocation] = useState<LatLng>(
-  //   localStorage.getItem("userLat") === null
-  //     ? defaultUserPosition
-  //     : storedUserPosition
-  // );
-
   const [userLocation, setUserLocation] = useLocalStorage<LatLng>(
     "userLatLng",
     defaultUserPosition
   );
 
-  // memorize last user location if different from the default one
-  // needed to always show the user his/her last location on next visit
-  useEffect(() => {
-    if (
-      userLocation.lat !== defaultUserPosition.lat &&
-      userLocation.lng !== defaultUserPosition.lng
-    ) {
-      localStorage.setItem("userLat", userLocation.lat.toString());
-      localStorage.setItem("userLon", userLocation.lng.toString());
-    }
-  }, [userLocation]);
-
-  const [mapPosition, setMapPosition] = useState(
-    localStorage.getItem("userLat") === null
-      ? {
-          bounds: defaultBounds,
-          center: defaultUserPosition,
-          distanceFromUser: 0,
-        }
-      : {
-          bounds: defaultBounds,
-          center: storedUserPosition,
-          distanceFromUser: 0,
-        }
-  );
+  const [mapPosition, setMapPosition] = useLocalStorage("mapPosition", {
+    bounds: defaultBounds,
+    center: defaultUserPosition,
+    distanceFromUser: 0,
+  });
 
   return (
     <PositionContext.Provider

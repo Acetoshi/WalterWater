@@ -4,8 +4,6 @@ export interface ContextProps {
   children: ReactNode;
 }
 
-
-
 // used in the app
 export interface LatLng {
   lat: number;
@@ -22,7 +20,7 @@ export interface Point {
   walkTime: string;
   tags: {
     amenity: "drinking_water" | "toilets" | "restaurant";
-    [key: string]: any;  // POIs can have any type of tags
+    [key: string]: any; // POIs can have any type of tags
   };
 }
 
@@ -48,7 +46,7 @@ export interface MapPosition {
 
 export interface PointsOfInterestContextValue {
   userFilters: UserFilters;
-  setUserFilters: React.Dispatch<React.SetStateAction<UserFilters>>;
+  setUserFilters: (value: UserFilters) => void;
   POIs: Point[];
   fetchPOIs: (center?: string) => Promise<void>;
   targetPOIPosition: { lat: number; lng: number };
@@ -58,10 +56,9 @@ export interface PointsOfInterestContextValue {
   requestStatus: string;
 }
 
-
 export interface PositionContextValue {
   userLocation: LatLng;
-  setUserLocation: React.Dispatch<React.SetStateAction<LatLng>>;
+  setUserLocation: (value: LatLng) => void;
   mapPosition: MapPosition;
-  setMapPosition: React.Dispatch<React.SetStateAction<MapPosition>>;
+  setMapPosition: (value: MapPosition) => void;
 }

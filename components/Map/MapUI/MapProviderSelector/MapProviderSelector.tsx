@@ -1,5 +1,4 @@
 "use client";
-import { useEffect } from "react";
 import Image from "next/image";
 import mapProviders from "./mapProviders.json";
 import MapProviderSelectorProps from "./MapProviderSelector.props";
@@ -11,10 +10,10 @@ export default function MapProviderSelector({
 }: MapProviderSelectorProps) {
   //see how the menu gets auto-closed when the map moves in MapTracker Component
 
-  // this is needed to useLocalStorage to remember the user's last map provider
-  useEffect(() => {
-    localStorage.setItem("mapProviderId", mapSelecter.providerId.toString());
-  }, [mapSelecter]);
+  // // this is needed to useLocalStorage to remember the user's last map provider
+  // useEffect(() => {
+  //   localStorage.setItem("mapProviderId", mapSelecter.providerId.toString());
+  // }, [mapSelecter]);
 
   return (
     <div id="map-provider-selector-container">

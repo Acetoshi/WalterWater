@@ -6,7 +6,7 @@ export default function useLocalStorage<T>(
 ): [T, (value: T) => void] {
   const [storedValue, setStoredValue] = useState<T>(initialValue);
 
-  const isBrowserEnvironment = typeof window !== "undefined";
+  const isBrowserEnvironment = window //typeof window !== "undefined";
 
   useEffect(() => {
     // Check if we're in the browser
