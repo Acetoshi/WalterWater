@@ -1,5 +1,6 @@
 "use client";
 import { useEffect } from "react";
+import Image from "next/image";
 import mapProviders from "./mapProviders.json";
 import MapProviderSelectorProps from "./MapProviderSelector.props";
 import "./MapProviderSelector.css";
@@ -28,10 +29,10 @@ export default function MapProviderSelector({
           })
         }
       >
-        <img
+        <Image
           src="/icons/layers.svg"
           alt="recenter the map on your position"
-        ></img>
+        ></Image>
       </button>
       <div
         className={`map-provider-menu-mask ${
@@ -57,16 +58,16 @@ export default function MapProviderSelector({
                 }
               >
                 {provider.alias === "simple" && (
-                  <img src="/mapPreviews/simple.jpg" alt="" />
+                  <Image src="/mapPreviews/simple.jpg" alt="" />
                 )}
                 {provider.alias === "detailed" && (
-                  <img src="/mapPreviews/detailed.jpg" alt="" />
+                  <Image src="/mapPreviews/detailed.jpg" alt="" />
                 )}
                 {provider.alias === "cycling" && (
-                  <img src="/mapPreviews/cycle.jpg" alt="" />
+                  <Image src="/mapPreviews/cycle.jpg" alt="" />
                 )}
                 {provider.alias === "satellite" && (
-                  <img src="/mapPreviews/satellite.jpg" alt="" />
+                  <Image src="/mapPreviews/satellite.jpg" alt="" />
                 )}
                 <p>{provider.alias}</p>
               </button>

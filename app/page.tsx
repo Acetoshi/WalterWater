@@ -14,9 +14,10 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import MapProviderSelector from "@/components/MapProviderSelector/MapProviderSelector";
 // import DataFetchingNotifier from "../components/DataFetchingNotifier";
 import mapProviders from "@/components/MapProviderSelector/mapProviders.json"
+import "leaflet/dist/leaflet.css";
 
 export default function Map() {
-  const [listIsDisplayed, setListIsDisplayed] = useState(false);
+  // const [listIsDisplayed, setListIsDisplayed] = useState(false);
   const [mapSelecter, setMapSelecter] = useState({
     isOpen: false,
     providerId: Number(localStorage.getItem("mapProviderId")),

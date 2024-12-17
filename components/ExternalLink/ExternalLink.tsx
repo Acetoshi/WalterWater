@@ -1,4 +1,5 @@
 import ExternalLinkProps from "./ExternalLink.props";
+import Image from "next/image";
 import "./ExternalLink.css";
 
 export default function ExternalLink({ href, children }: ExternalLinkProps) {
@@ -10,7 +11,7 @@ export default function ExternalLink({ href, children }: ExternalLinkProps) {
       rel="noopener noreferrer"
     >
       {children}
-      <img
+      <Image
         className="external-link-icon"
         src="/icons/external-link.svg"
         alt=""

@@ -1,11 +1,25 @@
-"use client"
+"use client";
 import { createContext, useState, useEffect, ContextType } from "react";
-import { ContextProps, LatLng } from "../contexts.types";
+import { ContextProps, LatLng, PositionContextValue } from "../contexts.types";
 
-const PositionContext = createContext<ContextType>();
+const defaultUserPosition = { lat: 48.86, lng: 2.33 };
+const defaultBounds = { minLat: 48.85, minLng: 2.32, maxLat: 48.87, maxLng: 2.34 }
+
+const defaultContextValue: PositionContextValue = {
+  userLocation: defaultUserPosition,
+  setUserLocation: () => {},
+  mapPosition: {
+    bounds: defaultBounds,
+    center: defaultUserPosition,
+    distanceFromUser: 0,
+  },
+  setMapPosition: () => {},
+};
+
+const PositionContext =
+  createContext<PositionContextValue>(defaultContextValue);
 
 export default function PositionProvider({ children }: ContextProps) {
-  const defaultUserPosition = { lat: 48.86, lng: 2.33 };
   const storedUserPosition = {
     lat: Number(localStorage.getItem("userLat")),
     lng: Number(localStorage.getItem("userLon")),
@@ -31,8 +45,8 @@ export default function PositionProvider({ children }: ContextProps) {
 
   const [mapPosition, setMapPosition] = useState(
     localStorage.getItem("userLat") === null
-      ? { bounds: null, center: defaultUserPosition, distanceFromUser: 0 }
-      : { bounds: null, center: storedUserPosition, distanceFromUser: 0 }
+      ? { bounds: defaultBounds, center: defaultUserPosition, distanceFromUser: 0 }
+      : { bounds: defaultBounds, center: storedUserPosition, distanceFromUser: 0 }
   );
 
   return (

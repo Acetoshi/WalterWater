@@ -3,7 +3,6 @@ import Navbar from "@/components/NavBar/Navbar";
 import "./globals.css";
 import PositionProvider from "@/contexts/Position/PositionProvider";
 import PointsOfInterestProvider from "@/contexts/PointsOfInterest/PointsOfInterestProvider";
-import Head from "next/head";
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -17,14 +16,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        <Head>
-          <link
-            rel="stylesheet"
-            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-            crossOrigin="anonymous"
-          />
-        </Head>
       <body>
         <PositionProvider>
           <PointsOfInterestProvider>
