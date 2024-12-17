@@ -6,7 +6,7 @@ export default function BackToMapButton() {
   return (
     <div className="redirect-button-wrapper">
       <Link href="/" className="redirect-button button-feedback">
-        <Image src="/icons/return.svg" alt="" />
+        <Image width={20} height={18} src="/icons/return.svg" alt="" />
         back to the map
       </Link>
     </div>

@@ -7,7 +7,7 @@ a.external-link {
     gap:0.2rem;
     align-items: center;
 
-    & img.external-link-icon {
+    & .external-link-icon {
         height: var(--font-size);
     }
 }

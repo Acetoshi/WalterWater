@@ -12,6 +12,8 @@ export default function ExternalLink({ href, children }: ExternalLinkProps) {
     >
       {children}
       <Image
+        width={16}
+        height={16}
         className="external-link-icon"
         src="/icons/external-link.svg"
         alt=""

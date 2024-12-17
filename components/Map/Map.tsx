@@ -3,8 +3,6 @@ import { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import PositionProvider from "@/contexts/Position/PositionProvider";
 import PointsOfInterestProvider from "@/contexts/PointsOfInterest/PointsOfInterestProvider";
-// import UserMarker from "../components/UserMarker";
-// import Markers from "../components/Markers";
 // import MapTracker from "../components/MapTracker";
 // import POIsFocuser from "../components/POIsFocuser";
 // import Capybara from "../components/EasterEgg";
@@ -15,8 +13,10 @@ import PointsOfInterestProvider from "@/contexts/PointsOfInterest/PointsOfIntere
 import MapProviderSelector from "./MapUI/MapProviderSelector/MapProviderSelector";
 // import DataFetchingNotifier from "../components/DataFetchingNotifier";
 import mapProviders from "./MapUI/MapProviderSelector/mapProviders.json";
-import "leaflet/dist/leaflet.css";
 import Walter from "./MapUI/Walter/Walter";
+// import MarkerCluster from "./MapUI/Markers/MarkerCluster/MarkerCluster";
+import UserMarker from "./MapUI/Markers/UserMaker/UserMarker";
+import "leaflet/dist/leaflet.css";
 
 export default function Map() {
   // const [listIsDisplayed, setListIsDisplayed] = useState(false);
@@ -44,9 +44,9 @@ export default function Map() {
               attribution={mapProviders[mapSelecter.providerId].attribution}
               url={mapProviders[mapSelecter.providerId].tilesUrl}
             />
-            {/* <Markers />
-        <UserMarker />
-        <MapTracker setMapSelecter={setMapSelecter} />
+            {/* <MarkerCluster /> */}
+            <UserMarker />
+            {/* <MapTracker setMapSelecter={setMapSelecter} />
 
         <DataFetchingNotifier />
         <RecenterButton />
@@ -54,7 +54,7 @@ export default function Map() {
         <FiltersDrawer listState={{ listIsDisplayed, setListIsDisplayed }} />
         <ListToggle listState={{ listIsDisplayed, setListIsDisplayed }} /> */}
 
-        <Walter />
+            <Walter />
           </MapContainer>
         </PointsOfInterestProvider>
       </PositionProvider>

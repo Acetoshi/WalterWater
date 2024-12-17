@@ -1,0 +1,11 @@
+.marker-cluster{
+    background-color: var(--main-color) !important;
+    opacity: 75%;
+    & div{
+        background-color: var(--main-color) !important;
+        opacity: 100%;
+        & span{
+            font-size: 18px;
+        }
+    }
+}
