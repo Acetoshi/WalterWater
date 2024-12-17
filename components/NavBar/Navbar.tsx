@@ -14,7 +14,7 @@ export default function Navbar() {
     { to: "/", label: "Map", icon: "" },
     { to: "/get-the-app", label: "Dowload the App", icon: "" },
     { to: "/frequently-asked-questions", label: "FAQs & Support", icon: "" },
-    { to: "/about/privacy", label: "Privacy Policy", icon: "" },
+    { to: "/privacy-policy", label: "Privacy Policy", icon: "" },
   ];
 
   return (
