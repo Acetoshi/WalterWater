@@ -1,0 +1,14 @@
+a {
+  color: var(--main-color);
+}
+
+a.external-link {
+    display: inline-flex;
+    gap:0.2rem;
+    align-items: center;
+
+    & .external-link-icon {
+        height: var(--font-size);
+    }
+}
+

@@ -1,40 +1,36 @@
-# Walter Water App
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Welcome to the **Walter Water App**! This web application helps users find nearby toilets and water points using OpenStreetMap data. Built with React, Walter Water provides a user-friendly interface to enhance your outdoor experiences.
+## Getting Started
 
-## Features
-
-- **Find Nearby Toilets and Water Points**: Easily locate essential facilities in your vicinity.
-- **Interactive Map**: Explore locations with an interactive map powered by OpenStreetMap.
-- **User-Friendly Interface**: Intuitive design for seamless navigation.
-- **Search Functionality**: Quickly search for facilities based on your current location.
-
-## Tech Stack
-
-- **React**: A JavaScript library for building user interfaces.
-- **OpenStreetMap**: Provides the mapping data for locations.
-
-## Installation
-
-### Prerequisites
-
-- Node.js (>= 14.x)
-- npm or yarn
-
-### Clone the Repository
+First, run the development server:
 
 ```bash
-git clone https://github.com/yourusername/walter-water-app.git
-cd walter-water-app
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-### Usage
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-    Allow Location Access: The app will request access to your location to find nearby toilets and water points.
-    Explore the Map: Zoom in/out and move around the map to discover facilities.
-    Search: Use the search bar to find specific locations or services.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-### Contact
+## Learn More
 
-For questions, suggestions, or issues, please open an issue in the repository
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
