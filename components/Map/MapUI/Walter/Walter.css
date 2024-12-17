@@ -1,0 +1,131 @@
+.walter-container {
+  position: absolute;
+  right: 16px;
+  bottom: -12px;
+  z-index: 1998;
+  transition: all 0.2s ease-out;
+
+}
+
+#walter {
+  height: 7rem;
+}
+
+.walter-container.hidden {
+  animation: 4s ease-in 0s transform;
+  transition-property: transform;
+  transition: transform 1s ease-out;
+  transform: translateY(45px);
+}
+
+.walter-infotip {
+  position: absolute;
+  left: -229px;
+  bottom: 100px;
+  border-radius: 20px 20px 0 20px;
+  background-color: #fff;
+  padding: 1.2rem;
+  width: 230px;
+
+  & p {
+    color: var(--grey-darker);
+    margin-top: 16px;
+  }
+
+  & .enable-location-button {
+    color: white;
+    margin: 0 auto;
+    padding: 8px 16px;
+    border-radius: 16px;
+    background-color: var(--main-color);
+    font-size: var(--font-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    margin-top: 8px;
+  }
+  & .enable-location-button.disabled {
+    background-color: grey !important;
+    opacity: 80%;
+    cursor: not-allowed;
+  }
+}
+
+.walter-infotip.fade-out {
+  transition: all 0.3s ease-in;
+  z-index: 0;
+  animation: 0.3s ease-in 0s 1 normal both fade-out;
+  & p {
+    visibility: hidden;
+  }
+}
+
+.walter-container .button-close-infotip {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: var(--secondary-color);
+  font-size: 0.8rem;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    width: 230px;
+    padding: 1.2rem;
+    visibility: visible;
+  }
+
+  99% {
+    opacity: 0;
+    width: 230px;
+    padding: 1.2rem;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    width: 0px;
+    padding: 0;
+    visibility: hidden;
+  }
+}
+
+/* .hide-walter .icon-walter-color { 
+ animation: 2s ease-in 1s infinite normal both bounce; 
+ } */
+
+/* @keyframes bounce {
+  70% {
+    transform: translateY(0%);
+  }
+
+  80% {
+    transform: translateY(-15%);
+  }
+
+  90% {
+    transform: translateY(0%);
+  }
+
+  95% {
+    transform: translateY(-7%);
+  }
+
+  97% {
+    transform: translateY(0%);
+  }
+
+  99% {
+    transform: translateY(-3%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+} */

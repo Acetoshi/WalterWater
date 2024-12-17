@@ -7,16 +7,16 @@ import PointsOfInterestProvider from "@/contexts/PointsOfInterest/PointsOfIntere
 // import Markers from "../components/Markers";
 // import MapTracker from "../components/MapTracker";
 // import POIsFocuser from "../components/POIsFocuser";
-// import Walter from "../components/Walter";
 // import Capybara from "../components/EasterEgg";
 // import ListToggle from "../components/ListToggle";
 // import ListView from "../components/ListView";
 // import RecenterButton from "../components/RecenterButton";
 // import FiltersDrawer from "../components/FiltersDrawer";
-import MapProviderSelector from "@/components/Map/MapUI/MapProviderSelector/MapProviderSelector";
+import MapProviderSelector from "./MapUI/MapProviderSelector/MapProviderSelector";
 // import DataFetchingNotifier from "../components/DataFetchingNotifier";
-import mapProviders from "@/components/Map/MapUI/MapProviderSelector/mapProviders.json";
+import mapProviders from "./MapUI/MapProviderSelector/mapProviders.json";
 import "leaflet/dist/leaflet.css";
+import Walter from "./MapUI/Walter/Walter";
 
 export default function Map() {
   // const [listIsDisplayed, setListIsDisplayed] = useState(false);
@@ -52,10 +52,9 @@ export default function Map() {
         <RecenterButton />
         <POIsFocuser />
         <FiltersDrawer listState={{ listIsDisplayed, setListIsDisplayed }} />
-        <ListToggle listState={{ listIsDisplayed, setListIsDisplayed }} />
+        <ListToggle listState={{ listIsDisplayed, setListIsDisplayed }} /> */}
 
-        <Capybara />
-        <Walter /> */}
+        <Walter />
           </MapContainer>
         </PointsOfInterestProvider>
       </PositionProvider>
