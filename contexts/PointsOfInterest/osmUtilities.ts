@@ -1,4 +1,11 @@
-export function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
+import { LatLng, MapBounds, Point, UserFilters } from "../contexts.types";
+
+export function getDistanceFromLatLonInKm(
+  lat1: number,
+  lng1: number,
+  lat2: number,
+  lng2: number
+) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2 - lat1); // deg2rad below
   var dLng = deg2rad(lng2 - lng1);
@@ -13,12 +20,12 @@ export function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
   return d.toFixed(2); //to fixed returns only 2 decimal places.
 }
 
-function deg2rad(deg) {
+function deg2rad(deg: number) {
   return deg * (Math.PI / 180);
 }
 
-function getWalkingTime(distanceKm, speedKmh = 4) {
-  const totalTimeInHours = distanceKm / speedKmh;
+function getWalkingTime(distanceKm: string, speedKmh = 4) {
+  const totalTimeInHours = Number(distanceKm) / speedKmh;
 
   const days = Math.floor(totalTimeInHours / 24);
   const hours = Math.floor(totalTimeInHours % 24);
@@ -34,7 +41,11 @@ function getWalkingTime(distanceKm, speedKmh = 4) {
   return timeString.trim() || "0min"; // Return '0min' if no time is calculated
 }
 
-export async function getPoints(userLocation, userFilters, mapBounds) {
+export async function getPoints(
+  userLocation: LatLng,
+  userFilters: UserFilters,
+  mapBounds: MapBounds
+) {
   if (!mapBounds) return { success: false, POIs: [] };
 
   const { water, food, toilets } = userFilters;
@@ -65,7 +76,7 @@ export async function getPoints(userLocation, userFilters, mapBounds) {
     // Parse the response as JSON
     const result = await response.json();
 
-    const points = result.elements.sort((pointA, pointB) => {
+    const points = result.elements.sort((pointA: Point, pointB: Point) => {
       const distanceA = getDistanceFromLatLonInKm(
         userLocation.lat,
         userLocation.lng,
@@ -87,7 +98,7 @@ export async function getPoints(userLocation, userFilters, mapBounds) {
       pointB.walkTime = getWalkingTime(distanceB);
 
       // Sorting based on distance
-      return distanceA - distanceB;
+      return Number(distanceA) - Number(distanceB);
     });
 
     return { success: true, POIs: points };
