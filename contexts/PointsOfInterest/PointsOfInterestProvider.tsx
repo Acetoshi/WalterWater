@@ -8,6 +8,7 @@ import {
   PointsOfInterestContextValue,
   UserFilters,
 } from "../contexts.types";
+import useLocalStorage from "@/utilities/useLocalStorage";
 import { usePosition } from "../Position/usePosition";
 import { getPoints } from "./osmUtilities";
 
@@ -17,20 +18,13 @@ const PointsOfInterestContext =
 export default function PointsOfInterestProvider({ children }: ContextProps) {
   const { userLocation, mapPosition } = usePosition();
 
-  const storedFilters = localStorage.getItem("userFilters");
-
-  const [userFilters, setUserFilters] = useState<UserFilters>(
-    storedFilters
-      ? {
-          water: storedFilters[0] === "1",
-          food: storedFilters[1] === "1",
-          toilets: storedFilters[2] === "1",
-        }
-      : {
-          water: true,
-          food: false,
-          toilets: true,
-        }
+  const [userFilters, setUserFilters] = useLocalStorage<UserFilters>(
+    "userFilters",
+    {
+      water: true,
+      food: false,
+      toilets: true,
+    }
   );
 
   const [requestStatus, setRequestStatus] = useState<string>("ready to fetch");
@@ -43,16 +37,6 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
     lat: 0,
     lng: 0,
   });
-
-  // store userFilters in localStorage
-  useEffect(() => {
-    localStorage.setItem(
-      "userFilters",
-      `${userFilters.water ? 1 : 0}${userFilters.food ? 1 : 0}${
-        userFilters.toilets ? 1 : 0
-      }`.toString()
-    );
-  }, [userFilters]);
 
   useEffect(() => {
     const newPOIs = areaPOIs.filter(
@@ -91,14 +75,14 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
     }
   };
 
-  useEffect(() => {
-    fetchPOIs("user");
-  }, [userLocation]);
+  // useEffect(() => {
+  //   fetchPOIs("user");
+  // }, [userLocation]);
 
   // Used to fetch new data everytime the map is moved
-  useEffect(() => {
-    fetchPOIs();
-  }, [mapPosition, userFilters]);
+  // useEffect(() => {
+  //   fetchPOIs();
+  // }, [mapPosition, userFilters]);
 
   return (
     <PointsOfInterestContext.Provider

@@ -31,6 +31,8 @@ export default function MapProviderSelector({
       >
         <Image
           src="/icons/layers.svg"
+          width={32}
+          height={34}
           alt="recenter the map on your position"
         ></Image>
       </button>
@@ -58,16 +60,36 @@ export default function MapProviderSelector({
                 }
               >
                 {provider.alias === "simple" && (
-                  <Image src="/mapPreviews/simple.jpg" alt="" />
+                  <Image
+                    width={36}
+                    height={36}
+                    src="/mapPreviews/simple.jpg"
+                    alt=""
+                  />
                 )}
                 {provider.alias === "detailed" && (
-                  <Image src="/mapPreviews/detailed.jpg" alt="" />
+                  <Image
+                    width={36}
+                    height={36}
+                    src="/mapPreviews/detailed.jpg"
+                    alt=""
+                  />
                 )}
                 {provider.alias === "cycling" && (
-                  <Image src="/mapPreviews/cycle.jpg" alt="" />
+                  <Image
+                    width={36}
+                    height={36}
+                    src="/mapPreviews/cycle.jpg"
+                    alt=""
+                  />
                 )}
                 {provider.alias === "satellite" && (
-                  <Image src="/mapPreviews/satellite.jpg" alt="" />
+                  <Image
+                    width={36}
+                    height={36}
+                    src="/mapPreviews/satellite.jpg"
+                    alt=""
+                  />
                 )}
                 <p>{provider.alias}</p>
               </button>

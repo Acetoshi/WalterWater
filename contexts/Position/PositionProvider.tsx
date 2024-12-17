@@ -1,9 +1,15 @@
 "use client";
 import { createContext, useState, useEffect, ContextType } from "react";
 import { ContextProps, LatLng, PositionContextValue } from "../contexts.types";
+import useLocalStorage from "@/utilities/useLocalStorage";
 
 const defaultUserPosition = { lat: 48.86, lng: 2.33 };
-const defaultBounds = { minLat: 48.85, minLng: 2.32, maxLat: 48.87, maxLng: 2.34 }
+const defaultBounds = {
+  minLat: 48.85,
+  minLng: 2.32,
+  maxLat: 48.87,
+  maxLng: 2.34,
+};
 
 const defaultContextValue: PositionContextValue = {
   userLocation: defaultUserPosition,
@@ -20,15 +26,20 @@ const PositionContext =
   createContext<PositionContextValue>(defaultContextValue);
 
 export default function PositionProvider({ children }: ContextProps) {
-  const storedUserPosition = {
-    lat: Number(localStorage.getItem("userLat")),
-    lng: Number(localStorage.getItem("userLon")),
-  };
+  // const storedUserPosition = {
+  //   lat: Number(localStorage.getItem("userLat")),
+  //   lng: Number(localStorage.getItem("userLon")),
+  // };
 
-  const [userLocation, setUserLocation] = useState<LatLng>(
-    localStorage.getItem("userLat") === null
-      ? defaultUserPosition
-      : storedUserPosition
+  // const [userLocation, setUserLocation] = useState<LatLng>(
+  //   localStorage.getItem("userLat") === null
+  //     ? defaultUserPosition
+  //     : storedUserPosition
+  // );
+
+  const [userLocation, setUserLocation] = useLocalStorage<LatLng>(
+    "userLatLng",
+    defaultUserPosition
   );
 
   // memorize last user location if different from the default one
@@ -45,8 +56,16 @@ export default function PositionProvider({ children }: ContextProps) {
 
   const [mapPosition, setMapPosition] = useState(
     localStorage.getItem("userLat") === null
-      ? { bounds: defaultBounds, center: defaultUserPosition, distanceFromUser: 0 }
-      : { bounds: defaultBounds, center: storedUserPosition, distanceFromUser: 0 }
+      ? {
+          bounds: defaultBounds,
+          center: defaultUserPosition,
+          distanceFromUser: 0,
+        }
+      : {
+          bounds: defaultBounds,
+          center: storedUserPosition,
+          distanceFromUser: 0,
+        }
   );
 
   return (
