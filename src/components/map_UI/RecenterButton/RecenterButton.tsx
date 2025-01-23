@@ -1,7 +1,7 @@
 import { useMap } from "react-leaflet";
-import { usePOIs } from "../hooks/usePOIs";
-import { usePosition } from "../hooks/usePosition";
-import "../styles/recenterButton.css";
+import { usePOIs } from "../../../hooks/usePOIs";
+import { usePosition } from "../../../hooks/usePosition";
+import "./RecenterButton.css";
 
 export default function RecenterButton() {
   const { userLocation, mapPosition } = usePosition();

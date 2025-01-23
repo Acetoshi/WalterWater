@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import mapProviders from "../scripts/mapProviders.json";
-import "../styles/mapProviderSelector.css";
+import mapProviders from "../../../scripts/mapProviders.json";
+import "./MapProviderSelector.css";
 
 export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
   //see how the menu gets auto-closed when the map moves in MapTracker Component

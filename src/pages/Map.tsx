@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
+import mapProviders from "../scripts/mapProviders.json";
 import UserMarker from "../components/UserMarker";
 import Markers from "../components/Markers";
 import MapTracker from "../components/MapTracker";
 import POIsFocuser from "../components/POIsFocuser";
 import Walter from "../components/Walter";
 import Capybara from "../components/EasterEgg";
-import ListToggle from "../components/ListToggle";
-import ListView from "../components/ListView";
-import RecenterButton from "../components/RecenterButton";
-import FiltersDrawer from "../components/FiltersDrawer";
-import mapProviders from "../scripts/mapProviders.json";
-import MapProviderSelector from "../components/MapProviderSelector";
-import DataFetchingNotifier from "../components/DataFetchingNotifier";
+import ListToggle from "../components/map_UI/ListToggle/ListToggle";
+import ListView from "../components/map_UI/ListView/ListView";
+import RecenterButton from "../components/map_UI/RecenterButton/RecenterButton";
+import FiltersDrawer from "../components/map_UI/FiltersDrawer/FiltersDrawer";
+import MapProviderSelector from "../components/map_UI/MapProviderSelector/MapProviderSelector";
+import DataFetchingNotifier from "../components/map_UI/DataFetchingNotifier/DataFetchingNotifier";
 
 export default function Map() {
-  const [listIsDisplayed, setListIsDisplayed] = useState(false);
+  const [listIsDisplayed, setListIsDisplayed] = useState<boolean>(false);
   const [mapSelecter, setMapSelecter] = useState({
     isOpen: false,
     providerId: Number(localStorage.getItem("mapProviderId")),

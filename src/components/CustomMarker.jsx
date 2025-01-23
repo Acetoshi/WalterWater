@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { faucetIcon, toiletIcon, foodIcon } from "../scripts/icons";
-import POIDetails from "./POIDetails";
+import POIDetails from "./map_UI/POIDetails/POIDetails";
 import "../styles/leafletPopup.css";
 
 function CustomMarkerComponent({ point, onMarkerClick }) {

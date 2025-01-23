@@ -1,6 +1,7 @@
-import "../styles/listToggle.css";
+import ListViewProps from "../ListView/Listview.props";
+import "./ListToggle.css";
 
-export default function ListToggle({ listState }) {
+export default function ListToggle({ listState }: ListViewProps) {
   const { listIsDisplayed, setListIsDisplayed } = listState;
 
   const handleToggle = () => setListIsDisplayed(!listIsDisplayed);
@@ -38,7 +39,6 @@ export default function ListToggle({ listState }) {
       </label>
 
       <span className="toggle-slider" />
-
     </fieldset>
   );
 }

@@ -49,10 +49,7 @@ export default function FrequentlyAskedQuestions() {
         <h2>Can I contribute to the map?</h2>
         <p>
           Yes! As Walter Water relies on OpenStreetMap data, you can directly{" "}
-          <ExternalLink
-            href="https://wiki.openstreetmap.org/wiki/Contribute_map_data"
-            target="_blank"
-          >
+          <ExternalLink href="https://wiki.openstreetmap.org/wiki/Contribute_map_data">
             contribute to the map
           </ExternalLink>
           . This helps keep the map up to date and useful for everyone. In the

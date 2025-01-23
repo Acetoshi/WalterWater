@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { usePOIs } from "../hooks/usePOIs";
-import "../styles/filtersDrawer.css";
+import { usePOIs } from "../../../hooks/usePOIs";
+import "./FiltersDrawer.css";
 
 export default function FiltersDrawer() {
   const { userFilters, setUserFilters } = usePOIs();
@@ -8,14 +8,13 @@ export default function FiltersDrawer() {
 
   return (
     <>
-        <button
-          id="drawer-background"
-          role="button"
-          className={isOpen ? "visible" : "hidden"}
-          aria-label="close drawer"
-          onClick={() => setIsOpen(false)}
-        >
-        </button>
+      <button
+        id="drawer-background"
+        role="button"
+        className={isOpen ? "visible" : "hidden"}
+        aria-label="close drawer"
+        onClick={() => setIsOpen(false)}
+      ></button>
       <div id="filters-drawer-container" className={isOpen ? "open" : "closed"}>
         <button
           id="filters-drawer-button"

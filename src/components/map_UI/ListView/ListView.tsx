@@ -1,9 +1,10 @@
 import { VariableSizeList as List } from "react-window";
-import { usePOIs } from "../hooks/usePOIs";
-import InfoCard from "./InfoCard";
-import "../styles/listview.css";
+import { usePOIs } from "../../../hooks/usePOIs";
+import InfoCard from "../InfoCard/InfoCard";
+import ListViewProps from "./Listview.props";
+import "./Listview.css";
 
-export default function ListView({ listState }) {
+export default function ListView({ listState }: ListViewProps) {
   const { POIs } = usePOIs();
   const { listIsDisplayed, setListIsDisplayed } = listState;
 

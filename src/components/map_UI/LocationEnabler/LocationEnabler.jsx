@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { usePosition } from "../hooks/usePosition";
+import { usePosition } from "../../../hooks/usePosition";
 
 // the point of this component is to avoid being too pushy with the user by requesting his location stairght up
 
@@ -33,10 +33,8 @@ export default function LocationEnabler({
         }
       );
     } else {
-        setImportantMessage(
-            "Geolocation isn't supported by your browser"
-          );
-          setLocationStatus("failed");
+      setImportantMessage("Geolocation isn't supported by your browser");
+      setLocationStatus("failed");
     }
   }
 
@@ -89,8 +87,7 @@ export default function LocationEnabler({
       {locationStatus === "unknown" && <span>enable location</span>}
       {locationStatus === "fetching" && (
         <span>
-          <span className="loader"></span>
-          {" "}working
+          <span className="loader"></span> working
         </span>
       )}
     </button>

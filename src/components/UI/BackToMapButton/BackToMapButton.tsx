@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../BackToMapButton.css"
+import "./BackToMapButton.css"
 
 export default function BackToMapButton() {
   return (

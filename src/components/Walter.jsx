@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import "../styles/walter.css";
 import { usePOIs } from "../hooks/usePOIs";
-import LocationEnabler from "./LocationEnabler";
+import LocationEnabler from "./map_UI/LocationEnabler/LocationEnabler";
 
 function Walter() {
   const checkFirstRender = useRef(true);
@@ -47,7 +47,6 @@ function Walter() {
 
   // needed to make walter say stuff from time to time
   useEffect(() => {
-
     setMessage(randomEntry(tips));
 
     // change message every 30 segonds

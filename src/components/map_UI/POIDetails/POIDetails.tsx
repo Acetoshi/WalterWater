@@ -1,5 +1,5 @@
 import { memo } from "react";
-import "../styles/POIDetails.css";
+import "./POIDetails.css";
 // Official doc for POI tags : https://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtoilets
 
 function POIDetailsComponent({ point }) {
@@ -18,8 +18,6 @@ function POIDetailsComponent({ point }) {
         />
         <h3>{point.tags.amenity.replace("_", " ")}</h3>
       </hgroup>
-
-      {/* <p>{JSON.stringify(point.tags)}</p> */}
 
       <ul className="poi-details">
         {point.tags.wheelchair && (

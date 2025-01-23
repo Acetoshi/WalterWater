@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { usePOIs } from "../hooks/usePOIs";
-import "../styles/dataFetchingNotifier.css";
+import { usePOIs } from "../../../hooks/usePOIs";
+import "./DataFetchingNotifier.css";
 
 // Needed for the user to know when the app is fetching
 export default function DataFetchingNotifier() {
@@ -9,9 +9,9 @@ export default function DataFetchingNotifier() {
 
   // this is to prevent the button from showing if the fetching takes less than 1s
   useEffect(() => {
-    let timeoutId;
+    let timeoutFn: NodeJS.Timeout
     if (requestStatus === "fetching data") {
-      timeoutId = setTimeout(() => {
+      timeoutFn = setTimeout(() => {
         if (requestStatus === "fetching data") {
           setIsHidden(false);
         }
@@ -23,7 +23,7 @@ export default function DataFetchingNotifier() {
     }
 
     return () => {
-      clearTimeout(timeoutId);
+      clearTimeout(timeoutFn);
     };
   }, [requestStatus]);
 
