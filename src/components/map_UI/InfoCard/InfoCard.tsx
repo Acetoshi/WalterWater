@@ -1,4 +1,4 @@
-import { usePOIs } from "../../../hooks/usePOIs";
+import usePOIs from "../../../Contexts/PointsOfInterest/usePOIs";
 import POIDetails from "../POIDetails/POIDetails";
 
 export default function InfoCard({ point, setIsDisplayed, style }) {

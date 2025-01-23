@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { usePOIs } from "../../../hooks/usePOIs";
+import usePOIs from "../../../Contexts/PointsOfInterest/usePOIs";
 import "./FiltersDrawer.css";
 
 export default function FiltersDrawer() {

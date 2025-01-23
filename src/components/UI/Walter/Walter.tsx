@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
-import "../styles/walter.css";
-import { usePOIs } from "../hooks/usePOIs";
-import LocationEnabler from "./map_UI/LocationEnabler/LocationEnabler";
+import usePOIs from "../../../Contexts/PointsOfInterest/usePOIs";
+import LocationEnabler from "../../map_UI/LocationEnabler/LocationEnabler";
+import "./Walter.css";
 
 function Walter() {
   const checkFirstRender = useRef(true);

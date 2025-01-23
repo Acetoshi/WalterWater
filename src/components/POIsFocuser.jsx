@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
-import { usePOIs } from "../hooks/usePOIs";
+import usePOIs from "../Contexts/PointsOfInterest/usePOIs";
+
+//TODO convert to a hook
 
 export default function POIsFocuser() {
   const { targetPOIPosition } = usePOIs();

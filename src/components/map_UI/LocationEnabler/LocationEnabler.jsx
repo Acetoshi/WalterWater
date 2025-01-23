@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { usePosition } from "../../../hooks/usePosition";
+import usePosition from "../../../Contexts/Position/usePosition";
 
+//TODO : convert this to a utility, a hook
 // the point of this component is to avoid being too pushy with the user by requesting his location stairght up
 
 export default function LocationEnabler({

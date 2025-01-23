@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import CustomMarker from "./CustomMarker";
 import { useMap } from "react-leaflet";
-import { usePOIs } from "../hooks/usePOIs";
+import usePOIs from "../Contexts/PointsOfInterest/usePOIs";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import "../styles/leafletMarkerGroup.css";
 

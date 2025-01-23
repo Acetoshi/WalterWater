@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { usePOIs } from "../../../hooks/usePOIs";
+import usePOIs from "../../../Contexts/PointsOfInterest/usePOIs";
 import "./DataFetchingNotifier.css";
 
 // Needed for the user to know when the app is fetching

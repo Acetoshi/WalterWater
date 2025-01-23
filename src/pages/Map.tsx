@@ -5,7 +5,7 @@ import UserMarker from "../components/UserMarker";
 import Markers from "../components/Markers";
 import MapTracker from "../components/MapTracker";
 import POIsFocuser from "../components/POIsFocuser";
-import Walter from "../components/Walter";
+import Walter from "../components/UI/Walter/Walter";
 import Capybara from "../components/EasterEgg";
 import ListToggle from "../components/map_UI/ListToggle/ListToggle";
 import ListView from "../components/map_UI/ListView/ListView";

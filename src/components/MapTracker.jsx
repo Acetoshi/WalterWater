@@ -1,5 +1,5 @@
 import { useMap } from "react-leaflet";
-import { usePosition } from "../hooks/usePosition";
+import usePosition from "../Contexts/Position/usePosition";
 import { getDistanceFromLatLonInKm } from "../scripts/osmUtilities";
 import { useEffect } from "react";
 
