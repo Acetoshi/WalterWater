@@ -1,15 +1,18 @@
-import { createContext, useState, useEffect } from "react";
+import { ContextProps, LatLng } from "@/types/contexts";
+import { createContext, useState, useEffect, ContextType } from "react";
 
-const PositionContext = createContext();
+const PositionContext = createContext<ContextType>();
 
-export default function PositionProvider({ children }) {
+export default function PositionProvider({
+  children,
+}: ContextProps) {
   const defaultUserPosition = { lat: 48.86, lng: 2.33 };
   const storedUserPosition = {
     lat: Number(localStorage.getItem("userLat")),
     lng: Number(localStorage.getItem("userLon")),
   };
 
-  const [userLocation, setUserLocation] = useState(
+  const [userLocation, setUserLocation] = useState<LatLng>(
     localStorage.getItem("userLat") === null
       ? defaultUserPosition
       : storedUserPosition
@@ -33,14 +36,13 @@ export default function PositionProvider({ children }) {
       : { bounds: null, center: storedUserPosition, distanceFromUser: 0 }
   );
 
-
   return (
     <PositionContext.Provider
       value={{
         userLocation,
         setUserLocation,
         mapPosition,
-        setMapPosition
+        setMapPosition,
       }}
     >
       {children}
@@ -48,4 +50,4 @@ export default function PositionProvider({ children }) {
   );
 }
 
-export {PositionContext}
+export { PositionContext };

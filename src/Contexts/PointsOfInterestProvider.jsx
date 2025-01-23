@@ -93,6 +93,8 @@ export default function PointsOfInterestProvider({ children }) {
     fetchPOIs();
   }, [mapPosition, userFilters]);
 
+  console.log(POIs)
+
   return (
     <PointsOfInterestContext.Provider
       value={{

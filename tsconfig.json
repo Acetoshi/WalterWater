@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "esnext",                      // Output modern JavaScript (ES Modules)
+    "module": "esnext",                      // Use ES modules
+    "moduleResolution": "node",              // Resolve modules like Node.js
+    "strict": true,                          // Enable all strict type-checking options
+    "esModuleInterop": true,                 // Ensure proper interop with CommonJS modules
+    "skipLibCheck": true,                    // Skip checking of declaration files (speeds up build)
+    "forceConsistentCasingInFileNames": true, // Ensure consistent casing of file names
+    "jsx": "react-jsx",                      // Use React JSX transform (for React projects)
+    "allowJs": true,                         // Allow JavaScript files to be imported (useful for mixed projects)
+    "resolveJsonModule": true,               // Allow importing JSON files
+    "isolatedModules": true,                 // Ensure files are treated as isolated modules
+    "noEmit": true,                          // Do not output files (since Vite handles the build)
+    "baseUrl": ".",                          // Base directory for resolving non-relative paths
+    "paths": {
+      "@/*": ["src/*"]                      // Allow using @ as an alias for src folder
+    }
+  },
+  "include": [
+    "src/**/*"                               // Include all TypeScript files under src
+  ],
+  "exclude": [
+    "node_modules",                          // Exclude node_modules folder
+    "dist"                                   // Exclude dist folder
+  ]
+}
