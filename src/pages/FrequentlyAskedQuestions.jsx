@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import BackToMapButton from "../components/BackToMapButton";
-import ExternalLink from "../components/ExternalLink";
+import BackToMapButton from "../components/UI/BackToMapButton/BackToMapButton";
+import ExternalLink from "../components/UI/ExternalLink/ExternalLink";
 
 export default function FrequentlyAskedQuestions() {
   return (

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import "../styles/navBar.css";
+import "./NavBar.css";
 
 export default function Navbar() {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
 
   function toggleMenu() {
     setIsCollapsed(() => !isCollapsed);

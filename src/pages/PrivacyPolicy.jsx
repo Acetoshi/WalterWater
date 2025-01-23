@@ -1,4 +1,4 @@
-import BackToMapButton from "../components/BackToMapButton";
+import BackToMapButton from "../components/UI/BackToMapButton/BackToMapButton";
 
 export default function PrivacyPolicy() {
   return (
@@ -81,7 +81,6 @@ export default function PrivacyPolicy() {
         </p>
       </section>
       <BackToMapButton />
-
     </main>
   );
 }

@@ -1,6 +1,7 @@
-import "../styles/externalLink.css"
+import ExternalLinkProps from "./ExternalLink.props";
+import "../ExternalLink.css";
 
-export default function ExternalLink({ href, children }) {
+export default function ExternalLink({ href, children }: ExternalLinkProps) {
   return (
     <a className="external-link" href={href} target="_blank">
       {children}
