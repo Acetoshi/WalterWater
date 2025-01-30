@@ -41,6 +41,7 @@ export interface MapBounds {
 export interface MapPosition {
   bounds: MapBounds;
   center: LatLng;
+  zoomLevel: number;
   distanceFromUser: number;
 }
 

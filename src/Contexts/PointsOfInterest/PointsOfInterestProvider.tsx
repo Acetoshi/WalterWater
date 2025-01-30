@@ -12,6 +12,7 @@ import useLocalStorage from "../../utilities/useLocalStorage";
 import usePosition from "../Position/usePosition";
 import { getPoints } from "./fetchPOIs.utils";
 import useMapRefetchThreshold from "./useMapRefetchThreshold";
+import { useDebounce } from "@/utilities/useDebounce";
 
 // Default context value for PointsOfInterestContext
 const defaultPointsOfInterestContextValue: PointsOfInterestContextValue = {
@@ -87,8 +88,12 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
   }, [userLocation]);
 
   //Used to fetch new data everytime the map is moved more than the threshold
-  // the threshold depends obviously on the user zoom level
-  useMapRefetchThreshold(mapPosition.center, 5,fetchPOIs);
+
+  // the position is debounced in order not to call the server too often
+  const debouncedMapCenter=useDebounce(mapPosition.center,1000)
+  
+  // TODO the threshold needs to depend on the user zoom level
+  useMapRefetchThreshold(debouncedMapCenter, 5,fetchPOIs);
 
   useEffect(() => {
       fetchPOIs();

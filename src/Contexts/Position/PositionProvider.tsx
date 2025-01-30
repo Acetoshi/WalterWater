@@ -34,6 +34,7 @@ export default function PositionProvider({ children }: ContextProps) {
   const [mapPosition, setMapPosition] = useLocalStorage("mapPosition", {
     bounds: defaultBounds,
     center: defaultUserPosition,
+    zoomLevel:14,
     distanceFromUser: 0,
   });
 
