@@ -1,0 +1,91 @@
+#filters-drawer-container {
+  position: absolute;
+  bottom: calc(25vh - 16px - 24px);
+  right: 16px;
+}
+
+#filters-drawer-container.open {
+  z-index: 5000;
+}
+
+#filters-drawer-container.closed {
+  z-index: 2000;
+}
+
+#filters-drawer-button {
+  width: 48px;
+  height: 48px;
+  padding: 10px;
+  border-radius: 48px;
+  background-color: var(--secondary-color);
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  right: 0;
+
+  & img {
+    width: 28px;
+    transition: transform 0.3s ease-out;
+  }
+}
+
+#filters-drawer {
+  background-color: white;
+  padding: 16px;
+  margin-right: 64px;
+  border-radius: 24px;
+  display: flex;
+}
+
+#filters-drawer.closed {
+  overflow: hidden;
+  max-width: 48px;
+  max-height: 48px;
+  padding: 0;
+  margin-right: 0;
+}
+
+.filter-button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: var(--main-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & img {
+    font-size: 2rem;
+  }
+
+  & img.deactivated {
+    filter: grayscale(100%) brightness(0.8) opacity(0.4);
+  }
+}
+
+#filters-drawer-container.open > #filters-drawer-button > img {
+  transform: rotate(-90deg);
+}
+
+#drawer-background.visible {
+  position: absolute;
+  z-index: 4999;
+  height: 100vh;
+  width: 100vw;
+  background-color: #00000099;
+  transition: 0.6s;
+  transition-property: background-color;
+}
+
+#drawer-background.hidden {
+  position: absolute;
+  z-index: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #ffffff00;
+}

@@ -34,7 +34,6 @@ cd walter-water-app
     Explore the Map: Zoom in/out and move around the map to discover facilities.
     Search: Use the search bar to find specific locations or services.
 
-
 ### Contact
 
 For questions, suggestions, or issues, please open an issue in the repository

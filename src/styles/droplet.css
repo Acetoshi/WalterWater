@@ -22,7 +22,6 @@
 
 /* copied from https://codepen.io/abehjat/pen/oXMENv */
 
-
 .drop {
   position: absolute;
   z-index: 2;
@@ -36,7 +35,7 @@
 }
 
 .drop:before {
-  content: "";
+  content: '';
   position: absolute;
   z-index: 2;
   width: 0;
@@ -59,7 +58,7 @@
 }
 
 .wave:after {
-  content: "";
+  content: '';
   position: absolute;
   opacity: 0;
   top: -5px;
@@ -125,10 +124,10 @@
 }
 
 @media screen and (min-width: 786px) {
-  .wave{
+  .wave {
     transform: scale(2.5);
   }
-  .drop{
+  .drop {
     transform: scale(2) translateY(-5px);
   }
 }

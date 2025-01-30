@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 :root {
   --main-color: #164f91;
@@ -10,8 +10,8 @@
   --grey-darker: #5a5a5a;
   --font-size: 16px;
 
-  --font-heading: "Outfit", sans-serif;
-  --font-body: "Outfit", sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Outfit', sans-serif;
 
   --font-weight-heading: 800;
   --font-weight-body: 350;
