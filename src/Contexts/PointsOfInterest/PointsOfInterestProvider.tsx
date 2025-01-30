@@ -14,6 +14,7 @@ import { getPoints } from './fetchPOIs.utils';
 import useMapRefetchThreshold from './useMapRefetchThreshold';
 import { useDebounce } from '@/utilities/useDebounce';
 import { getDistanceKm } from '@/utilities/distances.utils';
+import useEffectSkipFirstRender from '@/utilities/useEffectSkipFirstRender';
 
 // Default context value for PointsOfInterestContext
 const defaultPointsOfInterestContextValue: PointsOfInterestContextValue = {
@@ -64,6 +65,7 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
       setRequestStatus('fetching data');
       let bounds: MapBounds = mapPosition.bounds;
       if (center === 'user') {
+        console.log('request with user')
         bounds = {
           minLat: userLocation.lat - 0.25,
           maxLat: userLocation.lat + 0.25,
@@ -81,8 +83,6 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
         if (success) {
           setPOIs(POIs);
           setRequestStatus('data received');
-          //TODO : kill this timeout in the useEffect
-          setTimeout(() => setRequestStatus('ready to fetch'), 1000);
         } else {
           setRequestStatus('server error');
         }
@@ -96,12 +96,11 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
 
   // the position is debounced in order not to call the server too often
   const debouncedUserLocation = useDebounce(userLocation, 500);
-  useEffect(() => {
+  useEffectSkipFirstRender(() => {
     fetchPOIs('user');
   }, [debouncedUserLocation]);
 
   //Used to fetch new data everytime the map is moved more than the threshold
-
   // the position is debounced in order not to call the server too often
   const debouncedMapPosition = useDebounce(mapPosition, 500);
 
@@ -119,7 +118,6 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
     setRefetchThreshold(newThreshold);
   }, [debouncedMapPosition.zoomLevel]);
 
-  // TODO the threshold needs to depend on the user zoom level
   useMapRefetchThreshold(
     debouncedMapPosition.center,
     refetchThreshold,
