@@ -1,6 +1,6 @@
-import { useState } from "react";
-import usePOIs from "../../../Contexts/PointsOfInterest/usePOIs";
-import "./FiltersDrawer.css";
+import { useState } from 'react';
+import usePOIs from '../../../Contexts/PointsOfInterest/usePOIs';
+import './FiltersDrawer.css';
 
 export default function FiltersDrawer() {
   const { userFilters, setUserFilters } = usePOIs();
@@ -11,11 +11,11 @@ export default function FiltersDrawer() {
       <button
         id="drawer-background"
         role="button"
-        className={isOpen ? "visible" : "hidden"}
+        className={isOpen ? 'visible' : 'hidden'}
         aria-label="close drawer"
         onClick={() => setIsOpen(false)}
       ></button>
-      <div id="filters-drawer-container" className={isOpen ? "open" : "closed"}>
+      <div id="filters-drawer-container" className={isOpen ? 'open' : 'closed'}>
         <button
           id="filters-drawer-button"
           aria-label="open or close filters drawer"
@@ -28,7 +28,7 @@ export default function FiltersDrawer() {
             alt="recenter the map on your position"
           ></img>
         </button>
-        <ul id="filters-drawer" className={isOpen ? "open" : "closed"}>
+        <ul id="filters-drawer" className={isOpen ? 'open' : 'closed'}>
           <button
             role="button"
             aria-pressed={userFilters.water}
@@ -40,7 +40,7 @@ export default function FiltersDrawer() {
             }
           >
             <img
-              className={userFilters.water ? "" : "deactivated"}
+              className={userFilters.water ? '' : 'deactivated'}
               src={`/icons/faucet-icon.svg`}
               alt=""
             />
@@ -58,7 +58,7 @@ export default function FiltersDrawer() {
             }
           >
             <img
-              className={userFilters.food ? "" : "deactivated"}
+              className={userFilters.food ? '' : 'deactivated'}
               src={`/icons/food-icon.svg`}
               alt=""
             />
@@ -76,7 +76,7 @@ export default function FiltersDrawer() {
             }
           >
             <img
-              className={userFilters.toilets ? "" : "deactivated"}
+              className={userFilters.toilets ? '' : 'deactivated'}
               src={`/icons/toilets-icon.svg`}
               alt=""
             />

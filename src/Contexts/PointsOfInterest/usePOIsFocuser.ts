@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useMap } from "react-leaflet";
-import usePOIs from "./usePOIs";
+import { useEffect } from 'react';
+import { useMap } from 'react-leaflet';
+import usePOIs from './usePOIs';
 
 //TODO convert to a hook
 

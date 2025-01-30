@@ -1,4 +1,4 @@
-import { Point } from "@/Contexts/contexts.types";
+import { Point } from '@/Contexts/contexts.types';
 
 export default interface CustomMarkerProps {
   point: Point;

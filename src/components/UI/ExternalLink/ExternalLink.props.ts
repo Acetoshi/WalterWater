@@ -1,4 +1,4 @@
 export default interface ExternalLinkProps {
-    href: string;
-    children: React.ReactNode;
-  }
+  href: string;
+  children: React.ReactNode;
+}

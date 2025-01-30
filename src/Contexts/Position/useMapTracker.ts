@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { useMap } from "react-leaflet";
-import usePosition from "./usePosition";
-import { getDistanceKm } from "@/utilities/distances.utils";
+import { useEffect } from 'react';
+import { useMap } from 'react-leaflet';
+import usePosition from './usePosition';
+import { getDistanceKm } from '@/utilities/distances.utils';
 
 // This hook enables the app to track the center of the map, ie to know where the user is looking.
 export default function useMapTracker() {
@@ -13,7 +13,7 @@ export default function useMapTracker() {
     const handleDragStart = () => {
       map.closePopup();
     };
-    map.on("dragstart", handleDragStart);
+    map.on('dragstart', handleDragStart);
 
     const handleMoveEnd = () => {
       // Track the current map bounds in order to use them as a bounding box for POI search later on
@@ -23,30 +23,29 @@ export default function useMapTracker() {
         userLocation.lat,
         userLocation.lng,
         center.lat,
-        center.lng
+        center.lng,
       );
       setMapPosition({
-          bounds: {
-            minLat: bounds.getSouthEast().lat,
-            maxLat: bounds.getNorthWest().lat,
-            minLng: bounds.getSouthWest().lng,
-            maxLng: bounds.getNorthEast().lng,
-          },
-          center: {
-            lat: center.lat,
-            lng: center.lng,
-          },
-          zoomLevel:map.getZoom(),
-          distanceFromUser: distance,
+        bounds: {
+          minLat: bounds.getSouthEast().lat,
+          maxLat: bounds.getNorthWest().lat,
+          minLng: bounds.getSouthWest().lng,
+          maxLng: bounds.getNorthEast().lng,
+        },
+        center: {
+          lat: center.lat,
+          lng: center.lng,
+        },
+        zoomLevel: map.getZoom(),
+        distanceFromUser: distance,
       });
-      console.log("moved")
     };
 
-    map.on("moveend", handleMoveEnd);
+    map.on('moveend', handleMoveEnd);
 
     return () => {
-      map.off("dragstart", handleDragStart);
-      map.off("moveend", handleMoveEnd);
+      map.off('dragstart', handleDragStart);
+      map.off('moveend', handleMoveEnd);
     };
   }, [userLocation]);
 }

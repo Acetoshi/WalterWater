@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 export interface ContextProps {
   children: ReactNode;
@@ -12,15 +12,15 @@ export interface LatLng {
 
 // used when retrieving data from overpass
 export interface Point {
-  type: "node";
+  type: 'node';
   id: number;
   lat: number;
   lon: number;
   distance: string;
   walkTime: string;
   tags: {
-    amenity: "drinking_water" | "toilets" | "restaurant";
-    [key: string]: any; // POIs can have any type of tags
+    amenity: 'drinking_water' | 'toilets' | 'restaurant';
+    [key: string]: string; // POIs can have any type of tags
   };
 }
 

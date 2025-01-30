@@ -3,12 +3,11 @@ a {
 }
 
 a.external-link {
-    display: inline-flex;
-    gap:0.2rem;
-    align-items: center;
+  display: inline-flex;
+  gap: 0.2rem;
+  align-items: center;
 
-    & img.external-link-icon {
-        height: var(--font-size);
-    }
+  & img.external-link-icon {
+    height: var(--font-size);
+  }
 }
-

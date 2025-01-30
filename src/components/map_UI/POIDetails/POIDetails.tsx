@@ -1,9 +1,9 @@
-import { memo } from "react";
-import "./POIDetails.css";
-import { Point } from "@/Contexts/contexts.types";
+import { memo } from 'react';
+import './POIDetails.css';
+import { Point } from '@/Contexts/contexts.types';
 // Official doc for POI tags : https://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtoilets
 
-function POIDetailsComponent({ point }:{point:Point}) {
+function POIDetailsComponent({ point }: { point: Point }) {
   return (
     <>
       <hgroup className="poi-details-heading">
@@ -11,13 +11,13 @@ function POIDetailsComponent({ point }:{point:Point}) {
           className="poi-icon"
           loading="lazy"
           src={`/icons/${
-            point.tags.amenity === "drinking_water" ? "faucet" : ""
-          }${point.tags.amenity === "toilets" ? "toilets" : ""}${
-            point.tags.amenity === "restaurant" ? "food" : ""
+            point.tags.amenity === 'drinking_water' ? 'faucet' : ''
+          }${point.tags.amenity === 'toilets' ? 'toilets' : ''}${
+            point.tags.amenity === 'restaurant' ? 'food' : ''
           }-icon.svg`}
           alt=""
         />
-        <h3>{point.tags.amenity.replace("_", " ")}</h3>
+        <h3>{point.tags.amenity.replace('_', ' ')}</h3>
       </hgroup>
 
       <ul className="poi-details">
@@ -42,14 +42,14 @@ function POIDetailsComponent({ point }:{point:Point}) {
               alt=""
             />
             <p>
-              {point.tags.fee === "no"
-                ? "free of charge"
-                : "access requires a fee"}
+              {point.tags.fee === 'no'
+                ? 'free of charge'
+                : 'access requires a fee'}
             </p>
           </li>
         )}
 
-        {point.tags["toilets:position"] && (
+        {point.tags['toilets:position'] && (
           <li className="poi-info-row">
             <img
               className="poi-icon"
@@ -58,7 +58,7 @@ function POIDetailsComponent({ point }:{point:Point}) {
               alt=""
             />
             <p>
-              position : {point.tags["toilets:position"].replaceAll(";", ", ")}
+              position : {point.tags['toilets:position'].replaceAll(';', ', ')}
             </p>
           </li>
         )}

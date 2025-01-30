@@ -1,10 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 
 export default interface ListViewProps {
   listState: {
     listIsDisplayed: boolean;
-    setListIsDisplayed: Dispatch<
-      SetStateAction<boolean>
-    >;
+    setListIsDisplayed: Dispatch<SetStateAction<boolean>>;
   };
 }

@@ -1,5 +1,5 @@
-import ListViewProps from "../ListView/Listview.props";
-import "./ListToggle.css";
+import ListViewProps from '../ListView/Listview.props';
+import './ListToggle.css';
 
 export default function ListToggle({ listState }: ListViewProps) {
   const { listIsDisplayed, setListIsDisplayed } = listState;

@@ -1,5 +1,5 @@
-"use client";
-import { createContext, useState, useEffect, useRef } from "react";
+'use client';
+import { createContext, useState, useEffect, useRef } from 'react';
 import {
   ContextProps,
   LatLng,
@@ -7,13 +7,13 @@ import {
   Point,
   PointsOfInterestContextValue,
   UserFilters,
-} from "../contexts.types";
-import useLocalStorage from "../../utilities/useLocalStorage";
-import usePosition from "../Position/usePosition";
-import { getPoints } from "./fetchPOIs.utils";
-import useMapRefetchThreshold from "./useMapRefetchThreshold";
-import { useDebounce } from "@/utilities/useDebounce";
-import { getDistanceKm } from "@/utilities/distances.utils";
+} from '../contexts.types';
+import useLocalStorage from '../../utilities/useLocalStorage';
+import usePosition from '../Position/usePosition';
+import { getPoints } from './fetchPOIs.utils';
+import useMapRefetchThreshold from './useMapRefetchThreshold';
+import { useDebounce } from '@/utilities/useDebounce';
+import { getDistanceKm } from '@/utilities/distances.utils';
 
 // Default context value for PointsOfInterestContext
 const defaultPointsOfInterestContextValue: PointsOfInterestContextValue = {
@@ -27,26 +27,26 @@ const defaultPointsOfInterestContextValue: PointsOfInterestContextValue = {
   fetchPOIs: async () => {},
   targetPOIPosition: { lat: 0, lng: 0 },
   setTargetPOIPosition: () => {},
-  requestStatus: "idle",
+  requestStatus: 'idle',
 };
 
 const PointsOfInterestContext = createContext<PointsOfInterestContextValue>(
-  defaultPointsOfInterestContextValue
+  defaultPointsOfInterestContextValue,
 );
 
 export default function PointsOfInterestProvider({ children }: ContextProps) {
   const { userLocation, mapPosition } = usePosition();
 
   const [userFilters, setUserFilters] = useLocalStorage<UserFilters>(
-    "userFilters",
+    'userFilters',
     {
       water: true,
       food: false,
       toilets: true,
-    }
+    },
   );
 
-  const [requestStatus, setRequestStatus] = useState<string>("ready to fetch");
+  const [requestStatus, setRequestStatus] = useState<string>('ready to fetch');
 
   const [POIs, setPOIs] = useState<Point[]>([]);
 
@@ -61,9 +61,9 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
   const fetchPOIs = async (center?: string) => {
     if (!fetching.current) {
       fetching.current = true;
-      setRequestStatus("fetching data");
+      setRequestStatus('fetching data');
       let bounds: MapBounds = mapPosition.bounds;
-      if (center === "user") {
+      if (center === 'user') {
         bounds = {
           minLat: userLocation.lat - 0.25,
           maxLat: userLocation.lat + 0.25,
@@ -75,31 +75,29 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
         const { success, POIs } = await getPoints(
           userLocation,
           userFilters,
-          bounds
+          bounds,
         );
 
         if (success) {
           setPOIs(POIs);
-          setRequestStatus("data received");
+          setRequestStatus('data received');
           //TODO : kill this timeout in the useEffect
-          setTimeout(() => setRequestStatus("ready to fetch"), 1000);
+          setTimeout(() => setRequestStatus('ready to fetch'), 1000);
         } else {
-          setRequestStatus("server error");
+          setRequestStatus('server error');
         }
       } catch {
-        setRequestStatus("server error");
+        setRequestStatus('server error');
       } finally {
         fetching.current = false;
       }
     }
   };
 
-  console.log(fetching.current);
-
   // the position is debounced in order not to call the server too often
   const debouncedUserLocation = useDebounce(userLocation, 500);
   useEffect(() => {
-    fetchPOIs("user");
+    fetchPOIs('user');
   }, [debouncedUserLocation]);
 
   //Used to fetch new data everytime the map is moved more than the threshold
@@ -116,17 +114,16 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
         debouncedMapPosition.bounds.maxLat,
         debouncedMapPosition.bounds.maxLng,
         debouncedMapPosition.bounds.minLat,
-        debouncedMapPosition.bounds.minLng
+        debouncedMapPosition.bounds.minLng,
       ) / 2.5;
     setRefetchThreshold(newThreshold);
-    console.log("zoom changed, new threshold: ", newThreshold);
   }, [debouncedMapPosition.zoomLevel]);
 
   // TODO the threshold needs to depend on the user zoom level
   useMapRefetchThreshold(
     debouncedMapPosition.center,
     refetchThreshold,
-    fetchPOIs
+    fetchPOIs,
   );
 
   useEffect(() => {

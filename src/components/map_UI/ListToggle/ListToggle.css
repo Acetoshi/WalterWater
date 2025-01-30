@@ -67,13 +67,12 @@
 
 #toggle-input-list:checked ~ .toggle-slider {
   transform: translateX(48px);
-
 }
 
 /* This is required to change the images colour to white */
-#toggle-input-map:checked ~ .list-label>img {
-    filter: brightness(0) saturate(0) invert(1);
+#toggle-input-map:checked ~ .list-label > img {
+  filter: brightness(0) saturate(0) invert(1);
 }
-#toggle-input-list:checked ~ .map-label>img {
-    filter: brightness(0) saturate(0) invert(1);
+#toggle-input-list:checked ~ .map-label > img {
+  filter: brightness(0) saturate(0) invert(1);
 }

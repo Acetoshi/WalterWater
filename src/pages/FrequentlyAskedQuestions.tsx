@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import BackToMapButton from "../components/UI/BackToMapButton/BackToMapButton";
-import ExternalLink from "../components/UI/ExternalLink/ExternalLink";
+import { Link } from 'react-router-dom';
+import BackToMapButton from '../components/UI/BackToMapButton/BackToMapButton';
+import ExternalLink from '../components/UI/ExternalLink/ExternalLink';
 
 export default function FrequentlyAskedQuestions() {
   return (
@@ -30,7 +30,7 @@ export default function FrequentlyAskedQuestions() {
       <section>
         <h2>How can I share my location?</h2>
         <p>
-          You can allow the app to access your device's GPS. Once enabled, your
+          You can allow the app to access your device&aposs GPS. Once enabled, your
           current location will be displayed on the map, making it easier to
           find nearby amenities.
         </p>
@@ -48,7 +48,7 @@ export default function FrequentlyAskedQuestions() {
       <section>
         <h2>Can I contribute to the map?</h2>
         <p>
-          Yes! As Walter Water relies on OpenStreetMap data, you can directly{" "}
+          Yes! As Walter Water relies on OpenStreetMap data, you can directly{' '}
           <ExternalLink href="https://wiki.openstreetmap.org/wiki/Contribute_map_data">
             contribute to the map
           </ExternalLink>
@@ -72,7 +72,7 @@ export default function FrequentlyAskedQuestions() {
       <section>
         <h2>How do I report an issue with a POI?</h2>
         <p>
-          If you find incorrect information or if a facility is closed, you can{" "}
+          If you find incorrect information or if a facility is closed, you can{' '}
           <ExternalLink href="https://www.openstreetmap.org/fixthemap">
             report it on OpenStreetMap
           </ExternalLink>
@@ -109,10 +109,10 @@ export default function FrequentlyAskedQuestions() {
       <section>
         <h2>How can I provide feedback about the app?</h2>
         <p>
-          We welcome your feedback! You can{" "}
+          We welcome your feedback! You can{' '}
           <ExternalLink href="https://github.com/Acetoshi/WalterWater/issues">
             submit an issue on github
-          </ExternalLink>{" "}
+          </ExternalLink>{' '}
           if you feel something is lacking or have a suggestion for the app !
         </p>
       </section>
@@ -120,10 +120,10 @@ export default function FrequentlyAskedQuestions() {
       <section>
         <h2>What if I encounter a bug or issue with the app?</h2>
         <p>
-          If you experience any technical issues, please{" "}
+          If you experience any technical issues, please{' '}
           <ExternalLink href="https://github.com/Acetoshi/WalterWater/issues">
             submit an issue on github
-          </ExternalLink>{" "}
+          </ExternalLink>{' '}
           with as many details as possible, you can include screenshots or any
           other information that might help the developer understand your
           problem
@@ -135,10 +135,10 @@ export default function FrequentlyAskedQuestions() {
         <p>
           If you appreciate the work that goes into developing and maintaining
           this app, consider making a donation! Your support helps us improve
-          the app and add new features. You can{" "}
+          the app and add new features. You can{' '}
           <ExternalLink href="https://www.paypal.com/donate/?business=N4JHHZPNKYP44&amount=5&no_recurring=0&currency_code=EUR">
             donate via PayPal
-          </ExternalLink>{" "}
+          </ExternalLink>{' '}
           . Thank you for your generosity!
         </p>
       </section>

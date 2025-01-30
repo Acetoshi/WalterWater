@@ -1,4 +1,4 @@
-import "../styles/droplet.css";
+import '../styles/droplet.css';
 
 export default function Droplet() {
   return (

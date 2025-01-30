@@ -1,7 +1,7 @@
-"use client";
-import { createContext, useState, useEffect, ContextType } from "react";
-import { ContextProps, LatLng, PositionContextValue } from "../contexts.types";
-import useLocalStorage from "../../utilities/useLocalStorage";
+'use client';
+import { createContext } from 'react';
+import { ContextProps, LatLng, PositionContextValue } from '../contexts.types';
+import useLocalStorage from '../../utilities/useLocalStorage';
 
 const defaultUserPosition = { lat: 48.86, lng: 2.33 };
 const defaultBounds = {
@@ -17,6 +17,7 @@ const defaultContextValue: PositionContextValue = {
   mapPosition: {
     bounds: defaultBounds,
     center: defaultUserPosition,
+    zoomLevel: 14,
     distanceFromUser: 0,
   },
   setMapPosition: () => {},
@@ -27,14 +28,14 @@ const PositionContext =
 
 export default function PositionProvider({ children }: ContextProps) {
   const [userLocation, setUserLocation] = useLocalStorage<LatLng>(
-    "userLatLng",
-    defaultUserPosition
+    'userLatLng',
+    defaultUserPosition,
   );
 
-  const [mapPosition, setMapPosition] = useLocalStorage("mapPosition", {
+  const [mapPosition, setMapPosition] = useLocalStorage('mapPosition', {
     bounds: defaultBounds,
     center: defaultUserPosition,
-    zoomLevel:14,
+    zoomLevel: 14,
     distanceFromUser: 0,
   });
 

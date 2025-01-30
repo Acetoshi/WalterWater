@@ -2,7 +2,7 @@ export function getDistanceKm(
   lat1: number,
   lng1: number,
   lat2: number,
-  lng2: number
+  lng2: number,
 ) {
   const R = 6371; // Radius of the earth in km
   const dLat = deg2rad(lat2 - lat1); // deg2rad below
@@ -17,11 +17,11 @@ export function getDistanceKm(
   return R * c; // d.toFixed(2); //to fixed returns only 2 decimal places.
 }
 
-export function distanceAsString(distanceKm:number) {
-  if (distanceKm < 1){
-    return `${(distanceKm*1000).toFixed(0)} m`
+export function distanceAsString(distanceKm: number) {
+  if (distanceKm < 1) {
+    return `${(distanceKm * 1000).toFixed(0)} m`;
   } else {
-    return `${distanceKm.toFixed(1)} km`
+    return `${distanceKm.toFixed(1)} km`;
   }
 }
 
@@ -35,13 +35,13 @@ export function getWalkingTime(distanceKm: number, speedKmh = 4) {
   const days = Math.floor(totalTimeInHours / 24);
   const hours = Math.floor(totalTimeInHours % 24);
   const minutes = Math.round(
-    (totalTimeInHours - Math.floor(totalTimeInHours)) * 60
+    (totalTimeInHours - Math.floor(totalTimeInHours)) * 60,
   );
 
-  let timeString = "";
+  let timeString = '';
   if (days > 0) timeString += `${days}d `;
   if (hours > 0) timeString += `${hours}h `;
   if (minutes > 0) timeString += `${minutes}min`;
 
-  return timeString.trim() || "0min"; // Return '0min' if no time is calculated
+  return timeString.trim() || '0min'; // Return '0min' if no time is calculated
 }

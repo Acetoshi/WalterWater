@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export default function useLocalStorage<T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, (value: T) => void] {
   const [storedValue, setStoredValue] = useState<T>(initialValue);
 
-  const isBrowserEnvironment = window //typeof window !== "undefined";
+  const isBrowserEnvironment = window; //typeof window !== "undefined";
 
   useEffect(() => {
     // Check if we're in the browser
@@ -19,7 +19,7 @@ export default function useLocalStorage<T>(
           setStoredValue(initialValue);
         }
       } catch (error) {
-        console.error("Error reading localStorage", error);
+        console.error('Error reading localStorage', error);
       }
     }
   }, []);
@@ -31,7 +31,7 @@ export default function useLocalStorage<T>(
         localStorage.setItem(key, JSON.stringify(value));
       }
     } catch (error) {
-      console.error("Error setting localStorage", error);
+      console.error('Error setting localStorage', error);
     }
   };
 

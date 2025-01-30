@@ -1,5 +1,5 @@
-import ExternalLinkProps from "./ExternalLink.props";
-import "./ExternalLink.css";
+import ExternalLinkProps from './ExternalLink.props';
+import './ExternalLink.css';
 
 export default function ExternalLink({ href, children }: ExternalLinkProps) {
   return (

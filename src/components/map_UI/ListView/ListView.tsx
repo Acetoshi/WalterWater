@@ -1,8 +1,8 @@
-import { VariableSizeList as List } from "react-window";
-import usePOIs from "../../../Contexts/PointsOfInterest/usePOIs";
-import InfoCard from "../InfoCard/InfoCard";
-import ListViewProps from "./Listview.props";
-import "./Listview.css";
+import { VariableSizeList as List } from 'react-window';
+import usePOIs from '../../../Contexts/PointsOfInterest/usePOIs';
+import InfoCard from '../InfoCard/InfoCard';
+import ListViewProps from './Listview.props';
+import './Listview.css';
 
 export default function ListView({ listState }: ListViewProps) {
   const { POIs } = usePOIs();
@@ -11,11 +11,11 @@ export default function ListView({ listState }: ListViewProps) {
   return (
     <List
       className={
-        listIsDisplayed ? "list-view-container" : "list-view-container hidden"
+        listIsDisplayed ? 'list-view-container' : 'list-view-container hidden'
       }
-      innerElementType={"ul"}
+      innerElementType={'ul'}
       height={1024}
-      width={"unset"}
+      width={'unset'}
       itemCount={POIs.length}
       itemSize={() => 360}
       overscanCount={4}
@@ -26,7 +26,7 @@ export default function ListView({ listState }: ListViewProps) {
           setIsDisplayed={setListIsDisplayed}
           style={{
             ...style,
-            left: "unset",
+            left: 'unset',
           }}
         />
       )}

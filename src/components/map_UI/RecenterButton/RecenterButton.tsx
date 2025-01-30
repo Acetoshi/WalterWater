@@ -1,7 +1,7 @@
-import { useMap } from "react-leaflet";
-import usePOIs from "../../../Contexts/PointsOfInterest/usePOIs";
-import usePosition from "../../../Contexts/Position/usePosition";
-import "./RecenterButton.css";
+import { useMap } from 'react-leaflet';
+import usePOIs from '../../../Contexts/PointsOfInterest/usePOIs';
+import usePosition from '../../../Contexts/Position/usePosition';
+import './RecenterButton.css';
 
 export default function RecenterButton() {
   const { userLocation, mapPosition } = usePosition();
@@ -12,7 +12,7 @@ export default function RecenterButton() {
     // needed otherwise the open popups would 'refocus" the map
     map.closePopup();
     map.flyTo(userLocation, 14, { duration: 1 });
-    fetchPOIs("user");
+    fetchPOIs('user');
   };
 
   return (
@@ -21,7 +21,7 @@ export default function RecenterButton() {
         id="recenter-button"
         type="button"
         className={
-          mapPosition.distanceFromUser >= 0.05 ? "button-feedback" : ""
+          mapPosition.distanceFromUser >= 0.05 ? 'button-feedback' : ''
         }
         onClick={handleRecenter}
         disabled={mapPosition.distanceFromUser <= 0.05}
@@ -29,8 +29,8 @@ export default function RecenterButton() {
         <img
           src={
             mapPosition.distanceFromUser >= 0.2
-              ? "/icons/recenterWhiteEmpty.png"
-              : "/icons/recenterWhiteFull.png"
+              ? '/icons/recenterWhiteEmpty.png'
+              : '/icons/recenterWhiteFull.png'
           }
           alt="recenter the map on your position"
         ></img>

@@ -1,5 +1,5 @@
-import usePOIs from "../../../Contexts/PointsOfInterest/usePOIs";
-import POIDetails from "../POIDetails/POIDetails";
+import usePOIs from '../../../Contexts/PointsOfInterest/usePOIs';
+import POIDetails from '../POIDetails/POIDetails';
 
 export default function InfoCard({ point, setIsDisplayed, style }) {
   const { setTargetPOIPosition } = usePOIs();

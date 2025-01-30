@@ -1,10 +1,14 @@
-import { LatLng, MapBounds, Point, UserFilters } from "../contexts.types";
-import { distanceAsString, getDistanceKm, getWalkingTime } from "../../utilities/distances.utils";
+import { LatLng, MapBounds, Point, UserFilters } from '../contexts.types';
+import {
+  distanceAsString,
+  getDistanceKm,
+  getWalkingTime,
+} from '../../utilities/distances.utils';
 
 export async function getPoints(
   userLocation: LatLng,
   userFilters: UserFilters,
-  mapBounds: MapBounds
+  mapBounds: MapBounds,
 ) {
   if (!mapBounds) return { success: false, POIs: [] };
 
@@ -14,18 +18,18 @@ export async function getPoints(
 
   try {
     // Fetch data from Overpass API
-    const response = await fetch("https://overpass-api.de/api/interpreter", {
-      method: "POST",
+    const response = await fetch('https://overpass-api.de/api/interpreter', {
+      method: 'POST',
       body:
-        "data=" +
+        'data=' +
         encodeURIComponent(`
         [bbox:${boundingBox}]
         [out:json]
         [timeout:25];
         (
-          ${water ? `node["amenity"="drinking_water"](${boundingBox});` : ""}
-          ${toilets ? `node["amenity"="toilets"](${boundingBox});` : ""}
-          ${food ? `node["amenity"="restaurant"](${boundingBox});` : ""}
+          ${water ? `node["amenity"="drinking_water"](${boundingBox});` : ''}
+          ${toilets ? `node["amenity"="toilets"](${boundingBox});` : ''}
+          ${food ? `node["amenity"="restaurant"](${boundingBox});` : ''}
         );
         out geom ${maxObjects};
       `),
@@ -41,13 +45,13 @@ export async function getPoints(
         userLocation.lat,
         userLocation.lng,
         pointA.lat,
-        pointA.lon
+        pointA.lon,
       );
       const distanceB = getDistanceKm(
         userLocation.lat,
         userLocation.lng,
         pointB.lat,
-        pointB.lon
+        pointB.lon,
       );
 
       // Directly mutating the point objects to include distance and walkTime

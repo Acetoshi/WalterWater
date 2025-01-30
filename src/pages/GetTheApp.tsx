@@ -1,4 +1,4 @@
-import BackToMapButton from "../components/UI/BackToMapButton/BackToMapButton";
+import BackToMapButton from '../components/UI/BackToMapButton/BackToMapButton';
 
 export default function GetTheApp() {
   return (
