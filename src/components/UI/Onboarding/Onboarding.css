@@ -1,14 +1,13 @@
 #onboarding-dialog {
   margin: auto;
-  margin-top: 15vh;
-  z-index: 3000;
+  margin-top: 5vh;
   border: 0;
-  border-radius: 1rem;
-  padding: 2rem;
+  border-radius: 16px;
+  padding: 32px;
   background-color: white;
   color: var(--black);
   width: min(calc(100vw - 2rem), 500px);
-  height: 70vh;
+  height: 90vh;
 }
 
 #onboarding-dialog::backdrop{
@@ -22,6 +21,27 @@
   flex-grow: 3;
   flex-direction: column;
   justify-content: space-between;
+
+  & hgroup {
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+  }
+
+  & h1 {
+    font-size: larger;
+    text-align: center;
+  }
+
+  & p {
+    font-size: medium;
+  }
+}
+
+#onboarding-buttons-and-progress-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap:16px;
 }
 
 #onboarding-choice-button-wrapper {
@@ -39,11 +59,13 @@
     text-decoration: none;
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 0.75rem;
 
     & img {
       height: 1.1rem;
+      filter: grayscale(100%) brightness(100);
+      position:absolute;
+      right:calc(2rem + 16px);
     }
   }
 
@@ -54,13 +76,14 @@
   }
 }
 
+
 #onboarding-progress-bar {
   display: flex;
   gap: 8px;
   justify-content: center;
   & button {
-    width: 64px;
-    height: 16px;
+    width: 32px;
+    height: 8px;
     border-radius: 8px;
   }
   & button.active {

@@ -28,7 +28,7 @@ const PositionContext =
 
 export default function PositionProvider({ children }: ContextProps) {
   const [userLocation, setUserLocation] = useLocalStorage<LatLng>(
-    'userLatLng',
+    'ww_user_lat_lng',
     defaultUserPosition,
   );
 

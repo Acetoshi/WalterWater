@@ -70,7 +70,7 @@ export default function LocationEnabler({
 
   // only ask for permission if user never allowed location before
   useEffect(() => {
-    if (!localStorage.getItem('userLatLng')) {
+    if (!localStorage.getItem('ww_user_lat_lng')) {
       setImportantMessage('Enable location to get nearby points of interest !');
       setWalterIsVisible(true);
     } else {

@@ -10,7 +10,7 @@
   justify-content: center;
   animation: 2s linear fadeout;
   opacity: 0;
-  z-index: 0;
+  z-index: 1;
 }
 
 .ripple-container {
