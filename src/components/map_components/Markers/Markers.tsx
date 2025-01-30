@@ -1,9 +1,10 @@
 import { useCallback } from "react";
-import CustomMarker from "./CustomMarker";
+import CustomMarker from "../CustomMarker/CustomMarker";
 import { useMap } from "react-leaflet";
-import usePOIs from "../Contexts/PointsOfInterest/usePOIs";
+import usePOIs from "../../../Contexts/PointsOfInterest/usePOIs";
 import MarkerClusterGroup from "react-leaflet-cluster";
-import "../styles/leafletMarkerGroup.css";
+import { Point } from "@/Contexts/contexts.types";
+import "./Markers.css";
 
 export default function Markers() {
   const { POIs } = usePOIs();
@@ -11,7 +12,7 @@ export default function Markers() {
 
   // useCallBack needed because of marker clusters
   const handleMarkerClick = useCallback(
-    (point) => {
+    (point:Point) => {
       const zoom = map.getZoom();
       map.flyTo([point.lat, point.lon], zoom, {
         easeLinearity: 1,
@@ -32,7 +33,7 @@ export default function Markers() {
       maxClusterRadius={110}
     >
       {POIs &&
-        POIs.map((point, index) => (
+        POIs.map((point:Point, index:number) => (
           <CustomMarker
             key={`${point.id}+${index}`}
             point={point}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import mapProviders from "../scripts/mapProviders.json";
 import UserMarker from "../components/UserMarker";
-import Markers from "../components/Markers";
+import Markers from "../components/map_components/Markers/Markers";
 import MapTracker from "../components/MapTracker";
 import POIsFocuser from "../components/POIsFocuser";
 import Walter from "../components/UI/Walter/Walter";

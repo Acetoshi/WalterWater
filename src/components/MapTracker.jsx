@@ -1,6 +1,6 @@
 import { useMap } from "react-leaflet";
 import usePosition from "../Contexts/Position/usePosition";
-import { getDistanceFromLatLonInKm } from "../scripts/osmUtilities";
+import { getDistanceFromLatLonInKm } from "../Contexts/PointsOfInterest/osmUtilities";
 import { useEffect } from "react";
 
 // This component enables the app to track the center of the map, ie to know where the user is looking.
