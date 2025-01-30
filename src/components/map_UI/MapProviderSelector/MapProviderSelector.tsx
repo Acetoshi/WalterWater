@@ -1,14 +1,32 @@
 import { useEffect } from "react";
-import mapProviders from "../../../scripts/mapProviders.json";
 import "./MapProviderSelector.css";
+import mapProviders from "@/utilities/mapProviders.json";
+import usePosition from "@/Contexts/Position/usePosition";
+import { useMap } from "react-leaflet";
+import MapProviderSelecterProps from "./MapProviderSelector.props";
 
-export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
-  //see how the menu gets auto-closed when the map moves in MapTracker Component
+export default function MapProviderSelector({ mapSelecter, setMapSelecter }:MapProviderSelecterProps) {
+  const { userLocation } = usePosition();
+  const map = useMap();
 
   // this is needed to useLocalStorage to remember the user's last map provider
   useEffect(() => {
     localStorage.setItem("mapProviderId", mapSelecter.providerId.toString());
   }, [mapSelecter]);
+
+  // This is needed to close the MapProviderSelecter menu when the map moves
+  useEffect(() => {
+    const handleMoveStart = () => {
+      setMapSelecter((mapSelecter) => {
+        return { ...mapSelecter, isOpen: false };
+      });
+    };
+    map.on("movestart", handleMoveStart);
+
+    return () => {
+      map.off("movestart", handleMoveStart);
+    };
+  }, [userLocation]);
 
   return (
     <div id="map-provider-selector-container">
@@ -23,7 +41,10 @@ export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
           })
         }
       >
-        <img src="/icons/layers.svg" alt="recenter the map on your position"></img>
+        <img
+          src="/icons/layers.svg"
+          alt="recenter the map on your position"
+        ></img>
       </button>
       <div
         className={`map-provider-menu-mask ${
@@ -48,13 +69,17 @@ export default function MapProviderSelector({ mapSelecter, setMapSelecter }) {
                   })
                 }
               >
-                {provider.alias === "simple" && <img src="/mapPreviews/simple.jpg" alt=""/>}
-                {provider.alias === "detailed" && (
-                  <img src="/mapPreviews/detailed.jpg" alt=""/>
+                {provider.alias === "simple" && (
+                  <img src="/mapPreviews/simple.jpg" alt="" />
                 )}
-                {provider.alias === "cycling" && <img src="/mapPreviews/cycle.jpg" alt=""/>}
+                {provider.alias === "detailed" && (
+                  <img src="/mapPreviews/detailed.jpg" alt="" />
+                )}
+                {provider.alias === "cycling" && (
+                  <img src="/mapPreviews/cycle.jpg" alt="" />
+                )}
                 {provider.alias === "satellite" && (
-                  <img src="/mapPreviews/satellite.jpg" alt=""/>
+                  <img src="/mapPreviews/satellite.jpg" alt="" />
                 )}
                 <p>{provider.alias}</p>
               </button>

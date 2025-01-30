@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
-import usePOIs from "../Contexts/PointsOfInterest/usePOIs";
+import usePOIs from "./usePOIs";
 
 //TODO convert to a hook
 
-export default function POIsFocuser() {
+export default function usePOIsFocuser() {
   const { targetPOIPosition } = usePOIs();
   const map = useMap();
 
@@ -16,6 +16,4 @@ export default function POIsFocuser() {
       map.flyTo(targetPOIPosition, 18, { duration: 1 });
     }
   }, [targetPOIPosition]);
-
-  return null;
 }

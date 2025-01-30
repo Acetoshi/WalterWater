@@ -1,5 +1,5 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
-import Map from "./pages/Map";
+import Map from "./pages/Map/Map";
 import App from "./App";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import GetTheApp from "./pages/GetTheApp";

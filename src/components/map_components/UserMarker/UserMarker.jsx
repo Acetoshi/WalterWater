@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { Popup, Marker, useMap } from "react-leaflet";
-import usePosition from "../Contexts/Position/usePosition";
-import { walterIcon } from "../scripts/icons";
+import usePosition from "../../../Contexts/Position/usePosition";
+import { walterIcon } from "../icons";
 
 export default function UserMarker() {
-  const { userLocation} = usePosition();
+  const { userLocation } = usePosition();
 
   const map = useMap();
 
@@ -12,13 +12,12 @@ export default function UserMarker() {
     map.setView(userLocation, 15);
   }, [userLocation]);
 
-
   return (
     <Marker position={userLocation} icon={walterIcon}>
       <Popup>
         <p>
-          This is your position, explorer, use filters to find water or toilets around you.
-          Have a great time.
+          This is your position, explorer, use filters to find water or toilets
+          around you. Have a great time.
         </p>
       </Popup>
     </Marker>

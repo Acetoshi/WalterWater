@@ -1,14 +1,18 @@
 import { useCallback } from "react";
-import CustomMarker from "../CustomMarker/CustomMarker";
 import { useMap } from "react-leaflet";
 import usePOIs from "../../../Contexts/PointsOfInterest/usePOIs";
+import usePOIsFocuser from "@/Contexts/PointsOfInterest/usePOIsFocuser";
 import MarkerClusterGroup from "react-leaflet-cluster";
+import CustomMarker from "../CustomMarker/CustomMarker";
 import { Point } from "@/Contexts/contexts.types";
+import useMapTracker from "@/Contexts/Position/useMapTracker";
 import "./Markers.css";
 
 export default function Markers() {
   const { POIs } = usePOIs();
   const map = useMap();
+  usePOIsFocuser();
+  useMapTracker();
 
   // useCallBack needed because of marker clusters
   const handleMarkerClick = useCallback(
