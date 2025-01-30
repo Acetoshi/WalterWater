@@ -1,8 +1,9 @@
 import { memo } from "react";
 import "./POIDetails.css";
+import { Point } from "@/Contexts/contexts.types";
 // Official doc for POI tags : https://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtoilets
 
-function POIDetailsComponent({ point }) {
+function POIDetailsComponent({ point }:{point:Point}) {
   return (
     <>
       <hgroup className="poi-details-heading">
@@ -81,7 +82,7 @@ function POIDetailsComponent({ point }) {
             src="icons/footsteps.svg"
             alt=""
           />
-          <p>{`distance : ${point.distanceKm} km`}</p>
+          <p>{`distance : ${point.distance}`}</p>
         </li>
 
         <li className="poi-info-row">

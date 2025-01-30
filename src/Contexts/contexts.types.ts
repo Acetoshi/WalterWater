@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export interface ContextProps {
   children: ReactNode;
@@ -16,7 +16,7 @@ export interface Point {
   id: number;
   lat: number;
   lon: number;
-  distanceKm: string;
+  distance: string;
   walkTime: string;
   tags: {
     amenity: "drinking_water" | "toilets" | "restaurant";
@@ -58,7 +58,7 @@ export interface PointsOfInterestContextValue {
 
 export interface PositionContextValue {
   userLocation: LatLng;
-  setUserLocation: (value: LatLng) => void;
+  setUserLocation: Dispatch<SetStateAction<LatLng>>;
   mapPosition: MapPosition;
-  setMapPosition: (value: MapPosition) => void;
+  setMapPosition: Dispatch<SetStateAction<MapPosition>>;
 }

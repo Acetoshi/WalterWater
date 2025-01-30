@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
 import usePosition from "./usePosition";
-import { getDistanceKm } from "../PointsOfInterest/distances.utils";
+import { getDistanceKm } from "@/utilities/distances.utils";
 
 // This component enables the app to track the center of the map, ie to know where the user is looking.
 export default function useMapTracker() {
@@ -25,8 +25,7 @@ export default function useMapTracker() {
         center.lat,
         center.lng
       );
-      setMapPosition(() => {
-        return {
+      setMapPosition({
           bounds: {
             minLat: bounds._southWest.lat,
             maxLat: bounds._northEast.lat,
@@ -38,7 +37,6 @@ export default function useMapTracker() {
             lng: center.lng,
           },
           distanceFromUser: distance,
-        };
       });
     };
 

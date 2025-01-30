@@ -1,5 +1,5 @@
 import { LatLng, MapBounds, Point, UserFilters } from "../contexts.types";
-import { getDistanceKm, getWalkingTime } from "./distances.utils";
+import { distanceAsString, getDistanceKm, getWalkingTime } from "../../utilities/distances.utils";
 
 export async function getPoints(
   userLocation: LatLng,
@@ -51,10 +51,10 @@ export async function getPoints(
       );
 
       // Directly mutating the point objects to include distance and walkTime
-      pointA.distanceKm = distanceA;
+      pointA.distance = distanceAsString(distanceA);
       pointA.walkTime = getWalkingTime(distanceA);
 
-      pointB.distanceKm = distanceB;
+      pointB.distance = distanceAsString(distanceB);
       pointB.walkTime = getWalkingTime(distanceB);
 
       // Sorting based on distance
