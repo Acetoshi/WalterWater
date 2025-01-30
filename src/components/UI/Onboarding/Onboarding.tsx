@@ -1,8 +1,7 @@
 import useLocalStorage from '@/utilities/useLocalStorage';
-import { useRef, useState } from 'react';
-import './Onboarding.css';
+import { useRef, useState, useEffect } from 'react';
 import usePOIs from '@/Contexts/PointsOfInterest/usePOIs';
-import useEffectSkipFirstRender from '@/utilities/useEffectSkipFirstRender';
+import './Onboarding.css';
 
 export default function Onboarding() {
   const { setUserFilters } = usePOIs();
@@ -13,8 +12,8 @@ export default function Onboarding() {
   );
   const [onBoardingStep, setOnboardingStep] = useState<number>(0);
 
-  useEffectSkipFirstRender(() => {
-    if (!onBoardingDone && dialogRef.current) {
+  useEffect(() => {
+    if (!onBoardingDone) {
       setTimeout(
         () => dialogRef.current && dialogRef.current.showModal(),
         2000,
@@ -56,7 +55,7 @@ export default function Onboarding() {
               incrementWithDelay();
             }}
           >
-            water <img src="/icons/faucet-icon.svg" alt="" />
+            I need water <img src="/icons/faucet-icon.svg" alt="" />
           </button>
           <button
             className="call-to-action-button button-feedback"
@@ -65,7 +64,7 @@ export default function Onboarding() {
               incrementWithDelay();
             }}
           >
-            toilets <img src="/icons/toilets-icon.svg" alt="" />
+            I need toilets <img src="/icons/toilets-icon.svg" alt="" />
           </button>
           <button className="skip-button button-feedback" onClick={handleSkip}>
             Skip for now
@@ -80,7 +79,7 @@ export default function Onboarding() {
       image: '/onboarding/location.gif',
       choices: (
         <>
-          <button className="call-to-action-button">enable geolocation</button>
+          <button className="call-to-action-button">Enable geolocation</button>
           <button className="skip-button button-feedback" onClick={handleSkip}>
             Skip for now
           </button>

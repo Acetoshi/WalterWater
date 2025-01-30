@@ -32,7 +32,7 @@ export default function PositionProvider({ children }: ContextProps) {
     defaultUserPosition,
   );
 
-  const [mapPosition, setMapPosition] = useLocalStorage('mapPosition', {
+  const [mapPosition, setMapPosition] = useLocalStorage('ww_map_position', {
     bounds: defaultBounds,
     center: defaultUserPosition,
     zoomLevel: 14,

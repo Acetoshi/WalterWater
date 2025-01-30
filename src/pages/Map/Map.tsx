@@ -12,6 +12,7 @@ import MapProviderSelector from '../../components/map_UI/MapProviderSelector/Map
 import DataFetchingNotifier from '../../components/map_UI/DataFetchingNotifier/DataFetchingNotifier';
 import { MapSelecter } from './Map.types';
 import Onboarding from '@/components/UI/Onboarding/Onboarding';
+import './leaflet.css' // to stay up to date, you can always : import 'leaflet/dist/leaflet.css';
 
 export default function Map() {
   const [listIsDisplayed, setListIsDisplayed] = useState<boolean>(false);

@@ -14,13 +14,24 @@ export default function useLocalStorage<T>(
     }
   });
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   try {
+  //     localStorage.setItem(key, JSON.stringify(storedValue));
+  //   } catch (error) {
+  //     console.error('Error setting localStorage', error);
+  //   }
+  // }, [key, storedValue]);
+
+  const setValue = (value: T | ((prev: T) => T)) => {
     try {
-      localStorage.setItem(key, JSON.stringify(storedValue));
+      const valueToStore =
+        typeof value === 'function' ? (value as (prev: T) => T)(storedValue) : value;
+      setStoredValue(valueToStore);
+      localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
       console.error('Error setting localStorage', error);
     }
-  }, [key, storedValue]);
+  };
 
-  return [storedValue, setStoredValue];
+  return [storedValue, setValue];
 }
