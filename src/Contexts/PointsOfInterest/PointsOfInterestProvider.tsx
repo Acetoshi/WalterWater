@@ -12,8 +12,23 @@ import useLocalStorage from "../../utilities/useLocalStorage";
 import usePosition from "../Position/usePosition";
 import { getPoints } from "./osmUtilities";
 
+// Default context value for PointsOfInterestContext
+const defaultPointsOfInterestContextValue: PointsOfInterestContextValue = {
+  userFilters: {
+    water: true,
+    food: false,
+    toilets: true,
+  },
+  setUserFilters: () => {},
+  POIs: [],
+  fetchPOIs: async () => {},
+  targetPOIPosition: { lat: 0, lng: 0 }, 
+  setTargetPOIPosition: () => {},
+  requestStatus: "idle", 
+};
+
 const PointsOfInterestContext =
-  createContext<PointsOfInterestContextValue | null>(null);
+  createContext<PointsOfInterestContextValue>(defaultPointsOfInterestContextValue);
 
 export default function PointsOfInterestProvider({ children }: ContextProps) {
   const { userLocation, mapPosition } = usePosition();
