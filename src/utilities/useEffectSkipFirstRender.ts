@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
 
-function useEffectSkipFirstRender(callback: () => void, dependencies: React.DependencyList) {
+function useEffectSkipFirstRender(
+  callback: () => void,
+  dependencies: React.DependencyList,
+) {
   const hasRendered = useRef(false);
 
   useEffect(() => {

@@ -65,7 +65,6 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
       setRequestStatus('fetching data');
       let bounds: MapBounds = mapPosition.bounds;
       if (center === 'user') {
-        console.log('request with user')
         bounds = {
           minLat: userLocation.lat - 0.25,
           maxLat: userLocation.lat + 0.25,
@@ -97,7 +96,7 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
   // the position is debounced in order not to call the server too often
   const debouncedUserLocation = useDebounce(userLocation, 500);
   useEffectSkipFirstRender(() => {
-    fetchPOIs('user');
+    fetchPOIs();
   }, [debouncedUserLocation]);
 
   //Used to fetch new data everytime the map is moved more than the threshold

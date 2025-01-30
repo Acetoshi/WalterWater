@@ -30,9 +30,9 @@ export default function FrequentlyAskedQuestions() {
       <section>
         <h2>How can I share my location?</h2>
         <p>
-          You can allow the app to access your device&aposs GPS. Once enabled, your
-          current location will be displayed on the map, making it easier to
-          find nearby amenities.
+          You can allow the app to access your device&aposs GPS. Once enabled,
+          your current location will be displayed on the map, making it easier
+          to find nearby amenities.
         </p>
       </section>
 
