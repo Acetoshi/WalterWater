@@ -1,7 +1,12 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
+
+// ESM way to get the equivalent of `__dirname`
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [
@@ -20,71 +25,71 @@ export default defineConfig({
             src: '/pwa/walter-icon-16.png',
             sizes: '16x16',
             type: 'image/png',
-            purpose: 'any', // Used in browser tabs and bookmarks
+            purpose: 'any',
           },
           {
             src: '/pwa/walter-icon-32.png',
             sizes: '32x32',
             type: 'image/png',
-            purpose: 'any', // Used in browser tabs and bookmarks
+            purpose: 'any',
           },
           {
             src: '/pwa/walter-icon-120.png',
             sizes: '120x120',
             type: 'image/png',
-            purpose: 'any maskable', // iPhone (Retina 2x)
+            purpose: 'any maskable',
           },
           {
             src: '/pwa/walter-icon-152.png',
             sizes: '152x152',
             type: 'image/png',
-            purpose: 'any maskable', // iPad (Retina)
+            purpose: 'any maskable',
           },
           {
             src: '/pwa/walter-icon-167.png',
             sizes: '167x167',
             type: 'image/png',
-            purpose: 'any maskable', // iPad (Retina 2x)
+            purpose: 'any maskable',
           },
           {
             src: '/pwa/walter-icon-180.png',
             sizes: '180x180',
             type: 'image/png',
-            purpose: 'any maskable', // iPhone (Retina 3x) and iPad
+            purpose: 'any maskable',
           },
           {
             src: '/pwa/walter-icon-192.png',
             sizes: '192x192',
             type: 'image/png',
-            purpose: 'maskable', // Android (Recommended for home screen icons)
+            purpose: 'maskable',
           },
           {
             src: '/pwa/walter-icon-256.png',
             sizes: '256x256',
             type: 'image/png',
-            purpose: 'any', // Used in various contexts, including the Windows Start Menu
+            purpose: 'any',
           },
           {
             src: '/pwa/walter-icon-512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'maskable', // Android (Used for the Play Store)
+            purpose: 'maskable',
           },
         ],
       },
       registerType: 'autoUpdate',
-      strategies: 'generateSW', // or 'injectManifest'
+      strategies: 'generateSW',
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,jpg,svg}'],
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/api\.example\.com\/.*$/, // Regex for URL pattern
-            handler: 'NetworkFirst', // Caching strategy
+            urlPattern: /^https:\/\/api\.example\.com\/.*$/,
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'api-cache',
               expiration: {
-                maxEntries: 50, // Maximum number of entries to cache
-                maxAgeSeconds: 30 * 24 * 60 * 60, // Cache duration (30 days)
+                maxEntries: 50,
+                maxAgeSeconds: 30 * 24 * 60 * 60,
               },
             },
           },

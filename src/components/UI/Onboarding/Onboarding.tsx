@@ -13,11 +13,12 @@ export default function Onboarding() {
   );
   const [onBoardingStep, setOnboardingStep] = useState<number>(0);
 
-  console.log(onBoardingDone);
-
   useEffectSkipFirstRender(() => {
     if (!onBoardingDone && dialogRef.current) {
-      dialogRef.current.showModal();
+      setTimeout(
+        () => dialogRef.current && dialogRef.current.showModal(),
+        2000,
+      );
     }
   }, [onBoardingDone]);
 
@@ -25,41 +26,49 @@ export default function Onboarding() {
 
   const finishOnboarding = () => {
     setOnboardingDone(true);
-    handleClose();
+    setTimeout(handleClose, 300);
   };
 
   const handleSkip = () => {
     if (onBoardingStep < steps.length - 1) {
-      setOnboardingStep(onBoardingStep + 1);
+      incrementWithDelay();
     } else if (onBoardingStep === steps.length - 1) {
       handleClose();
       setOnboardingStep(0);
     }
   };
 
+  const incrementWithDelay = () =>
+    setTimeout(() => setOnboardingStep(onBoardingStep + 1), 300);
+
   const steps = [
     {
-      title: 'Welcome, explorer ! what are you looking for ?',
-      subtitle: 'Walter will help you find water taps or toilets near you',
+      title: 'Welcome, explorer ! What are you looking for ?',
+      subtitle:
+        'Stay hydrated by finding refill points, or find clean and accessible restrooms.',
+      image: '/onboarding/filters.gif',
       choices: (
         <>
           <button
-            className="call-to-action-button"
+            className="call-to-action-button button-feedback"
             onClick={() => {
               setUserFilters({ water: true, food: false, toilets: false });
-              setOnboardingStep(onBoardingStep + 1);
+              incrementWithDelay();
             }}
           >
             water <img src="/icons/faucet-icon.svg" alt="" />
           </button>
           <button
-            className="call-to-action-button"
+            className="call-to-action-button button-feedback"
             onClick={() => {
               setUserFilters({ water: false, food: false, toilets: true });
-              setOnboardingStep(onBoardingStep + 1);
+              incrementWithDelay();
             }}
           >
             toilets <img src="/icons/toilets-icon.svg" alt="" />
+          </button>
+          <button className="skip-button button-feedback" onClick={handleSkip}>
+            Skip for now
           </button>
         </>
       ),
@@ -67,20 +76,34 @@ export default function Onboarding() {
     {
       title: 'Find it near you !',
       subtitle:
-        'Enable geolocation to see points of interest around you, we will NOT store this data',
+        'Let us show you nearby refill points and toilets. Your location will not be stored on our servers',
+      image: '/onboarding/location.gif',
       choices: (
-        <button className="call-to-action-button">enable geolocation</button>
+        <>
+          <button className="call-to-action-button">enable geolocation</button>
+          <button className="skip-button button-feedback" onClick={handleSkip}>
+            Skip for now
+          </button>
+        </>
       ),
     },
     {
       title: 'Click any icon on the map to see details',
       subtitle:
-        'Each point of interest will have details such as accessibility, toilet position and much more !',
+        'Tap any icon to discover important details, like accessibility, distance, and more.',
       image: '/onboarding/poi-details.gif',
       choices: (
-        <button className="call-to-action-button" onClick={finishOnboarding}>
-          ok, got it !
-        </button>
+        <>
+          <button
+            className="call-to-action-button button-feedback"
+            onClick={finishOnboarding}
+          >
+            Ok, got it !
+          </button>
+          <button className="skip-button button-feedback" onClick={handleSkip}>
+            Remind me later
+          </button>
+        </>
       ),
     },
   ];
@@ -93,13 +116,18 @@ export default function Onboarding() {
           <p>{steps[onBoardingStep].subtitle}</p>
         </hgroup>
 
-        {/* {steps[onBoardingStep].image && <img className="onboarding-illustration" src={steps[onBoardingStep].image} alt=""/>} */}
+        {steps[onBoardingStep].image && (
+          <figure>
+            <img
+              className="onboarding-illustration"
+              src={steps[onBoardingStep].image}
+              alt=""
+            />
+          </figure>
+        )}
         <div id="onboarding-buttons-and-progress-wrapper">
           <div id="onboarding-choice-button-wrapper">
             {steps[onBoardingStep].choices}
-            <button className="skip-button" onClick={handleSkip}>
-              Skip
-            </button>
           </div>
           <div id="onboarding-progress-bar">
             <button
