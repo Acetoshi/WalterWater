@@ -11,6 +11,7 @@ import FiltersDrawer from '../../components/map_UI/FiltersDrawer/FiltersDrawer';
 import MapProviderSelector from '../../components/map_UI/MapProviderSelector/MapProviderSelector';
 import DataFetchingNotifier from '../../components/map_UI/DataFetchingNotifier/DataFetchingNotifier';
 import { MapSelecter } from './Map.types';
+import Onboarding from '@/components/UI/Onboarding/Onboarding';
 
 export default function Map() {
   const [listIsDisplayed, setListIsDisplayed] = useState<boolean>(false);
@@ -21,6 +22,7 @@ export default function Map() {
 
   return (
     <>
+      <Onboarding />
       <ListView listState={{ listIsDisplayed, setListIsDisplayed }} />
 
       <MapContainer center={[47.216671, -1.55]} zoomControl={false} zoom={14}>

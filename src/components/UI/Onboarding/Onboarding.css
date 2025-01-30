@@ -1,0 +1,72 @@
+#onboarding-dialog {
+  margin: auto;
+  margin-top: 15vh;
+  z-index: 3000;
+  border: 0;
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: white;
+  color: var(--black);
+  width: min(calc(100vw - 2rem), 500px);
+  height: 70vh;
+}
+
+#onboarding-dialog::backdrop{
+    backdrop-filter: blur(5px);
+}
+
+#onboarding-dialog-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-grow: 3;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#onboarding-choice-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  & button {
+    color: var(--main-color);
+    border: solid 1px var(--main-color);
+    background-color: white;
+    font-size: var(--font-size);
+    padding: 8px 16px;
+    border-radius: 32px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+
+    & img {
+      height: 1.1rem;
+    }
+  }
+
+  & button.call-to-action-button {
+    background-color: var(--main-color);
+    color: var(--white);
+    font-weight: bold;
+  }
+}
+
+#onboarding-progress-bar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  & button {
+    width: 64px;
+    height: 16px;
+    border-radius: 8px;
+  }
+  & button.active {
+    background-color: var(--secondary-color);
+  }
+  & button.inactive {
+    background-color: var(--grey-light);
+  }
+}
