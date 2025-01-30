@@ -46,7 +46,6 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
 
   const [requestStatus, setRequestStatus] = useState<string>("ready to fetch");
 
-  const [areaPOIs, setAreaPOIs] = useState<Point[]>([]);
   const [POIs, setPOIs] = useState<Point[]>([]);
 
   // used for the listview to pass the target POI position
@@ -55,15 +54,6 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
     lng: 0,
   });
 
-  useEffect(() => {
-    const newPOIs = areaPOIs.filter(
-      (point: Point) =>
-        (point.tags.amenity === "drinking_water" && userFilters.water) ||
-        (point.tags.amenity === "toilets" && userFilters.toilets) ||
-        (point.tags.amenity === "restaurant" && userFilters.food)
-    );
-    setPOIs(() => newPOIs);
-  }, [areaPOIs, userFilters]);
 
   const fetchPOIs = async (center?: string) => {
     setRequestStatus("fetching data");
@@ -83,7 +73,7 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
     );
 
     if (success) {
-      setAreaPOIs(POIs);
+      setPOIs(POIs);
       setRequestStatus("data received");
       //TODO : kill this timeout in the useEffect
       setTimeout(() => setRequestStatus("ready to fetch"), 1000);
