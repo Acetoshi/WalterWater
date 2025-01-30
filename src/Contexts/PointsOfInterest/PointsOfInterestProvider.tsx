@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 import {
   ContextProps,
   LatLng,
@@ -13,6 +13,7 @@ import usePosition from "../Position/usePosition";
 import { getPoints } from "./fetchPOIs.utils";
 import useMapRefetchThreshold from "./useMapRefetchThreshold";
 import { useDebounce } from "@/utilities/useDebounce";
+import { getDistanceKm } from "@/utilities/distances.utils";
 
 // Default context value for PointsOfInterestContext
 const defaultPointsOfInterestContextValue: PointsOfInterestContextValue = {
@@ -55,48 +56,81 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
     lng: 0,
   });
 
+  const fetching = useRef(false);
 
   const fetchPOIs = async (center?: string) => {
-    setRequestStatus("fetching data");
-    let bounds: MapBounds = mapPosition.bounds;
-    if (center === "user") {
-      bounds = {
-        minLat: userLocation.lat - 0.25,
-        maxLat: userLocation.lat + 0.25,
-        minLng: userLocation.lng - 0.25,
-        maxLng: userLocation.lng + 0.25,
-      };
-    }
-    const { success, POIs } = await getPoints(
-      userLocation,
-      userFilters,
-      bounds
-    );
+    if (!fetching.current) {
+      fetching.current = true;
+      setRequestStatus("fetching data");
+      let bounds: MapBounds = mapPosition.bounds;
+      if (center === "user") {
+        bounds = {
+          minLat: userLocation.lat - 0.25,
+          maxLat: userLocation.lat + 0.25,
+          minLng: userLocation.lng - 0.25,
+          maxLng: userLocation.lng + 0.25,
+        };
+      }
+      try {
+        const { success, POIs } = await getPoints(
+          userLocation,
+          userFilters,
+          bounds
+        );
 
-    if (success) {
-      setPOIs(POIs);
-      setRequestStatus("data received");
-      //TODO : kill this timeout in the useEffect
-      setTimeout(() => setRequestStatus("ready to fetch"), 1000);
-    } else {
-      setRequestStatus("server error");
+        if (success) {
+          setPOIs(POIs);
+          setRequestStatus("data received");
+          //TODO : kill this timeout in the useEffect
+          setTimeout(() => setRequestStatus("ready to fetch"), 1000);
+        } else {
+          setRequestStatus("server error");
+        }
+      } catch {
+        setRequestStatus("server error");
+      } finally {
+        fetching.current = false;
+      }
     }
   };
 
+  console.log(fetching.current);
+
+  // the position is debounced in order not to call the server too often
+  const debouncedUserLocation = useDebounce(userLocation, 500);
   useEffect(() => {
     fetchPOIs("user");
-  }, [userLocation]);
+  }, [debouncedUserLocation]);
 
   //Used to fetch new data everytime the map is moved more than the threshold
 
   // the position is debounced in order not to call the server too often
-  const debouncedMapCenter=useDebounce(mapPosition.center,1000)
-  
+  const debouncedMapPosition = useDebounce(mapPosition, 500);
+
+  // this threshold will evolve based on the user's zoom level
+  const [refetchThreshold, setRefetchThreshold] = useState<number>(5);
+  useEffect(() => {
+    // calculate new threshold
+    const newThreshold =
+      getDistanceKm(
+        debouncedMapPosition.bounds.maxLat,
+        debouncedMapPosition.bounds.maxLng,
+        debouncedMapPosition.bounds.minLat,
+        debouncedMapPosition.bounds.minLng
+      ) / 2.5;
+    setRefetchThreshold(newThreshold);
+    console.log("zoom changed, new threshold: ", newThreshold);
+  }, [debouncedMapPosition.zoomLevel]);
+
   // TODO the threshold needs to depend on the user zoom level
-  useMapRefetchThreshold(debouncedMapCenter, 5,fetchPOIs);
+  useMapRefetchThreshold(
+    debouncedMapPosition.center,
+    refetchThreshold,
+    fetchPOIs
+  );
 
   useEffect(() => {
-      fetchPOIs();
+    fetchPOIs();
   }, [userFilters]);
 
   return (

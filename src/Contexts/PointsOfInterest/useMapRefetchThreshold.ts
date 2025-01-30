@@ -25,5 +25,5 @@ export default function useMapRefetchThreshold(
       setLastFetchedpostion(mapCenter);
       refetch();
     }
-  }, [mapCenter, lastFetchedPosition]);
+  }, [mapCenter, lastFetchedPosition,threshold]);
 }
