@@ -10,7 +10,8 @@ import {
 } from "../contexts.types";
 import useLocalStorage from "../../utilities/useLocalStorage";
 import usePosition from "../Position/usePosition";
-import { getPoints } from "./osmUtilities";
+import { getPoints } from "./fetchPOIs.utils";
+import useMapRefetchThreshold from "./useMapRefetchThreshold";
 
 // Default context value for PointsOfInterestContext
 const defaultPointsOfInterestContextValue: PointsOfInterestContextValue = {
@@ -22,13 +23,14 @@ const defaultPointsOfInterestContextValue: PointsOfInterestContextValue = {
   setUserFilters: () => {},
   POIs: [],
   fetchPOIs: async () => {},
-  targetPOIPosition: { lat: 0, lng: 0 }, 
+  targetPOIPosition: { lat: 0, lng: 0 },
   setTargetPOIPosition: () => {},
-  requestStatus: "idle", 
+  requestStatus: "idle",
 };
 
-const PointsOfInterestContext =
-  createContext<PointsOfInterestContextValue>(defaultPointsOfInterestContextValue);
+const PointsOfInterestContext = createContext<PointsOfInterestContextValue>(
+  defaultPointsOfInterestContextValue
+);
 
 export default function PointsOfInterestProvider({ children }: ContextProps) {
   const { userLocation, mapPosition } = usePosition();
@@ -94,10 +96,13 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
     fetchPOIs("user");
   }, [userLocation]);
 
-  //Used to fetch new data everytime the map is moved
+  //Used to fetch new data everytime the map is moved more than the threshold
+  // the threshold depends obviously on the user zoom level
+  useMapRefetchThreshold(mapPosition.center, 5,fetchPOIs);
+
   useEffect(() => {
-    fetchPOIs();
-  }, [mapPosition, userFilters]);
+      fetchPOIs();
+  }, [userFilters]);
 
   return (
     <PointsOfInterestContext.Provider
