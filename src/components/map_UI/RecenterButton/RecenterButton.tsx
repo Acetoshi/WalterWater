@@ -4,15 +4,19 @@ import usePosition from '../../../Contexts/Position/usePosition';
 import './RecenterButton.css';
 
 export default function RecenterButton() {
-  const { userLocation, mapPosition } = usePosition();
+  const { askUserLocation, userLocation, mapPosition } = usePosition();
   const { fetchPOIs } = usePOIs();
   const map = useMap();
 
-  const handleRecenter = () => {
-    // needed otherwise the open popups would 'refocus" the map
-    map.closePopup();
-    map.flyTo(userLocation, 14, { duration: 1 });
-    fetchPOIs('user');
+  const handleRecenter = async () => {
+    askUserLocation(); // always ask for a refresh on user location
+
+    if (mapPosition.distanceFromUser >= 0.05) {
+      // needed otherwise the open popups would 'refocus" the map
+      map.closePopup();
+      map.flyTo(userLocation, 14, { duration: 1 });
+      fetchPOIs('user');
+    }
   };
 
   return (
@@ -24,7 +28,6 @@ export default function RecenterButton() {
           mapPosition.distanceFromUser >= 0.05 ? 'button-feedback' : ''
         }
         onClick={handleRecenter}
-        disabled={mapPosition.distanceFromUser <= 0.05}
       >
         <img
           src={

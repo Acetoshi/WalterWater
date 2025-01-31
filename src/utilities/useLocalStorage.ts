@@ -1,35 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function useLocalStorage<T>(
   key: string,
   initialValue: T,
 ): [T, (value: T) => void] {
-  const [storedValue, setStoredValue] = useState<T>(initialValue);
-
-  const isBrowserEnvironment = window; //typeof window !== "undefined";
-
-  useEffect(() => {
-    // Check if we're in the browser
-    if (isBrowserEnvironment) {
-      try {
-        const item = localStorage.getItem(key);
-        if (item) {
-          setStoredValue(JSON.parse(item));
-        } else {
-          setStoredValue(initialValue);
-        }
-      } catch (error) {
-        console.error('Error reading localStorage', error);
-      }
-    }
-  }, []);
-
-  const setValue = (value: T) => {
+  const [storedValue, setStoredValue] = useState<T>(() => {
     try {
-      setStoredValue(value);
-      if (isBrowserEnvironment) {
-        localStorage.setItem(key, JSON.stringify(value));
-      }
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error('Error reading localStorage', error);
+      return initialValue;
+    }
+  });
+
+  //TODO figure this out, what's the difference here ? does it impact ts errors i get in position provider ? INVESTIGATE
+  // useEffect(() => {
+  //   try {
+  //     localStorage.setItem(key, JSON.stringify(storedValue));
+  //   } catch (error) {
+  //     console.error('Error setting localStorage', error);
+  //   }
+  // }, [key, storedValue]);
+
+  const setValue = (value: T | ((prev: T) => T)) => {
+    try {
+      const valueToStore =
+        typeof value === 'function'
+          ? (value as (prev: T) => T)(storedValue)
+          : value;
+      setStoredValue(valueToStore);
+      localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
       console.error('Error setting localStorage', error);
     }

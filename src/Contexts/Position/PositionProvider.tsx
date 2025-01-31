@@ -12,6 +12,7 @@ const defaultBounds = {
 };
 
 const defaultContextValue: PositionContextValue = {
+  askUserLocation: () => new Promise<boolean>((resolve) => resolve),
   userLocation: defaultUserPosition,
   setUserLocation: () => {},
   mapPosition: {
@@ -28,20 +29,42 @@ const PositionContext =
 
 export default function PositionProvider({ children }: ContextProps) {
   const [userLocation, setUserLocation] = useLocalStorage<LatLng>(
-    'userLatLng',
+    'ww_user_lat_lng',
     defaultUserPosition,
   );
 
-  const [mapPosition, setMapPosition] = useLocalStorage('mapPosition', {
+  const [mapPosition, setMapPosition] = useLocalStorage('ww_map_position', {
     bounds: defaultBounds,
     center: defaultUserPosition,
     zoomLevel: 14,
     distanceFromUser: 0,
   });
 
+  const askUserLocation = async () => {
+    if (navigator.geolocation) {
+      try {
+        const position = await new Promise<GeolocationPosition>(
+          (resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject);
+          },
+        );
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+        return true;
+      } catch {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  };
+
   return (
     <PositionContext.Provider
       value={{
+        askUserLocation,
         userLocation,
         setUserLocation,
         mapPosition,

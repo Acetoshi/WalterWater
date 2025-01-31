@@ -1,0 +1,104 @@
+#onboarding-dialog {
+  margin: auto;
+  margin-top: 5vh;
+  border: 0;
+  border-radius: 16px;
+  padding: 32px;
+  background-color: white;
+  color: var(--black);
+  width: min(calc(100vw - 2rem), 500px);
+  height: 90vh;
+}
+
+#onboarding-dialog::backdrop {
+  backdrop-filter: blur(5px);
+}
+
+#onboarding-dialog-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-grow: 3;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  & hgroup {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  & h1 {
+    font-size: larger;
+    text-align: center;
+  }
+
+  & p {
+    font-size: medium;
+  }
+
+  & img.onboarding-illustration {
+    height: 33vh;
+    width: 33vh;
+    border-radius: 16px;
+  }
+}
+
+#onboarding-buttons-and-progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#onboarding-choice-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 300px;
+
+  & button {
+    position: relative;
+    color: var(--main-color);
+    border: solid 1px var(--main-color);
+    background-color: white;
+    font-size: var(--font-size);
+    padding: 8px 16px;
+    border-radius: 32px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 0.75rem;
+
+    & img {
+      height: 1.1rem;
+      filter: grayscale(100%) brightness(100);
+      position: absolute;
+      right: 16px;
+    }
+  }
+
+  & button.call-to-action-button {
+    background-color: var(--main-color);
+    color: var(--white);
+    font-weight: bold;
+  }
+}
+
+#onboarding-progress-bar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  & button {
+    width: 32px;
+    height: 8px;
+    border-radius: 8px;
+  }
+  & button.active {
+    background-color: var(--secondary-color);
+  }
+  & button.inactive {
+    background-color: var(--grey-light);
+  }
+}

@@ -47,17 +47,16 @@ export interface MapPosition {
 
 export interface PointsOfInterestContextValue {
   userFilters: UserFilters;
-  setUserFilters: (value: UserFilters) => void;
+  setUserFilters: Dispatch<SetStateAction<UserFilters>>;
   POIs: Point[];
   fetchPOIs: (center?: string) => Promise<void>;
   targetPOIPosition: { lat: number; lng: number };
-  setTargetPOIPosition: React.Dispatch<
-    React.SetStateAction<{ lat: number; lng: number }>
-  >;
+  setTargetPOIPosition: Dispatch<SetStateAction<{ lat: number; lng: number }>>;
   requestStatus: string;
 }
 
 export interface PositionContextValue {
+  askUserLocation: () => Promise<boolean>;
   userLocation: LatLng;
   setUserLocation: Dispatch<SetStateAction<LatLng>>;
   mapPosition: MapPosition;

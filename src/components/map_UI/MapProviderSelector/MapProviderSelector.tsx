@@ -73,16 +73,16 @@ export default function MapProviderSelector({
                 }
               >
                 {provider.alias === 'simple' && (
-                  <img src="/mapPreviews/simple.jpg" alt="" />
+                  <img src="/mapPreviews/simple.jpg" alt="" loading="lazy" />
                 )}
                 {provider.alias === 'detailed' && (
-                  <img src="/mapPreviews/detailed.jpg" alt="" />
+                  <img src="/mapPreviews/detailed.jpg" alt="" loading="lazy" />
                 )}
                 {provider.alias === 'cycling' && (
-                  <img src="/mapPreviews/cycle.jpg" alt="" />
+                  <img src="/mapPreviews/cycle.jpg" alt="" loading="lazy" />
                 )}
                 {provider.alias === 'satellite' && (
-                  <img src="/mapPreviews/satellite.jpg" alt="" />
+                  <img src="/mapPreviews/satellite.jpg" alt="" loading="lazy" />
                 )}
                 <p>{provider.alias}</p>
               </button>

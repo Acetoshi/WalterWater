@@ -39,7 +39,7 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
   const { userLocation, mapPosition } = usePosition();
 
   const [userFilters, setUserFilters] = useLocalStorage<UserFilters>(
-    'userFilters',
+    'ww_user_filters',
     {
       water: true,
       food: false,
