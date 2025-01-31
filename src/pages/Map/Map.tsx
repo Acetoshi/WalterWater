@@ -25,7 +25,6 @@ export default function Map() {
 
   return (
     <>
-      <SearchBar />
       <Onboarding />
       <ListView listState={{ listIsDisplayed, setListIsDisplayed }} />
 
@@ -41,6 +40,7 @@ export default function Map() {
         <Markers />
         <UserMarker />
         <DataFetchingNotifier />
+        <SearchBar />
         <RecenterButton />
         <FiltersDrawer />
         <ListToggle listState={{ listIsDisplayed, setListIsDisplayed }} />
