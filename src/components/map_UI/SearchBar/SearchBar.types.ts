@@ -11,7 +11,7 @@ export interface SearchResults {
 }
 
 export interface SelectedResult {
-    lat: number;
-    lng: number;
-    address: string;
-  }
+  lat: number;
+  lng: number;
+  address: string;
+}

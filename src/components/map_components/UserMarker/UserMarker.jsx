@@ -15,10 +15,9 @@ export default function UserMarker() {
   return (
     <Marker position={userLocation} icon={walterIcon}>
       <Popup>
-        <p>
-          This is your position, explorer, use filters to find water or toilets
-          around you. Have a great time.
-        </p>
+        <h4>Your position</h4>
+        This is you, explorer, use filters to find water or toilets around you.
+        Have a great time.
       </Popup>
     </Marker>
   );
