@@ -84,7 +84,6 @@ export default function Onboarding() {
           <button
             className="call-to-action-button button-feedback"
             onClick={async () => {
-              console.log('asking geoloc');
               const geolocObtained = await askUserLocation();
               if (geolocObtained) incrementWithDelay();
             }}

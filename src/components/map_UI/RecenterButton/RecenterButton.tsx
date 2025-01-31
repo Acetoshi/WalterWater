@@ -9,14 +9,13 @@ export default function RecenterButton() {
   const map = useMap();
 
   const handleRecenter = async () => {
-
     askUserLocation(); // always ask for a refresh on user location
 
-    if(mapPosition.distanceFromUser >= 0.05){
-    // needed otherwise the open popups would 'refocus" the map
-    map.closePopup();
-    map.flyTo(userLocation, 14, { duration: 1 });
-    fetchPOIs('user');
+    if (mapPosition.distanceFromUser >= 0.05) {
+      // needed otherwise the open popups would 'refocus" the map
+      map.closePopup();
+      map.flyTo(userLocation, 14, { duration: 1 });
+      fetchPOIs('user');
     }
   };
 

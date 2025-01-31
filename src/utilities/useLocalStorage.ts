@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function useLocalStorage<T>(
   key: string,
@@ -14,6 +14,7 @@ export default function useLocalStorage<T>(
     }
   });
 
+  //TODO figure this out, what's the difference here ? does it impact ts errors i get in position provider ? INVESTIGATE
   // useEffect(() => {
   //   try {
   //     localStorage.setItem(key, JSON.stringify(storedValue));
@@ -25,7 +26,9 @@ export default function useLocalStorage<T>(
   const setValue = (value: T | ((prev: T) => T)) => {
     try {
       const valueToStore =
-        typeof value === 'function' ? (value as (prev: T) => T)(storedValue) : value;
+        typeof value === 'function'
+          ? (value as (prev: T) => T)(storedValue)
+          : value;
       setStoredValue(valueToStore);
       localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
