@@ -2,6 +2,7 @@ import faucet from '/markerIcons/faucet_icon.svg';
 import toilet from '/markerIcons/toilet_icon.svg';
 import food from '/markerIcons/food_icon.svg';
 import walter from '/markerIcons/walter_icon_color.svg';
+import search from '/markerIcons/search_icon.svg';
 import capybara from '/markerIcons/capybara_icon.svg';
 import L from 'leaflet';
 
@@ -45,4 +46,12 @@ export const capybaraIcon = new L.icon({
   iconAnchor: [28, 72],
   popupAnchor: [0, -72],
   iconSize: [56, 72],
+});
+
+export const searchIcon = new L.icon({
+  iconUrl: search,
+  iconRetinaUrl: search,
+  iconAnchor: [17, 48],
+  popupAnchor: [0, -48],
+  iconSize: [35, 48],
 });
