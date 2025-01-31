@@ -94,10 +94,12 @@ export default function SearchBar() {
           </li>
         ))}
       </ul>
-      <SearchMarker
-        latLng={{ lat: selectedResult.lat, lng: selectedResult.lng }}
-        address={selectedResult.address}
-      />
+      {selectedResult.address && (
+        <SearchMarker
+          latLng={{ lat: selectedResult.lat, lng: selectedResult.lng }}
+          address={selectedResult.address}
+        />
+      )}
     </div>
   );
 }

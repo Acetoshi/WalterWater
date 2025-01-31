@@ -69,3 +69,11 @@
 #searchbar-results.hidden {
   display: none;
 }
+
+@media screen and (min-width: 768px) {
+  #searchbar-container {
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: calc(400px);
+  }
+}
