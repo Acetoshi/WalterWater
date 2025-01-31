@@ -1,39 +1,45 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useMap } from 'react-leaflet';
 import { useDebounce } from '@/utilities/useDebounce';
-import './SearchBar.css';
-import UserMarker from '@/components/map_components/UserMarker/UserMarker';
 import SearchMarker from '@/components/map_components/SearchMarker/SearchMarker';
-import { LatLng } from '@/Contexts/contexts.types';
+import './SearchBar.css';
+import { SearchResults, SelectedResult } from './SearchBar.types';
 
 export default function SearchBar() {
-  const [search, setSearch] = useState<string>('');
-  const [results, setResults] = useState({ entries: [], displayed: false });
-  const [selectedResultLatLng, setSelectedResultLatLng] = useState<LatLng>({
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchResults, setSearchResults] = useState<SearchResults>({
+    entries: [],
+    displayed: false,
+  });
+  const [selectedResult, setSelectedResult] = useState<SelectedResult>({
     lat: 0,
     lng: 0,
+    address: '',
   });
-  const debouncedSearch = useDebounce<string>(search, 500);
+
+  const debouncedSearchQuery = useDebounce<string>(searchQuery, 500);
   const map = useMap();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
+    setSearchQuery(event.target.value);
   };
 
   useEffect(() => {
     const fetchResults = async () => {
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/search.php?q=${sanitisedSearch}&format=jsonv2`,
+        `https://nominatim.openstreetmap.org/search.php?q=${sanitisedSearchQuery}&format=jsonv2`,
       );
       const result = await response.json();
-      setResults({ entries: result, displayed: true });
+      setSearchResults({ entries: result, displayed: true });
     };
 
-    const sanitisedSearch = debouncedSearch.trim();
-    if (sanitisedSearch) {
+    const sanitisedSearchQuery = debouncedSearchQuery.trim();
+    if (sanitisedSearchQuery) {
       fetchResults();
+    } else {
+      setSearchResults({ entries: [], displayed: true });
     }
-  }, [debouncedSearch]);
+  }, [debouncedSearchQuery]);
 
   const handleFlyTo = (lat: number, lng: number) => {
     map.closePopup();
@@ -41,15 +47,14 @@ export default function SearchBar() {
   };
 
   const handleInputFocus = () => {
-    const newResults = { ...results, displayed: true };
-    setResults(newResults);
+    const newResults = { ...searchResults, displayed: true };
+    setSearchResults(newResults);
   };
 
   // TODO : this is tricky cause you can't use a keyboard to see serch results, maybe trigger it with the div ?
   const handleInputBlur = () => {
-    console.log('blurred');
-    const newResults = { ...results, displayed: false };
-    setTimeout(() => setResults(newResults), 150);
+    const newResults = { ...searchResults, displayed: false };
+    setTimeout(() => setSearchResults(newResults), 150);
   };
 
   return (
@@ -59,22 +64,28 @@ export default function SearchBar() {
       onFocus={handleInputFocus}
     >
       <label id="searchbar-label" htmlFor="searchbar-input">
+        <img alt="" src="/icons/search.svg" />
         <input
           id="searchbar-input"
-          value={search}
+          value={searchQuery}
           type="text"
           onChange={handleChange}
+          placeholder="Search anywhere ..."
         />
       </label>
       <ul
         id="searchbar-results"
-        className={results.displayed ? 'visible' : 'hidden'}
+        className={searchResults.displayed ? 'visible' : 'hidden'}
       >
-        {results.entries.map((r) => (
+        {searchResults.entries.map((r) => (
           <li key={r.place_id}>
             <button
               onClick={() => {
-                setSelectedResultLatLng({lat:r.lat,lng:r.lon})
+                setSelectedResult({
+                  lat: r.lat,
+                  lng: r.lon,
+                  address: r.display_name,
+                });
                 handleFlyTo(r.lat, r.lon);
               }}
             >
@@ -83,7 +94,10 @@ export default function SearchBar() {
           </li>
         ))}
       </ul>
-      <SearchMarker latLng={selectedResultLatLng} />
+      <SearchMarker
+        latLng={{ lat: selectedResult.lat, lng: selectedResult.lng }}
+        address={selectedResult.address}
+      />
     </div>
   );
 }
