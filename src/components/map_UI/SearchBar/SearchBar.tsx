@@ -3,10 +3,16 @@ import { useMap } from 'react-leaflet';
 import { useDebounce } from '@/utilities/useDebounce';
 import './SearchBar.css';
 import UserMarker from '@/components/map_components/UserMarker/UserMarker';
+import SearchMarker from '@/components/map_components/SearchMarker/SearchMarker';
+import { LatLng } from '@/Contexts/contexts.types';
 
 export default function SearchBar() {
   const [search, setSearch] = useState<string>('');
   const [results, setResults] = useState({ entries: [], displayed: false });
+  const [selectedResultLatLng, setSelectedResultLatLng] = useState<LatLng>({
+    lat: 0,
+    lng: 0,
+  });
   const debouncedSearch = useDebounce<string>(search, 500);
   const map = useMap();
 
@@ -39,22 +45,25 @@ export default function SearchBar() {
     setResults(newResults);
   };
 
+  // TODO : this is tricky cause you can't use a keyboard to see serch results, maybe trigger it with the div ?
   const handleInputBlur = () => {
+    console.log('blurred');
     const newResults = { ...results, displayed: false };
-    setTimeout(()=>setResults(newResults),300);
+    setTimeout(() => setResults(newResults), 150);
   };
-  console.log(results)
 
   return (
-    <div id="searchbar-container">
+    <div
+      id="searchbar-container"
+      onBlur={handleInputBlur}
+      onFocus={handleInputFocus}
+    >
       <label id="searchbar-label" htmlFor="searchbar-input">
         <input
           id="searchbar-input"
           value={search}
           type="text"
           onChange={handleChange}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
         />
       </label>
       <ul
@@ -65,7 +74,7 @@ export default function SearchBar() {
           <li key={r.place_id}>
             <button
               onClick={() => {
-                console.log('clicked');
+                setSelectedResultLatLng({lat:r.lat,lng:r.lon})
                 handleFlyTo(r.lat, r.lon);
               }}
             >
@@ -74,7 +83,7 @@ export default function SearchBar() {
           </li>
         ))}
       </ul>
-      
+      <SearchMarker latLng={selectedResultLatLng} />
     </div>
   );
 }
