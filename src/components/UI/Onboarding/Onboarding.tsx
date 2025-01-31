@@ -2,9 +2,11 @@ import useLocalStorage from '@/utilities/useLocalStorage';
 import { useRef, useState, useEffect } from 'react';
 import usePOIs from '@/Contexts/PointsOfInterest/usePOIs';
 import './Onboarding.css';
+import usePosition from '@/Contexts/Position/usePosition';
 
 export default function Onboarding() {
   const { setUserFilters } = usePOIs();
+  const { askUserLocation } = usePosition();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [onBoardingDone, setOnboardingDone] = useLocalStorage<boolean>(
     'ww_onboarding_done',
@@ -79,7 +81,16 @@ export default function Onboarding() {
       image: '/onboarding/location.gif',
       choices: (
         <>
-          <button className="call-to-action-button">Enable geolocation</button>
+          <button
+            className="call-to-action-button button-feedback"
+            onClick={async () => {
+              console.log('asking geoloc');
+              const geolocObtained = await askUserLocation();
+              if (geolocObtained) incrementWithDelay();
+            }}
+          >
+            Enable geolocation
+          </button>
           <button className="skip-button button-feedback" onClick={handleSkip}>
             Skip for now
           </button>
@@ -131,17 +142,17 @@ export default function Onboarding() {
           <div id="onboarding-progress-bar">
             <button
               onClick={() => setOnboardingStep(0)}
-              aria-label="got to onboarding step 1"
+              aria-label="go to onboarding step 1"
               className={onBoardingStep >= 0 ? 'active' : 'inactive'}
             />
             <button
               onClick={() => setOnboardingStep(1)}
-              aria-label="got to onboarding step 2"
+              aria-label="go to onboarding step 2"
               className={onBoardingStep >= 1 ? 'active' : 'inactive'}
             />
             <button
               onClick={() => setOnboardingStep(2)}
-              aria-label="got to onboarding step 3"
+              aria-label="go to onboarding step 3"
               className={onBoardingStep >= 2 ? 'active' : 'inactive'}
             />
           </div>

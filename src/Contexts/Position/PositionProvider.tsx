@@ -12,6 +12,7 @@ const defaultBounds = {
 };
 
 const defaultContextValue: PositionContextValue = {
+  askUserLocation: () => new Promise<boolean>((resolve, _) => resolve),
   userLocation: defaultUserPosition,
   setUserLocation: () => {},
   mapPosition: {
@@ -39,9 +40,32 @@ export default function PositionProvider({ children }: ContextProps) {
     distanceFromUser: 0,
   });
 
+  const askUserLocation = async () => {
+    if (navigator.geolocation) {
+      try {
+        const position = await new Promise<GeolocationPosition>(
+          (resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject);
+          },
+        );
+        console.log('got it');
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+        return true;
+      } catch {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  };
+
   return (
     <PositionContext.Provider
       value={{
+        askUserLocation,
         userLocation,
         setUserLocation,
         mapPosition,

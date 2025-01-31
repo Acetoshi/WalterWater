@@ -56,6 +56,7 @@ export interface PointsOfInterestContextValue {
 }
 
 export interface PositionContextValue {
+  askUserLocation: () => Promise<boolean>;
   userLocation: LatLng;
   setUserLocation: Dispatch<SetStateAction<LatLng>>;
   mapPosition: MapPosition;
