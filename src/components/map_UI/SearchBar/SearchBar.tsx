@@ -57,6 +57,9 @@ export default function SearchBar() {
     setTimeout(() => setSearchResults(newResults), 150);
   };
 
+  // This enables us to show a message to the user when his/her search wasn't successfull
+  const noResultToShow = debouncedSearchQuery.trim() && searchResults.entries.length === 0;
+
   return (
     <div id="searchbar-container" onBlur={handleInputBlur} onFocus={handleInputFocus}>
       <label id="searchbar-label" htmlFor="searchbar-input">
@@ -69,7 +72,11 @@ export default function SearchBar() {
           placeholder="Search anywhere ..."
         />
       </label>
-      <ul id="searchbar-results" className={searchResults.displayed ? 'visible' : 'hidden'}>
+      <ul
+        id="searchbar-results"
+        className={searchResults.displayed ? 'visible' : 'hidden'}
+        aria-hidden={!searchResults.displayed}
+      >
         {searchResults.entries.map((r) => (
           <li key={r.place_id}>
             <button
@@ -86,6 +93,7 @@ export default function SearchBar() {
             </button>
           </li>
         ))}
+        {noResultToShow && <li>No results here. Try rewording your search.</li>}
       </ul>
       {selectedResult.address && (
         <SearchMarker latLng={{ lat: selectedResult.lat, lng: selectedResult.lng }} address={selectedResult.address} />
