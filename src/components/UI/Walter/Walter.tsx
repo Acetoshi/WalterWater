@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react';
-import usePOIs from '../../../Contexts/PointsOfInterest/usePOIs';
+import usePOIs from '@/Contexts/PointsOfInterest/usePOIs';
 import LocationEnabler from '../../map_UI/LocationEnabler/LocationEnabler';
-import './Walter.css';
 import useEffectSkipFirstRender from '@/utilities/useEffectSkipFirstRender';
+import './Walter.css';
 
 function Walter() {
-
-  //TODO : maybe walter should be a context, with functions to make him talk ? 
-  // TODO : like with the possibility to give a children prop ? 
+  //TODO : maybe walter should be a context, with functions to make him talk ?
+  // TODO : like with the possibility to give a children prop ?
 
   const { POIs } = usePOIs();
 
   const [walterIsVisible, setWalterIsVisible] = useState(false);
-  const [title, setTitle] = useState('');
-  const [message, setMessage] = useState('');
-  const [importantMessage, setImportantMessage] = useState('');
+
+  const [regularMessage, setRegularMessage] = useState({title:'',message:''});
+  const [priorityMessage, setPriorityMessage] = useState({title:'',message:''});
 
   const failMessages = [
     'Well, that was a lovely little treasure hunt… for absolutely nothing!',
@@ -37,12 +36,20 @@ function Walter() {
     'Improvised loo? Dig a hole and cover it up afterwards. Bears appreciate a tidy environment, thank you very much!',
   ];
 
-  const walterSays = (title: string, message: string, delay: number) => {
+  const walterSays = (title: string, message: string, delay?: number, priority?: boolean) => {
     setWalterIsVisible(true);
-    setMessage(message);
-    setTitle(title);
+    if (priority){
+      setPriorityMessage({title,message})
+      if (delay) setTimeout(() => clearPriorityMessage(), delay+500); // extra delay is needed because of the animation length
+    } else {
+      setRegularMessage({title,message});
+    }
     if (delay) setTimeout(() => setWalterIsVisible(false), delay);
   };
+
+  const clearPriorityMessage = () => {
+    setPriorityMessage({title:'',message:''})
+  }
 
   const randomEntry = (arr: Array<string>) => {
     const randomIndex = Math.floor(Math.random() * arr.length);
@@ -51,10 +58,10 @@ function Walter() {
 
   // needed to make walter say stuff from time to time
   useEffect(() => {
-    setMessage(randomEntry(tips));
+    setRegularMessage({title:'Walter pro-tip',message:randomEntry(tips)});
 
     // change message every 30 segonds
-    const intervalId = setInterval(() => setMessage(randomEntry(tips)), 30000);
+    const intervalId = setInterval(() => setRegularMessage({title:'Walter pro-tip',message:randomEntry(tips)}), 30000);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -62,7 +69,7 @@ function Walter() {
   //warn the user when his search didn't find anything
   useEffectSkipFirstRender(() => {
     if (POIs.length === 0) {
-      walterSays('No result !',randomEntry(failMessages), 3500);
+      walterSays('No result !', randomEntry(failMessages), 3500, true);
     }
   }, [POIs]);
 
@@ -77,13 +84,18 @@ function Walter() {
       </button>
 
       <div className={`walter-infotip ${walterIsVisible ? '' : 'fade-out'}`}>
-        <button role="button" className="close-infotip-button" onClick={() => setWalterIsVisible(false)} aria-label="close walter info bubble">
-          x
+        <button
+          role="button"
+          className="close-infotip-button"
+          onClick={() => setWalterIsVisible(false)}
+          aria-label="close info bubble"
+        >
+          <span aria-hidden="true">x</span>
         </button>
         <div className="container-infos">
-          <h4>{title}</h4>
-          <p>{importantMessage || message}</p>
-          <LocationEnabler setWalterIsVisible={setWalterIsVisible} setImportantMessage={setImportantMessage} />
+          <h4>{priorityMessage.title || regularMessage.title}</h4>
+          <p>{priorityMessage.message || regularMessage.message}</p>
+          <LocationEnabler walterSays={walterSays} />
         </div>
       </div>
     </div>

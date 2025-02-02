@@ -4,33 +4,21 @@ import usePosition from '../../../Contexts/Position/usePosition';
 //TODO : convert this to a utility, a hook
 // the point of this component is to avoid being too pushy with the user by requesting his location stairght up
 
-export default function LocationEnabler({ setWalterIsVisible, setImportantMessage }) {
-  const { setUserLocation } = usePosition();
-  const [locationStatus, setLocationStatus] = useState('unknown');
+export default function LocationEnabler({ walterSays }) {
+  const { setUserLocation, askUserLocation } = usePosition();
+  const [locationStatus, setLocationStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
   // this function is used to get the user's location when using a web browser
-  function getUserLocation() {
-    setLocationStatus('fetching');
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-          setLocationStatus('located');
-          setImportantMessage('Geolocation successfull !');
-          setTimeout(() => setWalterIsVisible(false), 2000);
-          setTimeout(() => setImportantMessage(''), 2500);
-        },
-        () => {
-          setImportantMessage("I couldn't locate you, refresh the page and try again.");
-          setLocationStatus('failed');
-        }
-      );
+  async function getUserLocation() {
+    setLocationStatus('loading');
+    const success = await askUserLocation();
+
+    if (success) {
+      walterSays('Geolocation success', `You're ready to explore nearby places!`, 2500, true);
+      setLocationStatus('success');
     } else {
-      setImportantMessage("Geolocation isn't supported by your browser");
-      setLocationStatus('failed');
+      walterSays('Geolocation error', `I couldn't locate you, refresh the page and try again.`, 3500, true);
+      setLocationStatus('error');
     }
   }
 
@@ -66,20 +54,19 @@ export default function LocationEnabler({ setWalterIsVisible, setImportantMessag
   // only ask for permission if user never allowed location before
   useEffect(() => {
     if (!localStorage.getItem('ww_user_lat_lng')) {
-      setImportantMessage('Enable location to get nearby points of interest !');
-      setWalterIsVisible(true);
+      walterSays('Enable Geolocation', `Enable location to get nearby points of interest !`, 20000, true);
     } else {
       getUserLocation();
     }
   }, []);
 
-  return locationStatus !== 'located' && locationStatus !== 'failed' ? (
+  return locationStatus !== 'success' && locationStatus !== 'error' ? (
     <button
-      className={`enable-location-button button-feedback ${locationStatus === 'fetching' ? 'disabled' : ''}`}
+      className={`enable-location-button button-feedback ${locationStatus === 'loading' ? 'disabled' : ''}`}
       onClick={getUserLocation}
     >
-      {locationStatus === 'unknown' && <span>enable location</span>}
-      {locationStatus === 'fetching' && (
+      {locationStatus === 'idle' && <span>enable location</span>}
+      {locationStatus === 'loading' && (
         <span>
           <span className="loader"></span> working
         </span>

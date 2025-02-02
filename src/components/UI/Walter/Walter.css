@@ -73,9 +73,12 @@
   top: 0px;
   text-align: center;
   color: var(--black);
-  font-family: Tahoma, Verdana, sans-serif !important;
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+  font:
+    16px/24px Tahoma,
+    Verdana,
+    sans-serif !important;
   color: #757575;
-  font-size: 1rem;
 }
 
 @keyframes fade-out {

@@ -1,4 +1,3 @@
-'use client';
 import { createContext, useState, useEffect, useRef } from 'react';
 import { ContextProps, LatLng, MapBounds, Point, PointsOfInterestContextValue, UserFilters } from '../contexts.types';
 import useLocalStorage from '../../utilities/useLocalStorage';
