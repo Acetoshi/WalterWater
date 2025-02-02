@@ -32,10 +32,7 @@ export default function Map() {
           attribution={mapProviders[mapSelecter.providerId].attribution}
           url={mapProviders[mapSelecter.providerId].tilesUrl}
         />
-        <MapProviderSelector
-          mapSelecter={mapSelecter}
-          setMapSelecter={setMapSelecter}
-        />
+        <MapProviderSelector mapSelecter={mapSelecter} setMapSelecter={setMapSelecter} />
         <Markers />
         <UserMarker />
         <DataFetchingNotifier />

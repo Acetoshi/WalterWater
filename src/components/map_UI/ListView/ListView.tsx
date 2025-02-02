@@ -10,9 +10,7 @@ export default function ListView({ listState }: ListViewProps) {
 
   return (
     <List
-      className={
-        listIsDisplayed ? 'list-view-container' : 'list-view-container hidden'
-      }
+      className={listIsDisplayed ? 'list-view-container' : 'list-view-container hidden'}
       innerElementType={'ul'}
       height={1024}
       width={'unset'}

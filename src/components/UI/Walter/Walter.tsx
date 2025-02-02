@@ -72,10 +72,7 @@ function Walter() {
 
   return (
     <div className={`walter-container ${walterIsVisible ? '' : 'hidden'}`}>
-      <button
-        role="button"
-        onClick={() => setWalterIsVisible(!walterIsVisible)}
-      >
+      <button role="button" onClick={() => setWalterIsVisible(!walterIsVisible)}>
         <img
           id="walter"
           src="/icons/walter-color.svg"
@@ -84,19 +81,12 @@ function Walter() {
       </button>
 
       <div className={`walter-infotip ${walterIsVisible ? '' : 'fade-out'}`}>
-        <button
-          role="button"
-          className="button-close-infotip"
-          onClick={() => setWalterIsVisible(false)}
-        >
+        <button role="button" className="button-close-infotip" onClick={() => setWalterIsVisible(false)}>
           ignore <span className="icon-close"></span>
         </button>
         <div className="container-infos">
           <p>{importantMessage || message}</p>
-          <LocationEnabler
-            setWalterIsVisible={setWalterIsVisible}
-            setImportantMessage={setImportantMessage}
-          />
+          <LocationEnabler setWalterIsVisible={setWalterIsVisible} setImportantMessage={setImportantMessage} />
         </div>
       </div>
     </div>

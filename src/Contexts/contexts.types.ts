@@ -52,7 +52,7 @@ export interface PointsOfInterestContextValue {
   fetchPOIs: (center?: string) => Promise<void>;
   targetPOIPosition: { lat: number; lng: number };
   setTargetPOIPosition: Dispatch<SetStateAction<{ lat: number; lng: number }>>;
-  requestStatus: string;
+  requestStatus: 'idle' | 'loading' | 'success' | 'error';
 }
 
 export interface PositionContextValue {

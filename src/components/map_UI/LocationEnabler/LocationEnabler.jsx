@@ -4,10 +4,7 @@ import usePosition from '../../../Contexts/Position/usePosition';
 //TODO : convert this to a utility, a hook
 // the point of this component is to avoid being too pushy with the user by requesting his location stairght up
 
-export default function LocationEnabler({
-  setWalterIsVisible,
-  setImportantMessage,
-}) {
+export default function LocationEnabler({ setWalterIsVisible, setImportantMessage }) {
   const { setUserLocation } = usePosition();
   const [locationStatus, setLocationStatus] = useState('unknown');
 
@@ -27,11 +24,9 @@ export default function LocationEnabler({
           setTimeout(() => setImportantMessage(''), 2500);
         },
         () => {
-          setImportantMessage(
-            "I couldn't locate you, refresh the page and try again.",
-          );
+          setImportantMessage("I couldn't locate you, refresh the page and try again.");
           setLocationStatus('failed');
-        },
+        }
       );
     } else {
       setImportantMessage("Geolocation isn't supported by your browser");
@@ -80,9 +75,7 @@ export default function LocationEnabler({
 
   return locationStatus !== 'located' && locationStatus !== 'failed' ? (
     <button
-      className={`enable-location-button button-feedback ${
-        locationStatus === 'fetching' ? 'disabled' : ''
-      }`}
+      className={`enable-location-button button-feedback ${locationStatus === 'fetching' ? 'disabled' : ''}`}
       onClick={getUserLocation}
     >
       {locationStatus === 'unknown' && <span>enable location</span>}

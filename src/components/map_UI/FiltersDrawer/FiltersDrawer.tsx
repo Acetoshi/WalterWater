@@ -23,10 +23,7 @@ export default function FiltersDrawer() {
           className="button-feedback"
           onClick={() => setIsOpen(() => !isOpen)}
         >
-          <img
-            src="/icons/filter.svg"
-            alt="recenter the map on your position"
-          ></img>
+          <img src="/icons/filter.svg" alt="recenter the map on your position"></img>
         </button>
         <ul id="filters-drawer" className={isOpen ? 'open' : 'closed'}>
           <button
@@ -39,11 +36,7 @@ export default function FiltersDrawer() {
               })
             }
           >
-            <img
-              className={userFilters.water ? '' : 'deactivated'}
-              src={`/icons/faucet-icon.svg`}
-              alt=""
-            />
+            <img className={userFilters.water ? '' : 'deactivated'} src={`/icons/faucet-icon.svg`} alt="" />
             water
           </button>
 
@@ -57,11 +50,7 @@ export default function FiltersDrawer() {
               })
             }
           >
-            <img
-              className={userFilters.food ? '' : 'deactivated'}
-              src={`/icons/food-icon.svg`}
-              alt=""
-            />
+            <img className={userFilters.food ? '' : 'deactivated'} src={`/icons/food-icon.svg`} alt="" />
             restaurants
           </button>
 
@@ -75,11 +64,7 @@ export default function FiltersDrawer() {
               })
             }
           >
-            <img
-              className={userFilters.toilets ? '' : 'deactivated'}
-              src={`/icons/toilets-icon.svg`}
-              alt=""
-            />
+            <img className={userFilters.toilets ? '' : 'deactivated'} src={`/icons/toilets-icon.svg`} alt="" />
             toilets
           </button>
         </ul>

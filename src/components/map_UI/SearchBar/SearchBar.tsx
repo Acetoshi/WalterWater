@@ -27,7 +27,7 @@ export default function SearchBar() {
   useEffect(() => {
     const fetchResults = async () => {
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/search.php?q=${sanitisedSearchQuery}&format=jsonv2`,
+        `https://nominatim.openstreetmap.org/search.php?q=${sanitisedSearchQuery}&format=jsonv2`
       );
       const result = await response.json();
       setSearchResults({ entries: result, displayed: true });
@@ -58,11 +58,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div
-      id="searchbar-container"
-      onBlur={handleInputBlur}
-      onFocus={handleInputFocus}
-    >
+    <div id="searchbar-container" onBlur={handleInputBlur} onFocus={handleInputFocus}>
       <label id="searchbar-label" htmlFor="searchbar-input">
         <img alt="" src="/icons/search.svg" />
         <input
@@ -73,10 +69,7 @@ export default function SearchBar() {
           placeholder="Search anywhere ..."
         />
       </label>
-      <ul
-        id="searchbar-results"
-        className={searchResults.displayed ? 'visible' : 'hidden'}
-      >
+      <ul id="searchbar-results" className={searchResults.displayed ? 'visible' : 'hidden'}>
         {searchResults.entries.map((r) => (
           <li key={r.place_id}>
             <button
@@ -95,10 +88,7 @@ export default function SearchBar() {
         ))}
       </ul>
       {selectedResult.address && (
-        <SearchMarker
-          latLng={{ lat: selectedResult.lat, lng: selectedResult.lng }}
-          address={selectedResult.address}
-        />
+        <SearchMarker latLng={{ lat: selectedResult.lat, lng: selectedResult.lng }} address={selectedResult.address} />
       )}
     </div>
   );

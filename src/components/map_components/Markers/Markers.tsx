@@ -23,7 +23,7 @@ export default function Markers() {
         duration: 0.6,
       });
     },
-    [POIs],
+    [POIs]
   );
 
   //TODO : use this reference : https://wiki.openstreetmap.org/wiki/Key:wikimedia_commons to find a way to obtain images from wikimedia.
@@ -38,11 +38,7 @@ export default function Markers() {
     >
       {POIs &&
         POIs.map((point: Point, index: number) => (
-          <CustomMarker
-            key={`${point.id}+${index}`}
-            point={point}
-            onMarkerClick={handleMarkerClick}
-          />
+          <CustomMarker key={`${point.id}+${index}`} point={point} onMarkerClick={handleMarkerClick} />
         ))}
     </MarkerClusterGroup>
   );

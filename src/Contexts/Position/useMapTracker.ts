@@ -19,12 +19,7 @@ export default function useMapTracker() {
       // Track the current map bounds in order to use them as a bounding box for POI search later on
       const bounds = map.getBounds();
       const center = map.getCenter();
-      const distance = getDistanceKm(
-        userLocation.lat,
-        userLocation.lng,
-        center.lat,
-        center.lng,
-      );
+      const distance = getDistanceKm(userLocation.lat, userLocation.lng, center.lat, center.lng);
       setMapPosition({
         bounds: {
           minLat: bounds.getSouthEast().lat,

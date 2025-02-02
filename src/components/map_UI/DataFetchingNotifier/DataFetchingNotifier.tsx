@@ -7,41 +7,25 @@ export default function DataFetchingNotifier() {
   const { requestStatus } = usePOIs();
   const [isHidden, setIsHidden] = useState(true);
 
-  // this is to prevent the button from showing if the fetching takes less than 1s
+  // this is to prevent the button from showing if the fetching takes less than 300s
   useEffect(() => {
-    let timeoutFn: NodeJS.Timeout;
-    if (requestStatus === 'fetching data') {
-      timeoutFn = setTimeout(() => {
-        if (requestStatus === 'fetching data') {
-          setIsHidden(false);
-        }
-      }, 1000);
-    } else if (requestStatus === 'server error') {
+    if (requestStatus === 'loading' || requestStatus === 'error') {
       setIsHidden(false);
     } else {
-      setIsHidden(true);
+      setTimeout(() => setIsHidden(true), 600);
     }
-
-    return () => {
-      clearTimeout(timeoutFn);
-    };
   }, [requestStatus]);
 
   return (
     <div id="data-fetching-notifier-container">
-      <span
-        id="data-fetching-notifier"
-        className={`disabled ${isHidden ? 'hidden' : ''}`}
-      >
-        {requestStatus === 'fetching data' && (
+      <span id="data-fetching-notifier" className={`disabled ${isHidden ? 'hidden' : ''}`}>
+        {requestStatus === 'loading' && (
           <p>
-            <span className="loader"></span> fetching data
+            <span className="loader"></span> loading data
           </p>
         )}
-        {requestStatus === 'data received' && <p>data received</p>}
-        {requestStatus === 'server error' && (
-          <p>server error, try zooming in</p>
-        )}
+        {requestStatus === 'success' && <p>data received</p>}
+        {requestStatus === 'error' && <p>error, try zooming in</p>}
       </span>
     </div>
   );

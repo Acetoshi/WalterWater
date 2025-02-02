@@ -5,11 +5,7 @@ export default function ExternalLink({ href, children }: ExternalLinkProps) {
   return (
     <a className="external-link" href={href} target="_blank">
       {children}
-      <img
-        className="external-link-icon"
-        src="/icons/external-link.svg"
-        alt=""
-      ></img>
+      <img className="external-link-icon" src="/icons/external-link.svg" alt=""></img>
     </a>
   );
 }

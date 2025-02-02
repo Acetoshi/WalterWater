@@ -14,12 +14,7 @@ export default function InfoCard({ point, setIsDisplayed, style }) {
       <article className="info-card">
         <POIDetails point={point} />
 
-        <button
-          onClick={handleClick}
-          aria-label="view on map"
-          role="button"
-          className="button-feedback"
-        >
+        <button onClick={handleClick} aria-label="view on map" role="button" className="button-feedback">
           view on map
         </button>
       </article>

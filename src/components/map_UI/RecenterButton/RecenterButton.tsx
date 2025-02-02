@@ -24,17 +24,11 @@ export default function RecenterButton() {
       <button
         id="recenter-button"
         type="button"
-        className={
-          mapPosition.distanceFromUser >= 0.05 ? 'button-feedback' : ''
-        }
+        className={mapPosition.distanceFromUser >= 0.05 ? 'button-feedback' : ''}
         onClick={handleRecenter}
       >
         <img
-          src={
-            mapPosition.distanceFromUser >= 0.2
-              ? '/icons/recenterWhiteEmpty.png'
-              : '/icons/recenterWhiteFull.png'
-          }
+          src={mapPosition.distanceFromUser >= 0.2 ? '/icons/recenterWhiteEmpty.png' : '/icons/recenterWhiteFull.png'}
           alt="recenter the map on your position"
         ></img>
       </button>
