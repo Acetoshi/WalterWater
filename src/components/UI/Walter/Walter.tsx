@@ -12,8 +12,8 @@ function Walter() {
 
   const [walterIsVisible, setWalterIsVisible] = useState(false);
 
-  const [regularMessage, setRegularMessage] = useState({title:'',message:''});
-  const [priorityMessage, setPriorityMessage] = useState({title:'',message:''});
+  const [regularMessage, setRegularMessage] = useState({ title: '', message: '' });
+  const [priorityMessage, setPriorityMessage] = useState({ title: '', message: '' });
 
   const failMessages = [
     'Well, that was a lovely little treasure hunt… for absolutely nothing!',
@@ -38,18 +38,18 @@ function Walter() {
 
   const walterSays = (title: string, message: string, delay?: number, priority?: boolean) => {
     setWalterIsVisible(true);
-    if (priority){
-      setPriorityMessage({title,message})
-      if (delay) setTimeout(() => clearPriorityMessage(), delay+500); // extra delay is needed because of the animation length
+    if (priority) {
+      setPriorityMessage({ title, message });
+      if (delay) setTimeout(() => clearPriorityMessage(), delay + 500); // extra delay is needed because of the animation length
     } else {
-      setRegularMessage({title,message});
+      setRegularMessage({ title, message });
     }
     if (delay) setTimeout(() => setWalterIsVisible(false), delay);
   };
 
   const clearPriorityMessage = () => {
-    setPriorityMessage({title:'',message:''})
-  }
+    setPriorityMessage({ title: '', message: '' });
+  };
 
   const randomEntry = (arr: Array<string>) => {
     const randomIndex = Math.floor(Math.random() * arr.length);
@@ -58,10 +58,13 @@ function Walter() {
 
   // needed to make walter say stuff from time to time
   useEffect(() => {
-    setRegularMessage({title:'Walter pro-tip',message:randomEntry(tips)});
+    setRegularMessage({ title: 'Walter pro-tip', message: randomEntry(tips) });
 
     // change message every 30 segonds
-    const intervalId = setInterval(() => setRegularMessage({title:'Walter pro-tip',message:randomEntry(tips)}), 30000);
+    const intervalId = setInterval(
+      () => setRegularMessage({ title: 'Walter pro-tip', message: randomEntry(tips) }),
+      30000
+    );
 
     return () => clearInterval(intervalId);
   }, []);
