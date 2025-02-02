@@ -1,15 +1,18 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import usePOIs from '../../../Contexts/PointsOfInterest/usePOIs';
 import LocationEnabler from '../../map_UI/LocationEnabler/LocationEnabler';
 import './Walter.css';
+import useEffectSkipFirstRender from '@/utilities/useEffectSkipFirstRender';
 
 function Walter() {
-  const checkFirstRender = useRef(true);
-  const checkSecondRender = useRef(true);
+
+  //TODO : maybe walter should be a context, with functions to make him talk ? 
+  // TODO : like with the possibility to give a children prop ? 
 
   const { POIs } = usePOIs();
 
   const [walterIsVisible, setWalterIsVisible] = useState(false);
+  const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
   const [importantMessage, setImportantMessage] = useState('');
 
@@ -34,13 +37,14 @@ function Walter() {
     'Improvised loo? Dig a hole and cover it up afterwards. Bears appreciate a tidy environment, thank you very much!',
   ];
 
-  const walterSays = (something, delay) => {
+  const walterSays = (title: string, message: string, delay: number) => {
     setWalterIsVisible(true);
-    setMessage(something);
+    setMessage(message);
+    setTitle(title);
     if (delay) setTimeout(() => setWalterIsVisible(false), delay);
   };
 
-  const randomEntry = (arr) => {
+  const randomEntry = (arr: Array<string>) => {
     const randomIndex = Math.floor(Math.random() * arr.length);
     return arr[randomIndex];
   };
@@ -56,17 +60,9 @@ function Walter() {
   }, []);
 
   //warn the user when his search didn't find anything
-  useEffect(() => {
-    // this is here to skip the first two renders
-    if (checkFirstRender.current) {
-      checkFirstRender.current = false;
-      return;
-    } else if (checkSecondRender.current) {
-      checkSecondRender.current = false;
-      return;
-    }
+  useEffectSkipFirstRender(() => {
     if (POIs.length === 0) {
-      walterSays(randomEntry(failMessages), 3500);
+      walterSays('No result !',randomEntry(failMessages), 3500);
     }
   }, [POIs]);
 
@@ -81,10 +77,11 @@ function Walter() {
       </button>
 
       <div className={`walter-infotip ${walterIsVisible ? '' : 'fade-out'}`}>
-        <button role="button" className="button-close-infotip" onClick={() => setWalterIsVisible(false)}>
-          ignore <span className="icon-close"></span>
+        <button role="button" className="close-infotip-button" onClick={() => setWalterIsVisible(false)} aria-label="close walter info bubble">
+          x
         </button>
         <div className="container-infos">
+          <h4>{title}</h4>
           <p>{importantMessage || message}</p>
           <LocationEnabler setWalterIsVisible={setWalterIsVisible} setImportantMessage={setImportantMessage} />
         </div>

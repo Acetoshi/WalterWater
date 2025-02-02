@@ -21,14 +21,19 @@
   position: absolute;
   left: -229px;
   bottom: 100px;
-  border-radius: 20px 20px 0 20px;
+  border-radius: 16px 16px 0 16px;
   background-color: #fff;
   padding: 1.2rem;
   width: 230px;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+
+  & h4 {
+    color: var(--black);
+    font-size: larger;
+  }
 
   & p {
     color: var(--grey-darker);
-    margin-top: 16px;
   }
 
   & .enable-location-button {
@@ -60,15 +65,17 @@
   }
 }
 
-.walter-container .button-close-infotip {
+.walter-container .close-infotip-button {
   position: absolute;
-  right: 10px;
-  top: 10px;
-  color: var(--secondary-color);
-  font-size: 0.8rem;
-  display: flex;
-  gap: 8px;
-  align-items: center;
+  width: 24px;
+  height: 24px;
+  right: 0px;
+  top: 0px;
+  text-align: center;
+  color: var(--black);
+  font-family: Tahoma, Verdana, sans-serif !important;
+  color: #757575;
+  font-size: 1rem;
 }
 
 @keyframes fade-out {
