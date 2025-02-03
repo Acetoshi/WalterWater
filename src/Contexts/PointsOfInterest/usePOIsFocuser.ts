@@ -4,7 +4,7 @@ import usePOIs from './usePOIs';
 import usePosition from '../Position/usePosition';
 
 export default function usePOIsFocuser() {
-  const { targetPOIPosition } = usePOIs();
+  const { targetPoint } = usePOIs();
   const { mapPosition } = usePosition();
   const map = useMap();
 
@@ -13,11 +13,11 @@ export default function usePOIsFocuser() {
     // first, calculate the view height
     const latOffset = (mapPosition.bounds.maxLat - mapPosition.bounds.minLat) / 4;
 
-    if (targetPOIPosition.lat !== 0) {
+    if (targetPoint.lat !== 0) {
       // this prevents a teleport to NULL island
       map.closePopup();
       const zoom = map.getZoom();
-      map.flyTo({ lat: targetPOIPosition.lat + latOffset, lng: targetPOIPosition.lng }, zoom, { duration: 1 });
+      map.flyTo({ lat: targetPoint.lat + latOffset, lng: targetPoint.lng }, zoom, { duration: 1 });
     }
-  }, [targetPOIPosition]);
+  }, [targetPoint]);
 }

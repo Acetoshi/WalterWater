@@ -1,27 +1,29 @@
 import { memo, useEffect, useRef } from 'react';
-import { Marker, Popup, useMap } from 'react-leaflet';
+import { Marker, Popup } from 'react-leaflet';
 import usePOIs from '@/Contexts/PointsOfInterest/usePOIs';
 import { faucetIcon, toiletIcon, foodIcon } from '@/utilities/icons';
 import POIDetails from '../../map_UI/POIDetails/POIDetails';
 import CustomMarkerProps from './CustomMarker.props';
+import L from 'leaflet';
 import './LeafletPopup.css';
 
 function CustomMarkerComponent({ point, onMarkerClick }: CustomMarkerProps) {
-  const { openPopupId } = usePOIs();
+
+  // these and the useEffect are needed to programatically open the popup of any marker on the map
+  const { targetPoint } = usePOIs();
+  const markerRef = useRef<L.Marker | null>(null);
+
+  useEffect(() => {
+    if (markerRef.current && point.id == targetPoint.id) {
+      setTimeout(() => markerRef.current?.openPopup(), 700);
+    }
+  }, [targetPoint]);
 
   const iconMap = {
     drinking_water: faucetIcon,
     toilets: toiletIcon,
     restaurant: foodIcon,
   };
-
-  const markerRef = useRef(null);
-
-  useEffect(() => {
-    if (markerRef.current && point.id == openPopupId) {
-      setTimeout(() => markerRef.current.openPopup(), 700);
-    }
-  }, [openPopupId]);
 
   return (
     <Marker

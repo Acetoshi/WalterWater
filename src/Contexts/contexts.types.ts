@@ -15,13 +15,19 @@ export interface Point {
   type: 'node';
   id: number;
   lat: number;
-  lon: number;
+  lon: number; //TODO : this needs to be converted to lng, to stay coherent
   distance: string;
   walkTime: string;
   tags: {
     amenity: 'drinking_water' | 'toilets' | 'restaurant';
     [key: string]: string; // POIs can have any type of tags
   };
+}
+
+export interface TargetPoint {
+  id: number;
+  lat: number;
+  lng: number;
 }
 
 export interface UserFilters {
@@ -45,14 +51,16 @@ export interface MapPosition {
   distanceFromUser: number;
 }
 
+export type RequestStatus = 'idle' | 'loading' | 'success' | 'error'
+
 export interface PointsOfInterestContextValue {
   userFilters: UserFilters;
   setUserFilters: Dispatch<SetStateAction<UserFilters>>;
   POIs: Point[];
   fetchPOIs: (center?: string) => Promise<void>;
-  targetPOIPosition: { lat: number; lng: number };
-  setTargetPOIPosition: Dispatch<SetStateAction<{ lat: number; lng: number }>>;
-  requestStatus: 'idle' | 'loading' | 'success' | 'error';
+  targetPoint: TargetPoint;
+  setTargetPoint: Dispatch<SetStateAction<TargetPoint>>;
+  requestStatus: RequestStatus;
 }
 
 export interface PositionContextValue {

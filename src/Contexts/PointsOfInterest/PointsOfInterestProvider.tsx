@@ -1,5 +1,14 @@
 import { createContext, useState, useEffect, useRef } from 'react';
-import { ContextProps, LatLng, MapBounds, Point, PointsOfInterestContextValue, UserFilters } from '../contexts.types';
+import {
+  ContextProps,
+  LatLng,
+  MapBounds,
+  Point,
+  PointsOfInterestContextValue,
+  RequestStatus,
+  TargetPoint,
+  UserFilters,
+} from '../contexts.types';
 import useLocalStorage from '../../utilities/useLocalStorage';
 import usePosition from '../Position/usePosition';
 import { getPoints } from './fetchPOIs.utils';
@@ -7,6 +16,10 @@ import useMapRefetchThreshold from './useMapRefetchThreshold';
 import { useDebounce } from '@/utilities/useDebounce';
 import { getDistanceKm } from '@/utilities/distances.utils';
 import useEffectSkipFirstRender from '@/utilities/useEffectSkipFirstRender';
+
+
+
+const defaultTargetPoint = { lat: 0, lng: 0, id: 0 };
 
 // Default context value for PointsOfInterestContext
 const defaultPointsOfInterestContextValue: PointsOfInterestContextValue = {
@@ -18,8 +31,8 @@ const defaultPointsOfInterestContextValue: PointsOfInterestContextValue = {
   setUserFilters: () => {},
   POIs: [],
   fetchPOIs: async () => {},
-  targetPOIPosition: { lat: 0, lng: 0 },
-  setTargetPOIPosition: () => {},
+  targetPoint: defaultTargetPoint,
+  setTargetPoint: () => {},
   requestStatus: 'idle',
 };
 
@@ -34,17 +47,14 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
     toilets: true,
   });
 
-  const [requestStatus, setRequestStatus] = useState<string>('ready to fetch');
+  const [requestStatus, setRequestStatus] = useState<RequestStatus>('idle');
 
   const [POIs, setPOIs] = useState<Point[]>([]);
-  const [openPopupId, setOpenPopupId] = useState<string|null>(null);
 
   // used for the listview to pass the target POI position
-  const [targetPOIPosition, setTargetPOIPosition] = useState<LatLng>({
-    lat: 0,
-    lng: 0,
-  });
+  const [targetPoint, setTargetPoint] = useState<TargetPoint>(defaultTargetPoint);
 
+  // used to keep track of the request state without trigering re-renders, and prevent calling the API multiple times
   const fetching = useRef(false);
 
   const fetchPOIs = async (center?: string) => {
@@ -83,7 +93,7 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
     fetchPOIs();
   }, [debouncedUserLocation]);
 
-  //Used to fetch new data everytime the map is moved more than the threshold
+  // Used to fetch new data everytime the map is moved more than the threshold
   // the position is debounced in order not to call the server too often
   const debouncedMapPosition = useDebounce(mapPosition, 500);
 
@@ -113,11 +123,9 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
         userFilters,
         setUserFilters,
         POIs,
-        openPopupId, 
-        setOpenPopupId,
         fetchPOIs,
-        targetPOIPosition,
-        setTargetPOIPosition,
+        targetPoint,
+        setTargetPoint,
         requestStatus,
       }}
     >
