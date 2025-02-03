@@ -2,11 +2,12 @@ import usePOIs from '../../../Contexts/PointsOfInterest/usePOIs';
 import POIDetails from '../POIDetails/POIDetails';
 
 export default function InfoCard({ point, setIsDisplayed, style }) {
-  const { setTargetPOIPosition } = usePOIs();
+  const { setTargetPOIPosition, setOpenPopupId, openPopupId } = usePOIs();
 
   const handleClick = () => {
     setIsDisplayed(false);
     setTargetPOIPosition({ lat: point.lat, lng: point.lon });
+    setOpenPopupId(point.id);
   };
 
   return (

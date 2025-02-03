@@ -37,6 +37,7 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
   const [requestStatus, setRequestStatus] = useState<string>('ready to fetch');
 
   const [POIs, setPOIs] = useState<Point[]>([]);
+  const [openPopupId, setOpenPopupId] = useState<string|null>(null);
 
   // used for the listview to pass the target POI position
   const [targetPOIPosition, setTargetPOIPosition] = useState<LatLng>({
@@ -112,6 +113,8 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
         userFilters,
         setUserFilters,
         POIs,
+        openPopupId, 
+        setOpenPopupId,
         fetchPOIs,
         targetPOIPosition,
         setTargetPOIPosition,
