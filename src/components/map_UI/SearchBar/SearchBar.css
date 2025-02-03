@@ -55,6 +55,21 @@
   padding: 8px;
   max-height: 50vh;
   overflow-y: scroll;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--light-gray);
+    border-radius: 4px;
+  }
 
   & button {
     color: var(--black);

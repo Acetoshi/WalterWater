@@ -1,13 +1,5 @@
-'use client';
 import { createContext, useState, useEffect, useRef } from 'react';
-import {
-  ContextProps,
-  LatLng,
-  MapBounds,
-  Point,
-  PointsOfInterestContextValue,
-  UserFilters,
-} from '../contexts.types';
+import { ContextProps, LatLng, MapBounds, Point, PointsOfInterestContextValue, UserFilters } from '../contexts.types';
 import useLocalStorage from '../../utilities/useLocalStorage';
 import usePosition from '../Position/usePosition';
 import { getPoints } from './fetchPOIs.utils';
@@ -31,21 +23,16 @@ const defaultPointsOfInterestContextValue: PointsOfInterestContextValue = {
   requestStatus: 'idle',
 };
 
-const PointsOfInterestContext = createContext<PointsOfInterestContextValue>(
-  defaultPointsOfInterestContextValue,
-);
+const PointsOfInterestContext = createContext<PointsOfInterestContextValue>(defaultPointsOfInterestContextValue);
 
 export default function PointsOfInterestProvider({ children }: ContextProps) {
   const { userLocation, mapPosition } = usePosition();
 
-  const [userFilters, setUserFilters] = useLocalStorage<UserFilters>(
-    'ww_user_filters',
-    {
-      water: true,
-      food: false,
-      toilets: true,
-    },
-  );
+  const [userFilters, setUserFilters] = useLocalStorage<UserFilters>('ww_user_filters', {
+    water: true,
+    food: false,
+    toilets: true,
+  });
 
   const [requestStatus, setRequestStatus] = useState<string>('ready to fetch');
 
@@ -62,7 +49,7 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
   const fetchPOIs = async (center?: string) => {
     if (!fetching.current) {
       fetching.current = true;
-      setRequestStatus('fetching data');
+      setRequestStatus('loading');
       let bounds: MapBounds = mapPosition.bounds;
       if (center === 'user') {
         bounds = {
@@ -73,20 +60,16 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
         };
       }
       try {
-        const { success, POIs } = await getPoints(
-          userLocation,
-          userFilters,
-          bounds,
-        );
+        const { success, POIs } = await getPoints(userLocation, userFilters, bounds);
 
         if (success) {
           setPOIs(POIs);
-          setRequestStatus('data received');
+          setRequestStatus('success');
         } else {
-          setRequestStatus('server error');
+          setRequestStatus('error');
         }
       } catch {
-        setRequestStatus('server error');
+        setRequestStatus('error');
       } finally {
         fetching.current = false;
       }
@@ -112,16 +95,12 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
         debouncedMapPosition.bounds.maxLat,
         debouncedMapPosition.bounds.maxLng,
         debouncedMapPosition.bounds.minLat,
-        debouncedMapPosition.bounds.minLng,
+        debouncedMapPosition.bounds.minLng
       ) / 2.5;
     setRefetchThreshold(newThreshold);
   }, [debouncedMapPosition.zoomLevel]);
 
-  useMapRefetchThreshold(
-    debouncedMapPosition.center,
-    refetchThreshold,
-    fetchPOIs,
-  );
+  useMapRefetchThreshold(debouncedMapPosition.center, refetchThreshold, fetchPOIs);
 
   useEffect(() => {
     fetchPOIs();

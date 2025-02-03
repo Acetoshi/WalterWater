@@ -1,15 +1,7 @@
 import { LatLng, MapBounds, Point, UserFilters } from '../contexts.types';
-import {
-  distanceAsString,
-  getDistanceKm,
-  getWalkingTime,
-} from '../../utilities/distances.utils';
+import { distanceAsString, getDistanceKm, getWalkingTime } from '../../utilities/distances.utils';
 
-export async function getPoints(
-  userLocation: LatLng,
-  userFilters: UserFilters,
-  mapBounds: MapBounds,
-) {
+export async function getPoints(userLocation: LatLng, userFilters: UserFilters, mapBounds: MapBounds) {
   if (!mapBounds) return { success: false, POIs: [] };
 
   const { water, food, toilets } = userFilters;
@@ -41,18 +33,8 @@ export async function getPoints(
     const result = await response.json();
 
     const points = result.elements.sort((pointA: Point, pointB: Point) => {
-      const distanceA = getDistanceKm(
-        userLocation.lat,
-        userLocation.lng,
-        pointA.lat,
-        pointA.lon,
-      );
-      const distanceB = getDistanceKm(
-        userLocation.lat,
-        userLocation.lng,
-        pointB.lat,
-        pointB.lon,
-      );
+      const distanceA = getDistanceKm(userLocation.lat, userLocation.lng, pointA.lat, pointA.lon);
+      const distanceB = getDistanceKm(userLocation.lat, userLocation.lng, pointB.lat, pointB.lon);
 
       // Directly mutating the point objects to include distance and walkTime
       pointA.distance = distanceAsString(distanceA);

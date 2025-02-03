@@ -5,10 +5,7 @@ import usePosition from '@/Contexts/Position/usePosition';
 import { useMap } from 'react-leaflet';
 import MapProviderSelecterProps from './MapProviderSelector.props';
 
-export default function MapProviderSelector({
-  mapSelecter,
-  setMapSelecter,
-}: MapProviderSelecterProps) {
+export default function MapProviderSelector({ mapSelecter, setMapSelecter }: MapProviderSelecterProps) {
   const { userLocation } = usePosition();
   const map = useMap();
 
@@ -44,21 +41,10 @@ export default function MapProviderSelector({
           })
         }
       >
-        <img
-          src="/icons/layers.svg"
-          alt="recenter the map on your position"
-        ></img>
+        <img src="/icons/layers.svg" alt="recenter the map on your position"></img>
       </button>
-      <div
-        className={`map-provider-menu-mask ${
-          mapSelecter.isOpen ? 'open' : 'closed'
-        }`}
-      >
-        <ul
-          className={`map-provider-menu ${
-            mapSelecter.isOpen ? 'open' : 'closed'
-          }`}
-        >
+      <div className={`map-provider-menu-mask ${mapSelecter.isOpen ? 'open' : 'closed'}`}>
+        <ul className={`map-provider-menu ${mapSelecter.isOpen ? 'open' : 'closed'}`}>
           {mapProviders.map((provider, index) => (
             <li key={provider.name}>
               <button
@@ -72,18 +58,10 @@ export default function MapProviderSelector({
                   })
                 }
               >
-                {provider.alias === 'simple' && (
-                  <img src="/mapPreviews/simple.jpg" alt="" loading="lazy" />
-                )}
-                {provider.alias === 'detailed' && (
-                  <img src="/mapPreviews/detailed.jpg" alt="" loading="lazy" />
-                )}
-                {provider.alias === 'cycling' && (
-                  <img src="/mapPreviews/cycle.jpg" alt="" loading="lazy" />
-                )}
-                {provider.alias === 'satellite' && (
-                  <img src="/mapPreviews/satellite.jpg" alt="" loading="lazy" />
-                )}
+                {provider.alias === 'simple' && <img src="/mapPreviews/simple.jpg" alt="" loading="lazy" />}
+                {provider.alias === 'detailed' && <img src="/mapPreviews/detailed.jpg" alt="" loading="lazy" />}
+                {provider.alias === 'cycling' && <img src="/mapPreviews/cycle.jpg" alt="" loading="lazy" />}
+                {provider.alias === 'satellite' && <img src="/mapPreviews/satellite.jpg" alt="" loading="lazy" />}
                 <p>{provider.alias}</p>
               </button>
             </li>

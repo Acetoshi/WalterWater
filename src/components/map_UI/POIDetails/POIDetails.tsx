@@ -23,75 +23,39 @@ function POIDetailsComponent({ point }: { point: Point }) {
       <ul className="poi-details">
         {point.tags.wheelchair && (
           <li className="poi-info-row">
-            <img
-              className="poi-icon"
-              loading="lazy"
-              src="/icons/wheelchair.svg"
-              alt=""
-            />
+            <img className="poi-icon" loading="lazy" src="/icons/wheelchair.svg" alt="" />
             <p>wheelchair access : {point.tags.wheelchair}</p>
           </li>
         )}
 
         {point.tags.fee && (
           <li className="poi-info-row">
-            <img
-              className="poi-icon"
-              loading="lazy"
-              src="/icons/money.svg"
-              alt=""
-            />
-            <p>
-              {point.tags.fee === 'no'
-                ? 'free of charge'
-                : 'access requires a fee'}
-            </p>
+            <img className="poi-icon" loading="lazy" src="/icons/money.svg" alt="" />
+            <p>{point.tags.fee === 'no' ? 'free of charge' : 'access requires a fee'}</p>
           </li>
         )}
 
         {point.tags['toilets:position'] && (
           <li className="poi-info-row">
-            <img
-              className="poi-icon"
-              loading="lazy"
-              src="/icons/toilet.svg"
-              alt=""
-            />
-            <p>
-              position : {point.tags['toilets:position'].replaceAll(';', ', ')}
-            </p>
+            <img className="poi-icon" loading="lazy" src="/icons/toilet.svg" alt="" />
+            <p>position : {point.tags['toilets:position'].replaceAll(';', ', ')}</p>
           </li>
         )}
 
         {point.tags.changing_table && (
           <li className="poi-info-row">
-            <img
-              className="poi-icon"
-              loading="lazy"
-              src="icons/baby-carriage.svg"
-              alt=""
-            />
+            <img className="poi-icon" loading="lazy" src="icons/baby-carriage.svg" alt="" />
             <p>changing table : {point.tags.changing_table}</p>
           </li>
         )}
 
         <li className="poi-info-row">
-          <img
-            className="poi-icon"
-            loading="lazy"
-            src="icons/footsteps.svg"
-            alt=""
-          />
+          <img className="poi-icon" loading="lazy" src="icons/footsteps.svg" alt="" />
           <p>{`distance : ${point.distance}`}</p>
         </li>
 
         <li className="poi-info-row">
-          <img
-            className="poi-icon"
-            loading="lazy"
-            src="/icons/time.svg"
-            alt=""
-          />
+          <img className="poi-icon" loading="lazy" src="/icons/time.svg" alt="" />
           <p>{`walk time : ${point.walkTime}`}</p>
         </li>
       </ul>

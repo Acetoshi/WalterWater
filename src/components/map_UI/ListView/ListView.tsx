@@ -1,5 +1,5 @@
 import { VariableSizeList as List } from 'react-window';
-import usePOIs from '../../../Contexts/PointsOfInterest/usePOIs';
+import usePOIs from '@/Contexts/PointsOfInterest/usePOIs';
 import InfoCard from '../InfoCard/InfoCard';
 import ListViewProps from './Listview.props';
 import './Listview.css';
@@ -10,9 +10,7 @@ export default function ListView({ listState }: ListViewProps) {
 
   return (
     <List
-      className={
-        listIsDisplayed ? 'list-view-container' : 'list-view-container hidden'
-      }
+      className={listIsDisplayed ? 'list-view-container' : 'list-view-container hidden'}
       innerElementType={'ul'}
       height={1024}
       width={'unset'}

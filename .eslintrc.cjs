@@ -12,20 +12,11 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: 'detect' } },
-  plugins: [
-    '@typescript-eslint',
-    'react',
-    'react-refresh',
-    'react-hooks',
-    'prettier',
-  ],
+  plugins: ['@typescript-eslint', 'react', 'react-refresh', 'react-hooks', 'prettier'],
   rules: {
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'react/jsx-no-target-blank': 'off',
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'react/prop-types': 'off',
     'react-hooks/exhaustive-deps': 'off',
   },
