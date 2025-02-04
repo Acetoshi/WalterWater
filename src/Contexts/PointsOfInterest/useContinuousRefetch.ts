@@ -1,11 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { MapBounds, MapPosition } from '../contexts.types';
+import { useDebounce } from '@/utilities/useDebounce';
 
 // this hook is basically like a use debounce but for distance,
 // it will call a refetch function ONLY IF the user is viewing a new area
 // basically there are two rectangles : what the user sees, mapPosition.bounds and what was already fetched : lastFetchedBounds
 // the second follows the first.
 export default function useContinuousRefetch(mapPosition: MapPosition, refetch: () => void) {
+  const debouncedMapPosition =useDebounce(mapPosition,1200); // this big delay enables the user to pan across the map easily without being blocked by refetches
   const lastFetchedBounds = useRef<MapBounds>(mapPosition.bounds);
 
   useEffect(() => {
@@ -49,6 +51,7 @@ export default function useContinuousRefetch(mapPosition: MapPosition, refetch: 
       };
       lastFetchedBounds.current = newFetchedBounds;
       refetch();
+      console.log('refetching')
     }
-  }, [mapPosition]);
+  }, [debouncedMapPosition]);
 }
