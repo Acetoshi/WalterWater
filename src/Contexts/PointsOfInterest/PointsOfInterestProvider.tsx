@@ -1,21 +1,19 @@
-import { createContext, useState, useEffect, useRef } from 'react';
+import { createContext, useState, useRef, useEffect } from 'react';
 import {
   ContextProps,
   LatLng,
-  MapBounds,
+ 
   Point,
   PointsOfInterestContextValue,
   RequestStatus,
   TargetPoint,
   UserFilters,
 } from '../contexts.types';
-import useLocalStorage from '../../utilities/useLocalStorage';
+import useLocalStorage from '@/utilities/useLocalStorage';
 import usePosition from '../Position/usePosition';
 import { getPoints } from './fetchPOIs.utils';
-import useMapRefetchThreshold from './useMapRefetchThreshold';
 import { useDebounce } from '@/utilities/useDebounce';
-import { getDistanceKm } from '@/utilities/distances.utils';
-import useEffectSkipFirstRender from '@/utilities/useEffectSkipFirstRender';
+import useContinuousRefetch from './useContinuousRefetch';
 
 
 
@@ -57,21 +55,12 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
   // used to keep track of the request state without trigering re-renders, and prevent calling the API multiple times
   const fetching = useRef(false);
 
-  const fetchPOIs = async (center?: string) => {
+  const fetchPOIs = async () => {
     if (!fetching.current) {
       fetching.current = true;
       setRequestStatus('loading');
-      let bounds: MapBounds = mapPosition.bounds;
-      if (center === 'user') {
-        bounds = {
-          minLat: userLocation.lat - 0.25,
-          maxLat: userLocation.lat + 0.25,
-          minLng: userLocation.lng - 0.25,
-          maxLng: userLocation.lng + 0.25,
-        };
-      }
       try {
-        const { success, POIs } = await getPoints(userLocation, userFilters, bounds);
+        const { success, POIs } = await getPoints(userLocation, userFilters, mapPosition.bounds);
 
         if (success) {
           setPOIs(POIs);
@@ -88,34 +77,13 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
   };
 
   // the position is debounced in order not to call the server too often
+  // TODO : what happens if the user is walking, does the system refetch every 500ms ???
   const debouncedUserLocation = useDebounce(userLocation, 500);
-  useEffectSkipFirstRender(() => {
-    fetchPOIs();
-  }, [debouncedUserLocation]);
-
-  // Used to fetch new data everytime the map is moved more than the threshold
-  // the position is debounced in order not to call the server too often
-  const debouncedMapPosition = useDebounce(mapPosition, 500);
-
-  // this threshold will evolve based on the user's zoom level
-  const [refetchThreshold, setRefetchThreshold] = useState<number>(5);
-  useEffect(() => {
-    // calculate new threshold
-    const newThreshold =
-      getDistanceKm(
-        debouncedMapPosition.bounds.maxLat,
-        debouncedMapPosition.bounds.maxLng,
-        debouncedMapPosition.bounds.minLat,
-        debouncedMapPosition.bounds.minLng
-      ) / 2.5;
-    setRefetchThreshold(newThreshold);
-  }, [debouncedMapPosition.zoomLevel]);
-
-  useMapRefetchThreshold(debouncedMapPosition.center, refetchThreshold, fetchPOIs);
-
   useEffect(() => {
     fetchPOIs();
-  }, [userFilters]);
+  }, [debouncedUserLocation, userFilters]);
+
+  useContinuousRefetch(mapPosition, fetchPOIs);
 
   return (
     <PointsOfInterestContext.Provider
