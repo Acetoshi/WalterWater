@@ -1,10 +1,9 @@
-import { createContext, useState, useRef } from 'react';
+import { createContext, useState, useRef, useEffect } from 'react';
 import { ContextProps, LatLng, Point, PointsOfInterestContextValue, UserFilters } from '../contexts.types';
 import useLocalStorage from '@/utilities/useLocalStorage';
 import usePosition from '../Position/usePosition';
 import { getPoints } from './fetchPOIs.utils';
 import { useDebounce } from '@/utilities/useDebounce';
-import useEffectSkipFirstRender from '@/utilities/useEffectSkipFirstRender';
 import useContinuousRefetch from './useContinuousRefetch';
 
 // Default context value for PointsOfInterestContext
@@ -67,8 +66,9 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
   };
 
   // the position is debounced in order not to call the server too often
+  // TODO : what happens if the user is walking, does the system refetch every 500ms ???
   const debouncedUserLocation = useDebounce(userLocation, 500);
-  useEffectSkipFirstRender(() => {
+  useEffect(() => {
     fetchPOIs();
   }, [debouncedUserLocation, userFilters]);
 
