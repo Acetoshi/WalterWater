@@ -37,6 +37,8 @@ export default function Markers() {
       spiderfyOnMaxZoom={false}
       polygonOptions={{ stroke: false }}
       maxClusterRadius={60}
+      removeOutsideVisibleBounds
+      animate
     >
       {POIs &&
         POIs.map((point: Point, index: number) => (

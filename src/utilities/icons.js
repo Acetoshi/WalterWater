@@ -8,29 +8,39 @@ import L from 'leaflet';
 
 // give the source to your icon
 
-export const faucetIcon = new L.icon({
-  iconUrl: faucet,
-  iconRetinaUrl: faucet,
-  iconAnchor: [17, 48],
-  popupAnchor: [0, -48],
-  iconSize: [35, 48],
-});
+const iconFromSVG = (svgImg) => {
+  const regularIconSize = {
+    iconAnchor: [17, 48],
+    popupAnchor: [0, -48],
+    iconSize: [35, 48],
+  };
 
-export const toiletIcon = new L.icon({
-  iconUrl: toilet,
-  iconRetinaUrl: toilet,
-  iconAnchor: [17, 48],
-  popupAnchor: [0, -48],
-  iconSize: [35, 48],
-});
+  const zoom = 1.4
 
-export const foodIcon = new L.icon({
-  iconUrl: food,
-  iconRetinaUrl: food,
-  iconAnchor: [17, 48],
-  popupAnchor: [0, -48],
-  iconSize: [35, 48],
-});
+  const zoomedIconSize = {
+    iconAnchor: [17 * zoom, 48 * zoom],
+    popupAnchor: [0, -48 * zoom],
+    iconSize: [35 * zoom, 48 * zoom],
+  };
+
+  return {
+    regular: new L.icon({
+      ...regularIconSize,
+      iconUrl: svgImg,
+      iconRetinaUrl: svgImg,
+    }),
+    zoomed: new L.icon({
+      ...zoomedIconSize,
+      iconUrl: svgImg,
+      iconRetinaUrl: svgImg,
+    }),
+  };
+};
+
+export const faucetIcon = iconFromSVG(faucet);
+export const toiletIcon = iconFromSVG(toilet);
+export const foodIcon = iconFromSVG(food);
+export const searchIcon = iconFromSVG(search);
 
 export const walterIcon = new L.icon({
   iconUrl: walter,
@@ -48,10 +58,9 @@ export const capybaraIcon = new L.icon({
   iconSize: [56, 72],
 });
 
-export const searchIcon = new L.icon({
-  iconUrl: search,
-  iconRetinaUrl: search,
-  iconAnchor: [17, 48],
-  popupAnchor: [0, -48],
-  iconSize: [35, 48],
-});
+
+export const iconMap = {
+  drinking_water: faucetIcon,
+  toilets: toiletIcon,
+  restaurant: foodIcon,
+};

@@ -50,7 +50,7 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
   const [POIs, setPOIs] = useState<Point[]>([]);
 
   // used for the listview to pass the target POI position
-  const [targetPoint, setTargetPoint] = useState<TargetPoint>(defaultTargetPoint);
+  const [targetPoint, setTargetPoint] = useState<Point>(defaultTargetPoint);
 
   // used to keep track of the request state without trigering re-renders, and prevent calling the API multiple times
   const fetching = useRef(false);
