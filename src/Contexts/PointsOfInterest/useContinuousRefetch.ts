@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { MapBounds, MapPosition } from '../contexts.types';
 
 // this hook is basically like a use debounce but for distance,
@@ -6,7 +6,7 @@ import { MapBounds, MapPosition } from '../contexts.types';
 // basically there are two rectangles : what the user sees, mapPosition.bounds and what was already fetched : lastFetchedBounds
 // the second follows the first.
 export default function useContinuousRefetch(mapPosition: MapPosition, refetch: () => void) {
-  const [lastFetchedBounds, setLastFetchedBounds] = useState<MapBounds>(mapPosition.bounds); // could this be a ref instead ? // could the whole mapPosition be a ref ?
+  const lastFetchedBounds = useRef<MapBounds>(mapPosition.bounds);
 
   useEffect(() => {
     const outOfBounds = () => {
@@ -19,16 +19,16 @@ export default function useContinuousRefetch(mapPosition: MapPosition, refetch: 
 
       // check if the user has panned out of the bounds of last fetch + a threshold
       if (
-        mapPosition.bounds.maxLat > lastFetchedBounds.maxLat + latThreshold ||
-        mapPosition.bounds.minLat < lastFetchedBounds.minLat - latThreshold ||
-        mapPosition.bounds.maxLng > lastFetchedBounds.maxLng + lngThreshold ||
-        mapPosition.bounds.minLng < lastFetchedBounds.minLng - lngThreshold
+        mapPosition.bounds.maxLat > lastFetchedBounds.current.maxLat + latThreshold ||
+        mapPosition.bounds.minLat < lastFetchedBounds.current.minLat - latThreshold ||
+        mapPosition.bounds.maxLng > lastFetchedBounds.current.maxLng + lngThreshold ||
+        mapPosition.bounds.minLng < lastFetchedBounds.current.minLng - lngThreshold
       ) {
         return true;
         // check if the user has zoomed out
       } else if (
-        mapPosition.bounds.maxLat > lastFetchedBounds.maxLat &&
-        mapPosition.bounds.minLat < lastFetchedBounds.minLat
+        mapPosition.bounds.maxLat > lastFetchedBounds.current.maxLat &&
+        mapPosition.bounds.minLat < lastFetchedBounds.current.minLat
       ) {
         return true;
       } else {
@@ -47,7 +47,7 @@ export default function useContinuousRefetch(mapPosition: MapPosition, refetch: 
         maxLat: mapPosition.bounds.maxLat + latOffset,
         maxLng: mapPosition.bounds.maxLng + lngOffset,
       };
-      setLastFetchedBounds(newFetchedBounds);
+      lastFetchedBounds.current = newFetchedBounds;
       refetch();
     }
   }, [mapPosition]);
