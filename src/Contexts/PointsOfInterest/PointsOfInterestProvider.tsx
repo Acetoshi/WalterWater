@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect, useRef } from 'react';
-import { ContextProps, LatLng, MapBounds, Point, PointsOfInterestContextValue, UserFilters } from '../contexts.types';
+import { createContext, useState, useRef } from 'react';
+import { ContextProps, LatLng, Point, PointsOfInterestContextValue, UserFilters } from '../contexts.types';
 import useLocalStorage from '@/utilities/useLocalStorage';
 import usePosition from '../Position/usePosition';
 import { getPoints } from './fetchPOIs.utils';
@@ -49,9 +49,8 @@ export default function PointsOfInterestProvider({ children }: ContextProps) {
     if (!fetching.current) {
       fetching.current = true;
       setRequestStatus('loading');
-      let bounds: MapBounds = mapPosition.bounds;
       try {
-        const { success, POIs } = await getPoints(userLocation, userFilters, bounds);
+        const { success, POIs } = await getPoints(userLocation, userFilters, mapPosition.bounds);
 
         if (success) {
           setPOIs(POIs);
