@@ -5,7 +5,11 @@ export async function getPoints(userLocation: LatLng, userFilters: UserFilters, 
   if (!mapBounds) return { success: false, POIs: [] };
 
   const { water, food, toilets } = userFilters;
-  const boundingBox = `${mapBounds.minLat},${mapBounds.minLng},${mapBounds.maxLat},${mapBounds.maxLng}`;
+  // we'll fetch in an area that is 1.5x larger that the user's view. ( ie pre-fetch POIs to enable panning)
+  const preFetchFactor = 1/3;
+  const latOffset = (mapBounds.maxLat - mapBounds.minLat) * preFetchFactor;
+  const lngOffset = (mapBounds.maxLng - mapBounds.minLng) * preFetchFactor;
+  const boundingBox = `${mapBounds.minLat - latOffset},${mapBounds.minLng - lngOffset},${mapBounds.maxLat + latOffset},${mapBounds.maxLng + lngOffset}`;
   const maxObjects = 2000;
 
   try {
