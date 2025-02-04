@@ -9,12 +9,6 @@ export default function useMapTracker() {
   const { userLocation, setMapPosition } = usePosition();
 
   useEffect(() => {
-    // This is needed to let the user move the map as he/she wishes wthout the open pop-ups anchoring the view
-    const handleDragStart = () => {
-      map.closePopup();
-    };
-    map.on('dragstart', handleDragStart);
-
     const handleMoveEnd = () => {
       // Track the current map bounds in order to use them as a bounding box for POI search later on
       const bounds = map.getBounds();
@@ -39,7 +33,6 @@ export default function useMapTracker() {
     map.on('moveend', handleMoveEnd);
 
     return () => {
-      map.off('dragstart', handleDragStart);
       map.off('moveend', handleMoveEnd);
     };
   }, [userLocation]);

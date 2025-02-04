@@ -19,7 +19,7 @@ export default function Markers() {
   // useCallBack needed because of marker clusters, otherwise the whole map is re-rendered all the time
   const handleMarkerClick = useCallback(
     (point: Point) => {
-      const latOffset = (mapPosition.bounds.maxLat - mapPosition.bounds.minLat) / 3; //this offset wil zoom the map slightly over the marker, so the user can read the pop-up properly
+      const latOffset = (mapPosition.bounds.maxLat - mapPosition.bounds.minLat) / 4; //this offset wil zoom the map slightly over the marker, so the user can read the pop-up properly
       map.flyTo([point.lat + latOffset, point.lon], mapPosition.zoomLevel, {
         easeLinearity: 1,
         duration: 0.6,
@@ -33,10 +33,10 @@ export default function Markers() {
     <MarkerClusterGroup
       key={'marker-cluster-group'}
       chunkedLoading
-      disableClusteringAtZoom={18}
+      disableClusteringAtZoom={17}
       spiderfyOnMaxZoom={false}
       polygonOptions={{ stroke: false }}
-      maxClusterRadius={110}
+      maxClusterRadius={60}
     >
       {POIs &&
         POIs.map((point: Point, index: number) => (

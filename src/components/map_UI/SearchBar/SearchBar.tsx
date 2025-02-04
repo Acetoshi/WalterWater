@@ -41,11 +41,6 @@ export default function SearchBar() {
     }
   }, [debouncedSearchQuery]);
 
-  const handleFlyTo = (lat: number, lng: number) => {
-    map.closePopup();
-    map.flyTo({ lat, lng }, 15, { duration: 1 });
-  };
-
   const handleInputFocus = () => {
     const newResults = { ...searchResults, displayed: true };
     setSearchResults(newResults);
@@ -86,7 +81,7 @@ export default function SearchBar() {
                   lng: r.lon,
                   address: r.display_name,
                 });
-                handleFlyTo(r.lat, r.lon);
+                map.flyTo({ lat:r.lat, lng:r.lon }, 15, { duration: 1 });
               }}
             >
               {r.display_name}
