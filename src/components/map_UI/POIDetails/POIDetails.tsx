@@ -1,6 +1,7 @@
 import { memo } from 'react';
-import './POIDetails.css';
 import { Point } from '@/Contexts/contexts.types';
+import './POIDetails.css';
+
 // Official doc for POI tags : https://wiki.openstreetmap.org/wiki/Tag:amenity%3Dtoilets
 
 function POIDetailsComponent({ point }: { point: Point }) {
