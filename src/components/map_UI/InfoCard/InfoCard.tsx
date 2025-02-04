@@ -6,14 +6,13 @@ export default function InfoCard({ point, setIsDisplayed, style }) {
 
   const handleClick = () => {
     setIsDisplayed(false);
-    setTargetPoint({ lat: point.lat, lng: point.lon, id: point.id});
+    setTargetPoint(point);
   };
 
   return (
     <li className="info-card-container" key={point.id} style={style}>
       <article className="info-card">
         <POIDetails point={point} />
-
         <button onClick={handleClick} aria-label="view on map" role="button" className="button-feedback">
           view on map
         </button>

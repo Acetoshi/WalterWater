@@ -6,8 +6,8 @@ import MarkerClusterGroup from 'react-leaflet-cluster';
 import CustomMarker from '../CustomMarker/CustomMarker';
 import { Point } from '@/Contexts/contexts.types';
 import useMapTracker from '@/Contexts/Position/useMapTracker';
-import './Markers.css';
 import usePosition from '@/Contexts/Position/usePosition';
+import './Markers.css';
 
 export default function Markers() {
   const { POIs } = usePOIs();

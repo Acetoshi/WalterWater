@@ -14,6 +14,8 @@ import Onboarding from '@/components/map_UI/Onboarding/Onboarding';
 import SearchBar from '@/components/map_UI/SearchBar/SearchBar';
 import { MapSelecter } from './Map.types';
 import './leaflet.css'; // to stay up to date, you can always : import 'leaflet/dist/leaflet.css';
+import CustomMarker from '@/components/map_components/CustomMarker/CustomMarker';
+import TargetPointMarker from '@/components/map_components/TargetPointMarker/TargetPointMarker';
 
 export default function Map() {
   const [listIsDisplayed, setListIsDisplayed] = useState<boolean>(false);
@@ -35,6 +37,7 @@ export default function Map() {
         <MapProviderSelector mapSelecter={mapSelecter} setMapSelecter={setMapSelecter} />
         <Markers />
         <UserMarker />
+        <TargetPointMarker />
         <DataFetchingNotifier />
         <SearchBar />
         <RecenterButton />

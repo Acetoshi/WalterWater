@@ -24,12 +24,6 @@ export interface Point {
   };
 }
 
-export interface TargetPoint {
-  id: number;
-  lat: number;
-  lng: number;
-}
-
 export interface UserFilters {
   water: boolean;
   food: boolean;
@@ -58,8 +52,8 @@ export interface PointsOfInterestContextValue {
   setUserFilters: Dispatch<SetStateAction<UserFilters>>;
   POIs: Point[];
   fetchPOIs: (center?: string) => Promise<void>;
-  targetPoint: TargetPoint;
-  setTargetPoint: Dispatch<SetStateAction<TargetPoint>>;
+  targetPoint: Point;
+  setTargetPoint: Dispatch<SetStateAction<Point>>;
   requestStatus: RequestStatus;
 }
 
