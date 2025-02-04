@@ -6,6 +6,7 @@ a.external-link {
   display: inline-flex;
   gap: 0.2rem;
   align-items: center;
+  font-size: var(--font-size);
 
   & img.external-link-icon {
     height: var(--font-size);
